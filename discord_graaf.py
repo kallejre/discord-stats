@@ -124,7 +124,7 @@ for c in sorted(archive['data']):  # c = kanali id
                     users[teine_uid]['tag_by'][uid]+=1
                     # print(users[uid]['n'],'->',users[teine_uid]['n'])
                 else:
-                    print('ERROR: ',tag)
+                    pass  # print('ERROR: ',tag)
         for sub in [cur_name]+list(kategooriad[cur_name]):
             pass
         """
