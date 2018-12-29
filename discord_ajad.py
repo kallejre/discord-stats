@@ -59,7 +59,7 @@ for c in archive['data']:  # c = kanali id
         h=time.hour
         # Nädalapäev: E = 0, P = 6
         # print(time.date(),time.time(),wk,h)
-        times.add(message['t'] // 10000 - 306788430)  # 10 sekundi täpsusega
+        times.add(message['t'] // 1000 - 1533942150)  # 1 sekundi täpsusega
         uid = message['u']
         if cur_name not in users[uid]['count']:  # Kui see sõnum on kasutaja
             users[uid]['count'][cur_name] = 0  # esimene sõnum antud kanalis
@@ -75,19 +75,23 @@ pikkused = list()
 kogus = list()
 keskmine_pikkus = list()
 sisukus = list()
-header = '\t'.join(['Nimi'] + channels + ['Kokku'])
+"""
+Väljund:
+Nimi, kanal, päev, tund, kogus
+Saab teha pivot-tabeli
+"""
+header = '\t'.join(['Nimi', 'Kanal','Päev','Tund','Kogus'])
 
 print(len(times))
 for x in list(users):
     count = 0
     c_len = 0
     for c in users[x]['times']:  # Iga kanaliga
-        for stamp in users[x]['times'][c]:  # Iga ajatempel
-            pass
+        #for stamp in users[x]['times'][c]:  # Iga ajatempel
+        pass
     users[x]['count']['total'] = count
     users[x]['lens']['total'] = c_len
-    print(x)
-    pygame.display.update()
+    # print(users[x]['times'])
 
 sisukus.append('Jrk.\tNimi\tLühike\tKõik\t%')
 c = 1
