@@ -41,6 +41,8 @@ for x in range(len(archive['meta']['userindex'])):
     # Viime lokaalse ID vastavusse kasutajanimega
     users[x] = {'n': archive['meta']['users'][archive['meta']['userindex'][x]]['name'], 'count': dict(), 'lens': dict(),
                 'times': dict()}
+users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
+                'times': dict()}
 channels = []
 # Kategooria peaks algama suure tähega
 kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
@@ -93,12 +95,13 @@ kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
                 "xp05": {"Syva", "Kokku", "XP"},
                 "xp06": {"Syva", "Kokku", "XP"},
                 "xp07": {"Syva", "Kokku", "XP"}}
-for c in archive['data']:  # c = kanali id
-    print(c[-2], end='')
+
+for c in sorted(archive['data']):  # c = kanali id
     cur_name = archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
     cur_name = cur_name.split('_')[0]
     channels.append(cur_name)
-    for m in sorted(archive['data'][c]):  # m = sõnumi ID
+    print(cur_name[:1]+cur_name[-2:],end=' ')
+    for m in archive['data'][c]:  # m = sõnumi ID
         message = archive['data'][c][m]
         time=datetime.datetime.fromtimestamp(message['t'] // 1000)
         wk=time.weekday()
@@ -106,21 +109,65 @@ for c in archive['data']:  # c = kanali id
         # Nädalapäev: E = 0, P = 6
         # print(time.date(),time.time(),wk,h)
         uid = message['u']
-        if cur_name not in users[uid]['count']:  # Kui see sõnum on kasutaja
-            users[uid]['count'][cur_name] = 0  # esimene sõnum antud kanalis
-            users[uid]['lens'][cur_name] = 0  # init loendurid
-            users[uid]['times'][cur_name] = [0]*168  # Iga tunni jaoks
-        users[uid]['count'][cur_name] += 1
-        users[uid]['lens'][cur_name] += len(message['m'])
-        users[uid]['times'][cur_name][24*wk+h]+=1
-for x in list(users):
-    total=[]
-    for c in sorted(users[x]['times']):
-        total.append(users[x]['times'][c])
-    total=list(map(sum,list(zip(*total))))
-    users[x]['times']['Kokku']=total  # ̌
+        for sub in [cur_name]+list(kategooriad[cur_name]):
+            if sub not in users[uid]['count']:# Kui see sõnum on kasutaja
+                users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
+                users[uid]['lens'][sub] = 0  # init loendurid
+                users[uid]['times'][sub] = [0]*168  # Iga tunni jaoks
+            users[uid]['count'][sub] += 1
+            users[uid]['lens'][sub] += len(message['m'])
+            users[uid]['times'][sub][24*wk+h]+=1
+        
+        uid = -1  # Kõigi kasutajate peale kokku
+        for sub in [cur_name]+list(kategooriad[cur_name]):
+            if sub not in users[uid]['count']:# Kui see sõnum on kasutaja
+                users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
+                users[uid]['lens'][sub] = 0  # init loendurid
+                users[uid]['times'][sub] = [0]*168  # Iga tunni jaoks
+            users[uid]['count'][sub] += 1
+            users[uid]['lens'][sub] += len(message['m'])
+            users[uid]['times'][sub][24*wk+h]+=1
 print()
-channels.sort()
+channels=['DJ', 'EX', 'Kokku', 'PR', 'Syva', 'Üldine', 'XP', 'dj01', 'dj02', 'ettepanekud', 'ex01', 'ex02', 'ex03', 'ex04',
+          'ex05', 'ex06', 'ex07', 'ex08', 'ex09', 'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'food', 'general', 'git', 'kaugōpe',
+          'konsult', 'meme', 'mitteniiolulisedagasiiskiolulised-teadaanded', 'olulised-teadaanded', 'pr01', 'pr02', 'pr03',
+          'pr04', 'pr06', 'pr07', 'pr08', 'pr09', 'pr11', 'pr12', 'pr13', 'pr14', 'pr15', 'random', 'stat', 'syvapy-general',
+          'videod', 'wat', 'xp01', 'xp02', 'xp03', 'xp04', 'xp05', 'xp06', 'xp07']
+nimed2=list(map(lambda uid:users[uid]['n'], users))+['all']
+nimed3=list(map(lambda x:x.lower(),nimed2))+['all']
+print('''
+****** Interaktiivne "aktiivsusmonitor" ******
+Kasutamine:
+    Esimesele reale kirjuta üks kategooria (või kanali nimi).
+    Teisele reale tühikutega eraldatult kasutajate nimed või "Kõik"
+    Kui sa ei tea (ühe) kasutaja nime, kirjuta nimeosa ja lõppu "?".
+''')
+while True:
+    kanal=input('\nSisesta kanal: ')
+    if kanal not in channels:
+        print('Tundmatu kanal. Vt alla.')
+        print(*channels)
+        #continue
+    while True:
+        nimed=input('Sisesta nimed: ')
+        if nimed[-1]=='?':
+            nimed=nimed[:-1].strip()
+            # print(nimed2)
+            out=list(sorted(filter(lambda x:nimed in x.lower(),nimed2)))
+            print(*out)
+            continue
+        nimed4=[]
+        for nimi in nimed.split():
+            if nimi.lower=='all':
+                nimed4.apend(-1)
+            if nimi.lower() in nimed3:
+                nimed4.append(nimed.index(nimi))
+            else:
+                print(nimi+' ei leitud.')
+        if nimed4!=[]:
+            break
+    # ASD
+    
 ##ajad = list()
 ##header=['Nimi','Kanal']
 ##for wk in 'ETKNRLP':
