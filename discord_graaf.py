@@ -100,7 +100,7 @@ for c in sorted(archive['data']):  # c = kanali id
     cur_name = cur_name.split('_')[0]
     channels.append(cur_name)
     print(cur_name[:1]+cur_name[-2:],end=' ')
-    prev_msg=0
+    prev_msg=-1
     # Regex: \<@!?\d+\>
     for m in sorted(archive['data'][c]):  # m = sõnumi ID
         message = archive['data'][c][m]
@@ -125,6 +125,13 @@ for c in sorted(archive['data']):  # c = kanali id
                     # print(users[uid]['n'],'->',users[teine_uid]['n'])
                 else:
                     pass  # print('ERROR: ',tag)
+        if prev_msg!=-1:
+            if prev_msg not in users[uid]['next']:
+                users[uid]['next'][prev_msg]=0
+                users[prev_msg]['prev'][uid]=0
+            users[uid]['next'][prev_msg]+=1
+            users[prev_msg]['prev'][uid]+=1
+        prev_msg=uid
         for sub in [cur_name]+list(kategooriad[cur_name]):
             pass
         """
@@ -136,9 +143,29 @@ for c in sorted(archive['data']):  # c = kanali id
             users[uid]['lens'][sub] += len(message['m'])
             users[uid]['times'][sub][24*wk+h]+=1"""
 print()
-uid=1
-for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i]):
+username='kadri'
+uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
+# Enne/Peale keda kirjutad
+for i in sorted(users[uid]['prev'], key=lambda i:users[uid]['prev'][i])[-5:]:
+    print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['prev'][i],'korda')
+print()
+for i in sorted(users[uid]['next'], key=lambda i:users[uid]['next'][i])[-5:]:
+    print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['next'][i],'korda')
+print()
+# Kes keda märgib
+for i in sorted(users[uid]['tag_by'], key=lambda i:users[uid]['tag_by'][i])[-5:]:
+    print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['tag_by'][i],'korda')
+print()
+for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i])[-5:]:
     print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
+print()
+
+with open('users.py','w',encoding='utf-8') as f:
+    f.write('users='+str(users))
+import json
+use=json.dumps(users)
+with open('ergo.json','w',encoding='utf-8') as f:
+    f.write(str(use))
 
 ##ajad = list()
 ##header=['Nimi','Kanal']
