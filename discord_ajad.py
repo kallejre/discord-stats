@@ -2,9 +2,7 @@
 """
 Asjandus discordi json-arhiivi töötlemiseks.
 
-See variant joonistab pildi, kus aeg on x-teljel,
-kasutaja y-teljel ja värv näitab kanalit. Kahtlane ollus.
-
+See variant genereerib tabeli kasutajate postituste sõltumise kellaajast.
 
 Andmete kogumiseks: https://dht.chylex.com/
 Andmeformaat:
@@ -56,16 +54,20 @@ for c in archive['data']:  # c = kanali id
             if message['u'] not in lyhi:
                 lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
             lyhi[message['u']] += 1
-        # print(datetime.datetime.fromtimestamp(message['t'] // 1000))
+        time=datetime.datetime.fromtimestamp(message['t'] // 1000)
+        wk=time.weekday()
+        h=time.hour
+        # Nädalapäev: E = 0, P = 6
+        # print(time.date(),time.time(),wk,h)
         times.add(message['t'] // 10000 - 306788430)  # 10 sekundi täpsusega
         uid = message['u']
         if cur_name not in users[uid]['count']:  # Kui see sõnum on kasutaja
             users[uid]['count'][cur_name] = 0  # esimene sõnum antud kanalis
             users[uid]['lens'][cur_name] = 0  # init loendurid
-            users[uid]['times'][cur_name] = set()
+            users[uid]['times'][cur_name] = [0]*168  # Iga tunni jaoks
         users[uid]['count'][cur_name] += 1
         users[uid]['lens'][cur_name] += len(message['m'])
-        users[uid]['times'][cur_name].add(message['t'] // 10000 - 306788430)
+        users[uid]['times'][cur_name][24*wk+h]+=1
 print()
 times = list(sorted(times))
 channels.sort()
@@ -76,22 +78,12 @@ sisukus = list()
 header = '\t'.join(['Nimi'] + channels + ['Kokku'])
 
 print(len(times))
-import pygame,colorsys
-colors=dict()
-c=0
-for i in channels:
-    colors[i]=tuple(map(lambda x:255*x,colorsys.hsv_to_rgb(0.618033988749895*c,1,1)))
-    c+=1
-pygame.init()
-lava = pygame.display.set_mode((min(len(times),10000), len(users)), 0, 32)
-#pygame.draw.rect(lava, (255,255,255),(5,5,10,10))
-pygame.display.update()
 for x in list(users):
     count = 0
     c_len = 0
     for c in users[x]['times']:  # Iga kanaliga
-        for stamp in users[x]['times'][c]:  # Iga ajatempel 
-            pygame.draw.rect(lava, colors[c],(times.index(stamp)%10000,x,2,3))
+        for stamp in users[x]['times'][c]:  # Iga ajatempel
+            pass
     users[x]['count']['total'] = count
     users[x]['lens']['total'] = c_len
     print(x)
@@ -101,10 +93,3 @@ sisukus.append('Jrk.\tNimi\tLühike\tKõik\t%')
 c = 1
 print(len(times))
 print('done')
-pygame.image.save(lava, "screenshot.jpeg")
-for i in sorted(colors):
-    print(i,colors[i])
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
