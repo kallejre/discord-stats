@@ -125,58 +125,46 @@ for c in sorted(archive['data']):  # c = kanali id
                     # print(users[uid]['n'],'->',users[teine_uid]['n'])
                 else:
                     pass  # print('ERROR: ',tag)
-        if prev_msg!=-1:
+        if prev_msg!=-1 and prev_msg!=uid:
             if prev_msg not in users[uid]['next']:
                 users[uid]['next'][prev_msg]=0
                 users[prev_msg]['prev'][uid]=0
             users[uid]['next'][prev_msg]+=1
             users[prev_msg]['prev'][uid]+=1
         prev_msg=uid
-        for sub in [cur_name]+list(kategooriad[cur_name]):
-            pass
-        """
-            if sub not in users[uid]['count']:# Kui see sõnum on kasutaja
-                users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
-                users[uid]['lens'][sub] = 0  # init loendurid
-                users[uid]['times'][sub] = [0]*168  # Iga tunni jaoks
-            users[uid]['count'][sub] += 1
-            users[uid]['lens'][sub] += len(message['m'])
-            users[uid]['times'][sub][24*wk+h]+=1"""
 print()
-username='kadri'
-uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
-# Enne/Peale keda kirjutad
-for i in sorted(users[uid]['prev'], key=lambda i:users[uid]['prev'][i])[-5:]:
-    print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['prev'][i],'korda')
-print()
-for i in sorted(users[uid]['next'], key=lambda i:users[uid]['next'][i])[-5:]:
-    print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['next'][i],'korda')
-print()
-# Kes keda märgib
-for i in sorted(users[uid]['tag_by'], key=lambda i:users[uid]['tag_by'][i])[-5:]:
-    print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['tag_by'][i],'korda')
-print()
-for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i])[-5:]:
-    print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
-print()
+if 1:
+    username='uudu'
+    uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
+    # Enne/Peale keda kirjutad
+    for i in sorted(users[uid]['prev'], key=lambda i:users[uid]['prev'][i])[-5:]:
+        print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['prev'][i],'korda')
+    print()
+    for i in sorted(users[uid]['next'], key=lambda i:users[uid]['next'][i])[-5:]:
+        print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['next'][i],'korda')
+    print('\nMärkimised:')
+    # Kes keda märgib
+    for i in sorted(users[uid]['tag_by'], key=lambda i:users[uid]['tag_by'][i])[-5:]:
+        print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['tag_by'][i],'korda')
+    print()
+    for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i])[-5:]:
+        print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
+    print()
+if 0:
+    with open('users.py','w',encoding='utf-8') as f:
+        f.write('users='+str(users))
+    import json
+    use=json.dumps(users)
+    with open('ergo.json','w',encoding='utf-8') as f:
+        f.write(str(use))
+with open('disco.tgf', 'w', encoding='utf-8') as f:
+    for i in users:
+        print(i,users[i]['n'],file=f)
+    print('#',file=f)
+    for uid in users:
+        for nxt in users[uid]['tag_to']:
+            count=users[uid]['tag_to'][nxt]
+            if count>=1:
+                print(uid,nxt,count,file=f)
 
-with open('users.py','w',encoding='utf-8') as f:
-    f.write('users='+str(users))
-import json
-use=json.dumps(users)
-with open('ergo.json','w',encoding='utf-8') as f:
-    f.write(str(use))
-
-##ajad = list()
-##header=['Nimi','Kanal']
-##for wk in 'ETKNRLP':
-##    for hr in range(24):
-##        header.append(wk+' '+str(hr))
-##header = '\t'.join(header)
-##ajad.append(header)
-##for x in list(users):
-##    for c in sorted(users[x]['times']):  # Iga kanaliga
-##        ajad.append('\t'.join([users[x]['n'],c]+list(map(str,users[x]['times'][c]))))
-##with open('d_out_ajatabel2.txt','w',encoding='utf8') as f:
-##    f.write('\n'.join(ajad))
 print('done')
