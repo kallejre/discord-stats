@@ -136,52 +136,56 @@ channels=['DJ', 'EX', 'Kokku', 'PR', 'Syva', 'Üldine', 'XP', 'dj01', 'dj02', 'e
 nimed2=list(map(lambda uid:users[uid]['n'], users))
 nimed3=list(map(lambda x:x.lower(),nimed2))
 print('''
-****** Interaktiivne "aktiivsusmonitor" ******
+    ****** Interaktiivne "aktiivsusmonitor" ******
 Kasutamine:
     Esimesele reale kirjuta üks kategooria (või kanali nimi).
     Teisele reale tühikutega eraldatult kasutajate nimed või "Kõik"
-    Kui sa ei tea (ühe) kasutaja nime, kirjuta nimeosa ja lõppu "?".
+    Kui ei tea (ühe) kasutaja nime, kirjuta nimeosa ja lõppu "?".
+    Sulgemiseks Ctrl + C
 ''')
 nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
-while True:
-    kanal=input('\nSisesta kanal: ')
-    if kanal not in channels:
-        print('Tundmatu kanal. Vt alla.')
-        print('''Ühendatud kanalid:
-Kokku
-├───EX
-├───PR
-├───Syva
-│   ├───DJ
-│   └───XP
-└───Üldine''')
-        print(*channels)
-        continue
+nädal=["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
+try:
     while True:
-        nimed=input('Sisesta nimed: ')
-        if nimed[-1]=='?':
-            nimed=nimed[:-1].strip()
-            # print(nimed2)
-            out=list(sorted(filter(lambda x:nimed in x.lower(),nimed2)))
-            print(*out)
+        kanal=input('\nSisesta kanal: ')
+        if kanal not in channels:
+            print('Tundmatu kanal. Vt alla.')
+            print('''Ühendatud kanalid:
+    Kokku
+    ├───EX
+    ├───PR
+    ├───Syva
+    │   ├───DJ
+    │   └───XP
+    └───Üldine''')
+            print(*channels)
             continue
-        nimed4=[]
-        for nimi in nimed.split():
-            if nimi.lower()=='kõik':
-                nimed4.append(-1)
-            elif nimi.lower() in nimed3:
-                nimed4.append(nimed3.index(nimi))
-            else:
-                print(nimi+' ei leitud.')
-        if nimed4!=[]:
-            break
-    for uid in nimed4:
-        print('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
-        for i in range(7):
-            out=['',nädal[i]]+list(map(str,users[uid]['times'][kanal][24*i:24*(i+1)]))
-            print('\t'.join(out))
-        print('\n')
-    
+        while True:
+            nimed=input('Sisesta nimed: ')
+            if nimed[-1]=='?':
+                nimed=nimed[:-1].strip()
+                # print(nimed2)
+                out=list(sorted(filter(lambda x:nimed in x.lower(),nimed2)))
+                print(*out)
+                continue
+            nimed4=[]
+            for nimi in nimed.split():
+                if nimi.lower()=='kõik':
+                    nimed4.append(-1)
+                elif nimi.lower() in nimed3:
+                    nimed4.append(nimed3.index(nimi.lower()))
+                else:
+                    print(nimi+' ei leitud.')
+            if nimed4!=[]:
+                break
+        for uid in nimed4:
+            print('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
+            for i in range(7):
+                out=['',nädal[i]]+list(map(str,users[uid]['times'][kanal][24*i:24*(i+1)]))
+                print('\t'.join(out))
+            print('\n')
+except KeyboardInterrupt:
+    pass
 ##ajad = list()
 ##header=['Nimi','Kanal']
 ##for wk in 'ETKNRLP':
