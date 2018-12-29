@@ -59,7 +59,6 @@ for c in archive['data']:  # c = kanali id
         h=time.hour
         # Nädalapäev: E = 0, P = 6
         # print(time.date(),time.time(),wk,h)
-        times.add(message['t'] // 1000 - 1533942150)  # 1 sekundi täpsusega
         uid = message['u']
         if cur_name not in users[uid]['count']:  # Kui see sõnum on kasutaja
             users[uid]['count'][cur_name] = 0  # esimene sõnum antud kanalis
@@ -69,7 +68,6 @@ for c in archive['data']:  # c = kanali id
         users[uid]['lens'][cur_name] += len(message['m'])
         users[uid]['times'][cur_name][24*wk+h]+=1
 print()
-times = list(sorted(times))
 channels.sort()
 ajad = list()
 head=[]
@@ -78,7 +76,6 @@ for wk in 'ETKNRLP':
         head.append(wk+' '+str(hr))
 header = '\t'.join(['Nimi','Kanal']+head)
 ajad.append(header)
-print(len(times))
 for x in list(users):
     total=[]
     for c in sorted(users[x]['times']):  # Iga kanaliga
