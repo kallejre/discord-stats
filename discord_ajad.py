@@ -71,29 +71,23 @@ for c in archive['data']:  # c = kanali id
 print()
 times = list(sorted(times))
 channels.sort()
-pikkused = list()
-kogus = list()
-keskmine_pikkus = list()
-sisukus = list()
-"""
-Väljund:
-Nimi, kanal, päev, tund, kogus
-Saab teha pivot-tabeli
-"""
-header = '\t'.join(['Nimi', 'Kanal','Päev','Tund','Kogus'])
-
+ajad = list()
+head=[]
+for wk in 'ETKNRLP':
+    for hr in range(24):
+        head.append(wk+' '+str(hr))
+header = '\t'.join(['Nimi','Kanal']+head)
+ajad.append(header)
 print(len(times))
 for x in list(users):
-    count = 0
-    c_len = 0
-    for c in users[x]['times']:  # Iga kanaliga
-        #for stamp in users[x]['times'][c]:  # Iga ajatempel
-        pass
-    users[x]['count']['total'] = count
-    users[x]['lens']['total'] = c_len
+    total=[]
+    for c in sorted(users[x]['times']):  # Iga kanaliga
+        total.append(users[x]['times'][c])
+        ajad.append('\t'.join([users[x]['n'],c]+list(map(str,total[-1]))))
+    total=list(map(sum,list(zip(*total))))
+    ajad.append('\t'.join([users[x]['n'],'Kokku']+list(map(str,total))))
     # print(users[x]['times'])
-
-sisukus.append('Jrk.\tNimi\tLühike\tKõik\t%')
+with open('d_out_ajatabel.txt','w',encoding='utf8') as f:
+    f.write('\n'.join(ajad))
 c = 1
-print(len(times))
 print('done')
