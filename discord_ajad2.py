@@ -133,8 +133,8 @@ channels=['DJ', 'EX', 'Kokku', 'PR', 'Syva', 'Üldine', 'XP', 'dj01', 'dj02', 'e
           'konsult', 'meme', 'mitteniiolulisedagasiiskiolulised-teadaanded', 'olulised-teadaanded', 'pr01', 'pr02', 'pr03',
           'pr04', 'pr06', 'pr07', 'pr08', 'pr09', 'pr11', 'pr12', 'pr13', 'pr14', 'pr15', 'random', 'stat', 'syvapy-general',
           'videod', 'wat', 'xp01', 'xp02', 'xp03', 'xp04', 'xp05', 'xp06', 'xp07']
-nimed2=list(map(lambda uid:users[uid]['n'], users))+['all']
-nimed3=list(map(lambda x:x.lower(),nimed2))+['all']
+nimed2=list(map(lambda uid:users[uid]['n'], users))
+nimed3=list(map(lambda x:x.lower(),nimed2))
 print('''
 ****** Interaktiivne "aktiivsusmonitor" ******
 Kasutamine:
@@ -142,12 +142,21 @@ Kasutamine:
     Teisele reale tühikutega eraldatult kasutajate nimed või "Kõik"
     Kui sa ei tea (ühe) kasutaja nime, kirjuta nimeosa ja lõppu "?".
 ''')
+nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
 while True:
     kanal=input('\nSisesta kanal: ')
     if kanal not in channels:
         print('Tundmatu kanal. Vt alla.')
+        print('''Ühendatud kanalid:
+Kokku
+├───EX
+├───PR
+├───Syva
+│   ├───DJ
+│   └───XP
+└───Üldine''')
         print(*channels)
-        #continue
+        continue
     while True:
         nimed=input('Sisesta nimed: ')
         if nimed[-1]=='?':
@@ -158,15 +167,20 @@ while True:
             continue
         nimed4=[]
         for nimi in nimed.split():
-            if nimi.lower=='all':
-                nimed4.apend(-1)
-            if nimi.lower() in nimed3:
-                nimed4.append(nimed.index(nimi))
+            if nimi.lower()=='kõik':
+                nimed4.append(-1)
+            elif nimi.lower() in nimed3:
+                nimed4.append(nimed3.index(nimi))
             else:
                 print(nimi+' ei leitud.')
         if nimed4!=[]:
             break
-    # ASD
+    for uid in nimed4:
+        print('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
+        for i in range(7):
+            out=['',nädal[i]]+list(map(str,users[uid]['times'][kanal][24*i:24*(i+1)]))
+            print('\t'.join(out))
+        print('\n')
     
 ##ajad = list()
 ##header=['Nimi','Kanal']
