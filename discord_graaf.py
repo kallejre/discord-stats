@@ -136,7 +136,9 @@ for c in sorted(archive['data']):  # c = kanali id
             users[uid]['lens'][sub] += len(message['m'])
             users[uid]['times'][sub][24*wk+h]+=1"""
 print()
-
+uid=1
+for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i]):
+    print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
 
 ##ajad = list()
 ##header=['Nimi','Kanal']
