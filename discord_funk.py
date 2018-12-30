@@ -111,7 +111,6 @@ for wk in 'ETKNRLP':
     for hr in range(24):
         head.append(wk+' '+str(hr))
 header2 = '\t'.join(['Nimi','Kanal']+head)
-del head
 nimed2=list(map(lambda uid:users[uid]['n'], users))
 nimed3=list(map(lambda x:x.lower(),nimed2))
 nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
@@ -133,7 +132,7 @@ for c in archive['data']:  # c = kanali id
         print(message['m'].lower(), file=f)  # Kopeeri sõnum faili
         time=datetime.datetime.fromtimestamp(message['t'] // 1000)
         wk=time.weekday()
-        h=time.hour
+        hr=time.hour
         # Nädalapäev: E = 0, P = 6
         # print(time.date(),time.time(),wk,h)
         
@@ -175,7 +174,7 @@ for c in archive['data']:  # c = kanali id
                 users[uid]['times'][sub] = [0]*168  # Iga tunni jaoks
             users[uid]['count'][sub] += 1
             users[uid]['lens'][sub] += len(message['m'])
-            users[uid]['times'][sub][24*wk+h]+=1
+            users[uid]['times'][sub][24*wk+hr]+=1
             
         uid = -1  # Kõigi kasutajate peale kokku
         for sub in [cur_name]+list(kategooriad[cur_name]):
@@ -185,10 +184,13 @@ for c in archive['data']:  # c = kanali id
                 users[uid]['times'][sub] = [0]*168  # Iga tunni jaoks
             users[uid]['count'][sub] += 1
             users[uid]['lens'][sub] += len(message['m'])
-            users[uid]['times'][sub][24*wk+h]+=1
+            users[uid]['times'][sub][24*wk+hr]+=1
 times = list(sorted(times))
 f.close()
+del c,m,sub,head,wk,hr,prev_msg,uid,tags,tag,time,message,\
+    a,x,f,file,cur_name,teine_uid,matchNum,match,matches
 print()
+print(list(sorted(filter(lambda x:x[0]!='_',globals()))))
 
 def arhiiv():
     for x in list(users):
@@ -294,8 +296,11 @@ Kasutamine:
                 print(ajatabelVäiksem(uid, kanal))
     except KeyboardInterrupt:
         pass
-def graafid_edetabel(username):
-    uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
+def graafid_edetabel(username, uid=0):
+    if not uid:
+        uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
+    else:
+        uid=username
     # Enne/Peale keda kirjutad
     for i in sorted(users[uid]['prev'], key=lambda i:users[uid]['prev'][i])[-5:]:
         print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['prev'][i],'korda')
@@ -310,21 +315,31 @@ def graafid_edetabel(username):
     for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i])[-5:]:
         print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
     print()
-def output_users()
+def output_users():
     with open('users.py','w',encoding='utf-8') as f:
         f.write('users='+str(users))
     import json
     use=json.dumps(users)
     with open('ergo.json','w',encoding='utf-8') as f:
         f.write(str(use))
-            
-    with open('disco.tgf', 'w', encoding='utf-8') as f:
+def output_tgf_tag():
+    with open('disco_tag.tgf', 'w', encoding='utf-8') as f:
         for i in users:
             print(i,users[i]['n'],file=f)
         print('#',file=f)
         for uid in users:
             for nxt in users[uid]['tag_to']:
                 count=users[uid]['tag_to'][nxt]
+                if count>=1:
+                    print(uid,nxt,count,file=f)
+def output_tgf_msg():
+    with open('disco_msg.tgf', 'w', encoding='utf-8') as f:
+        for i in users:
+            print(i,users[i]['n'],file=f)
+        print('#',file=f)
+        for uid in users:
+            for nxt in users[uid]['nxt']:
+                count=users[uid]['nxt'][nxt]
                 if count>=1:
                     print(uid,nxt,count,file=f)
 def statistika_tag():
@@ -345,7 +360,7 @@ def statistika_msg():
                 count=users[uid]['next'][nxt]
                 if count>=1:
                     print(users[uid]['n'],users[nxt]['n'],count,file=f,sep='\t')
-def statistika_tag2()
+def statistika_tag2():
     # Kahepoolse märkimise tabel
     paarid=set()
     key='tag_to'
@@ -362,7 +377,7 @@ def statistika_tag2()
                         if count>1:
                             l=list(sorted([users[uid]['n'],users[nxt]['n']]))
                             print(*l,välja,sisse,str(count).replace('.',','),file=f,sep='\t')
-def statistika_msg2()
+def statistika_msg2():
     # Kahepoolse vestlemise tabel
     paarid=set()
     key='next'
