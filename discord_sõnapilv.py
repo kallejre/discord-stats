@@ -33,3 +33,19 @@ for i in d:
             print(i, q[i], sep='\t')
         except:
             print('\t', q[i], sep='')
+# re.sub [^\w@\< \>#\n] -> " "
+"""
+f=open('C:\\Users\\kalle\\Documents\\GitHub\\discord-stats\\sõnapilv2.txt',encoding='utf-8')
+q=f.read()
+w=q.split()
+e=set(w)
+a=dict()
+for i in w:
+	if i not in a:
+		a[i]=0
+	a[i]+=1
+s=list(sorted(a,key=lambda x:a[x],reverse=True))
+d=list(filter(lambda x:len(x)>3,s))
+a['<@366546170149076993>']
+a[d[0]]
+"""
