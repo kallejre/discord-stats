@@ -140,15 +140,13 @@ for c in archive['data']:  # c = kanali id
         
         times.add(message['t'] // 10000 - 306788430)  # 10 sekundi täpsusega
         uid = message['u']
-        # Siiani korras
         ### REGEX
         matches=re.finditer('\<@!?\d+\>', message['m'])
         tags=[]
         for matchNum, match in enumerate(matches):
             tags.append(match.group()[2:-1].strip('!'))
         if tags:
-            # archive['meta']['users']['259709906607800321']
-            # archive['meta']['userindex'].index('259709906607800321')
+            # archive['meta']['userindex'].index(yld_id)
             for tag in tags:
                 if tag in archive['meta']['userindex']:
                     teine_uid=archive['meta']['userindex'].index(tag)
