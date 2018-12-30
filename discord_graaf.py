@@ -157,6 +157,7 @@ if 0:
     use=json.dumps(users)
     with open('ergo.json','w',encoding='utf-8') as f:
         f.write(str(use))
+"""
 with open('disco.tgf', 'w', encoding='utf-8') as f:
     for i in users:
         print(i,users[i]['n'],file=f)
@@ -166,5 +167,22 @@ with open('disco.tgf', 'w', encoding='utf-8') as f:
             count=users[uid]['tag_to'][nxt]
             if count>=1:
                 print(uid,nxt,count,file=f)
-
+"""
+with open('d_out_tag.txt', 'w', encoding='utf-8') as f:
+    for uid in users:
+        for nxt in users[uid]['tag_to']:
+            count=users[uid]['tag_to'][nxt]
+            if count>=1:
+                print(users[uid]['n'],users[nxt]['n'],count,file=f,sep='\t')
+paarid=set()
+key='next'
+with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
+    for uid in users:
+        for nxt in users[uid][key]:
+            if ((nxt,uid) not in paarid):  # users[nxt][key][uid]
+                paarid.add((uid,nxt))
+                if uid in users[nxt][key]:
+                    count= min([users[nxt][key][uid]/users[uid][key][nxt],users[uid][key][nxt]/users[nxt][key][uid]])*\
+                            min([users[nxt][key][uid], users[uid][key][nxt]])
+                    if count>1:print(users[uid]['n'],users[nxt]['n'],str(count).replace('.',','),file=f,sep='\t')
 print('done')
