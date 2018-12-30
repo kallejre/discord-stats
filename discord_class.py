@@ -207,7 +207,7 @@ class stats:
         self.times = list(sorted(self.times))
         f.close()
         print()
-        print(list(sorted(filter(lambda x:x[0]!='_',globals()))))
+
 
 
     def arhiiv():
@@ -447,4 +447,7 @@ class stats:
         pygame.quit()
 sts=stats()
 for i in list(filter(lambda x:x[0]!='_',dir(sts))):
-	print(i,str(eval('sts.'+i))[:50])
+    if type(eval('sts.'+i)).__name__=='type':
+        for x in list(filter(lambda x:x[0]!='_',dir(eval('sts.'+i)))):
+            print('sts.'+i+'.'+x,str(eval('sts.'+i+'.'+x))[:40],sep='\t')
+    else:print('sts.'+i,str(eval('sts.'+i))[:35].strip(),sep='\t')
