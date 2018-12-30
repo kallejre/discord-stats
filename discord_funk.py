@@ -100,7 +100,7 @@ kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
 f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
 ###   INIT2   ###
 for c in archive['data']:  # c = kanali id
-    print(c[0], end='')
+    print(c[2], end='')
     cur_name = archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
     cur_name = cur_name.split('_')[0]
     channels.append(cur_name)
@@ -192,7 +192,7 @@ nimed2=list(map(lambda uid:users[uid]['n'], users))
 nimed3=list(map(lambda x:x.lower(),nimed2))
 nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
 nädal=["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
-class Arhiiv:
+def arhiiv():
     for x in list(users):
         count = 0
         c_len = 0
@@ -236,7 +236,7 @@ class Arhiiv:
         c += 1
     with open('d_out4.txt', 'w', encoding='utf-8') as f:
         f.write('\n'.join(sisukus))
-class AjatabelSuur:
+def ajatabelSuur():
     ajad.append(header2)
     for x in list(users):
         total=[]
@@ -250,7 +250,7 @@ class AjatabelSuur:
         f.write('\n'.join(ajad))
     c = 1
     print('done')
-class AjatabelVäike:
+def ajatabelVäike():
     print('''
     ****** Interaktiivne "aktiivsusmonitor" ******
 Kasutamine:
@@ -279,7 +279,7 @@ Kasutamine:
                 if nimed[-1]=='?':
                     nimed=nimed[:-1].strip()
                     print(nimed)
-                    out=list(sorted(filter(lambda x:print(list(globals())) in x.lower(),nimed2))) # ;nimed.lower()
+                    out=list(sorted(filter(lambda x:nimed.lower() in x.lower(),nimed2))) # ;nimed.lower()
                     print(*out)
                     continue
                 nimed4=[]
@@ -300,7 +300,7 @@ Kasutamine:
                 print('\n')
     except KeyboardInterrupt:
         pass
-class Graafid:
+def graafid():
     if 1:
         username='uudu'
         uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
@@ -371,7 +371,7 @@ class Graafid:
                             l=list(sorted([users[uid]['n'],users[nxt]['n']]))
                             print(*l,välja,sisse,str(count).replace('.',','),file=f,sep='\t')
     print('done')
-class Graafik:
+def graafik():
     """Pygame joonistamine."""
     import pygame,colorsys
     colors=dict()
