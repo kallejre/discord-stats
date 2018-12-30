@@ -176,13 +176,19 @@ with open('d_out_tag.txt', 'w', encoding='utf-8') as f:
                 print(users[uid]['n'],users[nxt]['n'],count,file=f,sep='\t')
 paarid=set()
 key='next'
+#key='tag_to'
 with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
     for uid in users:
         for nxt in users[uid][key]:
             if ((nxt,uid) not in paarid):  # users[nxt][key][uid]
                 paarid.add((uid,nxt))
                 if uid in users[nxt][key]:
-                    count= min([users[nxt][key][uid]/users[uid][key][nxt],users[uid][key][nxt]/users[nxt][key][uid]])*\
-                            min([users[nxt][key][uid], users[uid][key][nxt]])
-                    if count>1:print(users[uid]['n'],users[nxt]['n'],str(count).replace('.',','),file=f,sep='\t')
+                    sisse=users[nxt][key][uid]
+                    välja=users[uid][key][nxt]
+                    count=min([sisse/välja,välja/sisse])*min([sisse, välja])
+                    # count= min([users[nxt][key][uid]/users[uid][key][nxt],users[uid][key][nxt]/users[nxt][key][uid]])*\
+                    #         min([users[nxt][key][uid], users[uid][key][nxt]])
+                    if count>1:
+                        l=list(sorted([users[uid]['n'],users[nxt]['n']]))
+                        print(*l,välja,sisse,str(count).replace('.',','),file=f,sep='\t')
 print('done')

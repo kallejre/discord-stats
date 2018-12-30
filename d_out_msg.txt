@@ -1,1277 +1,1277 @@
-Rauno	Kadri	57,246153846153845
-Rauno	Ago	27,84090909090909
-Rauno	test9	10,285714285714285
-Rauno	Mikk	3,5999999999999996
-Rauno	Sebastian	8,333333333333334
-Rauno	Kristjan	6,4
-Rauno	krohtla	1,3333333333333333
-Rauno	Helin	4,166666666666667
-Rauno	Elvar	13,473684210526315
-Rauno	TankerElite	1,5
-Rauno	Anubis	2,2857142857142856
-Rauno	markal	1,5
-Rauno	Kaido.K	6,125
-Rauno	pesalu	7,0
-Rauno	kenlaumets	3,2
-Rauno	Kert	2,25
-Rauno	Piret	4,0
-Rauno	ER	9,09090909090909
-Rauno	bode	8,1
-Rauno	SiimM	2,2857142857142856
-Rauno	eikall	6,0
-Rauno	lenny666	5,0
-Kadri	Ago	1150,1178318931659
-Kadri	test9	332,0266272189349
-Kadri	MajorMoopsy	89,04301075268818
-Kadri	Vallavanem	9,600000000000001
-Kadri	Mikk	214,51271186440678
-Kadri	Sebastian	626,0142405063291
-Kadri	Kristjan	153,68527918781726
-Kadri	Piret	84,55045871559633
-Kadri	Helin	46,41428571428571
-Kadri	236460404446855168	25,289473684210527
-Kadri	Elvar	731,0727496917386
-Kadri	moth	23,68421052631579
-Kadri	TankerElite	7,11764705882353
-Kadri	marko169	33,23076923076923
-Kadri	TROLLOLOLOLOLOLO	111,00884955752213
-Kadri	Anubis	390,08955223880594
-Kadri	outworld	4,166666666666667
-Kadri	mj	20,484848484848484
-Kadri	yipers	28,033333333333335
-Kadri	Glad	43,183673469387756
-Kadri	Atren	6,4
-Kadri	markal	17,454545454545453
-Kadri	Kaido.K	178,82843137254903
-Kadri	uudu	12,071428571428571
-Kadri	シkwaper	7,363636363636364
-Kadri	Patapon	21,043478260869566
-Kadri	Taurixz	13,235294117647058
-Kadri	André	9,307692307692308
-Kadri	Tristan	2,6666666666666665
-Kadri	firehax	19,047619047619047
-Kadri	Ea	2,0
-Kadri	kaspar	1,3333333333333333
-Kadri	Pls no tilt	11,266666666666667
-Kadri	kenlaumets	3,2
-Kadri	Kert	8,642857142857142
-Kadri	hhar0ld	3,0
-Kadri	tankitõrje	3,0
-Kadri	f11	15,041666666666666
-Kadri	sutgon	18,05
-Kadri	Emily Joy Krohn	14,727272727272728
-Kadri	Liis	1,3333333333333333
-Kadri	Tärk	7,5625
-Kadri	Tanel	6,125
-Kadri	Janar	4,166666666666667
-Kadri	rs	5,142857142857142
-Kadri	frang	23,813953488372093
-Kadri	Piidur	13,066666666666666
-Kadri	SapnikZ	2,6666666666666665
-Kadri	Anurist	10,0
-Kadri	HipSterius	1,5
-Kadri	Rait K3	12,041666666666668
-Kadri	F-22	7,0
-Kadri	Aivar Hinrikus	3,125
-Kadri	Lightning	4,166666666666667
-Kadri	Skye	14,08695652173913
-Kadri	andres	4,0
-Kadri	ER	6,666666666666666
-Kadri	olla(OliverLaidma)	1,3333333333333333
-Kadri	Andri	2,2727272727272725
-Kadri	bode	1,3333333333333333
-Kadri	$A$HA	7,6923076923076925
-Kadri	Raul	3,0
-Kadri	KristjanErik	1,3333333333333333
-Kadri	kristjan.	4,5
-Kadri	TheCreepySheep	76,05
-Kadri	VanWolfing	5,0
-Kadri	SiimM	1,3333333333333333
-Kadri	Holger	2,25
-Kadri	andreivassiljev	6,125
-Kadri	Alex.	1,3333333333333333
-Kadri	lenny666	4,5
-Kadri	Edvin	8,0
-Kadri	Ahti	2,0
-Kadri	IlmarB	1,3333333333333333
-Kadri	krohtla	29,257142857142856
-Kadri	LarsAsi	6,125
-Kadri	MeusChapeus	8,333333333333334
-Kadri	Tidrexion	7,0
-Kadri	Ken	23,310344827586206
-Kadri	123321	2,0
-Kadri	ErkkiA	3,0
-Kadri	Jevgenia	9,941176470588236
-Kadri	liliat	4,166666666666667
-Kadri	Taavi	1,3333333333333333
-Kadri	SASKE	1,3333333333333333
-Kadri	tsarapuu	1,3333333333333333
-Kadri	savyla	2,0
-Kadri	Sirual	1,3333333333333333
-Kadri	eikall	2,0
-Ago	test9	188,036866359447
-Ago	MajorMoopsy	42,88235294117647
-Ago	Vallavanem	8,0
-Ago	Mikk	122,12307692307692
-Ago	Sebastian	185,0
-Ago	Kristjan	165,02083333333334
-Ago	Piret	82,10227272727273
-Ago	Helin	204,04285714285714
-Ago	236460404446855168	77,44
-Ago	Elvar	236,00420168067228
-Ago	moth	36,0
-Ago	TankerElite	33,800000000000004
-Ago	marko169	18,232558139534884
-Ago	TROLLOLOLOLOLOLO	47,10126582278481
-Ago	Anubis	272,5640243902439
-Ago	outworld	17,64
-Ago	mj	13,066666666666666
-Ago	yipers	24,142857142857142
-Ago	Glad	26,035714285714285
-Ago	Atren	34,0
-Ago	markal	38,75438596491228
-Ago	Kaido.K	107,28030303030303
-Ago	uudu	9,0
-Ago	シkwaper	2,25
-Ago	Patapon	11,076923076923077
-Ago	Taurixz	16,40909090909091
-Ago	André	13,235294117647058
-Ago	Tristan	4,083333333333334
-Ago	firehax	38,72
-Ago	Ea	5,0
-Ago	kaspar	1,4705882352941178
-Ago	kenlaumets	11,636363636363637
-Ago	Kert	113,07563025210084
-Ago	hhar0ld	19,0
-Ago	f11	26,94736842105263
-Ago	sutgon	46,285714285714285
-Ago	Emily Joy Krohn	11,529411764705882
-Ago	Liis	13,066666666666666
-Ago	Tärk	16,055555555555554
-Ago	Tanel	55,06779661016949
-Ago	Janar	16,055555555555554
-Ago	SkullTiger	6,125
-Ago	sqvat	2,25
-Ago	rs	3,2
-Ago	frang	29,121212121212125
-Ago	Piidur	7,0
-Ago	SapnikZ	23,310344827586206
-Ago	Anurist	19,36
-Ago	lliizu	1,3333333333333333
-Ago	HipSterius	23,14814814814815
-Ago	durgress	1,125
-Ago	Rait K3	3,2727272727272725
-Ago	Aivar Hinrikus	18,05
-Ago	Lightning	30,0
-Ago	timmu	11,0
-Ago	Skye	29,454545454545457
-Ago	ER	92,89285714285714
-Ago	MZ	12,565217391304348
-Ago	lolxd	4,5
-Ago	Andri	2,5
-Ago	bode	5,0625
-Ago	$A$HA	21,16
-Ago	Raul	30,0
-Ago	KristjanErik	2,0
-Ago	kristjan.	7,111111111111111
-Ago	TheCreepySheep	137,1103448275862
-Ago	VanWolfing	12,8
-Ago	reneberkmann	5,7857142857142865
-Ago	raltm2e	7,142857142857143
-Ago	RSam	3,2
-Ago	SiimM	20,346153846153847
-Ago	PeebukasNagmir69	9,09090909090909
-Ago	Holger	22,153846153846153
-Ago	andreivassiljev	19,173913043478258
-Ago	Alex.	2,0
-Ago	G[A]stly	11,076923076923077
-Ago	zetty	2,0
-Ago	Lammas	2,0
-Ago	semph	3,0
-Ago	jkymmel	5,333333333333333
-Ago	JaagupSelli	6,75
-Ago	NeljaRaudne	1,3333333333333333
-Ago	maeiteamidagi	4,166666666666667
-Ago	lenny666	18,892857142857142
-Ago	kermz	17,052631578947366
-Ago	beatrix	1,3333333333333333
-Ago	ProtoMolecule	10,88888888888889
-Ago	margus	17,052631578947366
-Ago	Dave_Shinji	42,1875
-Ago	Kristjan	5,142857142857142
-Ago	9to5	5,818181818181818
-Ago	Sõne	1,3333333333333333
-Ago	Oskar	10,083333333333332
-Ago	Tafka	2,25
-Ago	teeleht	1,3333333333333333
-Ago	Teisi-LIis	2,0
-Ago	Anja	3,0
-Ago	Edvin	52,266666666666666
-Ago	Ahti	9,600000000000001
-Ago	Olari	11,0
-Ago	IlmarB	2,25
-Ago	Karis	6,0
-Ago	krohtla	75,7032967032967
-Ago	Scharlett	9,307692307692308
-Ago	LarsAsi	15,210526315789474
-Ago	Deleted User	6,0
-Ago	JanTreier	2,25
-Ago	MeusChapeus	33,028571428571425
-Ago	Raggamasta	3,2
-Ago	HarriH	26,133333333333333
-Ago	Tidrexion	7,363636363636364
-Ago	mikklahe	12,5
-Ago	fox	6,125
-Ago	Ken	18,0
-Ago	123321	23,04
-Ago	pesalu	28,488372093023255
-Ago	ErkkiA	6,0
-Ago	Margo	1,7999999999999998
-Ago	Frank	3,5714285714285716
-Ago	KrisTi	11,076923076923077
-Ago	eikall	2,0
-Ago	taavet	4,166666666666667
-Ago	kristinamerlyn	7,111111111111111
-Ago	Gert_Lohmus	6,4
-Ago	Sveta	2,0
-Ago	KPohl	5,444444444444445
-Ago	d0nsm	6,0
-Ago	Raul	2,0
-Ago	Home Run	3,5714285714285716
-Ago	Timo Loomets	9,307692307692308
-Ago	TSlex	4,8999999999999995
-Ago	Jevgenia	31,410256410256412
-Ago	hard1	1,3333333333333333
-Ago	LiisiLota	6,125
-Ago	Parvetaja	11,0
-Ago	liliat	2,0
-Ago	svenanton	10,0
-Ago	Tark hiina vanamees	2,2857142857142856
-Ago	SASKE	1,7999999999999998
-Ago	gautam	3,2
-Ago	raunc	5,142857142857142
-Ago	heidi	2,25
-Ago	aveka	3,2
-Ago	Misha	3,0
-Ago	AnnaS	7,363636363636364
-Ago	emotüdruk	2,25
-Ago	Boriss	3,2
-Ago	eikall	9,09090909090909
-Ago	Tuuli	2,25
-Ago	Annie	1,3333333333333333
-Ago	anpopl	1,7999999999999998
-Ago	Denkru56	2,0
-Ago	Igor	7,0
-Ago	Krandr	1,3333333333333333
-Ago	TheGreatLarkin	6,125
-Ago	sparrowxz	2,25
-Ago	jevg	3,125
-Ago	olla(OliverLaidma)	22,153846153846153
-Ago	ets12	6,4
-Ago	jevgen	2,25
-Ago	tn	10,083333333333332
-Ago	Polina	1,3333333333333333
-Ago	kristel	2,0
-test9	MajorMoopsy	27,03448275862069
-test9	Vallavanem	2,25
-test9	Mikk	29,43243243243243
-test9	Sebastian	59,50704225352113
-test9	Kristjan	27,923076923076923
-test9	Piret	20,346153846153847
-test9	Helin	21,16
-test9	236460404446855168	11,842105263157896
-test9	Elvar	59,23880597014926
-test9	moth	6,4
-test9	TankerElite	4,0
-test9	marko169	4,923076923076923
-test9	TROLLOLOLOLOLOLO	26,133333333333333
-test9	Anubis	58,0609756097561
-test9	outworld	2,0
-test9	mj	8,333333333333334
-test9	yipers	9,09090909090909
-test9	Glad	4,5
-test9	Atren	10,285714285714285
-test9	markal	2,2857142857142856
-test9	Kaido.K	41,08888888888889
-test9	uudu	2,6666666666666665
-test9	Patapon	4,571428571428571
-test9	André	4,166666666666667
-test9	Tristan	2,0
-test9	firehax	4,8999999999999995
-test9	Ea	1,3333333333333333
-test9	kenlaumets	1,3333333333333333
-test9	Kert	20,833333333333336
-test9	f11	4,0
-test9	sutgon	9,09090909090909
-test9	Emily Joy Krohn	2,6666666666666665
-test9	Tärk	4,5
-test9	Janar	3,2
-test9	frang	6,0
-test9	Anurist	2,0
-test9	HipSterius	1,3333333333333333
-test9	Aivar Hinrikus	4,166666666666667
-test9	Lightning	3,0
-test9	timmu	2,25
-test9	Skye	9,0
-test9	ER	2,25
-test9	$A$HA	2,0
-test9	Raul	7,0
-test9	TheCreepySheep	48,431034482758626
-test9	JaagupSelli	3,5714285714285716
-test9	lenny666	2,6666666666666665
-test9	ProtoMolecule	1,3333333333333333
-test9	Edvin	3,2
-test9	krohtla	21,0
-test9	mikklahe	3,0
-test9	123321	4,166666666666667
-test9	nooblander	2,0
-test9	Timo Loomets	1,7999999999999998
-test9	Jevgenia	3,0
-test9	Boriss	2,0
-test9	Annie	2,25
-MajorMoopsy	Sebastian	25,137931034482758
-MajorMoopsy	Kristjan	11,0
-MajorMoopsy	Helin	3,125
-MajorMoopsy	236460404446855168	3,2
-MajorMoopsy	Elvar	4,5
-MajorMoopsy	moth	3,5999999999999996
-MajorMoopsy	marko169	5,818181818181818
-MajorMoopsy	TROLLOLOLOLOLOLO	15,210526315789474
-MajorMoopsy	Anubis	42,02272727272727
-MajorMoopsy	outworld	1,3333333333333333
-MajorMoopsy	mj	10,0
-MajorMoopsy	yipers	7,6923076923076925
-MajorMoopsy	Atren	10,88888888888889
-MajorMoopsy	Kaido.K	10,88888888888889
-MajorMoopsy	Tristan	2,25
-MajorMoopsy	Kert	2,25
-MajorMoopsy	f11	3,0
-MajorMoopsy	sutgon	8,066666666666666
-MajorMoopsy	Emily Joy Krohn	4,0
-MajorMoopsy	Tärk	7,111111111111111
-MajorMoopsy	Tanel	13,066666666666666
-MajorMoopsy	Janar	6,125
-MajorMoopsy	frang	2,6666666666666665
-MajorMoopsy	HipSterius	2,6666666666666665
-MajorMoopsy	KristjanP	32,23684210526316
-MajorMoopsy	Lightning	2,0
-MajorMoopsy	ER	10,285714285714285
-MajorMoopsy	$A$HA	3,0
-MajorMoopsy	TheCreepySheep	24,5
-MajorMoopsy	raltm2e	1,3333333333333333
-MajorMoopsy	SiimM	1,3333333333333333
-MajorMoopsy	Holger	4,0
-MajorMoopsy	andreivassiljev	3,0
-MajorMoopsy	kermz	1,2857142857142856
-MajorMoopsy	beatrix	2,0
-MajorMoopsy	ProtoMolecule	5,0
-MajorMoopsy	Dave_Shinji	8,1
-MajorMoopsy	9to5	1,3333333333333333
-MajorMoopsy	Oskar	2,0
-MajorMoopsy	lava	1,3333333333333333
-MajorMoopsy	Aivar Hinrikus	3,5714285714285716
-MajorMoopsy	Ely	1,7999999999999998
-MajorMoopsy	Edvin	4,166666666666667
-MajorMoopsy	Olari	1,3333333333333333
-MajorMoopsy	krohtla	2,25
-MajorMoopsy	MeusChapeus	6,0
-MajorMoopsy	Raggamasta	1,3333333333333333
-MajorMoopsy	HarriH	7,363636363636364
-MajorMoopsy	Ken	1,7999999999999998
-MajorMoopsy	pesalu	10,5625
-MajorMoopsy	KrisTi	6,125
-MajorMoopsy	Gert_Lohmus	3,0
-MajorMoopsy	KPohl	1,3333333333333333
-MajorMoopsy	d0nsm	2,0
-MajorMoopsy	Andri	4,5
-MajorMoopsy	Home Run	1,3333333333333333
-MajorMoopsy	Jevgenia	8,0
-MajorMoopsy	LiisiLota	1,3333333333333333
-MajorMoopsy	Katarina	1,3333333333333333
-MajorMoopsy	vabriku direktor	2,0
-MajorMoopsy	TT	2,25
-Vallavanem	Kristjan	10,083333333333332
-Vallavanem	Helin	1,3333333333333333
-Vallavanem	TankerElite	4,166666666666667
-Vallavanem	TROLLOLOLOLOLOLO	20,0
-Vallavanem	Anubis	6,4
-Vallavanem	Kaido.K	3,5999999999999996
-Vallavanem	Taurixz	4,166666666666667
-Vallavanem	sutgon	3,0
-Vallavanem	krohtla	2,25
-Vallavanem	$A$HA	5,142857142857142
-Vallavanem	Stas	1,3333333333333333
-Vallavanem	AnnaS	2,25
-Vallavanem	Boriss	2,0
-Vallavanem	Kert	2,0
-Mikk	Sebastian	16,40909090909091
-Mikk	Kristjan	21,16
-Mikk	Piret	22,041666666666668
-Mikk	Helin	9,600000000000001
-Mikk	236460404446855168	1,7999999999999998
-Mikk	Elvar	74,71111111111111
-Mikk	moth	6,0
-Mikk	TankerElite	3,2
-Mikk	marko169	1,7999999999999998
-Mikk	TROLLOLOLOLOLOLO	1,4545454545454546
-Mikk	Anubis	73,01333333333334
-Mikk	yipers	1,3333333333333333
-Mikk	Glad	8,0
-Mikk	markal	1,7999999999999998
-Mikk	Kaido.K	12,565217391304348
-Mikk	シkwaper	2,0
-Mikk	Taurixz	1,5
-Mikk	firehax	6,4
-Mikk	Kert	7,111111111111111
-Mikk	Tärk	5,444444444444445
-Mikk	SapnikZ	4,5
-Mikk	Aivar Hinrikus	3,2
-Mikk	Skye	2,0
-Mikk	ER	12,25
-Mikk	$A$HA	4,0
-Mikk	Raul	24,0
-Mikk	TheCreepySheep	23,516129032258064
-Mikk	andreivassiljev	3,2
-Mikk	JaagupSelli	2,0
-Mikk	Edvin	15,210526315789474
-Mikk	krohtla	8,333333333333334
-Mikk	Jevgenia	2,6666666666666665
-Mikk	Sirual	2,0
-Sebastian	Kristjan	20,51219512195122
-Sebastian	Piret	26,470588235294116
-Sebastian	Helin	26,694444444444446
-Sebastian	236460404446855168	2,0
-Sebastian	Elvar	100,41791044776119
-Sebastian	moth	1,7999999999999998
-Sebastian	TankerElite	12,5
-Sebastian	marko169	5,444444444444445
-Sebastian	TROLLOLOLOLOLOLO	6,050000000000001
-Sebastian	Anubis	99,32432432432432
-Sebastian	yipers	12,5
-Sebastian	Glad	11,266666666666667
-Sebastian	Atren	10,083333333333332
-Sebastian	markal	4,764705882352941
-Sebastian	Kaido.K	101,00970873786407
-Sebastian	uudu	2,0
-Sebastian	André	2,25
-Sebastian	firehax	2,7777777777777777
-Sebastian	kaspar	1,7999999999999998
-Sebastian	olla(OliverLaidma)	4,8999999999999995
-Sebastian	Kert	7,142857142857143
-Sebastian	f11	17,0
-Sebastian	sutgon	4,5
-Sebastian	Emily Joy Krohn	5,0
-Sebastian	Tärk	1,6
-Sebastian	frang	6,75
-Sebastian	Polina	1,3333333333333333
-Sebastian	ER	12,19047619047619
-Sebastian	TheCreepySheep	15,058823529411764
-Sebastian	RSam	3,0
-Sebastian	Holger	4,166666666666667
-Sebastian	kaalikas	2,0
-Sebastian	ProtoMolecule	10,083333333333332
-Sebastian	Edvin	2,0
-Sebastian	Ahti	6,0
-Sebastian	krohtla	10,0
-Sebastian	Scharlett	7,6923076923076925
-Sebastian	LarsAsi	2,0
-Sebastian	Karliito	3,0
-Sebastian	123321	2,0
-Sebastian	KrisTi	2,25
-Sebastian	kristinamerlyn	13,136363636363637
-Sebastian	Sirual	1,3333333333333333
-Sebastian	Boriss	2,0
-Sebastian	ets12	5,0
-Kristjan	Piret	11,0
-Kristjan	Helin	21,125
-Kristjan	236460404446855168	4,5
-Kristjan	Elvar	22,13157894736842
-Kristjan	moth	20,833333333333336
-Kristjan	TankerElite	14,45
-Kristjan	marko169	1,3333333333333333
-Kristjan	TROLLOLOLOLOLOLO	44,083333333333336
-Kristjan	Anubis	100,54330708661416
-Kristjan	mj	9,09090909090909
-Kristjan	yipers	5,142857142857142
-Kristjan	Glad	8,066666666666666
-Kristjan	Atren	22,0
-Kristjan	markal	3,0
-Kristjan	Kaido.K	45,45454545454545
-Kristjan	Taurixz	1,5
-Kristjan	Kimmo	4,5
-Kristjan	firehax	3,2727272727272725
-Kristjan	Pls no tilt	9,0
-Kristjan	kenlaumets	3,0
-Kristjan	hhar0ld	9,307692307692308
-Kristjan	sutgon	12,8
-Kristjan	Emily Joy Krohn	2,25
-Kristjan	Tärk	15,058823529411764
-Kristjan	Tanel	5,444444444444445
-Kristjan	Janar	2,0
-Kristjan	SkullTiger	1,3333333333333333
-Kristjan	frang	16,0
-Kristjan	Piidur	1,6
-Kristjan	SapnikZ	2,7777777777777777
-Kristjan	timmu	5,818181818181818
-Kristjan	Skye	1,3333333333333333
-Kristjan	ER	5,333333333333333
-Kristjan	Raul	6,666666666666666
-Kristjan	TheCreepySheep	29,46938775510204
-Kristjan	VanWolfing	3,0
-Kristjan	PeebukasNagmir69	1,3333333333333333
-Kristjan	lenny666	1,3333333333333333
-Kristjan	Dave_Shinji	4,8999999999999995
-Kristjan	Edvin	6,75
-Kristjan	IlmarB	1,7999999999999998
-Kristjan	krohtla	14,0625
-Kristjan	MeusChapeus	13,5
-Kristjan	Ragnar	2,25
-Kristjan	Gert_Lohmus	11,076923076923077
-Kristjan	Home Run	3,2
-Kristjan	Jevgenia	3,2
-Kristjan	Parvetaja	1,3333333333333333
-Kristjan	liliat	13,066666666666666
-Kristjan	raunc	1,3333333333333333
-Kristjan	Boriss	1,3333333333333333
-Kristjan	pitkunait	2,0
-Piret	krohtla	3,2
-Piret	Helin	8,066666666666666
-Piret	Ragnar	4,0
-Piret	Elvar	28,982758620689655
-Piret	TROLLOLOLOLOLOLO	8,333333333333334
-Piret	Anubis	19,047619047619047
-Piret	outworld	2,0
-Piret	Tidrexion	2,0
-Piret	Glad	10,0
-Piret	markal	1,3333333333333333
-Piret	Kaido.K	24,735294117647058
-Piret	Patapon	9,307692307692308
-Piret	Taurixz	2,6666666666666665
-Piret	André	2,6666666666666665
-Piret	firehax	2,0
-Piret	olla(OliverLaidma)	6,0
-Piret	Kert	3,0625
-Piret	Kaspar	4,0
-Piret	Raul	3,125
-Piret	TheCreepySheep	11,0
-Piret	LarsAsi	3,5714285714285716
-Piret	lenny666	4,166666666666667
-Helin	Elvar	26,94736842105263
-Helin	moth	20,166666666666664
-Helin	TankerElite	1,7999999999999998
-Helin	TROLLOLOLOLOLOLO	4,0
-Helin	Anubis	50,416666666666664
-Helin	markal	1,5
-Helin	Kaido.K	4,8999999999999995
-Helin	Kert	4,454545454545454
-Helin	f11	4,0
-Helin	Tanel	2,25
-Helin	Lightning	3,2
-Helin	ER	5,0
-Helin	TheCreepySheep	2,0
-Helin	VanWolfing	3,2
-Helin	kristinamerlyn	1,3333333333333333
-236460404446855168	Anja	1,3333333333333333
-236460404446855168	Elvar	5,444444444444445
-236460404446855168	moth	3,0
-236460404446855168	MeusChapeus	3,0
-236460404446855168	TROLLOLOLOLOLOLO	7,111111111111111
-236460404446855168	Anubis	6,0
-236460404446855168	markal	6,125
-236460404446855168	Kaido.K	19,173913043478258
-236460404446855168	Patapon	4,0
-236460404446855168	Tristan	1,7999999999999998
-236460404446855168	Kert	10,0
-236460404446855168	sutgon	2,0
-236460404446855168	Tärk	1,3333333333333333
-236460404446855168	Andri	9,0
-236460404446855168	TheCreepySheep	6,75
-236460404446855168	JaagupSelli	2,0
-236460404446855168	Oskar	2,0
-Elvar	moth	2,25
-Elvar	TankerElite	3,2727272727272725
-Elvar	marko169	9,09090909090909
-Elvar	TROLLOLOLOLOLOLO	34,38095238095238
-Elvar	Anubis	72,01351351351352
-Elvar	outworld	1,2857142857142856
-Elvar	mj	7,5625
-Elvar	yipers	4,166666666666667
-Elvar	Glad	22,321428571428573
-Elvar	Atren	1,7999999999999998
-Elvar	markal	12,19047619047619
-Elvar	Kaido.K	31,609756097560975
-Elvar	uudu	4,5
-Elvar	Taurixz	2,25
-Elvar	André	2,6666666666666665
-Elvar	Tristan	2,25
-Elvar	firehax	14,0625
-Elvar	Kert	1,7999999999999998
-Elvar	tankitõrje	2,0
-Elvar	f11	2,0
-Elvar	Emily Joy Krohn	3,0
-Elvar	Tärk	6,125
-Elvar	frang	8,333333333333334
-Elvar	Piidur	5,142857142857142
-Elvar	HipSterius	2,0
-Elvar	Andri	6,125
-Elvar	Raul	3,0
-Elvar	TheCreepySheep	4,083333333333334
-Elvar	Alex.	5,142857142857142
-Elvar	L1ghtK	3,2
-Elvar	Edvin	6,125
-Elvar	krohtla	10,083333333333332
-Elvar	Scharlett	1,7999999999999998
-Elvar	MeusChapeus	5,444444444444445
-Elvar	Gert_Lohmus	2,25
-Elvar	Jevgenia	2,6666666666666665
-Elvar	Gremow	2,0
-Elvar	Parvetaja	1,3333333333333333
-Elvar	Tuuli	3,125
-moth	TROLLOLOLOLOLOLO	4,8999999999999995
-moth	Anubis	29,032258064516128
-moth	Atren	3,2
-moth	Kaido.K	7,111111111111111
-moth	uudu	3,0
-moth	Taurixz	2,25
-moth	sutgon	2,0
-moth	Tanel	1,3333333333333333
-moth	frang	3,2
-moth	Jevgenia	2,0
-moth	timmu	2,0
-moth	Andri	3,2
-moth	TheCreepySheep	32,029411764705884
-moth	zetty	1,3333333333333333
-moth	JaagupSelli	3,5714285714285716
-moth	margus	3,0
-moth	Oskar	1,3333333333333333
-TankerElite	krohtla	3,5714285714285716
-TankerElite	LarsAsi	3,0
-TankerElite	TROLLOLOLOLOLOLO	10,0
-TankerElite	Anubis	15,428571428571427
-TankerElite	mj	1,3333333333333333
-TankerElite	Glad	1,7999999999999998
-TankerElite	Kaido.K	15,428571428571427
-TankerElite	uudu	1,7999999999999998
-TankerElite	ErkkiA	2,0
-TankerElite	Ea	2,0
-TankerElite	MZ	5,0
-TankerElite	f11	4,5
-TankerElite	Tärk	4,0
-TankerElite	frang	5,142857142857142
-TankerElite	SapnikZ	1,2857142857142856
-TankerElite	HipSterius	2,25
-TankerElite	ER	5,0
-TankerElite	margus	2,0
-marko169	TROLLOLOLOLOLOLO	12,071428571428571
-marko169	Anubis	15,041666666666666
-marko169	yipers	1,2857142857142856
-marko169	Atren	8,0
-marko169	markal	1,3333333333333333
-marko169	Taurixz	2,0
-marko169	frang	1,3333333333333333
-marko169	liliat	1,3333333333333333
-marko169	KristjanP	2,0
-marko169	Raul	1,3333333333333333
-marko169	TheCreepySheep	4,0
-marko169	HarriH	4,166666666666667
-TROLLOLOLOLOLOLO	Anubis	83,04597701149426
-TROLLOLOLOLOLOLO	outworld	5,142857142857142
-TROLLOLOLOLOLOLO	mj	4,0
-TROLLOLOLOLOLOLO	yipers	1,4545454545454546
-TROLLOLOLOLOLOLO	Glad	16,2
-TROLLOLOLOLOLOLO	Atren	7,111111111111111
-TROLLOLOLOLOLOLO	Kaido.K	39,02439024390244
-TROLLOLOLOLOLOLO	Patapon	1,3333333333333333
-TROLLOLOLOLOLOLO	Taurixz	5,142857142857142
-TROLLOLOLOLOLOLO	André	1,7999999999999998
-TROLLOLOLOLOLOLO	firehax	6,4
-TROLLOLOLOLOLOLO	Kert	2,2857142857142856
-TROLLOLOLOLOLOLO	hhar0ld	1,3333333333333333
-TROLLOLOLOLOLOLO	f11	2,0
-TROLLOLOLOLOLOLO	sutgon	10,5625
-TROLLOLOLOLOLOLO	Liis	3,2
-TROLLOLOLOLOLOLO	Tärk	5,0
-TROLLOLOLOLOLOLO	Tanel	6,125
-TROLLOLOLOLOLOLO	Janar	1,3333333333333333
-TROLLOLOLOLOLOLO	jevgen	2,25
-TROLLOLOLOLOLOLO	Karl-Joosep	1,7999999999999998
-TROLLOLOLOLOLOLO	SapnikZ	2,5
-TROLLOLOLOLOLOLO	Anurist	3,2
-TROLLOLOLOLOLOLO	HipSterius	6,125
-TROLLOLOLOLOLOLO	KristjanP	4,0
-TROLLOLOLOLOLOLO	Skye	5,142857142857142
-TROLLOLOLOLOLOLO	ER	13,066666666666666
-TROLLOLOLOLOLOLO	MZ	2,2857142857142856
-TROLLOLOLOLOLOLO	bode	1,3333333333333333
-TROLLOLOLOLOLOLO	$A$HA	2,25
-TROLLOLOLOLOLOLO	Raul	8,1
-TROLLOLOLOLOLOLO	TheCreepySheep	11,842105263157896
-TROLLOLOLOLOLOLO	VanWolfing	2,0
-TROLLOLOLOLOLOLO	raltm2e	2,25
-TROLLOLOLOLOLOLO	SiimM	2,0
-TROLLOLOLOLOLOLO	PeebukasNagmir69	1,3333333333333333
-TROLLOLOLOLOLOLO	Holger	9,0
-TROLLOLOLOLOLOLO	andreivassiljev	2,0
-TROLLOLOLOLOLOLO	Alex.	4,0
-TROLLOLOLOLOLOLO	G[A]stly	2,0
-TROLLOLOLOLOLOLO	jkymmel	2,0
-TROLLOLOLOLOLOLO	margus	2,0
-TROLLOLOLOLOLOLO	Dave_Shinji	6,0
-TROLLOLOLOLOLOLO	Edvin	13,066666666666666
-TROLLOLOLOLOLOLO	krohtla	6,75
-TROLLOLOLOLOLOLO	LarsAsi	2,0
-TROLLOLOLOLOLOLO	MeusChapeus	22,041666666666668
-TROLLOLOLOLOLOLO	Home Run	1,3333333333333333
-TROLLOLOLOLOLOLO	Jevgenia	4,5
-TROLLOLOLOLOLOLO	liliat	4,0
-TROLLOLOLOLOLOLO	kenlaumets	5,0
-TROLLOLOLOLOLOLO	AnnaS	8,0
-TROLLOLOLOLOLOLO	Slicey	2,0
-Anubis	mj	3,769230769230769
-Anubis	yipers	12,8
-Anubis	Glad	17,19047619047619
-Anubis	Atren	9,0
-Anubis	markal	4,0
-Anubis	Kaido.K	76,29069767441861
-Anubis	uudu	8,642857142857142
-Anubis	Patapon	6,4
-Anubis	Taurixz	1,7999999999999998
-Anubis	André	2,2857142857142856
-Anubis	firehax	3,2666666666666666
-Anubis	kaspar	2,7777777777777777
-Anubis	kenlaumets	4,8999999999999995
-Anubis	Kert	29,257142857142856
-Anubis	hhar0ld	3,2
-Anubis	f11	6,125
-Anubis	sutgon	15,695652173913043
-Anubis	Emily Joy Krohn	6,050000000000001
-Anubis	Tärk	7,6923076923076925
-Anubis	Tanel	15,058823529411764
-Anubis	Janar	8,1
-Anubis	SkullTiger	1,3333333333333333
-Anubis	rs	2,0
-Anubis	frang	6,25
-Anubis	Piidur	5,142857142857142
-Anubis	SapnikZ	13,136363636363637
-Anubis	HipSterius	4,0
-Anubis	durgress	1,3333333333333333
-Anubis	KristjanP	1,3333333333333333
-Anubis	Aivar Hinrikus	2,6666666666666665
-Anubis	Lightning	1,3333333333333333
-Anubis	timmu	5,142857142857142
-Anubis	Skye	6,4
-Anubis	ER	4,5
-Anubis	lolxd	1,3333333333333333
-Anubis	Andri	4,8999999999999995
-Anubis	bode	5,142857142857142
-Anubis	$A$HA	10,0
-Anubis	Raul	10,083333333333332
-Anubis	kristjan.	3,0
-Anubis	TheCreepySheep	87,25773195876289
-Anubis	VanWolfing	4,8999999999999995
-Anubis	raltm2e	1,3333333333333333
-Anubis	Holger	6,4
-Anubis	andreivassiljev	3,0
-Anubis	zetty	3,2
-Anubis	olla(OliverLaidma)	5,0
-Anubis	JaagupSelli	3,5714285714285716
-Anubis	lenny666	7,0
-Anubis	kermz	4,0
-Anubis	ProtoMolecule	4,5
-Anubis	margus	3,2
-Anubis	Dave_Shinji	8,0
-Anubis	Teisi-LIis	1,3333333333333333
-Anubis	Edvin	2,2857142857142856
-Anubis	krohtla	42,08695652173913
-Anubis	LarsAsi	2,2857142857142856
-Anubis	MeusChapeus	1,3333333333333333
-Anubis	Karliito	1,3333333333333333
-Anubis	HarriH	5,0
-Anubis	mikklahe	2,0
-Anubis	Ken	3,2
-Anubis	Shmel	1,7999999999999998
-Anubis	emmakuppart	3,2
-Anubis	Gert_Lohmus	2,6666666666666665
-Anubis	Home Run	2,0
-Anubis	Jevgenia	3,125
-Anubis	tn	2,0
-Anubis	LiisiLota	3,0
-Anubis	liliat	5,444444444444445
-Anubis	SASKE	3,2
-Anubis	AnnaS	3,0
-Anubis	Boriss	6,0
-Anubis	Annie	1,7999999999999998
-Anubis	TT	1,3333333333333333
-outworld	Kaido.K	1,3333333333333333
-outworld	pesalu	1,3333333333333333
-outworld	Janar	2,0
-mj	Glad	2,0
-mj	uudu	3,2
-mj	kaspar	1,3333333333333333
-mj	Kert	14,0625
-mj	sutgon	3,0
-mj	frang	8,1
-mj	Piidur	2,25
-mj	ER	1,3333333333333333
-mj	TheCreepySheep	3,2
-yipers	Ely	1,3333333333333333
-yipers	Kaido.K	1,7999999999999998
-yipers	123321	1,3333333333333333
-yipers	Tärk	4,0
-yipers	Tanel	1,3333333333333333
-yipers	frang	7,0
-yipers	KristjanP	15,0
-yipers	ER	1,3333333333333333
-yipers	TheCreepySheep	2,25
-yipers	zetty	2,0
-yipers	jkymmel	2,0
-yipers	JaagupSelli	2,0
-yipers	nooblander	4,0
-yipers	margus	1,3333333333333333
-yipers	Edvin	1,7999999999999998
-Glad	markal	2,25
-Glad	Kaido.K	4,5
-Glad	Patapon	2,25
-Glad	André	2,6666666666666665
-Glad	firehax	2,0
-Glad	Janar	2,6666666666666665
-Glad	krohtla	1,7999999999999998
-Glad	HipSterius	1,3333333333333333
-Glad	MZ	2,0
-Glad	Raul	2,25
-Glad	Oskar	9,09090909090909
-Atren	Frank	4,166666666666667
-Atren	Kirchu	2,25
-Atren	Kaido.K	4,5
-Atren	Tristan	2,0
-Atren	firehax	2,25
-Atren	kaspar	2,0
-Atren	Kert	8,1
-Atren	hhar0ld	3,0
-Atren	f11	3,5714285714285716
-Atren	sutgon	5,142857142857142
-Atren	Emily Joy Krohn	1,3333333333333333
-Atren	KristjanP	6,230769230769231
-Atren	Aivar Hinrikus	7,0
-Atren	Andri	3,2
-Atren	TheCreepySheep	11,130434782608695
-Atren	lenny666	1,3333333333333333
-Atren	9to5	2,0
-Atren	Teisi-LIis	2,25
-Atren	Edvin	5,0
-Atren	krohtla	4,166666666666667
-Atren	Scharlett	2,0
-Atren	HarriH	3,0
-Atren	123321	1,3333333333333333
-Atren	KrisTi	2,0
-Atren	raimpz	1,3333333333333333
-Atren	Jevgenia	3,5714285714285716
-Atren	Annie	3,0
-Atren	anpopl	2,0
-Atren	Slicey	2,0
-Atren	liinavil	3,0
-markal	ER	3,0
-markal	Kaido.K	4,083333333333334
-markal	MZ	1,3333333333333333
-markal	Kert	1,7999999999999998
-markal	Scharlett	2,0
-markal	Lightning	5,142857142857142
-Kaido.K	uudu	1,3333333333333333
-Kaido.K	Paps	3,0
-Kaido.K	André	9,0
-Kaido.K	Tristan	1,3333333333333333
-Kaido.K	firehax	17,64
-Kaido.K	Alex.	7,142857142857143
-Kaido.K	kenlaumets	3,2
-Kaido.K	Kert	29,641025641025642
-Kaido.K	f11	6,0
-Kaido.K	sutgon	11,266666666666667
-Kaido.K	Emily Joy Krohn	3,2
-Kaido.K	Tärk	2,6666666666666665
-Kaido.K	Tanel	1,7999999999999998
-Kaido.K	rs	6,125
-Kaido.K	Taurixz	12,071428571428571
-Kaido.K	SapnikZ	2,2857142857142856
-Kaido.K	Aleksander Smirnov	2,6666666666666665
-Kaido.K	lliizu	3,0
-Kaido.K	HipSterius	3,2
-Kaido.K	Lightning	6,0
-Kaido.K	Skye	6,368421052631579
-Kaido.K	ER	29,878048780487806
-Kaido.K	MZ	6,0
-Kaido.K	bode	4,0
-Kaido.K	$A$HA	2,6666666666666665
-Kaido.K	Raul	17,925925925925924
-Kaido.K	kristjan.	1,3333333333333333
-Kaido.K	TheCreepySheep	25,6
-Kaido.K	VanWolfing	5,142857142857142
-Kaido.K	reneberkmann	5,0
-Kaido.K	LarsAsi	9,600000000000001
-Kaido.K	SkullTiger	5,0
-Kaido.K	SiimM	4,0
-Kaido.K	Holger	27,272727272727273
-Kaido.K	andreivassiljev	4,8999999999999995
-Kaido.K	sparrowxz	1,3333333333333333
-Kaido.K	G[A]stly	16,055555555555554
-Kaido.K	L1ghtK	4,0
-Kaido.K	lenny666	4,5
-Kaido.K	ProtoMolecule	15,0
-Kaido.K	Dave_Shinji	10,083333333333332
-Kaido.K	Oskar	1,7999999999999998
-Kaido.K	Tafka	2,0
-Kaido.K	teeleht	4,5
-Kaido.K	Edvin	19,0
-Kaido.K	Ahti	3,0
-Kaido.K	krohtla	54,0
-Kaido.K	Scharlett	5,142857142857142
-Kaido.K	jevg	5,0
-Kaido.K	JanTreier	4,166666666666667
-Kaido.K	MeusChapeus	4,0
-Kaido.K	HarriH	6,0
-Kaido.K	Tidrexion	8,0
-Kaido.K	Ken	14,0625
-Kaido.K	pesalu	20,0
-Kaido.K	ErkkiA	6,0
-Kaido.K	kf	2,0
-Kaido.K	KrisTi	9,307692307692308
-Kaido.K	eikall	6,125
-Kaido.K	taavet	4,0
-Kaido.K	kristinamerlyn	3,0
-Kaido.K	nooblander	1,3333333333333333
-Kaido.K	Gert_Lohmus	4,5
-Kaido.K	Pisikoll	4,0
-Kaido.K	Timo Loomets	2,25
-Kaido.K	Jevgenia	13,136363636363637
-Kaido.K	LiisiLota	4,5
-Kaido.K	svenanton	1,3333333333333333
-Kaido.K	olla(OliverLaidma)	14,0
-Kaido.K	AnnaS	5,444444444444445
-Kaido.K	Boriss	10,285714285714285
-Kaido.K	eikall	8,333333333333334
-Kaido.K	Igor	4,5
-Kaido.K	Jan	3,0
-uudu	TheCreepySheep	1,3333333333333333
-uudu	hhar0ld	1,3333333333333333
-uudu	frang	10,617647058823529
-uudu	Piidur	5,142857142857142
-シkwaper	Janar	2,0
-シkwaper	SapnikZ	2,25
-Patapon	bode	2,0
-Patapon	$A$HA	2,25
-Patapon	PeebukasNagmir69	1,3333333333333333
-Patapon	Kimmo	3,0
-Patapon	Andri	1,3333333333333333
-Patapon	Dave_Shinji	3,0
-Patapon	AnnaS	8,0
-Taurixz	Edvin	1,3333333333333333
-Taurixz	krohtla	4,083333333333334
-Taurixz	LarsAsi	2,6666666666666665
-Taurixz	MeusChapeus	7,111111111111111
-Taurixz	Taavi	1,3333333333333333
-Taurixz	Kert	2,0
-Taurixz	sutgon	10,083333333333332
-Taurixz	G[A]stly	1,3333333333333333
-Taurixz	Kristjan	2,0
-Taurixz	teeleht	1,3333333333333333
-André	LarsAsi	3,5714285714285716
-André	krohtla	2,6666666666666665
-André	SapnikZ	2,0
-André	Anurist	2,0
-André	$A$HA	6,4
-André	TheCreepySheep	1,7999999999999998
-Tristan	krohtla	6,125
-Tristan	sutgon	4,0
-firehax	krohtla	6,0
-firehax	Edvin	4,0
-firehax	KrisTi	7,0
-firehax	Kert	27,0
-firehax	sutgon	3,2
-firehax	SapnikZ	1,3333333333333333
-firehax	Lightning	2,0
-firehax	ER	2,0
-firehax	liliat	3,5714285714285716
-firehax	TheCreepySheep	31,114285714285714
-firehax	lenny666	2,0
-firehax	Andri	6,125
-firehax	Raul	3,2
-Ea	krohtla	1,3333333333333333
-kaspar	TheCreepySheep	1,7999999999999998
-kaspar	SapnikZ	2,25
-kaspar	sutgon	2,0
-kenlaumets	TightRobotron	3,0
-Kert	MeusChapeus	30,03125
-Kert	HarriH	10,0
-Kert	pesalu	9,0
-Kert	Kimmo	3,0
-Kert	jevg	1,3333333333333333
-Kert	Olari	1,3333333333333333
-Kert	Tärk	2,25
-Kert	Aivar Hinrikus	3,5714285714285716
-Kert	krohtla	20,045454545454547
-Kert	HipSterius	3,0
-Kert	Jevgenia	4,8999999999999995
-Kert	Lightning	2,25
-Kert	Skye	4,454545454545454
-Kert	LiisiLota	1,3333333333333333
-Kert	ER	12,0
-Kert	Raul	16,0
-Kert	TheCreepySheep	5,818181818181818
-Kert	LarsAsi	3,5714285714285716
-Kert	некитос))))	2,0
-Kert	Holger	3,5999999999999996
-Kert	AnnaS	4,0
-Kert	Edvin	18,05
-Kert	lenny666	6,0
-Kert	teeleht	2,0
-hhar0ld	Tärk	3,0
-f11	ErkkiA	5,142857142857142
-f11	sutgon	6,125
-f11	Tärk	1,3333333333333333
-f11	KPohl	1,3333333333333333
-f11	Piidur	2,6666666666666665
-f11	krohtla	3,0
-f11	TheCreepySheep	6,0
-f11	Edvin	1,3333333333333333
-f11	kermz	2,0
-sutgon	Ken	8,0
-sutgon	Tidrexion	1,3333333333333333
-sutgon	Emily Joy Krohn	2,0
-sutgon	TSlex	6,0
-sutgon	Skye	10,285714285714285
-sutgon	LiisiLota	2,25
-sutgon	TheCreepySheep	13,761904761904763
-sutgon	VanWolfing	3,2
-sutgon	raltm2e	5,0
-sutgon	G[A]stly	2,0
-sutgon	liliat	2,25
-sutgon	Andri	2,0
-sutgon	krohtla	1,2857142857142856
-Emily Joy Krohn	TheCreepySheep	3,5714285714285716
-Tärk	Edvin	2,25
-Tärk	pesalu	2,0
-Tärk	Tuuli	1,3333333333333333
-Tärk	SapnikZ	2,25
-Tärk	MZ	2,25
-Tärk	Parvetaja	2,25
-Tärk	Raul	5,0
-Tärk	TheCreepySheep	3,5714285714285716
-Tärk	Denkru56	2,0
-Tanel	MeusChapeus	2,25
-Tanel	Janar	4,0
-Tanel	HipSterius	3,0
-Tanel	ER	4,5
-Tanel	VanWolfing	2,0
-Tanel	jkymmel	3,0
-Tanel	JaagupSelli	1,3333333333333333
-Tanel	NeljaRaudne	4,0
-Tanel	KristjanP	2,0
-Janar	PiiaMiia	4,166666666666667
-Janar	KPohl	2,0
-Janar	ER	4,8999999999999995
-Janar	Raul	1,7999999999999998
-Janar	TheCreepySheep	3,764705882352941
-Janar	MeusChapeus	2,6666666666666665
-Janar	jkymmel	2,0
-Janar	kermz	2,0
-Janar	margus	3,0
-Janar	Dave_Shinji	10,0
-Janar	9to5	1,3333333333333333
-Janar	kazenokami	3,0
-SkullTiger	margus	1,3333333333333333
-SkullTiger	SapnikZ	2,25
-rs	krohtla	4,0
-rs	Home Run	2,0
-frang	Piidur	16,2
-frang	SapnikZ	1,3333333333333333
-Karl-Joosep	Holger	2,0
-SapnikZ	Anurist	2,0
-SapnikZ	HipSterius	2,25
-SapnikZ	andreivassiljev	3,2
-Anurist	Mokkachino	3,0
-Anurist	Teisi-LIis	3,0
-Aleksander Smirnov	Aivar Hinrikus	3,0
-HipSterius	krohtla	1,5
-HipSterius	olla(OliverLaidma)	2,25
-HipSterius	Tiina	2,25
-HipSterius	ER	1,3333333333333333
-HipSterius	svenanton	2,25
-HipSterius	Mokkachino	3,2
-HipSterius	Holger	3,2
-HipSterius	Boriss	2,0
-durgress	jevg	4,166666666666667
-KristjanP	LarsAsi	3,0
-KristjanP	TheCreepySheep	17,052631578947366
-KristjanP	Raggamasta	2,0
-Aivar Hinrikus	Shmel	1,3333333333333333
-Aivar Hinrikus	krohtla	3,2
-Lightning	ER	2,6666666666666665
-Lightning	krohtla	4,166666666666667
-Lightning	LarsAsi	3,0
-Lightning	lenny666	2,25
-Lightning	Raul	2,0
-timmu	Holger	6,125
-timmu	jevgen	2,0
-timmu	PapaSayHai	2,25
-timmu	lepapuu	5,142857142857142
-Skye	krohtla	1,3333333333333333
-Skye	TheCreepySheep	34,0
-andres	Ahti	2,25
-andres	ER	4,8999999999999995
-andres	Olari	3,0
-andres	HarriH	4,0
-andres	kermz	2,25
-andres	margus	2,2857142857142856
-ER	olla(OliverLaidma)	1,5
-ER	Tiina	2,0
-ER	MZ	1,3333333333333333
-ER	bode	1,3333333333333333
-ER	reneberkmann	3,2
-ER	SiimM	1,3333333333333333
-ER	PeebukasNagmir69	2,25
-ER	Holger	4,0
-ER	G[A]stly	2,0
-ER	kermz	2,6666666666666665
-ER	ProtoMolecule	2,25
-ER	margus	4,166666666666667
-ER	Edvin	4,454545454545454
-ER	Ahti	2,0
-ER	krohtla	11,842105263157896
-ER	Scharlett	4,0
-ER	Ivo	2,25
-ER	fox	3,5714285714285716
-ER	Margo	2,25
-ER	Gert_Lohmus	2,0
-MZ	Paps	2,0
-MZ	ErkkiA	5,0
-MZ	Sirual	4,166666666666667
-MZ	olla(OliverLaidma)	3,0
-Andri	liliat	1,7999999999999998
-Andri	TheCreepySheep	16,40909090909091
-bode	Edvin	1,3333333333333333
-$A$HA	Jevgenia	1,7999999999999998
-$A$HA	Raul	2,0
-$A$HA	andreivassiljev	6,0
-Raul	krohtla	5,444444444444445
-Raul	liliat	1,3333333333333333
-Raul	MeusChapeus	12,5
-Raul	TheCreepySheep	18,615384615384617
-Raul	PeebukasNagmir69	2,25
-Raul	Holger	2,6666666666666665
-Raul	teeleht	2,0
-TheCreepySheep	VanWolfing	1,7999999999999998
-TheCreepySheep	SiimM	2,0
-TheCreepySheep	Holger	2,2857142857142856
-TheCreepySheep	Alex.	1,7999999999999998
-TheCreepySheep	G[A]stly	2,6666666666666665
-TheCreepySheep	zetty	4,166666666666667
-TheCreepySheep	kaalikas	3,0
-TheCreepySheep	semph	1,3333333333333333
-TheCreepySheep	jkymmel	2,6666666666666665
-TheCreepySheep	JaagupSelli	2,7777777777777777
-TheCreepySheep	eikall	2,0
-TheCreepySheep	maeiteamidagi	1,3333333333333333
-TheCreepySheep	kermz	6,4
-TheCreepySheep	ProtoMolecule	1,3333333333333333
-TheCreepySheep	margus	1,3333333333333333
-TheCreepySheep	Dave_Shinji	1,3333333333333333
-TheCreepySheep	Kristjan	1,3333333333333333
-TheCreepySheep	Oskar	1,3333333333333333
-TheCreepySheep	Olari	3,0
-TheCreepySheep	krohtla	14,0625
-TheCreepySheep	MeusChapeus	14,08695652173913
-TheCreepySheep	HarriH	11,842105263157896
-TheCreepySheep	fox	1,7999999999999998
-TheCreepySheep	Ken	3,0
-TheCreepySheep	pesalu	5,142857142857142
-TheCreepySheep	Frank	2,25
-TheCreepySheep	KrisTi	1,3333333333333333
-TheCreepySheep	Mokkachino	2,25
-TheCreepySheep	Jevgenia	1,2857142857142856
-TheCreepySheep	Parvetaja	2,25
-TheCreepySheep	liliat	5,0
-TheCreepySheep	Annie	19,200000000000003
-VanWolfing	krohtla	4,166666666666667
-VanWolfing	jkymmel	3,0
-reneberkmann	kermz	3,0
-reneberkmann	Ahti	3,0
-SiimM	krohtla	4,166666666666667
-PeebukasNagmir69	krohtla	1,3333333333333333
-Holger	krohtla	6,4
-Holger	Karliito	2,0
-Holger	Sirual	3,2
-Holger	olla(OliverLaidma)	4,0
-Holger	Dave_Shinji	2,0
-Holger	LarsAsi	5,0
-Holger	Polina	1,3333333333333333
-andreivassiljev	krohtla	12,071428571428571
-andreivassiljev	Tuuli	2,0
-G[A]stly	raunc	1,3333333333333333
-Entityknownevil	blender ™	2,0
-JaagupSelli	Deleted User	2,0
-maeiteamidagi	Edvin	2,0
-lenny666	LarsAsi	3,2
-lenny666	svenanton	2,0
-lenny666	Frank	2,25
-lenny666	krohtla	7,6923076923076925
-kermz	Ivo	6,125
-kermz	Ahti	7,0
-kermz	Pearu Pung	4,0
-beatrix	Ely	2,6666666666666665
-ProtoMolecule	Ahti	2,6666666666666665
-ProtoMolecule	krohtla	7,0
-margus	Edvin	5,0
-margus	Ahti	4,0
-margus	fox	2,0
-margus	LiisiLota	3,2
-margus	HarriH	1,3333333333333333
-margus	Sõne	7,0
-margus	lava	2,0
-Dave_Shinji	krohtla	1,7999999999999998
-Dave_Shinji	pesalu	2,25
-Dave_Shinji	AndG	3,0
-Dave_Shinji	Oskar	5,0
-Kristjan	Edvin	2,0
-Kristjan	HarriH	3,0
-AndG	Denkru56	2,0
-Tafka	LarsAsi	6,125
-Teisi-LIis	krohtla	1,3333333333333333
-Teisi-LIis	jevgen	3,2
-Edvin	krohtla	1,3333333333333333
-Edvin	HarriH	2,0
-Edvin	Ken	1,3333333333333333
-Edvin	Villu	1,3333333333333333
-Ahti	krohtla	1,7999999999999998
-Ahti	Sveta	3,2
-Olari	Ken	5,0
-krohtla	olla(OliverLaidma)	4,166666666666667
-krohtla	LarsAsi	6,4
-krohtla	Scharlett	2,25
-krohtla	Tidrexion	2,0
-krohtla	Ken	3,2
-krohtla	pesalu	2,2857142857142856
-krohtla	Frank	3,0
-krohtla	eikall	2,6666666666666665
-krohtla	Gert_Lohmus	4,0
-krohtla	Kimmo	6,0
-krohtla	TSlex	7,111111111111111
-krohtla	Jevgenia	10,083333333333332
-krohtla	raunc	2,6666666666666665
-krohtla	heidi	1,7999999999999998
-krohtla	AnnaS	3,125
-krohtla	ets12	2,0
-krohtla	eikall	2,0
-krohtla	Annie	2,25
-Scharlett	emmakuppart	3,2
-MeusChapeus	pesalu	1,3333333333333333
-MeusChapeus	Raggamasta	1,3333333333333333
-MeusChapeus	TSlex	5,142857142857142
-HarriH	tn	1,3333333333333333
-Tidrexion	pesalu	3,0
-Tidrexion	olla(OliverLaidma)	3,0
-mikklahe	nooblander	2,0
-fox	kazenokami	3,0
-fox	eikall	2,0
-d0nsm	svenanton	2,0
-Mokkachino	Slicey	2,0
-Jevgenia	Boriss	1,3333333333333333
-kazenokami	jyrx123	2,0
+Kadri	Rauno	61	65	57,246153846153845
+Ago	Rauno	44	35	27,84090909090909
+Rauno	test9	14	12	10,285714285714285
+Mikk	Rauno	6	10	3,5999999999999996
+Rauno	Sebastian	12	10	8,333333333333334
+Kristjan	Rauno	8	10	6,4
+Rauno	krohtla	3	2	1,3333333333333333
+Helin	Rauno	5	6	4,166666666666667
+Elvar	Rauno	16	19	13,473684210526315
+Rauno	TankerElite	6	3	1,5
+Anubis	Rauno	4	7	2,2857142857142856
+Rauno	markal	6	3	1,5
+Kaido.K	Rauno	7	8	6,125
+Rauno	pesalu	7	7	7,0
+Rauno	kenlaumets	5	4	3,2
+Kert	Rauno	4	3	2,25
+Piret	Rauno	4	4	4,0
+ER	Rauno	10	11	9,09090909090909
+Rauno	bode	10	9	8,1
+Rauno	SiimM	4	7	2,2857142857142856
+Rauno	eikall	6	6	6,0
+Rauno	lenny666	5	5	5,0
+Ago	Kadri	1273	1210	1150,1178318931659
+Kadri	test9	338	335	332,0266272189349
+Kadri	MajorMoopsy	91	93	89,04301075268818
+Kadri	Vallavanem	15	12	9,600000000000001
+Kadri	Mikk	236	225	214,51271186440678
+Kadri	Sebastian	632	629	626,0142405063291
+Kadri	Kristjan	174	197	153,68527918781726
+Kadri	Piret	109	96	84,55045871559633
+Helin	Kadri	57	70	46,41428571428571
+236460404446855168	Kadri	31	38	25,289473684210527
+Elvar	Kadri	770	811	731,0727496917386
+Kadri	moth	30	38	23,68421052631579
+Kadri	TankerElite	11	17	7,11764705882353
+Kadri	marko169	36	39	33,23076923076923
+Kadri	TROLLOLOLOLOLOLO	112	113	111,00884955752213
+Anubis	Kadri	402	396	390,08955223880594
+Kadri	outworld	6	5	4,166666666666667
+Kadri	mj	33	26	20,484848484848484
+Kadri	yipers	30	29	28,033333333333335
+Glad	Kadri	49	46	43,183673469387756
+Atren	Kadri	10	8	6,4
+Kadri	markal	24	33	17,454545454545453
+Kadri	Kaido.K	191	204	178,82843137254903
+Kadri	uudu	13	14	12,071428571428571
+Kadri	シkwaper	9	11	7,363636363636364
+Kadri	Patapon	23	22	21,043478260869566
+Kadri	Taurixz	15	17	13,235294117647058
+André	Kadri	11	13	9,307692307692308
+Kadri	Tristan	4	6	2,6666666666666665
+Kadri	firehax	20	21	19,047619047619047
+Ea	Kadri	2	2	2,0
+Kadri	kaspar	2	3	1,3333333333333333
+Kadri	Pls no tilt	15	13	11,266666666666667
+Kadri	kenlaumets	5	4	3,2
+Kadri	Kert	14	11	8,642857142857142
+Kadri	hhar0ld	3	3	3,0
+Kadri	tankitõrje	3	3	3,0
+Kadri	f11	24	19	15,041666666666666
+Kadri	sutgon	20	19	18,05
+Emily Joy Krohn	Kadri	18	22	14,727272727272728
+Kadri	Liis	3	2	1,3333333333333333
+Kadri	Tärk	16	11	7,5625
+Kadri	Tanel	8	7	6,125
+Janar	Kadri	6	5	4,166666666666667
+Kadri	rs	7	6	5,142857142857142
+Kadri	frang	43	32	23,813953488372093
+Kadri	Piidur	14	15	13,066666666666666
+Kadri	SapnikZ	6	4	2,6666666666666665
+Anurist	Kadri	10	10	10,0
+HipSterius	Kadri	6	3	1,5
+Kadri	Rait K3	17	24	12,041666666666668
+F-22	Kadri	7	7	7,0
+Aivar Hinrikus	Kadri	5	8	3,125
+Kadri	Lightning	6	5	4,166666666666667
+Kadri	Skye	18	23	14,08695652173913
+Kadri	andres	4	4	4,0
+ER	Kadri	15	10	6,666666666666666
+Kadri	olla(OliverLaidma)	3	2	1,3333333333333333
+Andri	Kadri	11	5	2,2727272727272725
+Kadri	bode	3	2	1,3333333333333333
+$A$HA	Kadri	10	13	7,6923076923076925
+Kadri	Raul	12	6	3,0
+Kadri	KristjanErik	2	3	1,3333333333333333
+Kadri	kristjan.	6	8	4,5
+Kadri	TheCreepySheep	78	80	76,05
+Kadri	VanWolfing	5	5	5,0
+Kadri	SiimM	2	3	1,3333333333333333
+Holger	Kadri	4	3	2,25
+Kadri	andreivassiljev	7	8	6,125
+Alex.	Kadri	2	3	1,3333333333333333
+Kadri	lenny666	8	6	4,5
+Edvin	Kadri	8	8	8,0
+Ahti	Kadri	2	2	2,0
+IlmarB	Kadri	3	2	1,3333333333333333
+Kadri	krohtla	32	35	29,257142857142856
+Kadri	LarsAsi	8	7	6,125
+Kadri	MeusChapeus	12	10	8,333333333333334
+Kadri	Tidrexion	7	7	7,0
+Kadri	Ken	26	29	23,310344827586206
+123321	Kadri	2	2	2,0
+ErkkiA	Kadri	3	3	3,0
+Jevgenia	Kadri	13	17	9,941176470588236
+Kadri	liliat	5	6	4,166666666666667
+Kadri	Taavi	2	3	1,3333333333333333
+Kadri	SASKE	2	3	1,3333333333333333
+Kadri	tsarapuu	3	2	1,3333333333333333
+Kadri	savyla	2	2	2,0
+Kadri	Sirual	3	2	1,3333333333333333
+Kadri	eikall	2	2	2,0
+Ago	test9	217	202	188,036866359447
+Ago	MajorMoopsy	68	54	42,88235294117647
+Ago	Vallavanem	12	18	8,0
+Ago	Mikk	126	130	122,12307692307692
+Ago	Sebastian	185	185	185,0
+Ago	Kristjan	178	192	165,02083333333334
+Ago	Piret	85	88	82,10227272727273
+Ago	Helin	210	207	204,04285714285714
+236460404446855168	Ago	88	100	77,44
+Ago	Elvar	238	237	236,00420168067228
+Ago	moth	49	42	36,0
+Ago	TankerElite	39	45	33,800000000000004
+Ago	marko169	43	28	18,232558139534884
+Ago	TROLLOLOLOLOLOLO	79	61	47,10126582278481
+Ago	Anubis	328	299	272,5640243902439
+Ago	outworld	21	25	17,64
+Ago	mj	14	15	13,066666666666666
+Ago	yipers	28	26	24,142857142857142
+Ago	Glad	27	28	26,035714285714285
+Ago	Atren	34	34	34,0
+Ago	markal	57	47	38,75438596491228
+Ago	Kaido.K	132	119	107,28030303030303
+Ago	uudu	16	12	9,0
+Ago	シkwaper	4	3	2,25
+Ago	Patapon	12	13	11,076923076923077
+Ago	Taurixz	19	22	16,40909090909091
+Ago	André	15	17	13,235294117647058
+Ago	Tristan	12	7	4,083333333333334
+Ago	firehax	50	44	38,72
+Ago	Ea	5	5	5,0
+Ago	kaspar	17	5	1,4705882352941178
+Ago	kenlaumets	16	22	11,636363636363637
+Ago	Kert	116	119	113,07563025210084
+Ago	hhar0ld	19	19	19,0
+Ago	f11	38	32	26,94736842105263
+Ago	sutgon	54	63	46,285714285714285
+Ago	Emily Joy Krohn	17	14	11,529411764705882
+Ago	Liis	15	14	13,066666666666666
+Ago	Tärk	17	18	16,055555555555554
+Ago	Tanel	57	59	55,06779661016949
+Ago	Janar	18	17	16,055555555555554
+Ago	SkullTiger	8	7	6,125
+Ago	sqvat	3	4	2,25
+Ago	rs	5	4	3,2
+Ago	frang	33	31	29,121212121212125
+Ago	Piidur	7	7	7,0
+Ago	SapnikZ	29	26	23,310344827586206
+Ago	Anurist	22	25	19,36
+Ago	lliizu	2	3	1,3333333333333333
+Ago	HipSterius	25	27	23,14814814814815
+Ago	durgress	8	3	1,125
+Ago	Rait K3	11	6	3,2727272727272725
+Ago	Aivar Hinrikus	19	20	18,05
+Ago	Lightning	30	30	30,0
+Ago	timmu	11	11	11,0
+Ago	Skye	44	36	29,454545454545457
+Ago	ER	112	102	92,89285714285714
+Ago	MZ	23	17	12,565217391304348
+Ago	lolxd	6	8	4,5
+Ago	Andri	5	10	2,5
+Ago	bode	9	16	5,0625
+$A$HA	Ago	23	25	21,16
+Ago	Raul	30	30	30,0
+Ago	KristjanErik	2	2	2,0
+Ago	kristjan.	8	9	7,111111111111111
+Ago	TheCreepySheep	141	145	137,1103448275862
+Ago	VanWolfing	16	20	12,8
+Ago	reneberkmann	9	14	5,7857142857142865
+Ago	raltm2e	14	10	7,142857142857143
+Ago	RSam	5	4	3,2
+Ago	SiimM	26	23	20,346153846153847
+Ago	PeebukasNagmir69	10	11	9,09090909090909
+Ago	Holger	26	24	22,153846153846153
+Ago	andreivassiljev	23	21	19,173913043478258
+Ago	Alex.	2	2	2,0
+Ago	G[A]stly	13	12	11,076923076923077
+Ago	zetty	4	8	2,0
+Ago	Lammas	2	2	2,0
+Ago	semph	3	3	3,0
+Ago	jkymmel	8	12	5,333333333333333
+Ago	JaagupSelli	12	9	6,75
+Ago	NeljaRaudne	2	3	1,3333333333333333
+Ago	maeiteamidagi	6	5	4,166666666666667
+Ago	lenny666	23	28	18,892857142857142
+Ago	kermz	18	19	17,052631578947366
+Ago	beatrix	3	2	1,3333333333333333
+Ago	ProtoMolecule	14	18	10,88888888888889
+Ago	margus	18	19	17,052631578947366
+Ago	Dave_Shinji	48	45	42,1875
+Ago	Kristjan	6	7	5,142857142857142
+9to5	Ago	8	11	5,818181818181818
+Ago	Sõne	3	2	1,3333333333333333
+Ago	Oskar	11	12	10,083333333333332
+Ago	Tafka	3	4	2,25
+Ago	teeleht	2	3	1,3333333333333333
+Ago	Teisi-LIis	2	2	2,0
+Ago	Anja	3	3	3,0
+Ago	Edvin	56	60	52,266666666666666
+Ago	Ahti	15	12	9,600000000000001
+Ago	Olari	11	11	11,0
+Ago	IlmarB	3	4	2,25
+Ago	Karis	6	6	6,0
+Ago	krohtla	83	91	75,7032967032967
+Ago	Scharlett	11	13	9,307692307692308
+Ago	LarsAsi	19	17	15,210526315789474
+Ago	Deleted User	6	6	6,0
+Ago	JanTreier	3	4	2,25
+Ago	MeusChapeus	35	34	33,028571428571425
+Ago	Raggamasta	5	4	3,2
+Ago	HarriH	30	28	26,133333333333333
+Ago	Tidrexion	11	9	7,363636363636364
+Ago	mikklahe	18	15	12,5
+Ago	fox	7	8	6,125
+Ago	Ken	18	18	18,0
+123321	Ago	25	24	23,04
+Ago	pesalu	43	35	28,488372093023255
+Ago	ErkkiA	6	6	6,0
+Ago	Margo	3	5	1,7999999999999998
+Ago	Frank	7	5	3,5714285714285716
+Ago	KrisTi	13	12	11,076923076923077
+Ago	eikall	2	2	2,0
+Ago	taavet	6	5	4,166666666666667
+Ago	kristinamerlyn	8	9	7,111111111111111
+Ago	Gert_Lohmus	8	10	6,4
+Ago	Sveta	2	2	2,0
+Ago	KPohl	7	9	5,444444444444445
+Ago	d0nsm	6	6	6,0
+Ago	Raul	2	2	2,0
+Ago	Home Run	7	5	3,5714285714285716
+Ago	Timo Loomets	13	11	9,307692307692308
+Ago	TSlex	7	10	4,8999999999999995
+Ago	Jevgenia	35	39	31,410256410256412
+Ago	hard1	2	3	1,3333333333333333
+Ago	LiisiLota	8	7	6,125
+Ago	Parvetaja	11	11	11,0
+Ago	liliat	2	2	2,0
+Ago	svenanton	10	10	10,0
+Ago	Tark hiina vanamees	4	7	2,2857142857142856
+Ago	SASKE	5	3	1,7999999999999998
+Ago	gautam	4	5	3,2
+Ago	raunc	7	6	5,142857142857142
+Ago	heidi	4	3	2,25
+Ago	aveka	4	5	3,2
+Ago	Misha	3	3	3,0
+Ago	AnnaS	9	11	7,363636363636364
+Ago	emotüdruk	4	3	2,25
+Ago	Boriss	4	5	3,2
+Ago	eikall	10	11	9,09090909090909
+Ago	Tuuli	4	3	2,25
+Ago	Annie	4	12	1,3333333333333333
+Ago	anpopl	3	5	1,7999999999999998
+Ago	Denkru56	2	2	2,0
+Ago	Igor	7	7	7,0
+Ago	Krandr	2	3	1,3333333333333333
+Ago	TheGreatLarkin	7	8	6,125
+Ago	sparrowxz	4	3	2,25
+Ago	jevg	5	8	3,125
+Ago	olla(OliverLaidma)	26	24	22,153846153846153
+Ago	ets12	8	10	6,4
+Ago	jevgen	4	3	2,25
+Ago	tn	11	12	10,083333333333332
+Ago	Polina	3	2	1,3333333333333333
+Ago	kristel	2	2	2,0
+MajorMoopsy	test9	29	28	27,03448275862069
+Vallavanem	test9	4	3	2,25
+Mikk	test9	37	33	29,43243243243243
+Sebastian	test9	65	71	59,50704225352113
+Kristjan	test9	39	33	27,923076923076923
+Piret	test9	26	23	20,346153846153847
+Helin	test9	23	25	21,16
+236460404446855168	test9	19	15	11,842105263157896
+Elvar	test9	67	63	59,23880597014926
+moth	test9	8	10	6,4
+TankerElite	test9	4	4	4,0
+marko169	test9	13	8	4,923076923076923
+TROLLOLOLOLOLOLO	test9	30	28	26,133333333333333
+Anubis	test9	82	69	58,0609756097561
+outworld	test9	2	2	2,0
+mj	test9	10	12	8,333333333333334
+test9	yipers	10	11	9,09090909090909
+Glad	test9	6	8	4,5
+Atren	test9	14	12	10,285714285714285
+markal	test9	7	4	2,2857142857142856
+Kaido.K	test9	45	43	41,08888888888889
+test9	uudu	6	4	2,6666666666666665
+Patapon	test9	14	8	4,571428571428571
+André	test9	5	6	4,166666666666667
+Tristan	test9	2	2	2,0
+firehax	test9	10	7	4,8999999999999995
+Ea	test9	2	3	1,3333333333333333
+kenlaumets	test9	3	2	1,3333333333333333
+Kert	test9	25	30	20,833333333333336
+f11	test9	4	4	4,0
+sutgon	test9	10	11	9,09090909090909
+Emily Joy Krohn	test9	4	6	2,6666666666666665
+Tärk	test9	6	8	4,5
+Janar	test9	4	5	3,2
+frang	test9	6	6	6,0
+Anurist	test9	2	2	2,0
+HipSterius	test9	2	3	1,3333333333333333
+Aivar Hinrikus	test9	6	5	4,166666666666667
+Lightning	test9	3	3	3,0
+test9	timmu	4	3	2,25
+Skye	test9	9	9	9,0
+ER	test9	3	4	2,25
+$A$HA	test9	2	2	2,0
+Raul	test9	7	7	7,0
+TheCreepySheep	test9	53	58	48,431034482758626
+JaagupSelli	test9	5	7	3,5714285714285716
+lenny666	test9	4	6	2,6666666666666665
+ProtoMolecule	test9	2	3	1,3333333333333333
+Edvin	test9	5	4	3,2
+krohtla	test9	21	21	21,0
+mikklahe	test9	3	3	3,0
+123321	test9	6	5	4,166666666666667
+nooblander	test9	2	2	2,0
+Timo Loomets	test9	3	5	1,7999999999999998
+Jevgenia	test9	3	3	3,0
+Boriss	test9	2	2	2,0
+Annie	test9	4	3	2,25
+MajorMoopsy	Sebastian	29	27	25,137931034482758
+Kristjan	MajorMoopsy	11	11	11,0
+Helin	MajorMoopsy	8	5	3,125
+236460404446855168	MajorMoopsy	5	4	3,2
+Elvar	MajorMoopsy	8	6	4,5
+MajorMoopsy	moth	6	10	3,5999999999999996
+MajorMoopsy	marko169	8	11	5,818181818181818
+MajorMoopsy	TROLLOLOLOLOLOLO	19	17	15,210526315789474
+Anubis	MajorMoopsy	44	43	42,02272727272727
+MajorMoopsy	outworld	2	3	1,3333333333333333
+MajorMoopsy	mj	10	10	10,0
+MajorMoopsy	yipers	13	10	7,6923076923076925
+Atren	MajorMoopsy	18	14	10,88888888888889
+Kaido.K	MajorMoopsy	14	18	10,88888888888889
+MajorMoopsy	Tristan	3	4	2,25
+Kert	MajorMoopsy	3	4	2,25
+MajorMoopsy	f11	3	3	3,0
+MajorMoopsy	sutgon	11	15	8,066666666666666
+Emily Joy Krohn	MajorMoopsy	4	4	4,0
+MajorMoopsy	Tärk	9	8	7,111111111111111
+MajorMoopsy	Tanel	14	15	13,066666666666666
+Janar	MajorMoopsy	8	7	6,125
+MajorMoopsy	frang	4	6	2,6666666666666665
+HipSterius	MajorMoopsy	6	4	2,6666666666666665
+KristjanP	MajorMoopsy	35	38	32,23684210526316
+Lightning	MajorMoopsy	2	2	2,0
+ER	MajorMoopsy	12	14	10,285714285714285
+$A$HA	MajorMoopsy	3	3	3,0
+MajorMoopsy	TheCreepySheep	50	35	24,5
+MajorMoopsy	raltm2e	3	2	1,3333333333333333
+MajorMoopsy	SiimM	2	3	1,3333333333333333
+Holger	MajorMoopsy	4	4	4,0
+MajorMoopsy	andreivassiljev	3	3	3,0
+MajorMoopsy	kermz	3	7	1,2857142857142856
+MajorMoopsy	beatrix	8	4	2,0
+MajorMoopsy	ProtoMolecule	5	5	5,0
+Dave_Shinji	MajorMoopsy	9	10	8,1
+9to5	MajorMoopsy	2	3	1,3333333333333333
+MajorMoopsy	Oskar	2	2	2,0
+MajorMoopsy	lava	3	2	1,3333333333333333
+Aivar Hinrikus	MajorMoopsy	5	7	3,5714285714285716
+Ely	MajorMoopsy	3	5	1,7999999999999998
+Edvin	MajorMoopsy	6	5	4,166666666666667
+MajorMoopsy	Olari	3	2	1,3333333333333333
+MajorMoopsy	krohtla	3	4	2,25
+MajorMoopsy	MeusChapeus	6	6	6,0
+MajorMoopsy	Raggamasta	2	3	1,3333333333333333
+HarriH	MajorMoopsy	11	9	7,363636363636364
+Ken	MajorMoopsy	3	5	1,7999999999999998
+MajorMoopsy	pesalu	13	16	10,5625
+KrisTi	MajorMoopsy	7	8	6,125
+Gert_Lohmus	MajorMoopsy	3	3	3,0
+KPohl	MajorMoopsy	3	2	1,3333333333333333
+MajorMoopsy	d0nsm	2	2	2,0
+Andri	MajorMoopsy	8	6	4,5
+Home Run	MajorMoopsy	2	3	1,3333333333333333
+Jevgenia	MajorMoopsy	8	8	8,0
+LiisiLota	MajorMoopsy	2	3	1,3333333333333333
+Katarina	MajorMoopsy	2	3	1,3333333333333333
+MajorMoopsy	vabriku direktor	2	2	2,0
+MajorMoopsy	TT	3	4	2,25
+Kristjan	Vallavanem	11	12	10,083333333333332
+Helin	Vallavanem	2	3	1,3333333333333333
+TankerElite	Vallavanem	6	5	4,166666666666667
+TROLLOLOLOLOLOLO	Vallavanem	20	20	20,0
+Anubis	Vallavanem	10	8	6,4
+Kaido.K	Vallavanem	6	10	3,5999999999999996
+Taurixz	Vallavanem	6	5	4,166666666666667
+Vallavanem	sutgon	3	3	3,0
+Vallavanem	krohtla	3	4	2,25
+$A$HA	Vallavanem	7	6	5,142857142857142
+Stas	Vallavanem	3	2	1,3333333333333333
+AnnaS	Vallavanem	4	3	2,25
+Boriss	Vallavanem	2	2	2,0
+Kert	Vallavanem	2	2	2,0
+Mikk	Sebastian	22	19	16,40909090909091
+Kristjan	Mikk	25	23	21,16
+Mikk	Piret	23	24	22,041666666666668
+Helin	Mikk	15	12	9,600000000000001
+236460404446855168	Mikk	5	3	1,7999999999999998
+Elvar	Mikk	90	82	74,71111111111111
+Mikk	moth	6	6	6,0
+Mikk	TankerElite	4	5	3,2
+Mikk	marko169	5	3	1,7999999999999998
+Mikk	TROLLOLOLOLOLOLO	4	11	1,4545454545454546
+Anubis	Mikk	75	74	73,01333333333334
+Mikk	yipers	2	3	1,3333333333333333
+Glad	Mikk	8	8	8,0
+Mikk	markal	5	3	1,7999999999999998
+Kaido.K	Mikk	17	23	12,565217391304348
+Mikk	シkwaper	2	2	2,0
+Mikk	Taurixz	6	3	1,5
+Mikk	firehax	8	10	6,4
+Kert	Mikk	8	9	7,111111111111111
+Mikk	Tärk	9	7	5,444444444444445
+Mikk	SapnikZ	8	6	4,5
+Aivar Hinrikus	Mikk	5	4	3,2
+Mikk	Skye	2	2	2,0
+ER	Mikk	14	16	12,25
+$A$HA	Mikk	4	4	4,0
+Mikk	Raul	24	24	24,0
+Mikk	TheCreepySheep	27	31	23,516129032258064
+Mikk	andreivassiljev	5	4	3,2
+JaagupSelli	Mikk	2	2	2,0
+Edvin	Mikk	19	17	15,210526315789474
+Mikk	krohtla	10	12	8,333333333333334
+Jevgenia	Mikk	4	6	2,6666666666666665
+Mikk	Sirual	2	2	2,0
+Kristjan	Sebastian	41	29	20,51219512195122
+Piret	Sebastian	30	34	26,470588235294116
+Helin	Sebastian	31	36	26,694444444444446
+236460404446855168	Sebastian	2	2	2,0
+Elvar	Sebastian	134	116	100,41791044776119
+Sebastian	moth	5	3	1,7999999999999998
+Sebastian	TankerElite	18	15	12,5
+Sebastian	marko169	7	9	5,444444444444445
+Sebastian	TROLLOLOLOLOLOLO	11	20	6,050000000000001
+Anubis	Sebastian	111	105	99,32432432432432
+Sebastian	yipers	15	18	12,5
+Glad	Sebastian	13	15	11,266666666666667
+Atren	Sebastian	11	12	10,083333333333332
+Sebastian	markal	9	17	4,764705882352941
+Kaido.K	Sebastian	102	103	101,00970873786407
+Sebastian	uudu	2	2	2,0
+André	Sebastian	4	3	2,25
+Sebastian	firehax	9	5	2,7777777777777777
+Sebastian	kaspar	3	5	1,7999999999999998
+Sebastian	olla(OliverLaidma)	10	7	4,8999999999999995
+Kert	Sebastian	14	10	7,142857142857143
+Sebastian	f11	17	17	17,0
+Sebastian	sutgon	6	8	4,5
+Emily Joy Krohn	Sebastian	5	5	5,0
+Sebastian	Tärk	4	10	1,6
+Sebastian	frang	9	12	6,75
+Polina	Sebastian	3	2	1,3333333333333333
+ER	Sebastian	16	21	12,19047619047619
+Sebastian	TheCreepySheep	16	17	15,058823529411764
+RSam	Sebastian	3	3	3,0
+Holger	Sebastian	6	5	4,166666666666667
+Sebastian	kaalikas	2	2	2,0
+ProtoMolecule	Sebastian	12	11	10,083333333333332
+Edvin	Sebastian	2	2	2,0
+Ahti	Sebastian	6	6	6,0
+Sebastian	krohtla	10	10	10,0
+Scharlett	Sebastian	13	10	7,6923076923076925
+LarsAsi	Sebastian	2	2	2,0
+Karliito	Sebastian	3	3	3,0
+123321	Sebastian	2	2	2,0
+KrisTi	Sebastian	4	3	2,25
+Sebastian	kristinamerlyn	22	17	13,136363636363637
+Sebastian	Sirual	2	3	1,3333333333333333
+Boriss	Sebastian	2	2	2,0
+Sebastian	ets12	5	5	5,0
+Kristjan	Piret	11	11	11,0
+Helin	Kristjan	26	32	21,125
+236460404446855168	Kristjan	6	8	4,5
+Elvar	Kristjan	38	29	22,13157894736842
+Kristjan	moth	30	25	20,833333333333336
+Kristjan	TankerElite	20	17	14,45
+Kristjan	marko169	2	3	1,3333333333333333
+Kristjan	TROLLOLOLOLOLOLO	46	48	44,083333333333336
+Anubis	Kristjan	113	127	100,54330708661416
+Kristjan	mj	11	10	9,09090909090909
+Kristjan	yipers	6	7	5,142857142857142
+Glad	Kristjan	11	15	8,066666666666666
+Atren	Kristjan	22	22	22,0
+Kristjan	markal	3	3	3,0
+Kaido.K	Kristjan	55	50	45,45454545454545
+Kristjan	Taurixz	3	6	1,5
+Kimmo	Kristjan	8	6	4,5
+Kristjan	firehax	11	6	3,2727272727272725
+Kristjan	Pls no tilt	9	9	9,0
+Kristjan	kenlaumets	3	3	3,0
+Kristjan	hhar0ld	11	13	9,307692307692308
+Kristjan	sutgon	20	16	12,8
+Emily Joy Krohn	Kristjan	4	3	2,25
+Kristjan	Tärk	17	16	15,058823529411764
+Kristjan	Tanel	7	9	5,444444444444445
+Janar	Kristjan	8	4	2,0
+Kristjan	SkullTiger	3	2	1,3333333333333333
+Kristjan	frang	16	16	16,0
+Kristjan	Piidur	10	4	1,6
+Kristjan	SapnikZ	9	5	2,7777777777777777
+Kristjan	timmu	11	8	5,818181818181818
+Kristjan	Skye	2	3	1,3333333333333333
+ER	Kristjan	8	12	5,333333333333333
+Kristjan	Raul	10	15	6,666666666666666
+Kristjan	TheCreepySheep	49	38	29,46938775510204
+Kristjan	VanWolfing	3	3	3,0
+Kristjan	PeebukasNagmir69	3	2	1,3333333333333333
+Kristjan	lenny666	3	2	1,3333333333333333
+Dave_Shinji	Kristjan	7	10	4,8999999999999995
+Edvin	Kristjan	12	9	6,75
+IlmarB	Kristjan	3	5	1,7999999999999998
+Kristjan	krohtla	16	15	14,0625
+Kristjan	MeusChapeus	18	24	13,5
+Kristjan	Ragnar	3	4	2,25
+Gert_Lohmus	Kristjan	12	13	11,076923076923077
+Home Run	Kristjan	4	5	3,2
+Jevgenia	Kristjan	5	4	3,2
+Kristjan	Parvetaja	3	2	1,3333333333333333
+Kristjan	liliat	15	14	13,066666666666666
+Kristjan	raunc	2	3	1,3333333333333333
+Boriss	Kristjan	3	2	1,3333333333333333
+Kristjan	pitkunait	2	2	2,0
+Piret	krohtla	4	5	3,2
+Helin	Piret	15	11	8,066666666666666
+Piret	Ragnar	4	4	4,0
+Elvar	Piret	58	41	28,982758620689655
+Piret	TROLLOLOLOLOLOLO	10	12	8,333333333333334
+Anubis	Piret	21	20	19,047619047619047
+Piret	outworld	2	2	2,0
+Piret	Tidrexion	2	2	2,0
+Glad	Piret	10	10	10,0
+Piret	markal	2	3	1,3333333333333333
+Kaido.K	Piret	34	29	24,735294117647058
+Patapon	Piret	11	13	9,307692307692308
+Piret	Taurixz	6	4	2,6666666666666665
+André	Piret	6	4	2,6666666666666665
+Piret	firehax	2	2	2,0
+Piret	olla(OliverLaidma)	6	6	6,0
+Kert	Piret	7	16	3,0625
+Kaspar	Piret	4	4	4,0
+Piret	Raul	8	5	3,125
+Piret	TheCreepySheep	11	11	11,0
+LarsAsi	Piret	5	7	3,5714285714285716
+Piret	lenny666	5	6	4,166666666666667
+Elvar	Helin	32	38	26,94736842105263
+Helin	moth	22	24	20,166666666666664
+Helin	TankerElite	3	5	1,7999999999999998
+Helin	TROLLOLOLOLOLOLO	4	4	4,0
+Anubis	Helin	55	60	50,416666666666664
+Helin	markal	3	6	1,5
+Helin	Kaido.K	7	10	4,8999999999999995
+Helin	Kert	11	7	4,454545454545454
+Helin	f11	4	4	4,0
+Helin	Tanel	4	3	2,25
+Helin	Lightning	4	5	3,2
+ER	Helin	5	5	5,0
+Helin	TheCreepySheep	2	2	2,0
+Helin	VanWolfing	5	4	3,2
+Helin	kristinamerlyn	3	2	1,3333333333333333
+236460404446855168	Anja	2	3	1,3333333333333333
+236460404446855168	Elvar	9	7	5,444444444444445
+236460404446855168	moth	3	3	3,0
+236460404446855168	MeusChapeus	3	3	3,0
+236460404446855168	TROLLOLOLOLOLOLO	9	8	7,111111111111111
+236460404446855168	Anubis	6	6	6,0
+236460404446855168	markal	7	8	6,125
+236460404446855168	Kaido.K	21	23	19,173913043478258
+236460404446855168	Patapon	6	9	4,0
+236460404446855168	Tristan	3	5	1,7999999999999998
+236460404446855168	Kert	10	10	10,0
+236460404446855168	sutgon	2	2	2,0
+236460404446855168	Tärk	3	2	1,3333333333333333
+236460404446855168	Andri	9	9	9,0
+236460404446855168	TheCreepySheep	9	12	6,75
+236460404446855168	JaagupSelli	2	2	2,0
+236460404446855168	Oskar	2	2	2,0
+Elvar	moth	3	4	2,25
+Elvar	TankerElite	11	6	3,2727272727272725
+Elvar	marko169	10	11	9,09090909090909
+Elvar	TROLLOLOLOLOLOLO	42	38	34,38095238095238
+Anubis	Elvar	73	74	72,01351351351352
+Elvar	outworld	3	7	1,2857142857142856
+Elvar	mj	11	16	7,5625
+Elvar	yipers	5	6	4,166666666666667
+Elvar	Glad	28	25	22,321428571428573
+Atren	Elvar	3	5	1,7999999999999998
+Elvar	markal	21	16	12,19047619047619
+Elvar	Kaido.K	41	36	31,609756097560975
+Elvar	uudu	6	8	4,5
+Elvar	Taurixz	3	4	2,25
+André	Elvar	6	4	2,6666666666666665
+Elvar	Tristan	3	4	2,25
+Elvar	firehax	16	15	14,0625
+Elvar	Kert	3	5	1,7999999999999998
+Elvar	tankitõrje	2	2	2,0
+Elvar	f11	2	2	2,0
+Elvar	Emily Joy Krohn	3	3	3,0
+Elvar	Tärk	8	7	6,125
+Elvar	frang	10	12	8,333333333333334
+Elvar	Piidur	7	6	5,142857142857142
+Elvar	HipSterius	2	2	2,0
+Andri	Elvar	8	7	6,125
+Elvar	Raul	3	3	3,0
+Elvar	TheCreepySheep	7	12	4,083333333333334
+Alex.	Elvar	6	7	5,142857142857142
+Elvar	L1ghtK	5	4	3,2
+Edvin	Elvar	7	8	6,125
+Elvar	krohtla	11	12	10,083333333333332
+Elvar	Scharlett	5	3	1,7999999999999998
+Elvar	MeusChapeus	9	7	5,444444444444445
+Elvar	Gert_Lohmus	4	3	2,25
+Elvar	Jevgenia	4	6	2,6666666666666665
+Elvar	Gremow	2	2	2,0
+Elvar	Parvetaja	2	3	1,3333333333333333
+Elvar	Tuuli	8	5	3,125
+TROLLOLOLOLOLOLO	moth	7	10	4,8999999999999995
+Anubis	moth	31	30	29,032258064516128
+Atren	moth	5	4	3,2
+Kaido.K	moth	9	8	7,111111111111111
+moth	uudu	3	3	3,0
+Taurixz	moth	4	3	2,25
+moth	sutgon	2	2	2,0
+Tanel	moth	2	3	1,3333333333333333
+frang	moth	5	4	3,2
+Jevgenia	moth	2	2	2,0
+moth	timmu	2	2	2,0
+Andri	moth	4	5	3,2
+TheCreepySheep	moth	34	33	32,029411764705884
+moth	zetty	2	3	1,3333333333333333
+JaagupSelli	moth	5	7	3,5714285714285716
+margus	moth	3	3	3,0
+Oskar	moth	3	2	1,3333333333333333
+TankerElite	krohtla	5	7	3,5714285714285716
+LarsAsi	TankerElite	3	3	3,0
+TROLLOLOLOLOLOLO	TankerElite	10	10	10,0
+Anubis	TankerElite	18	21	15,428571428571427
+TankerElite	mj	3	2	1,3333333333333333
+Glad	TankerElite	5	3	1,7999999999999998
+Kaido.K	TankerElite	21	18	15,428571428571427
+TankerElite	uudu	3	5	1,7999999999999998
+ErkkiA	TankerElite	2	2	2,0
+Ea	TankerElite	2	2	2,0
+MZ	TankerElite	5	5	5,0
+TankerElite	f11	6	8	4,5
+TankerElite	Tärk	4	4	4,0
+TankerElite	frang	6	7	5,142857142857142
+SapnikZ	TankerElite	3	7	1,2857142857142856
+HipSterius	TankerElite	3	4	2,25
+ER	TankerElite	5	5	5,0
+TankerElite	margus	2	2	2,0
+TROLLOLOLOLOLOLO	marko169	14	13	12,071428571428571
+Anubis	marko169	19	24	15,041666666666666
+marko169	yipers	3	7	1,2857142857142856
+Atren	marko169	8	8	8,0
+markal	marko169	3	2	1,3333333333333333
+Taurixz	marko169	2	2	2,0
+frang	marko169	2	3	1,3333333333333333
+liliat	marko169	2	3	1,3333333333333333
+KristjanP	marko169	2	2	2,0
+Raul	marko169	3	2	1,3333333333333333
+TheCreepySheep	marko169	4	4	4,0
+HarriH	marko169	6	5	4,166666666666667
+Anubis	TROLLOLOLOLOLOLO	85	87	83,04597701149426
+TROLLOLOLOLOLOLO	outworld	7	6	5,142857142857142
+TROLLOLOLOLOLOLO	mj	6	9	4,0
+TROLLOLOLOLOLOLO	yipers	11	4	1,4545454545454546
+Glad	TROLLOLOLOLOLOLO	20	18	16,2
+Atren	TROLLOLOLOLOLOLO	9	8	7,111111111111111
+Kaido.K	TROLLOLOLOLOLOLO	41	40	39,02439024390244
+Patapon	TROLLOLOLOLOLOLO	3	2	1,3333333333333333
+TROLLOLOLOLOLOLO	Taurixz	7	6	5,142857142857142
+André	TROLLOLOLOLOLOLO	5	3	1,7999999999999998
+TROLLOLOLOLOLOLO	firehax	8	10	6,4
+Kert	TROLLOLOLOLOLOLO	7	4	2,2857142857142856
+TROLLOLOLOLOLOLO	hhar0ld	3	2	1,3333333333333333
+TROLLOLOLOLOLOLO	f11	2	2	2,0
+TROLLOLOLOLOLOLO	sutgon	16	13	10,5625
+Liis	TROLLOLOLOLOLOLO	5	4	3,2
+TROLLOLOLOLOLOLO	Tärk	5	5	5,0
+TROLLOLOLOLOLOLO	Tanel	7	8	6,125
+Janar	TROLLOLOLOLOLOLO	3	2	1,3333333333333333
+TROLLOLOLOLOLOLO	jevgen	4	3	2,25
+Karl-Joosep	TROLLOLOLOLOLOLO	5	3	1,7999999999999998
+SapnikZ	TROLLOLOLOLOLOLO	5	10	2,5
+Anurist	TROLLOLOLOLOLOLO	5	4	3,2
+HipSterius	TROLLOLOLOLOLOLO	8	7	6,125
+KristjanP	TROLLOLOLOLOLOLO	4	4	4,0
+Skye	TROLLOLOLOLOLOLO	6	7	5,142857142857142
+ER	TROLLOLOLOLOLOLO	14	15	13,066666666666666
+MZ	TROLLOLOLOLOLOLO	4	7	2,2857142857142856
+TROLLOLOLOLOLOLO	bode	3	2	1,3333333333333333
+$A$HA	TROLLOLOLOLOLOLO	3	4	2,25
+Raul	TROLLOLOLOLOLOLO	10	9	8,1
+TROLLOLOLOLOLOLO	TheCreepySheep	19	15	11,842105263157896
+TROLLOLOLOLOLOLO	VanWolfing	2	2	2,0
+TROLLOLOLOLOLOLO	raltm2e	4	3	2,25
+SiimM	TROLLOLOLOLOLOLO	2	2	2,0
+PeebukasNagmir69	TROLLOLOLOLOLOLO	3	2	1,3333333333333333
+Holger	TROLLOLOLOLOLOLO	12	16	9,0
+TROLLOLOLOLOLOLO	andreivassiljev	2	2	2,0
+Alex.	TROLLOLOLOLOLOLO	4	4	4,0
+G[A]stly	TROLLOLOLOLOLOLO	2	2	2,0
+TROLLOLOLOLOLOLO	jkymmel	2	2	2,0
+TROLLOLOLOLOLOLO	margus	2	2	2,0
+Dave_Shinji	TROLLOLOLOLOLOLO	6	6	6,0
+Edvin	TROLLOLOLOLOLOLO	15	14	13,066666666666666
+TROLLOLOLOLOLOLO	krohtla	9	12	6,75
+LarsAsi	TROLLOLOLOLOLOLO	2	2	2,0
+MeusChapeus	TROLLOLOLOLOLOLO	23	24	22,041666666666668
+Home Run	TROLLOLOLOLOLOLO	3	2	1,3333333333333333
+Jevgenia	TROLLOLOLOLOLOLO	6	8	4,5
+TROLLOLOLOLOLOLO	liliat	4	4	4,0
+TROLLOLOLOLOLOLO	kenlaumets	5	5	5,0
+AnnaS	TROLLOLOLOLOLOLO	8	8	8,0
+Slicey	TROLLOLOLOLOLOLO	2	2	2,0
+Anubis	mj	7	13	3,769230769230769
+Anubis	yipers	20	16	12,8
+Anubis	Glad	19	21	17,19047619047619
+Anubis	Atren	12	16	9,0
+Anubis	markal	6	9	4,0
+Anubis	Kaido.K	81	86	76,29069767441861
+Anubis	uudu	14	11	8,642857142857142
+Anubis	Patapon	8	10	6,4
+Anubis	Taurixz	3	5	1,7999999999999998
+André	Anubis	4	7	2,2857142857142856
+Anubis	firehax	7	15	3,2666666666666666
+Anubis	kaspar	5	9	2,7777777777777777
+Anubis	kenlaumets	7	10	4,8999999999999995
+Anubis	Kert	35	32	29,257142857142856
+Anubis	hhar0ld	5	4	3,2
+Anubis	f11	8	7	6,125
+Anubis	sutgon	23	19	15,695652173913043
+Anubis	Emily Joy Krohn	20	11	6,050000000000001
+Anubis	Tärk	10	13	7,6923076923076925
+Anubis	Tanel	17	16	15,058823529411764
+Anubis	Janar	10	9	8,1
+Anubis	SkullTiger	2	3	1,3333333333333333
+Anubis	rs	2	2	2,0
+Anubis	frang	16	10	6,25
+Anubis	Piidur	6	7	5,142857142857142
+Anubis	SapnikZ	17	22	13,136363636363637
+Anubis	HipSterius	4	4	4,0
+Anubis	durgress	3	2	1,3333333333333333
+Anubis	KristjanP	3	2	1,3333333333333333
+Aivar Hinrikus	Anubis	4	6	2,6666666666666665
+Anubis	Lightning	2	3	1,3333333333333333
+Anubis	timmu	7	6	5,142857142857142
+Anubis	Skye	10	8	6,4
+Anubis	ER	18	9	4,5
+Anubis	lolxd	3	2	1,3333333333333333
+Andri	Anubis	10	7	4,8999999999999995
+Anubis	bode	7	6	5,142857142857142
+$A$HA	Anubis	10	10	10,0
+Anubis	Raul	12	11	10,083333333333332
+Anubis	kristjan.	3	3	3,0
+Anubis	TheCreepySheep	97	92	87,25773195876289
+Anubis	VanWolfing	7	10	4,8999999999999995
+Anubis	raltm2e	2	3	1,3333333333333333
+Anubis	Holger	10	8	6,4
+Anubis	andreivassiljev	3	3	3,0
+Anubis	zetty	4	5	3,2
+Anubis	olla(OliverLaidma)	5	5	5,0
+Anubis	JaagupSelli	5	7	3,5714285714285716
+Anubis	lenny666	7	7	7,0
+Anubis	kermz	6	9	4,0
+Anubis	ProtoMolecule	8	6	4,5
+Anubis	margus	4	5	3,2
+Anubis	Dave_Shinji	8	8	8,0
+Anubis	Teisi-LIis	2	3	1,3333333333333333
+Anubis	Edvin	4	7	2,2857142857142856
+Anubis	krohtla	44	46	42,08695652173913
+Anubis	LarsAsi	4	7	2,2857142857142856
+Anubis	MeusChapeus	2	3	1,3333333333333333
+Anubis	Karliito	3	2	1,3333333333333333
+Anubis	HarriH	5	5	5,0
+Anubis	mikklahe	2	2	2,0
+Anubis	Ken	5	4	3,2
+Anubis	Shmel	5	3	1,7999999999999998
+Anubis	emmakuppart	4	5	3,2
+Anubis	Gert_Lohmus	4	6	2,6666666666666665
+Anubis	Home Run	2	2	2,0
+Anubis	Jevgenia	8	5	3,125
+Anubis	tn	2	2	2,0
+Anubis	LiisiLota	3	3	3,0
+Anubis	liliat	7	9	5,444444444444445
+Anubis	SASKE	5	4	3,2
+AnnaS	Anubis	3	3	3,0
+Anubis	Boriss	6	6	6,0
+Annie	Anubis	5	3	1,7999999999999998
+Anubis	TT	2	3	1,3333333333333333
+Kaido.K	outworld	2	3	1,3333333333333333
+outworld	pesalu	3	2	1,3333333333333333
+Janar	outworld	2	2	2,0
+Glad	mj	2	2	2,0
+mj	uudu	5	4	3,2
+kaspar	mj	2	3	1,3333333333333333
+Kert	mj	16	15	14,0625
+mj	sutgon	3	3	3,0
+frang	mj	10	9	8,1
+Piidur	mj	3	4	2,25
+ER	mj	2	3	1,3333333333333333
+TheCreepySheep	mj	5	4	3,2
+Ely	yipers	2	3	1,3333333333333333
+Kaido.K	yipers	3	5	1,7999999999999998
+123321	yipers	3	2	1,3333333333333333
+Tärk	yipers	4	4	4,0
+Tanel	yipers	3	2	1,3333333333333333
+frang	yipers	7	7	7,0
+KristjanP	yipers	15	15	15,0
+ER	yipers	3	2	1,3333333333333333
+TheCreepySheep	yipers	3	4	2,25
+yipers	zetty	2	2	2,0
+jkymmel	yipers	2	2	2,0
+JaagupSelli	yipers	2	2	2,0
+nooblander	yipers	4	4	4,0
+margus	yipers	2	3	1,3333333333333333
+Edvin	yipers	3	5	1,7999999999999998
+Glad	markal	4	3	2,25
+Glad	Kaido.K	8	6	4,5
+Glad	Patapon	3	4	2,25
+André	Glad	4	6	2,6666666666666665
+Glad	firehax	2	2	2,0
+Glad	Janar	4	6	2,6666666666666665
+Glad	krohtla	3	5	1,7999999999999998
+Glad	HipSterius	2	3	1,3333333333333333
+Glad	MZ	2	2	2,0
+Glad	Raul	3	4	2,25
+Glad	Oskar	11	10	9,09090909090909
+Atren	Frank	5	6	4,166666666666667
+Atren	Kirchu	3	4	2,25
+Atren	Kaido.K	8	6	4,5
+Atren	Tristan	2	2	2,0
+Atren	firehax	4	3	2,25
+Atren	kaspar	2	2	2,0
+Atren	Kert	9	10	8,1
+Atren	hhar0ld	3	3	3,0
+Atren	f11	5	7	3,5714285714285716
+Atren	sutgon	7	6	5,142857142857142
+Atren	Emily Joy Krohn	2	3	1,3333333333333333
+Atren	KristjanP	13	9	6,230769230769231
+Aivar Hinrikus	Atren	7	7	7,0
+Andri	Atren	5	4	3,2
+Atren	TheCreepySheep	16	23	11,130434782608695
+Atren	lenny666	3	2	1,3333333333333333
+9to5	Atren	2	2	2,0
+Atren	Teisi-LIis	3	4	2,25
+Atren	Edvin	5	5	5,0
+Atren	krohtla	5	6	4,166666666666667
+Atren	Scharlett	2	2	2,0
+Atren	HarriH	3	3	3,0
+123321	Atren	2	3	1,3333333333333333
+Atren	KrisTi	2	2	2,0
+Atren	raimpz	3	2	1,3333333333333333
+Atren	Jevgenia	5	7	3,5714285714285716
+Annie	Atren	3	3	3,0
+Atren	anpopl	2	2	2,0
+Atren	Slicey	2	2	2,0
+Atren	liinavil	3	3	3,0
+ER	markal	3	3	3,0
+Kaido.K	markal	12	7	4,083333333333334
+MZ	markal	2	3	1,3333333333333333
+Kert	markal	5	3	1,7999999999999998
+Scharlett	markal	2	2	2,0
+Lightning	markal	7	6	5,142857142857142
+Kaido.K	uudu	3	2	1,3333333333333333
+Kaido.K	Paps	3	3	3,0
+André	Kaido.K	9	9	9,0
+Kaido.K	Tristan	3	2	1,3333333333333333
+Kaido.K	firehax	21	25	17,64
+Alex.	Kaido.K	10	14	7,142857142857143
+Kaido.K	kenlaumets	5	4	3,2
+Kaido.K	Kert	34	39	29,641025641025642
+Kaido.K	f11	6	6	6,0
+Kaido.K	sutgon	15	13	11,266666666666667
+Emily Joy Krohn	Kaido.K	4	5	3,2
+Kaido.K	Tärk	6	4	2,6666666666666665
+Kaido.K	Tanel	5	3	1,7999999999999998
+Kaido.K	rs	7	8	6,125
+Kaido.K	Taurixz	14	13	12,071428571428571
+Kaido.K	SapnikZ	4	7	2,2857142857142856
+Aleksander Smirnov	Kaido.K	4	6	2,6666666666666665
+Kaido.K	lliizu	3	3	3,0
+HipSterius	Kaido.K	4	5	3,2
+Kaido.K	Lightning	6	6	6,0
+Kaido.K	Skye	19	11	6,368421052631579
+ER	Kaido.K	41	35	29,878048780487806
+Kaido.K	MZ	6	6	6,0
+Kaido.K	bode	4	4	4,0
+$A$HA	Kaido.K	4	6	2,6666666666666665
+Kaido.K	Raul	22	27	17,925925925925924
+Kaido.K	kristjan.	3	2	1,3333333333333333
+Kaido.K	TheCreepySheep	32	40	25,6
+Kaido.K	VanWolfing	6	7	5,142857142857142
+Kaido.K	reneberkmann	5	5	5,0
+Kaido.K	LarsAsi	15	12	9,600000000000001
+Kaido.K	SkullTiger	5	5	5,0
+Kaido.K	SiimM	4	4	4,0
+Holger	Kaido.K	30	33	27,272727272727273
+Kaido.K	andreivassiljev	7	10	4,8999999999999995
+Kaido.K	sparrowxz	2	3	1,3333333333333333
+G[A]stly	Kaido.K	17	18	16,055555555555554
+Kaido.K	L1ghtK	4	4	4,0
+Kaido.K	lenny666	6	8	4,5
+Kaido.K	ProtoMolecule	15	15	15,0
+Dave_Shinji	Kaido.K	11	12	10,083333333333332
+Kaido.K	Oskar	5	3	1,7999999999999998
+Kaido.K	Tafka	2	2	2,0
+Kaido.K	teeleht	8	6	4,5
+Edvin	Kaido.K	19	19	19,0
+Ahti	Kaido.K	3	3	3,0
+Kaido.K	krohtla	54	54	54,0
+Kaido.K	Scharlett	7	6	5,142857142857142
+Kaido.K	jevg	5	5	5,0
+JanTreier	Kaido.K	6	5	4,166666666666667
+Kaido.K	MeusChapeus	4	4	4,0
+HarriH	Kaido.K	6	6	6,0
+Kaido.K	Tidrexion	8	8	8,0
+Kaido.K	Ken	16	15	14,0625
+Kaido.K	pesalu	20	20	20,0
+ErkkiA	Kaido.K	6	6	6,0
+Kaido.K	kf	2	2	2,0
+Kaido.K	KrisTi	13	11	9,307692307692308
+Kaido.K	eikall	7	8	6,125
+Kaido.K	taavet	4	4	4,0
+Kaido.K	kristinamerlyn	3	3	3,0
+Kaido.K	nooblander	3	2	1,3333333333333333
+Gert_Lohmus	Kaido.K	8	6	4,5
+Kaido.K	Pisikoll	4	4	4,0
+Kaido.K	Timo Loomets	3	4	2,25
+Jevgenia	Kaido.K	22	17	13,136363636363637
+Kaido.K	LiisiLota	6	8	4,5
+Kaido.K	svenanton	3	2	1,3333333333333333
+Kaido.K	olla(OliverLaidma)	14	14	14,0
+AnnaS	Kaido.K	7	9	5,444444444444445
+Boriss	Kaido.K	14	12	10,285714285714285
+Kaido.K	eikall	12	10	8,333333333333334
+Igor	Kaido.K	8	6	4,5
+Jan	Kaido.K	3	3	3,0
+TheCreepySheep	uudu	3	2	1,3333333333333333
+hhar0ld	uudu	3	2	1,3333333333333333
+frang	uudu	19	34	10,617647058823529
+Piidur	uudu	7	6	5,142857142857142
+Janar	シkwaper	2	2	2,0
+SapnikZ	シkwaper	3	4	2,25
+Patapon	bode	2	2	2,0
+$A$HA	Patapon	4	3	2,25
+Patapon	PeebukasNagmir69	3	2	1,3333333333333333
+Kimmo	Patapon	3	3	3,0
+Andri	Patapon	2	3	1,3333333333333333
+Dave_Shinji	Patapon	3	3	3,0
+AnnaS	Patapon	8	8	8,0
+Edvin	Taurixz	3	2	1,3333333333333333
+Taurixz	krohtla	7	12	4,083333333333334
+LarsAsi	Taurixz	6	4	2,6666666666666665
+MeusChapeus	Taurixz	8	9	7,111111111111111
+Taavi	Taurixz	2	3	1,3333333333333333
+Kert	Taurixz	2	2	2,0
+Taurixz	sutgon	12	11	10,083333333333332
+G[A]stly	Taurixz	3	2	1,3333333333333333
+Kristjan	Taurixz	2	2	2,0
+Taurixz	teeleht	2	3	1,3333333333333333
+André	LarsAsi	7	5	3,5714285714285716
+André	krohtla	4	6	2,6666666666666665
+André	SapnikZ	2	2	2,0
+André	Anurist	2	2	2,0
+$A$HA	André	10	8	6,4
+André	TheCreepySheep	5	3	1,7999999999999998
+Tristan	krohtla	8	7	6,125
+Tristan	sutgon	4	4	4,0
+firehax	krohtla	6	6	6,0
+Edvin	firehax	4	4	4,0
+KrisTi	firehax	7	7	7,0
+Kert	firehax	27	27	27,0
+firehax	sutgon	4	5	3,2
+SapnikZ	firehax	2	3	1,3333333333333333
+Lightning	firehax	2	2	2,0
+ER	firehax	2	2	2,0
+firehax	liliat	7	5	3,5714285714285716
+TheCreepySheep	firehax	33	35	31,114285714285714
+firehax	lenny666	2	2	2,0
+Andri	firehax	8	7	6,125
+Raul	firehax	5	4	3,2
+Ea	krohtla	2	3	1,3333333333333333
+TheCreepySheep	kaspar	3	5	1,7999999999999998
+SapnikZ	kaspar	3	4	2,25
+kaspar	sutgon	2	2	2,0
+TightRobotron	kenlaumets	3	3	3,0
+Kert	MeusChapeus	32	31	30,03125
+HarriH	Kert	10	10	10,0
+Kert	pesalu	9	9	9,0
+Kert	Kimmo	3	3	3,0
+Kert	jevg	3	2	1,3333333333333333
+Kert	Olari	2	3	1,3333333333333333
+Kert	Tärk	4	3	2,25
+Aivar Hinrikus	Kert	5	7	3,5714285714285716
+Kert	krohtla	21	22	20,045454545454547
+HipSterius	Kert	3	3	3,0
+Jevgenia	Kert	10	7	4,8999999999999995
+Kert	Lightning	3	4	2,25
+Kert	Skye	7	11	4,454545454545454
+Kert	LiisiLota	2	3	1,3333333333333333
+ER	Kert	12	12	12,0
+Kert	Raul	16	16	16,0
+Kert	TheCreepySheep	11	8	5,818181818181818
+Kert	LarsAsi	5	7	3,5714285714285716
+Kert	некитос))))	2	2	2,0
+Holger	Kert	10	6	3,5999999999999996
+AnnaS	Kert	4	4	4,0
+Edvin	Kert	19	20	18,05
+Kert	lenny666	6	6	6,0
+Kert	teeleht	2	2	2,0
+Tärk	hhar0ld	3	3	3,0
+ErkkiA	f11	7	6	5,142857142857142
+f11	sutgon	7	8	6,125
+Tärk	f11	2	3	1,3333333333333333
+KPohl	f11	3	2	1,3333333333333333
+Piidur	f11	6	4	2,6666666666666665
+f11	krohtla	3	3	3,0
+TheCreepySheep	f11	6	6	6,0
+Edvin	f11	3	2	1,3333333333333333
+f11	kermz	2	2	2,0
+Ken	sutgon	8	8	8,0
+Tidrexion	sutgon	2	3	1,3333333333333333
+Emily Joy Krohn	sutgon	2	2	2,0
+TSlex	sutgon	6	6	6,0
+Skye	sutgon	12	14	10,285714285714285
+LiisiLota	sutgon	4	3	2,25
+TheCreepySheep	sutgon	17	21	13,761904761904763
+VanWolfing	sutgon	4	5	3,2
+raltm2e	sutgon	5	5	5,0
+G[A]stly	sutgon	2	2	2,0
+liliat	sutgon	3	4	2,25
+Andri	sutgon	2	2	2,0
+krohtla	sutgon	7	3	1,2857142857142856
+Emily Joy Krohn	TheCreepySheep	7	5	3,5714285714285716
+Edvin	Tärk	3	4	2,25
+Tärk	pesalu	2	2	2,0
+Tuuli	Tärk	2	3	1,3333333333333333
+SapnikZ	Tärk	3	4	2,25
+MZ	Tärk	4	3	2,25
+Parvetaja	Tärk	3	4	2,25
+Raul	Tärk	5	5	5,0
+TheCreepySheep	Tärk	5	7	3,5714285714285716
+Denkru56	Tärk	2	2	2,0
+MeusChapeus	Tanel	4	3	2,25
+Janar	Tanel	4	4	4,0
+HipSterius	Tanel	3	3	3,0
+ER	Tanel	6	8	4,5
+Tanel	VanWolfing	2	2	2,0
+Tanel	jkymmel	3	3	3,0
+JaagupSelli	Tanel	2	3	1,3333333333333333
+NeljaRaudne	Tanel	4	4	4,0
+KristjanP	Tanel	2	2	2,0
+Janar	PiiaMiia	5	6	4,166666666666667
+Janar	KPohl	2	2	2,0
+ER	Janar	7	10	4,8999999999999995
+Janar	Raul	3	5	1,7999999999999998
+Janar	TheCreepySheep	17	8	3,764705882352941
+Janar	MeusChapeus	6	4	2,6666666666666665
+Janar	jkymmel	2	2	2,0
+Janar	kermz	2	2	2,0
+Janar	margus	3	3	3,0
+Dave_Shinji	Janar	10	10	10,0
+9to5	Janar	3	2	1,3333333333333333
+Janar	kazenokami	3	3	3,0
+SkullTiger	margus	2	3	1,3333333333333333
+SapnikZ	SkullTiger	4	3	2,25
+krohtla	rs	4	4	4,0
+Home Run	rs	2	2	2,0
+Piidur	frang	18	20	16,2
+SapnikZ	frang	3	2	1,3333333333333333
+Holger	Karl-Joosep	2	2	2,0
+Anurist	SapnikZ	2	2	2,0
+HipSterius	SapnikZ	3	4	2,25
+SapnikZ	andreivassiljev	4	5	3,2
+Anurist	Mokkachino	3	3	3,0
+Anurist	Teisi-LIis	3	3	3,0
+Aivar Hinrikus	Aleksander Smirnov	3	3	3,0
+HipSterius	krohtla	6	3	1,5
+HipSterius	olla(OliverLaidma)	4	3	2,25
+HipSterius	Tiina	3	4	2,25
+ER	HipSterius	2	3	1,3333333333333333
+HipSterius	svenanton	4	3	2,25
+HipSterius	Mokkachino	4	5	3,2
+HipSterius	Holger	5	4	3,2
+Boriss	HipSterius	2	2	2,0
+durgress	jevg	6	5	4,166666666666667
+KristjanP	LarsAsi	3	3	3,0
+KristjanP	TheCreepySheep	19	18	17,052631578947366
+KristjanP	Raggamasta	2	2	2,0
+Aivar Hinrikus	Shmel	2	3	1,3333333333333333
+Aivar Hinrikus	krohtla	4	5	3,2
+ER	Lightning	4	6	2,6666666666666665
+Lightning	krohtla	6	5	4,166666666666667
+LarsAsi	Lightning	3	3	3,0
+Lightning	lenny666	4	3	2,25
+Lightning	Raul	2	2	2,0
+Holger	timmu	8	7	6,125
+jevgen	timmu	2	2	2,0
+PapaSayHai	timmu	3	4	2,25
+lepapuu	timmu	6	7	5,142857142857142
+Skye	krohtla	2	3	1,3333333333333333
+Skye	TheCreepySheep	34	34	34,0
+Ahti	andres	4	3	2,25
+ER	andres	7	10	4,8999999999999995
+Olari	andres	3	3	3,0
+HarriH	andres	4	4	4,0
+andres	kermz	3	4	2,25
+andres	margus	7	4	2,2857142857142856
+ER	olla(OliverLaidma)	3	6	1,5
+ER	Tiina	2	2	2,0
+ER	MZ	2	3	1,3333333333333333
+ER	bode	3	2	1,3333333333333333
+ER	reneberkmann	4	5	3,2
+ER	SiimM	3	2	1,3333333333333333
+ER	PeebukasNagmir69	4	3	2,25
+ER	Holger	4	4	4,0
+ER	G[A]stly	2	2	2,0
+ER	kermz	4	6	2,6666666666666665
+ER	ProtoMolecule	4	3	2,25
+ER	margus	6	5	4,166666666666667
+ER	Edvin	11	7	4,454545454545454
+Ahti	ER	2	2	2,0
+ER	krohtla	19	15	11,842105263157896
+ER	Scharlett	4	4	4,0
+ER	Ivo	3	4	2,25
+ER	fox	7	5	3,5714285714285716
+ER	Margo	3	4	2,25
+ER	Gert_Lohmus	2	2	2,0
+MZ	Paps	2	2	2,0
+ErkkiA	MZ	5	5	5,0
+MZ	Sirual	5	6	4,166666666666667
+MZ	olla(OliverLaidma)	3	3	3,0
+Andri	liliat	3	5	1,7999999999999998
+Andri	TheCreepySheep	22	19	16,40909090909091
+Edvin	bode	3	2	1,3333333333333333
+$A$HA	Jevgenia	5	3	1,7999999999999998
+$A$HA	Raul	2	2	2,0
+$A$HA	andreivassiljev	6	6	6,0
+Raul	krohtla	9	7	5,444444444444445
+Raul	liliat	2	3	1,3333333333333333
+MeusChapeus	Raul	15	18	12,5
+Raul	TheCreepySheep	22	26	18,615384615384617
+PeebukasNagmir69	Raul	4	3	2,25
+Holger	Raul	4	6	2,6666666666666665
+Raul	teeleht	2	2	2,0
+TheCreepySheep	VanWolfing	3	5	1,7999999999999998
+SiimM	TheCreepySheep	2	2	2,0
+Holger	TheCreepySheep	7	4	2,2857142857142856
+Alex.	TheCreepySheep	3	5	1,7999999999999998
+G[A]stly	TheCreepySheep	6	4	2,6666666666666665
+TheCreepySheep	zetty	5	6	4,166666666666667
+TheCreepySheep	kaalikas	3	3	3,0
+TheCreepySheep	semph	3	2	1,3333333333333333
+TheCreepySheep	jkymmel	6	4	2,6666666666666665
+JaagupSelli	TheCreepySheep	9	5	2,7777777777777777
+TheCreepySheep	eikall	2	2	2,0
+TheCreepySheep	maeiteamidagi	3	2	1,3333333333333333
+TheCreepySheep	kermz	8	10	6,4
+ProtoMolecule	TheCreepySheep	2	3	1,3333333333333333
+TheCreepySheep	margus	2	3	1,3333333333333333
+Dave_Shinji	TheCreepySheep	2	3	1,3333333333333333
+Kristjan	TheCreepySheep	2	3	1,3333333333333333
+Oskar	TheCreepySheep	2	3	1,3333333333333333
+Olari	TheCreepySheep	3	3	3,0
+TheCreepySheep	krohtla	16	15	14,0625
+MeusChapeus	TheCreepySheep	23	18	14,08695652173913
+HarriH	TheCreepySheep	19	15	11,842105263157896
+TheCreepySheep	fox	5	3	1,7999999999999998
+Ken	TheCreepySheep	3	3	3,0
+TheCreepySheep	pesalu	7	6	5,142857142857142
+Frank	TheCreepySheep	4	3	2,25
+KrisTi	TheCreepySheep	3	2	1,3333333333333333
+Mokkachino	TheCreepySheep	3	4	2,25
+Jevgenia	TheCreepySheep	7	3	1,2857142857142856
+Parvetaja	TheCreepySheep	3	4	2,25
+TheCreepySheep	liliat	5	5	5,0
+Annie	TheCreepySheep	30	24	19,200000000000003
+VanWolfing	krohtla	6	5	4,166666666666667
+VanWolfing	jkymmel	3	3	3,0
+kermz	reneberkmann	3	3	3,0
+Ahti	reneberkmann	3	3	3,0
+SiimM	krohtla	5	6	4,166666666666667
+PeebukasNagmir69	krohtla	3	2	1,3333333333333333
+Holger	krohtla	10	8	6,4
+Holger	Karliito	2	2	2,0
+Holger	Sirual	4	5	3,2
+Holger	olla(OliverLaidma)	4	4	4,0
+Dave_Shinji	Holger	2	2	2,0
+Holger	LarsAsi	5	5	5,0
+Holger	Polina	2	3	1,3333333333333333
+andreivassiljev	krohtla	13	14	12,071428571428571
+Tuuli	andreivassiljev	2	2	2,0
+G[A]stly	raunc	2	3	1,3333333333333333
+Entityknownevil	blender ™	2	2	2,0
+Deleted User	JaagupSelli	2	2	2,0
+Edvin	maeiteamidagi	2	2	2,0
+LarsAsi	lenny666	4	5	3,2
+lenny666	svenanton	2	2	2,0
+Frank	lenny666	4	3	2,25
+krohtla	lenny666	13	10	7,6923076923076925
+Ivo	kermz	8	7	6,125
+Ahti	kermz	7	7	7,0
+Pearu Pung	kermz	4	4	4,0
+Ely	beatrix	6	4	2,6666666666666665
+Ahti	ProtoMolecule	6	4	2,6666666666666665
+ProtoMolecule	krohtla	7	7	7,0
+Edvin	margus	5	5	5,0
+Ahti	margus	4	4	4,0
+fox	margus	2	2	2,0
+LiisiLota	margus	4	5	3,2
+HarriH	margus	3	2	1,3333333333333333
+Sõne	margus	7	7	7,0
+lava	margus	2	2	2,0
+Dave_Shinji	krohtla	5	3	1,7999999999999998
+Dave_Shinji	pesalu	4	3	2,25
+AndG	Dave_Shinji	3	3	3,0
+Dave_Shinji	Oskar	5	5	5,0
+Edvin	Kristjan	2	2	2,0
+HarriH	Kristjan	3	3	3,0
+AndG	Denkru56	2	2	2,0
+LarsAsi	Tafka	8	7	6,125
+Teisi-LIis	krohtla	3	2	1,3333333333333333
+Teisi-LIis	jevgen	4	5	3,2
+Edvin	krohtla	3	2	1,3333333333333333
+Edvin	HarriH	2	2	2,0
+Edvin	Ken	2	3	1,3333333333333333
+Edvin	Villu	2	3	1,3333333333333333
+Ahti	krohtla	5	3	1,7999999999999998
+Ahti	Sveta	5	4	3,2
+Ken	Olari	5	5	5,0
+krohtla	olla(OliverLaidma)	5	6	4,166666666666667
+LarsAsi	krohtla	10	8	6,4
+Scharlett	krohtla	4	3	2,25
+Tidrexion	krohtla	2	2	2,0
+Ken	krohtla	4	5	3,2
+krohtla	pesalu	7	4	2,2857142857142856
+Frank	krohtla	3	3	3,0
+eikall	krohtla	6	4	2,6666666666666665
+Gert_Lohmus	krohtla	4	4	4,0
+Kimmo	krohtla	6	6	6,0
+TSlex	krohtla	9	8	7,111111111111111
+Jevgenia	krohtla	12	11	10,083333333333332
+krohtla	raunc	6	4	2,6666666666666665
+heidi	krohtla	5	3	1,7999999999999998
+AnnaS	krohtla	5	8	3,125
+ets12	krohtla	2	2	2,0
+eikall	krohtla	2	2	2,0
+Annie	krohtla	3	4	2,25
+Scharlett	emmakuppart	5	4	3,2
+MeusChapeus	pesalu	2	3	1,3333333333333333
+MeusChapeus	Raggamasta	3	2	1,3333333333333333
+MeusChapeus	TSlex	6	7	5,142857142857142
+HarriH	tn	2	3	1,3333333333333333
+Tidrexion	pesalu	3	3	3,0
+Tidrexion	olla(OliverLaidma)	3	3	3,0
+mikklahe	nooblander	2	2	2,0
+fox	kazenokami	3	3	3,0
+eikall	fox	2	2	2,0
+d0nsm	svenanton	2	2	2,0
+Mokkachino	Slicey	2	2	2,0
+Boriss	Jevgenia	3	2	1,3333333333333333
+jyrx123	kazenokami	2	2	2,0
