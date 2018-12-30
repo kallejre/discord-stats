@@ -5,24 +5,23 @@ Asjandus discordi json-arhiivi töötlemiseks.
 Klassikaline lähenemine statistikale.
 Edasine arendamine käib siitkaudu
 
-Stats.ajatabel_suur     p
-Stats.ajatabel_vaike    p
-Stats.ajatabel_vaiksem  p
-Stats.arhiiv            p
-Stats.graafid_edetabel  p
-Stats.graafik           p
-Stats.init2             p
-Stats.out_tgf_msg       p
-Stats.out_tgf_tag       p
-Stats.out_users_json    p
-Stats.out_users_py      p
-Stats.stat_msg          p
-Stats.stat_msg2         p
-Stats.stat_tag          p
-Stats.stat_tag2         p
+Stats.ajatabel_suur     Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta.
+Stats.ajatabel_vaike    UI ajatabelite kuvamiseks
+Stats.ajatabel_vaiksem  Ajatabelite sõnede tegemine.
+Stats.arhiiv            Tagastab palju asju. Sõnumite kogupikkus, arv, keskmine pikkus kasutaja/kanali lõikes.
+Stats.graafid_edetabel  Kuva N populaarseimat suunda.
+Stats.graafik           Pygame joonistamine.
+Stats.__init__          Peamiselt muutujate algväärtustamine.
+Stats.init2             Aandmete kogumine ja põhiline töötlemine.
+Stats.out_tgf_msg       Kirjavahetuse põhjal TGF-graaf.
+Stats.out_tgf_tag       Märkimiste põhjal TGF-graaf.
+Stats.out_users_json    Self.users -> JSON. Kole väljund.
+Stats.out_users_py      Self.users -> Python. Kena väljund.
+Stats.stat_msg          Sõnumite statisika, kui palju on X->Y sõnumeid.
+Stats.stat_msg2         Kahepoolse vestlemise tabel.
+Stats.stat_tag          Tag statisika, kui palju on X->Y märkimisi.
+Stats.stat_tag2         Kahepoolse märkimise tabel.
 Stats.users             Põhiline muutuja, kus on kasutajate info.
-
-
 
 Nädalapäev: E = 0, P = 6
 Andmete kogumiseks: https://dht.chylex.com/
@@ -478,7 +477,7 @@ class Stats:
 
 
 sts = Stats()
-#"""
+"""
 for i in list(filter(lambda x: x[0] != '_', dir(sts))):
     if type(eval('sts.' + i)).__name__ == 'type':
         for x in list(filter(lambda x: x[0] != '_', dir(eval('sts.' + i)))):
