@@ -38,9 +38,13 @@ archive = eval(file)
 users = dict()
 lyhi = dict()
 times = set()
+pikkused = list()
+kogus = list()
+keskmine_pikkus = list()
+sisukus = list()
+ajad = list()
 import datetime,re
 for x in range(len(archive['meta']['userindex'])):
-    # Viime lokaalse ID vastavusse kasutajanimega
     users[x] = {'n': archive['meta']['users'][archive['meta']['userindex'][x]]['name'], 'count': dict(), 'lens': dict(),
                 'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(),'tag_to': dict()}
 users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
@@ -49,7 +53,7 @@ channels = []
 # Kategooria peaks algama suure tähega
 kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
                 "dj02": {"Syva", "Kokku", "DJ"},
-                "ettepanekud": {"Üldine", "Kokku"},
+                "ettepanekud": {"Yldine", "Kokku"},
                 "ex01": {"EX", "Kokku"},
                 "ex02": {"EX", "Kokku"},
                 "ex03": {"EX", "Kokku"},
@@ -64,14 +68,14 @@ kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
                 "ex13": {"EX", "Kokku"},
                 "ex14": {"EX", "Kokku"},
                 "ex15": {"EX", "Kokku"},
-                "food": {"Üldine", "Kokku"},
-                "general": {"Üldine", "Kokku"},
-                "git": {"Üldine", "Kokku"},
-                "kaugōpe": {"Üldine", "Kokku"},
-                "konsult": {"Üldine", "Kokku"},
-                "meme": {"Üldine", "Kokku"},
-                "mitteniiolulisedagasiiskiolulised-teadaanded": {"Üldine", "Kokku"},
-                "olulised-teadaanded": {"Üldine", "Kokku"},
+                "food": {"Yldine", "Kokku"},
+                "general": {"Yldine", "Kokku"},
+                "git": {"Yldine", "Kokku"},
+                "kaugōpe": {"Yldine", "Kokku"},
+                "konsult": {"Yldine", "Kokku"},
+                "meme": {"Yldine", "Kokku"},
+                "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"},
+                "olulised-teadaanded": {"Yldine", "Kokku"},
                 "pr01": {"PR", "Kokku"},
                 "pr02": {"PR", "Kokku"},
                 "pr03": {"PR", "Kokku"},
@@ -85,10 +89,10 @@ kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
                 "pr13": {"PR", "Kokku"},
                 "pr14": {"PR", "Kokku"},
                 "pr15": {"PR", "Kokku"},
-                "random": {"Üldine", "Kokku"},
-                "stat": {"Üldine", "Kokku"},
-                "syvapy-general": {"Üldine", "Kokku"},
-                "videod": {"Üldine", "Kokku"},
+                "random": {"Yldine", "Kokku"},
+                "stat": {"Yldine", "Kokku"},
+                "syvapy-general": {"Yldine", "Kokku"},
+                "videod": {"Yldine", "Kokku"},
                 "wat": {"PR", "Kokku"},
                 "xp01": {"Syva", "Kokku", "XP"},
                 "xp02": {"Syva", "Kokku", "XP"},
@@ -97,13 +101,27 @@ kategooriad = { "dj01": {"Syva", "Kokku", "DJ"},
                 "xp05": {"Syva", "Kokku", "XP"},
                 "xp06": {"Syva", "Kokku", "XP"},
                 "xp07": {"Syva", "Kokku", "XP"}}
+channels=list(kategooriad)
+for a in list(channels):
+    channels+=list(kategooriad[a])
+channels=list(sorted(set(channels)))
+header = '\t'.join(['Nimi'] + channels + ['Kokku'])
+head=[]
+for wk in 'ETKNRLP':
+    for hr in range(24):
+        head.append(wk+' '+str(hr))
+header2 = '\t'.join(['Nimi','Kanal']+head)
+del head
+nimed2=list(map(lambda uid:users[uid]['n'], users))
+nimed3=list(map(lambda x:x.lower(),nimed2))
+nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
+nädal=["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
 f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
 ###   INIT2   ###
 for c in archive['data']:  # c = kanali id
     print(c[2], end='')
     cur_name = archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
     cur_name = cur_name.split('_')[0]
-    channels.append(cur_name)
     prev_msg=-1
     for m in sorted(archive['data'][c]):  # m = sõnumi ID
         message = archive['data'][c][m]
@@ -168,30 +186,10 @@ for c in archive['data']:  # c = kanali id
             users[uid]['count'][sub] += 1
             users[uid]['lens'][sub] += len(message['m'])
             users[uid]['times'][sub][24*wk+h]+=1
+times = list(sorted(times))
 f.close()
 print()
-channels=['DJ', 'EX', 'Kokku', 'PR', 'Syva', 'Üldine', 'XP', 'dj01', 'dj02', 'ettepanekud', 'ex01', 'ex02', 'ex03', 'ex04',
-          'ex05', 'ex06', 'ex07', 'ex08', 'ex09', 'ex11', 'ex12', 'ex13', 'ex14', 'ex15', 'food', 'general', 'git', 'kaugōpe',
-          'konsult', 'meme', 'mitteniiolulisedagasiiskiolulised-teadaanded', 'olulised-teadaanded', 'pr01', 'pr02', 'pr03',
-          'pr04', 'pr06', 'pr07', 'pr08', 'pr09', 'pr11', 'pr12', 'pr13', 'pr14', 'pr15', 'random', 'stat', 'syvapy-general',
-          'videod', 'wat', 'xp01', 'xp02', 'xp03', 'xp04', 'xp05', 'xp06', 'xp07']
-pikkused = list()
-times = list(sorted(times))
-kogus = list()
-keskmine_pikkus = list()
-sisukus = list()
-header = '\t'.join(['Nimi'] + channels + ['Kokku'])
-head=[]
-for wk in 'ETKNRLP':
-    for hr in range(24):
-        head.append(wk+' '+str(hr))
-header2 = '\t'.join(['Nimi','Kanal']+head)
-del head
-ajad = list()
-nimed2=list(map(lambda uid:users[uid]['n'], users))
-nimed3=list(map(lambda x:x.lower(),nimed2))
-nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
-nädal=["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
+
 def arhiiv():
     for x in list(users):
         count = 0
@@ -264,14 +262,7 @@ Kasutamine:
             kanal=input('\nSisesta kanal: ')
             if kanal not in channels:
                 print('Tundmatu kanal. Vt alla.')
-                print('''Ühendatud kanalid:
-    Kokku
-    ├───EX
-    ├───PR
-    ├───Syva
-    │   ├───DJ
-    │   └───XP
-    └───Üldine''')
+                print('Ühendatud kanalid:\n    Kokku\n    ├───EX\n    ├───PR\n    ├───Syva\n    │   ├───DJ\n    │   └───XP\n    └───Üldine')
                 print(*channels)
                 continue
             while True:
