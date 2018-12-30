@@ -248,6 +248,13 @@ def ajatabelSuur():
         f.write('\n'.join(ajad))
     c = 1
     print('done')
+def ajatabelVäiksem(uid, kanal):
+    out=[]
+    out.append('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
+    for i in range(7):
+        out=['',nädal[i]]+list(map(str,users[uid]['times'][kanal][24*i:24*(i+1)]))
+        out.append('\t'.join(out))
+    return '\n'.join(out)
 def ajatabelVäike():
     print('''
     ****** Interaktiivne "aktiivsusmonitor" ******
@@ -284,38 +291,32 @@ Kasutamine:
                 if nimed4!=[]:
                     break
             for uid in nimed4:
-                print('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
-                for i in range(7):
-                    out=['',nädal[i]]+list(map(str,users[uid]['times'][kanal][24*i:24*(i+1)]))
-                    print('\t'.join(out))
-                print('\n')
+                print(ajatabelVäiksem(uid, kanal))
     except KeyboardInterrupt:
         pass
-def graafid():
-    if 1:
-        username='uudu'
-        uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
-        # Enne/Peale keda kirjutad
-        for i in sorted(users[uid]['prev'], key=lambda i:users[uid]['prev'][i])[-5:]:
-            print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['prev'][i],'korda')
-        print()
-        for i in sorted(users[uid]['next'], key=lambda i:users[uid]['next'][i])[-5:]:
-            print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['next'][i],'korda')
-        print('\nMärkimised:')
-        # Kes keda märgib
-        for i in sorted(users[uid]['tag_by'], key=lambda i:users[uid]['tag_by'][i])[-5:]:
-            print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['tag_by'][i],'korda')
-        print()
-        for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i])[-5:]:
-            print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
-        print()
-    if 0:
-        with open('users.py','w',encoding='utf-8') as f:
-            f.write('users='+str(users))
-        import json
-        use=json.dumps(users)
-        with open('ergo.json','w',encoding='utf-8') as f:
-            f.write(str(use))
+def graafid_edetabel(username):
+    uid=list(filter(lambda x:username.lower() in users[x]['n'].lower(),users))[0]
+    # Enne/Peale keda kirjutad
+    for i in sorted(users[uid]['prev'], key=lambda i:users[uid]['prev'][i])[-5:]:
+        print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['prev'][i],'korda')
+    print()
+    for i in sorted(users[uid]['next'], key=lambda i:users[uid]['next'][i])[-5:]:
+        print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['next'][i],'korda')
+    print('\nMärkimised:')
+    # Kes keda märgib
+    for i in sorted(users[uid]['tag_by'], key=lambda i:users[uid]['tag_by'][i])[-5:]:
+        print(users[i]['n'],'->',users[uid]['n'],' \t',users[uid]['tag_by'][i],'korda')
+    print()
+    for i in sorted(users[uid]['tag_to'], key=lambda i:users[uid]['tag_to'][i])[-5:]:
+        print(users[uid]['n'],'->',users[i]['n'],' \t',users[uid]['tag_to'][i],'korda')
+    print()
+def output_users()
+    with open('users.py','w',encoding='utf-8') as f:
+        f.write('users='+str(users))
+    import json
+    use=json.dumps(users)
+    with open('ergo.json','w',encoding='utf-8') as f:
+        f.write(str(use))
             
     with open('disco.tgf', 'w', encoding='utf-8') as f:
         for i in users:
@@ -326,16 +327,30 @@ def graafid():
                 count=users[uid]['tag_to'][nxt]
                 if count>=1:
                     print(uid,nxt,count,file=f)
-                    
+def statistika_tag():
+    # Tag statisika, kui palju on X->Y märkimisi
     with open('d_out_tag.txt', 'w', encoding='utf-8') as f:
+        print('X Y X->Y'.split(),file=f,sep='\t')
         for uid in users:
             for nxt in users[uid]['tag_to']:
                 count=users[uid]['tag_to'][nxt]
                 if count>=1:
                     print(users[uid]['n'],users[nxt]['n'],count,file=f,sep='\t')
+def statistika_msg():
+    # Sõnumite statisika, kui palju on X->Y sõnumeid
+    with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
+        print('X Y X->Y'.split(),file=f,sep='\t')
+        for uid in users:
+            for nxt in users[uid]['next']:
+                count=users[uid]['next'][nxt]
+                if count>=1:
+                    print(users[uid]['n'],users[nxt]['n'],count,file=f,sep='\t')
+def statistika_tag2()
+    # Kahepoolse märkimise tabel
     paarid=set()
     key='tag_to'
     with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
+        print('X Y X->Y Y->X Tehe'.split(),file=f,sep='\t')
         for uid in users:
             for nxt in users[uid][key]:
                 if ((nxt,uid) not in paarid):  # users[nxt][key][uid]
@@ -347,9 +362,12 @@ def graafid():
                         if count>1:
                             l=list(sorted([users[uid]['n'],users[nxt]['n']]))
                             print(*l,välja,sisse,str(count).replace('.',','),file=f,sep='\t')
+def statistika_msg2()
+    # Kahepoolse vestlemise tabel
     paarid=set()
     key='next'
-    with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
+    with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
+        print('X Y X->Y Y->X Tehe'.split(),file=f,sep='\t')
         for uid in users:
             for nxt in users[uid][key]:
                 if ((nxt,uid) not in paarid):  # users[nxt][key][uid]
@@ -361,7 +379,6 @@ def graafid():
                         if count>1:
                             l=list(sorted([users[uid]['n'],users[nxt]['n']]))
                             print(*l,välja,sisse,str(count).replace('.',','),file=f,sep='\t')
-    print('done')
 def graafik():
     """Pygame joonistamine."""
     import pygame,colorsys
@@ -384,10 +401,6 @@ def graafik():
         users[x]['lens']['total'] = c_len
         print(x)
         pygame.display.update()
-
-    c = 1
-    print(len(times))
-    print('done')
     pygame.image.save(lava, "screenshot.jpeg")
     for i in sorted(colors):
         print(i,colors[i])
