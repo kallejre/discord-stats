@@ -9,8 +9,8 @@ Stats.ajatabel_suur     Koosta suur tabel iga nime, kanali, kellaaja ja kuupäev
 Stats.ajatabel_vaike    UI ajatabelite kuvamiseks
 Stats.ajatabel_vaiksem  Ajatabelite sõnede tegemine.
 Stats.arhiiv            Tagastab palju asju. Sõnumite kogupikkus, arv, keskmine pikkus kasutaja/kanali lõikes.
-Stats.graafid_edetabel  Kuva N populaarseimat suunda.
-Stats.graafik           Pygame joonistamine.
+Stats.graafid_edetabel  Kuva N populaarseimat suunda ühe kasutaja suhtes.
+Stats.graafik           Pygame joonistamine. KATKI!
 Stats.__init__          Peamiselt muutujate algväärtustamine.
 Stats.init2             Aandmete kogumine ja põhiline töötlemine.
 Stats.out_tgf_msg       Kirjavahetuse põhjal TGF-graaf.
@@ -340,7 +340,7 @@ class Stats:
             pass
 
     def graafid_edetabel(self, username, n=5, uid=0):
-        """Kuva N populaarseimat suunda."""
+        """Kuva N populaarseimat suunda ühe kasutaja suhtes."""
         if not uid:
             uid = list(filter(lambda x: username.lower() in self.users[x]['n'].lower(), self.users))[0]
         else:
@@ -390,8 +390,8 @@ class Stats:
                 print(i1, self.users[i1]['n'], file=f)
             print('#', file=f)
             for uid in filter(lambda x: x > -1, self.users):
-                for nxt in self.users[uid]['nxt']:
-                    count = self.users[uid]['nxt'][nxt]
+                for nxt in self.users[uid]['next']:
+                    count = self.users[uid]['next'][nxt]
                     if count >= 1:
                         print(uid, nxt, count, file=f)
 
@@ -452,7 +452,7 @@ class Stats:
                                 print(*l + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
 
     def graafik(self):
-        """Pygame joonistamine."""
+        """Pygame joonistamine. Väga KATKI!"""
         import pygame
         colors, c = dict(), 0
         for i1 in self.channels:
@@ -477,7 +477,7 @@ class Stats:
 
 
 sts = Stats()
-"""
+#"""
 for i in list(filter(lambda x: x[0] != '_', dir(sts))):
     if type(eval('sts.' + i)).__name__ == 'type':
         for x in list(filter(lambda x: x[0] != '_', dir(eval('sts.' + i)))):
