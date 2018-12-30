@@ -5,6 +5,8 @@ Asjandus discordi json-arhiivi töötlemiseks.
 Funktsionaalne lähenemine statistikale.
 Siit võiks tulla suur asi.
 
+
+Nädalapäev: E = 0, P = 6
 Andmete kogumiseks: https://dht.chylex.com/
 Andmeformaat:
 data:
@@ -117,6 +119,8 @@ nädal=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupä
 nädal=["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
 f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
 ###   INIT2   ###
+# Siin osas toimub andmete kogumine ja põhiline töötlemine
+# Alumised funktsioonid on vaid vormistamiseks ja kuvamiseks
 for c in archive['data']:  # c = kanali id
     print(c[2], end='')
     cur_name = archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
@@ -128,13 +132,11 @@ for c in archive['data']:  # c = kanali id
             if message['u'] not in lyhi:
                 lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
             lyhi[message['u']] += 1
-            # continue         # Lühisõnumi saab vahele jätta
+            # continue         # Lühikese sõnumi saab vahele jätta
         print(message['m'].lower(), file=f)  # Kopeeri sõnum faili
         time=datetime.datetime.fromtimestamp(message['t'] // 1000)
         wk=time.weekday()
         hr=time.hour
-        # Nädalapäev: E = 0, P = 6
-        # print(time.date(),time.time(),wk,h)
         
         times.add(message['t'] // 10000 - 306788430)  # 10 sekundi täpsusega
         uid = message['u']
@@ -155,9 +157,7 @@ for c in archive['data']:  # c = kanali id
                         users[teine_uid]['tag_by'][uid]=0
                     users[uid]['tag_to'][teine_uid]+=1
                     users[teine_uid]['tag_by'][uid]+=1
-                    # print(users[uid]['n'],'->',users[teine_uid]['n'])
-                else:
-                    pass  # print('ERROR: ',tag)
+                    
         ### REGEX läbi
         if prev_msg!=-1 and prev_msg!=uid:
             if prev_msg not in users[uid]['next']:
@@ -165,7 +165,6 @@ for c in archive['data']:  # c = kanali id
                 users[prev_msg]['prev'][uid]=0
             users[uid]['next'][prev_msg]+=1
             users[prev_msg]['prev'][uid]+=1
-        prev_msg=uid
         # /\ Regexist
         for sub in [cur_name]+list(kategooriad[cur_name]):
             if sub not in users[uid]['count']:# Kui see sõnum on kasutaja
@@ -175,8 +174,9 @@ for c in archive['data']:  # c = kanali id
             users[uid]['count'][sub] += 1
             users[uid]['lens'][sub] += len(message['m'])
             users[uid]['times'][sub][24*wk+hr]+=1
-            
-        uid = -1  # Kõigi kasutajate peale kokku
+
+        uid2=uid
+        uid = -1  # Kõigi kasutajate ühisstatistika
         for sub in [cur_name]+list(kategooriad[cur_name]):
             if sub not in users[uid]['count']:# Kui see sõnum on kasutaja
                 users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
@@ -185,6 +185,26 @@ for c in archive['data']:  # c = kanali id
             users[uid]['count'][sub] += 1
             users[uid]['lens'][sub] += len(message['m'])
             users[uid]['times'][sub][24*wk+hr]+=1
+        if tags:
+            for tag in tags:
+                if tag in archive['meta']['userindex']:
+                    teine_uid=archive['meta']['userindex'].index(tag)
+                    if teine_uid not in users[uid]['tag_to']:
+                        users[uid]['tag_to'][teine_uid]=0
+                    if uid2 not in users[uid]['tag_by']:
+                        users[uid]['tag_by'][uid2]=0
+                    users[uid]['tag_to'][teine_uid]+=1
+                    users[uid]['tag_by'][uid2]+=1
+        if prev_msg!=-1 and prev_msg!=uid2:
+            if prev_msg not in users[uid]['next']:
+                users[uid]['next'][prev_msg]=0
+            if uid2 not in users[uid]['prev']:
+                users[uid]['prev'][uid2]=0
+            users[uid]['next'][prev_msg]+=1
+            users[uid]['prev'][uid2]+=1
+        
+        prev_msg=uid2
+                    
 times = list(sorted(times))
 f.close()
 del c,m,sub,head,wk,hr,prev_msg,uid,tags,tag,time,message,\
@@ -251,12 +271,12 @@ def ajatabelSuur():
     c = 1
     print('done')
 def ajatabelVäiksem(uid, kanal):
-    out=[]
-    out.append('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
+    out2=[]
+    out2.append('\t'.join([users[uid]['n'],'Päev']+list(map(str,range(24)))))
     for i in range(7):
         out=['',nädal[i]]+list(map(str,users[uid]['times'][kanal][24*i:24*(i+1)]))
-        out.append('\t'.join(out))
-    return '\n'.join(out)
+        out2.append('\t'.join(out))
+    return '\n'.join(out2)
 def ajatabelVäike():
     print('''
     ****** Interaktiivne "aktiivsusmonitor" ******
@@ -324,20 +344,20 @@ def output_users():
         f.write(str(use))
 def output_tgf_tag():
     with open('disco_tag.tgf', 'w', encoding='utf-8') as f:
-        for i in users:
+        for i in filter(lambda x:x>-1,users):
             print(i,users[i]['n'],file=f)
         print('#',file=f)
-        for uid in users:
+        for uid in filter(lambda x:x>-1,users):
             for nxt in users[uid]['tag_to']:
                 count=users[uid]['tag_to'][nxt]
                 if count>=1:
                     print(uid,nxt,count,file=f)
 def output_tgf_msg():
     with open('disco_msg.tgf', 'w', encoding='utf-8') as f:
-        for i in users:
+        for i in filter(lambda x:x>-1,users):
             print(i,users[i]['n'],file=f)
         print('#',file=f)
-        for uid in users:
+        for uid in filter(lambda x:x>-1,users):
             for nxt in users[uid]['nxt']:
                 count=users[uid]['nxt'][nxt]
                 if count>=1:
