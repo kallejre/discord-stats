@@ -38,7 +38,7 @@ archive = eval(file)
 users = dict()
 lyhi = dict()
 times = set()
-import datetime
+import datetime,re
 for x in range(len(archive['meta']['userindex'])):
     # Viime lokaalse ID vastavusse kasutajanimega
     users[x] = {'n': archive['meta']['users'][archive['meta']['userindex'][x]]['name'], 'count': dict(), 'lens': dict(),
@@ -278,8 +278,8 @@ Kasutamine:
                 nimed=input('Sisesta nimed: ')
                 if nimed[-1]=='?':
                     nimed=nimed[:-1].strip()
-                    # print(nimed2)
-                    out=list(sorted(filter(lambda x:nimed in x.lower(),nimed2)))
+                    print(nimed)
+                    out=list(sorted(filter(lambda x:print(list(globals())) in x.lower(),nimed2))) # ;nimed.lower()
                     print(*out)
                     continue
                 nimed4=[]
