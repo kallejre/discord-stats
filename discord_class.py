@@ -5,6 +5,24 @@ Asjandus discordi json-arhiivi töötlemiseks.
 Klassikaline lähenemine statistikale.
 Edasine arendamine käib siitkaudu
 
+Stats.ajatabel_suur     p
+Stats.ajatabel_vaike    p
+Stats.ajatabel_vaiksem  p
+Stats.arhiiv            p
+Stats.graafid_edetabel  p
+Stats.graafik           p
+Stats.init2             p
+Stats.out_tgf_msg       p
+Stats.out_tgf_tag       p
+Stats.out_users_json    p
+Stats.out_users_py      p
+Stats.stat_msg          p
+Stats.stat_msg2         p
+Stats.stat_tag          p
+Stats.stat_tag2         p
+Stats.users             Põhiline muutuja, kus on kasutajate info.
+
+
 
 Nädalapäev: E = 0, P = 6
 Andmete kogumiseks: https://dht.chylex.com/
@@ -40,37 +58,54 @@ import json
 import re
 
 
-class stats:
+class Stats:
+    """Statistika."""
+
     def __init__(self, fname='dht.txt'):
-        # ###   INIT1   ###
+        """
+        ###   INIT1   ###.
+
+        Peamiselt muutujate algväärtustamine.
+        """
         with open(fname, encoding='utf8') as f:
             file = f.read()
         self.archive = eval(file)
         self.users = dict()
         self.lyhi = dict()
         self.times = list()
-        for x in range(len(self.archive['meta']['userindex'])):
-            self.users[x] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x]]['name'],
-                             'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
-                             'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
+        for x1 in range(len(self.archive['meta']['userindex'])):
+            self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
+                              'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
+                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
         self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
                           'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
         # Kategooria peaks algama suure tähega
-        self.kategooriad = {"dj01": {"Syva", "Kokku", "DJ"},  "dj02": {"Syva", "Kokku", "DJ"},
-            "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"}, 
-            "ex03": {"EX", "Kokku"}, "ex04": {"EX", "Kokku"}, "ex05": {"EX", "Kokku"}, "ex06": {"EX", "Kokku"}, 
-            "ex07": {"EX", "Kokku"}, "ex08": {"EX", "Kokku"}, "ex09": {"EX", "Kokku"}, "ex11": {"EX", "Kokku"}, 
-            "ex12": {"EX", "Kokku"}, "ex13": {"EX", "Kokku"}, "ex14": {"EX", "Kokku"}, "ex15": {"EX", "Kokku"}, 
-            "food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"}, "git": {"Yldine", "Kokku"},
-            "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
-            "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"}, "pr03": {"PR", "Kokku"},
-            "olulised-teadaanded": {"Yldine", "Kokku"}, "pr01": {"PR", "Kokku"}, "pr02": {"PR", "Kokku"},
-            "pr04": {"PR", "Kokku"}, "pr06": {"PR", "Kokku"}, "pr07": {"PR", "Kokku"}, "pr08": {"PR", "Kokku"},
-            "pr09": {"PR", "Kokku"}, "pr11": {"PR", "Kokku"}, "pr12": {"PR", "Kokku"}, "pr13": {"PR", "Kokku"},
-            "pr14": {"PR", "Kokku"}, "pr15": {"PR", "Kokku"}, "random": {"Yldine", "Kokku"}, "wat": {"PR", "Kokku"},
-            "stat": {"Yldine", "Kokku"}, "syvapy-general": {"Yldine", "Kokku"}, "videod": {"Yldine", "Kokku"},
-            "xp01": {"Syva", "Kokku", "XP"}, "xp02": {"Syva", "Kokku", "XP"}, "xp03": {"Syva", "Kokku", "XP"},
-            "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"}, "xp06": {"Syva", "Kokku", "XP"},
+        self.kategooriad = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ"},
+                            "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"},
+                            "ex03": {"EX", "Kokku"}, "ex04": {"EX", "Kokku"}, "ex05": {"EX", "Kokku"},
+                            "ex06": {"EX", "Kokku"},
+                            "ex07": {"EX", "Kokku"}, "ex08": {"EX", "Kokku"}, "ex09": {"EX", "Kokku"},
+                            "ex11": {"EX", "Kokku"},
+                            "ex12": {"EX", "Kokku"}, "ex13": {"EX", "Kokku"}, "ex14": {"EX", "Kokku"},
+                            "ex15": {"EX", "Kokku"},
+                            "food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"}, "git": {"Yldine", "Kokku"},
+                            "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
+                            "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"},
+                            "pr03": {"PR", "Kokku"},
+                            "olulised-teadaanded": {"Yldine", "Kokku"}, "pr01": {"PR", "Kokku"},
+                            "pr02": {"PR", "Kokku"},
+                            "pr04": {"PR", "Kokku"}, "pr06": {"PR", "Kokku"}, "pr07": {"PR", "Kokku"},
+                            "pr08": {"PR", "Kokku"},
+                            "pr09": {"PR", "Kokku"}, "pr11": {"PR", "Kokku"}, "pr12": {"PR", "Kokku"},
+                            "pr13": {"PR", "Kokku"},
+                            "pr14": {"PR", "Kokku"}, "pr15": {"PR", "Kokku"}, "random": {"Yldine", "Kokku"},
+                            "wat": {"PR", "Kokku"},
+                            "stat": {"Yldine", "Kokku"}, "syvapy-general": {"Yldine", "Kokku"},
+                            "videod": {"Yldine", "Kokku"},
+                            "xp01": {"Syva", "Kokku", "XP"}, "xp02": {"Syva", "Kokku", "XP"},
+                            "xp03": {"Syva", "Kokku", "XP"},
+                            "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
+                            "xp06": {"Syva", "Kokku", "XP"},
                             "xp07": {"Syva", "Kokku", "XP"}}
         channels = list(self.kategooriad)
         for a in list(channels):
@@ -89,30 +124,34 @@ class stats:
         self.init2()
 
     def init2(self):
-        ###   INIT2   ###
-        # Siin osas toimub andmete kogumine ja põhiline töötlemine
-        # Alumised funktsioonid on vaid vormistamiseks ja kuvamiseks
+        """
+        ###   INIT2   ###.
+
+        Siin osas toimub andmete kogumine ja põhiline töötlemine.
+        Alumised funktsioonid on vaid vormistamiseks ja kuvamiseks.
+        Kunagi võiks teha mingi seadistamisvõimaluse.
+        """
         f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
         for c in self.archive['data']:  # c = kanali id
             cur_name = self.archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
             cur_name = cur_name.split('_')[0]
             prev_msg = -1
             print(cur_name[:1] + cur_name[-2:], end=' ')
-            for m in sorted(self.archive['data'][c]):  # m = sõnumi ID
+            for m in sorted(self.archive['data'][c]):               # m = sõnumi ID
                 message = self.archive['data'][c][m]
-                if len(message['m'].strip().split()) < 2:  # Ühesõnaliste sõnumitega opereerimine
+                if len(message['m'].strip().split()) < 2:           # Ühesõnaliste sõnumitega opereerimine
                     if message['u'] not in self.lyhi:
-                        self.lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
+                        self.lyhi[message['u']] = 0                 # Loendab lühikesi sõnumeid
                     self.lyhi[message['u']] += 1
-                    # continue         # Lühikese sõnumi saab vahele jätta
-                print(message['m'].lower(), file=f)  # Kopeeri sõnum faili
-                time = datetime.datetime.fromtimestamp(message['t'] // 1000)
+                    # continue                                      # Lühikese sõnumi saab vahele jätta
+                print(message['m'].lower(), file=f)                 # Kopeeri sõnum faili
+                time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
                 wk = time.weekday()
                 hr = time.hour
 
-                self.times.append(time)  # 1 sekundi täpsusega
+                self.times.append(time)
                 uid = message['u']
-                ### REGEX
+                # REGEX start
                 matches = re.finditer('\<@!?\d+\>', message['m'])
                 tags = []
                 for matchNum, match in enumerate(matches):
@@ -128,30 +167,30 @@ class stats:
                             self.users[uid]['tag_to'][teine_uid] += 1
                             self.users[teine_uid]['tag_by'][uid] += 1
 
-                ### REGEX läbi
                 if prev_msg != -1 and prev_msg != uid:
                     if prev_msg not in self.users[uid]['next']:
                         self.users[uid]['next'][prev_msg] = 0
                         self.users[prev_msg]['prev'][uid] = 0
                     self.users[uid]['next'][prev_msg] += 1
                     self.users[prev_msg]['prev'][uid] += 1
-                # /\ Regexist
+                # REGEX läbi
+
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
-                    if sub not in self.users[uid]['count']:  # Kui see sõnum on kasutaja
-                        self.users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
-                        self.users[uid]['lens'][sub] = 0  # init loendurid
-                        self.users[uid]['times'][sub] = [0] * 168  # Iga tunni jaoks
+                    if sub not in self.users[uid]['count']:         # Kui see sõnum on kasutaja
+                        self.users[uid]['count'][sub] = 0           # esimene sõnum antud kanalis
+                        self.users[uid]['lens'][sub] = 0            # init loendurid
+                        self.users[uid]['times'][sub] = [0] * 168   # Iga tunni jaoks
                     self.users[uid]['count'][sub] += 1
                     self.users[uid]['lens'][sub] += len(message['m'])
                     self.users[uid]['times'][sub][24 * wk + hr] += 1
 
                 uid2 = uid
-                uid = -1  # Kõigi kasutajate ühisstatistika
+                uid = -1                                            # Kõigi kasutajate ühisstatistika
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
-                    if sub not in self.users[uid]['count']:  # Kui see sõnum on kasutaja
-                        self.users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
-                        self.users[uid]['lens'][sub] = 0  # init loendurid
-                        self.users[uid]['times'][sub] = [0] * 168  # Iga tunni jaoks
+                    if sub not in self.users[uid]['count']:         # Kui see sõnum on kasutaja
+                        self.users[uid]['count'][sub] = 0           # esimene sõnum antud kanalis
+                        self.users[uid]['lens'][sub] = 0            # init loendurid
+                        self.users[uid]['times'][sub] = [0] * 168   # Iga tunni jaoks
                     self.users[uid]['count'][sub] += 1
                     self.users[uid]['lens'][sub] += len(message['m'])
                     self.users[uid]['times'][sub][24 * wk + hr] += 1
@@ -179,7 +218,6 @@ class stats:
         print()
 
     def arhiiv(self):
-        # Mida ta teeb
         """
         Tagastab palju asju.
 
@@ -230,38 +268,38 @@ class stats:
             f.write('\n'.join([self.header] + keskmine_pikkus))
         sisukus.append('Jrk.\tNimi\tLühike\tKõik\t%')
         c = 1
-        for i in sorted(self.lyhi, key=lambda x: self.users[x]['count']['total'], reverse=True):
-            out = '\t'.join([str(c), self.users[i]['n'], str(self.lyhi[i]), str(self.users[i]['count']['total']),
-                             str(round(self.lyhi[i] / self.users[i]['count']['total'] * 100, 2)).replace('.', ',')])
+        for i1 in sorted(self.lyhi, key=lambda x: self.users[x]['count']['total'], reverse=True):
+            out = '\t'.join([str(c), self.users[i1]['n'], str(self.lyhi[i1]), str(self.users[i1]['count']['total']),
+                             str(round(self.lyhi[i1] / self.users[i1]['count']['total'] * 100, 2)).replace('.', ',')])
             sisukus.append(out)
             c += 1
         with open('d_out4.txt', 'w', encoding='utf-8') as f:
             f.write('\n'.join(sisukus))
 
-    def ajatabelSuur(self):
+    def ajatabel_suur(self):
         """Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta."""
         ajad = [self.header2]
-        for x in list(self.users):
+        for x1 in list(self.users):
             total = []
-            for c in sorted(self.users[x]['times']):  # Iga kanaliga
-                total.append(self.users[x]['times'][c])
-                ajad.append('\t'.join([self.users[x]['n'], c] + list(map(str, total[-1]))))
+            for c in sorted(self.users[x1]['times']):               # Iga kanaliga
+                total.append(self.users[x1]['times'][c])
+                ajad.append('\t'.join([self.users[x1]['n'], c] + list(map(str, total[-1]))))
             total = list(map(sum, list(zip(*total))))
-            ajad.append('\t'.join([self.users[x]['n'], 'Kokku'] + list(map(str, total))))
+            ajad.append('\t'.join([self.users[x1]['n'], 'Kokku'] + list(map(str, total))))
             # print(self.users[x]['times'])
         with open('d_out_ajatabel.txt', 'w', encoding='utf8') as f:
             f.write('\n'.join(ajad))
         print('done')
 
-    def ajatabelVaiksem(self, uid, kanal):
-        """Masinloetavate ajatabelite tegemine."""
+    def ajatabel_vaiksem(self, uid, kanal):
+        """Ajatabelite sõnede tegemine."""
         out2 = ['\t'.join([self.users[uid]['n'], 'Päev'] + list(map(str, range(24))))]
-        for i in range(7):
-            out = ['', self.week[i]] + list(map(str, self.users[uid]['times'][kanal][24 * i:24 * (i + 1)]))
+        for i1 in range(7):
+            out = ['', self.week[i1]] + list(map(str, self.users[uid]['times'][kanal][24 * i1:24 * (i1 + 1)]))
             out2.append('\t'.join(out))
         return '\n'.join(out2)
 
-    def ajatabelVaike(self):
+    def ajatabel_vaike(self):
         """UI ajatabelite kuvamiseks."""
         print('''
         ****** Interaktiivne "aktiivsusmonitor" ******
@@ -269,16 +307,14 @@ class stats:
         Esimesele reale kirjuta üks kategooria (või kanali nimi).
         Teisele reale tühikutega eraldatult kasutajate nimed või "Kõik"
         Kui ei tea (ühe) kasutaja nime, kirjuta nimeosa ja lõppu "?".
-        Sulgemiseks Ctrl + C
-    ''')
+        Sulgemiseks Ctrl + C ''')
         try:
             while True:
                 kanal = input('\nSisesta kanal: ')
                 if kanal not in self.channels:
                     print('Tundmatu kanal. Vt alla.')
-                    print(
-                        'Ühendatud kanalid:\n    Kokku\n    ├───EX\n    ├───PR\n    ├───Syva\n'
-                        '    │   ├───DJ\n    │   └───XP\n    └───Üldine')
+                    print('Ühendatud kanalid:\n    Kokku\n    ├───EX\n    ├───PR\n    ├───Syva\n'
+                          '    │   ├───DJ\n    │   └───XP\n    └───Üldine')
                     print(*self.channels)
                     continue
                 while True:
@@ -300,29 +336,29 @@ class stats:
                     if nimed4:
                         break
                 for uid in nimed4:
-                    print(self.ajatabelVaiksem(uid, kanal))
+                    print(self.ajatabel_vaiksem(uid, kanal))
         except KeyboardInterrupt:
             pass
 
-    def graafid_edetabel(self, username,n=5, uid=0):
+    def graafid_edetabel(self, username, n=5, uid=0):
         """Kuva N populaarseimat suunda."""
         if not uid:
             uid = list(filter(lambda x: username.lower() in self.users[x]['n'].lower(), self.users))[0]
         else:
             uid = username
         # Enne/Peale keda kirjutad
-        for i in sorted(self.users[uid]['prev'], key=lambda i: self.users[uid]['prev'][i])[-n:]:
-            print(self.users[i]['n'], '->', self.users[uid]['n'], ' \t', self.users[uid]['prev'][i], 'korda')
+        for i1 in sorted(self.users[uid]['prev'], key=lambda i: self.users[uid]['prev'][i])[-n:]:
+            print(self.users[i1]['n'], '->', self.users[uid]['n'], ' \t', self.users[uid]['prev'][i1], 'korda')
         print()
-        for i in sorted(self.users[uid]['next'], key=lambda i: self.users[uid]['next'][i])[-n:]:
-            print(self.users[uid]['n'], '->', self.users[i]['n'], ' \t', self.users[uid]['next'][i], 'korda')
+        for i1 in sorted(self.users[uid]['next'], key=lambda i: self.users[uid]['next'][i])[-n:]:
+            print(self.users[uid]['n'], '->', self.users[i1]['n'], ' \t', self.users[uid]['next'][i1], 'korda')
         print('\nMärkimised:')
         # Kes keda märgib
-        for i in sorted(self.users[uid]['tag_by'], key=lambda i: self.users[uid]['tag_by'][i])[-n:]:
-            print(self.users[i]['n'], '->', self.users[uid]['n'], ' \t', self.users[uid]['tag_by'][i], 'korda')
+        for i1 in sorted(self.users[uid]['tag_by'], key=lambda i: self.users[uid]['tag_by'][i])[-n:]:
+            print(self.users[i1]['n'], '->', self.users[uid]['n'], ' \t', self.users[uid]['tag_by'][i1], 'korda')
         print()
-        for i in sorted(self.users[uid]['tag_to'], key=lambda i: self.users[uid]['tag_to'][i])[-n:]:
-            print(self.users[uid]['n'], '->', self.users[i]['n'], ' \t', self.users[uid]['tag_to'][i], 'korda')
+        for i1 in sorted(self.users[uid]['tag_to'], key=lambda i: self.users[uid]['tag_to'][i])[-n:]:
+            print(self.users[uid]['n'], '->', self.users[i1]['n'], ' \t', self.users[uid]['tag_to'][i1], 'korda')
         print()
 
     def out_users_py(self, fname='users.py'):
@@ -339,8 +375,8 @@ class stats:
     def out_tgf_tag(self, fname='disco_tag.tgf'):
         """Märkimiste põhjal TGF-graaf."""
         with open(fname, 'w', encoding='utf-8') as f:
-            for i in filter(lambda x: x > -1, self.users):
-                print(i, self.users[i]['n'], file=f)
+            for i1 in filter(lambda x: x > -1, self.users):
+                print(i1, self.users[i1]['n'], file=f)
             print('#', file=f)
             for uid in filter(lambda x: x > -1, self.users):
                 for nxt in self.users[uid]['tag_to']:
@@ -351,8 +387,8 @@ class stats:
     def out_tgf_msg(self, fname='disco_msg.tgf'):
         """Kirjavahetuse põhjal TGF-graaf."""
         with open(fname, 'w', encoding='utf-8') as f:
-            for i in filter(lambda x: x > -1, self.users):
-                print(i, self.users[i]['n'], file=f)
+            for i1 in filter(lambda x: x > -1, self.users):
+                print(i1, self.users[i1]['n'], file=f)
             print('#', file=f)
             for uid in filter(lambda x: x > -1, self.users):
                 for nxt in self.users[uid]['nxt']:
@@ -388,7 +424,7 @@ class stats:
             print('X Y X->Y Y->X Tehe'.split(), file=f, sep='\t')
             for uid in self.users:
                 for nxt in self.users[uid][key]:
-                    if ((nxt, uid) not in paarid):  # self.users[nxt][key][uid]
+                    if (nxt, uid) not in paarid:
                         paarid.add((uid, nxt))
                         if uid in self.users[nxt][key]:
                             sisse = self.users[nxt][key][uid]
@@ -406,7 +442,7 @@ class stats:
             print('X Y X->Y Y->X Tehe'.split(), file=f, sep='\t')
             for uid in self.users:
                 for nxt in self.users[uid][key]:
-                    if ((nxt, uid) not in paarid):  # self.users[nxt][key][uid]
+                    if (nxt, uid) not in paarid:  # self.users[nxt][key][uid]
                         paarid.add((uid, nxt))
                         if uid in self.users[nxt][key]:
                             sisse = self.users[nxt][key][uid]
@@ -420,31 +456,33 @@ class stats:
         """Pygame joonistamine."""
         import pygame
         colors, c = dict(), 0
-        for i in self.channels:
-            colors[i] = tuple(map(lambda x: 255 * x, colorsys.hsv_to_rgb(0.618033988749895 * c, 1, 1)))
+        for i1 in self.channels:
+            colors[i1] = tuple(map(lambda x: 255 * x, colorsys.hsv_to_rgb(0.618033988749895 * c, 1, 1)))
             c += 1
         pygame.init()
         lava = pygame.display.set_mode((min(len(self.times), 10000), len(self.users)), 0, 32)
         # pygame.draw.rect(lava, (255,255,255),(5,5,10,10))
         pygame.display.update()
-        for x in list(self.users):
+        for x1 in list(self.users):
             count, c_len = 0, 0
-            for c in self.users[x]['times']:  # Iga kanaliga
-                for stamp in self.users[x]['times'][c]:  # Iga ajatempel 
-                    pygame.draw.rect(lava, colors[c], (self.times.index(stamp) % 10000, x, 2, 3))
-            self.users[x]['count']['total'] = count
-            self.users[x]['lens']['total'] = c_len
+            for c in self.users[x1]['times']:  # Iga kanaliga
+                for stamp in self.users[x1]['times'][c]:  # Iga ajatempel
+                    pygame.draw.rect(lava, colors[c], (self.times.index(stamp) % 10000, x1, 2, 3))
+            self.users[x1]['count']['total'] = count
+            self.users[x1]['lens']['total'] = c_len
             pygame.display.update()
         pygame.image.save(lava, "screenshot.jpeg")
-        for i in sorted(colors):
-            print(i, colors[i])
+        for i1 in sorted(colors):
+            print(i1, colors[i1])
         pygame.quit()
 
 
-sts = stats()
+sts = Stats()
+#"""
 for i in list(filter(lambda x: x[0] != '_', dir(sts))):
     if type(eval('sts.' + i)).__name__ == 'type':
         for x in list(filter(lambda x: x[0] != '_', dir(eval('sts.' + i)))):
             print('sts.' + i + '.' + x, str(eval('sts.' + i + '.' + x))[:40], sep='\t')
     else:
         print('sts.' + i, str(eval('sts.' + i))[:35].strip(), sep='\t')
+#"""
