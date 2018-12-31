@@ -190,7 +190,7 @@ class Stats:
                     self.times2[time_str]=dict()
                 if cur_name not in self.times2[time_str]:
                     self.times2[time_str][cur_name]=dict()
-                if uid not in self.times2[time_str]:
+                if uid not in self.times2[time_str][cur_name]:
                     self.times2[time_str][cur_name][uid]=0
                 self.times2[time_str][cur_name][uid]+=1
                 n_counter+=1
@@ -585,12 +585,13 @@ pygame.display.update()
 maksimumid=list()
 for time in sts.times2:
     s=0
-    print(time)
     for kanal in sts.times2[time]:
         for uid in sts.times2[time][kanal]:
             s+=sts.times2[time][kanal][uid]
     maksimumid.append(s)
 vahemiku_max=max(maksimumid)
+print(sum(maksimumid))
+
 # list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
 pygame.image.save(lava, "screenshot.jpeg")
 pygame.quit()
