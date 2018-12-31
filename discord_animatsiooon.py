@@ -142,7 +142,6 @@ class Stats:
         Kunagi võiks teha mingi seadistamisvõimaluse.
         """
         f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
-        n_counter=0
         for c in self.archive['data']:  # c = kanali id
             cur_name = self.archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
             cur_name = cur_name.split('_')[0]
@@ -193,7 +192,6 @@ class Stats:
                 if uid not in self.times2[time_str][cur_name]:
                     self.times2[time_str][cur_name][uid]=0
                 self.times2[time_str][cur_name][uid]+=1
-                n_counter+=1
                 # self.times2 töötlemine läbi
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
                     if sub not in self.users[uid]['count']:         # Kui see sõnum on kasutaja
@@ -232,7 +230,6 @@ class Stats:
                     self.users[uid]['next'][prev_msg] += 1
                     self.users[uid]['prev'][uid2] += 1
                 prev_msg = uid2
-        print(n_counter)
         self.times = list(sorted(self.times))
         f.close()
         print()
@@ -510,88 +507,91 @@ for i in list(filter(lambda x: x[0] != '_', dir(sts))):
 x=sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))[:5]
 for i in x: print(i,'\t', sts.times2[i])
 """
-def draw_timestamp(screen, stamp, size = 50, pos=(5,0),color = (200, 000, 000),font='agencyFB'):
-    stamp = str(stamp)
-    font = pygame.font.SysFont(font, int(size*0.8333333))
-    text = font.render(stamp, True, color)
-    screen.blit(text, pos)
-def draw_x_axis(screen, txt, x, y, size = 50, color = (200, 000, 000),font='agencyFB'):
-    txt = str(txt)
-    font = pygame.font.SysFont(font, int(size*0.8333333))
-    text = font.render(txt, True, color)
-    overflow = pygame.surface.Surface((100, int(size*1)))
-    overflow.blit(text,(0,0))
-    overflow=pygame.transform.rotate(overflow,90)
-    screen.blit(overflow, (x, y))
-def draw_user_legend(name, x, y, color=[250,230,130], size = 30, txt_color = (200, 000, 000), font='agencyFB', simulate=False, screen=None):
-    txt = str(name)
-    font = pygame.font.SysFont(font, int(size*0.8333333))
-    text = font.render(txt, True, txt_color)
-    overflow = pygame.surface.Surface((text.get_size()[0]+int(size*0.8), int(size)))
-    if not simulate:
-        overflow.blit(text,(int(size*0.8),0))
-        pygame.draw.rect(overflow,color,(int(size*0.1),int(size*0.2),int(size*0.6),int(size*0.6)))
-        screen.blit(overflow, (x, y))
+class animate:
+    ### Kogu soust tuleb nüüd ümber kirjutada
+    import pygame
+    def draw_timestamp(self, stamp, size = 50, pos=(5,0),color = (200, 000, 000),font='agencyFB'):
+        stamp = str(stamp)
+        font = pygame.font.SysFont(font, int(size*0.8333333))
+        text = font.render(stamp, True, color)
+        self.screen.blit(text, pos)
+    def draw_x_axis(self, txt, x, y, size = 50, color = (200, 000, 000),font='agencyFB'):
+        txt = str(txt)
+        font = pygame.font.SysFont(font, int(size*0.8333333))
+        text = font.render(txt, True, color)
+        overflow = pygame.surface.Surface((100, int(size*1)))
+        overflow.blit(text,(0,0))
+        overflow=pygame.transform.rotate(overflow,90)
+        self.screen.blit(overflow, (x, y))
+    def draw_user_legend(self,name, x, y, color=[250,230,130], size = 30, txt_color = (200, 000, 000), font='agencyFB', simulate=False, screen=None):
+        txt = str(name)
+        font = pygame.font.SysFont(font, int(size*0.8333333))
+        text = font.render(txt, True, txt_color)
+        overflow = pygame.surface.Surface((text.get_size()[0]+int(size*0.8), int(size)))
+        if not simulate:
+            overflow.blit(text,(int(size*0.8),0))
+            pygame.draw.rect(overflow,color,(int(size*0.1),int(size*0.2),int(size*0.6),int(size*0.6)))
+            self.screen.blit(overflow, (x, y))
+            pygame.display.update()
+        return overflow.get_size()
+    def __init__()
+        pygame.init()
+        s=50
+        name_buffer=105  # Eeldatav nimede ruum koos 5px varuga
+        colors, c = dict(), 0
+        width=(len(sts.channels)+1)*s
+        sizes=list()
+        ajatempel=50  # Ajatempli kõrgus ülal vasakus nurgas
+        graafiku_osa=100
+        for i in list(filter(lambda x:x>=0,sts.users)):
+            sizes.append(self.draw_user_legend(sts.users[i]['n'],0,0,simulate=True)[0])
+        ls=len(sizes)
+        sizes.sort()
+        x2=sizes[round(ls*0.8)]
+        y2=30+3
+        x_columns=width//x2
+        y_lines=(len(sts.users)-1)//x_columns
+        y_hei=y_lines*y2
+        print(y_hei)
+        #"""
+        hei=graafiku_osa+y_hei+name_buffer+ajatempel
+        self.lava = pygame.display.set_mode((width,hei), 0, 32)
+    # X-telje joonistamine
+    y_t=hei-name_buffer-y_hei
+    for i in range(len(sts.channels)):
+        x_t=(i*s)
+        draw_x_axis(lava,sts.channels[i],x_t,y_t,size=s)
         pygame.display.update()
-    return overflow.get_size()
-### Kogu soust tuleb nüüd ümber kirjutada
-import pygame
-pygame.init()
-s=50
-name_buffer=105  # Eeldatav nimede ruum koos 5px varuga
-colors, c = dict(), 0
-width=(len(sts.channels)+1)*s
-sizes=list()
-ajatempel=50  # Ajatempli kõrgus ülal vasakus nurgas
-graafiku_osa=100
-for i in list(filter(lambda x:x>=0,sts.users)):
-    sizes.append(draw_user_legend(sts.users[i]['n'],0,0,simulate=True)[0])
-ls=len(sizes)
-sizes.sort()
-x2=sizes[round(ls*0.8)]
-y2=30+3
-x_columns=width//x2
-y_lines=(len(sts.users)-1)//x_columns
-y_hei=y_lines*y2
-print(y_hei)
-#"""
-hei=graafiku_osa+y_hei+name_buffer+ajatempel
-lava = pygame.display.set_mode((width,hei), 0, 32)
-# X-telje joonistamine
-y_t=hei-name_buffer-y_hei
-for i in range(len(sts.channels)):
-    x_t=(i*s)
-    draw_x_axis(lava,sts.channels[i],x_t,y_t,size=s)
+    #"""
+    # Järgmine samm: teha iga kasutajale värv.
+    # Legendi joonistamine:
+    y=hei-y_hei
+    x=10
+    for i in list(filter(lambda x:x>=0,sts.users)):
+        colors[i] = tuple(map(lambda x: min([round(255 * x),255]), colorsys.hsv_to_rgb(0.618033988749895 * c, 1-i//5*0.01, 1-i//3*0.005)))
+        c += 1
+        draw_user_legend(sts.users[i]['n'],x,y,colors[i],screen=lava)
+        y+=y2
+        if y+y2> hei:
+            y=hei-y_hei
+            x+=x2
+            pygame.display.update()
+    # Lisa ajamärge
+    draw_timestamp(lava,'Sat 03 Nov 2018')
     pygame.display.update()
-#"""
-# Järgmine samm: teha iga kasutajale värv.
-# Legendi joonistamine:
-y=hei-y_hei
-x=10
-for i in list(filter(lambda x:x>=0,sts.users)):
-    colors[i] = tuple(map(lambda x: min([round(255 * x),255]), colorsys.hsv_to_rgb(0.618033988749895 * c, 1-i//5*0.01, 1-i//3*0.005)))
-    c += 1
-    draw_user_legend(sts.users[i]['n'],x,y,colors[i],screen=lava)
-    y+=y2
-    if y+y2> hei:
-        y=hei-y_hei
-        x+=x2
-        pygame.display.update()
-# Lisa ajamärge
-draw_timestamp(lava,'Sat 03 Nov 2018')
-pygame.display.update()
-# Joonista graafik
-# Tuleb veel läbi mõelda...
-maksimumid=list()
-for time in sts.times2:
-    s=0
-    for kanal in sts.times2[time]:
-        for uid in sts.times2[time][kanal]:
-            s+=sts.times2[time][kanal][uid]
-    maksimumid.append(s)
-vahemiku_max=max(maksimumid)
-print(sum(maksimumid))
+    # Joonista graafik
+    # Tuleb veel läbi mõelda...
+    maksimumid=set()
+    for time in sts.times2:
+        for kanal in sts.times2[time]:
+            s=0
+            for uid in sts.times2[time][kanal]:
+                s+=sts.times2[time][kanal][uid]
+            maksimumid.add(s)
+    vahemiku_max=max(maksimumid)
 
-# list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
-pygame.image.save(lava, "screenshot.jpeg")
-pygame.quit()
+    draw_columns(sts.times2[stamp])
+
+    # list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
+    pygame.image.save(lava, "screenshot.jpeg")
+    pygame.quit()
