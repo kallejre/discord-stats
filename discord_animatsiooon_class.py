@@ -615,7 +615,7 @@ class Animate:
             s = 0
             for uid in data[kanal]:
                 s += data[kanal][uid]
-            y_h=round(log(s)/log(self.vahemiku_max)*self.graafiku_osa)
+            y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
             pygame.draw.rect(self.lava,[220]*3,(self.s*column_nr,self.graafiku_osa+self.ajatempel-y_h,self.s,y_h))
     def draw(self,stamp):
         """Ühe kaadri joonistamine."""
@@ -632,12 +632,26 @@ class Animate:
         pygame.display.flip()
         pygame.image.save(self.lava, 'gif/screenshot_'+"{:03d}".format(self.counter)+'_'+stamp+'.jpeg')
         self.counter+=1
-
+    def modifyEachValueInDictionary(self,old,new,decay_a,decay_b):
+        # max([0,decay_a*old[kanal]-decay_b,new[kanal]])
+        # max([0,decay_a*old[kanal]-decay_b])
+        out=dict()
+        if new:
+            for k,v in new.items():
+                out[k]=v
+        for k,v in old.items():
+            if k in out:
+                out[k]=max([0,decay_a*v-decay_b,out[k]])
+            else:
+                out[k]=max([0,decay_a*v-decay_b])
+        return out
     def draw_main(self):
         """Ma ei tea, milleks"""
         self.lava = pygame.display.set_mode((self.width, self.hei), 0, 32)
         self.lava.fill([0,0,0])
         self.times3=dict()
+        decay_a=0.8
+        decay_b=1
         # datetime.datetime(2018, 8, 11, 2, 0)+datetime.timedelta(hours=1)
         if self.day0.hour==0==self.day9.hour and '%H' not in self.sts.ajaformaat:
             delta = datetime.timedelta(days=1)
@@ -645,13 +659,31 @@ class Animate:
             delta = datetime.timedelta(hours=1)
         datum=self.day0
         self.counter=0
+        dat_prev=0
+        # Esimene kord
+        date_text=datetime.datetime.strftime(datum,self.sts.ajaformaat)
+        self.times3[date_text]=self.sts.times2[date_text]
+        dat_prev=date_text
+        self.draw(date_text)
+        datum += delta
         while datum<=self.day9:
-            date_text=datetime.datetime.strftime(datum,self.sts.ajaformaat)
+            date_text=datetime.datetime.strftime(datum,self.sts.ajaformaat)          
             if date_text in self.sts.times2:
-                self.times3[date_text]=self.sts.times2[date_text]
+                new=self.sts.times2[date_text]
             else:
-                #continue
-                self.times3[date_text]=None
+                new=[]
+            old=self.times3[dat_prev]
+            dat_prev=date_text
+            combined=dict()
+            for kanal in set(old).union(set(new)):
+                if kanal in new and kanal in old:
+                    combined[kanal]=self.modifyEachValueInDictionary(old[kanal],new[kanal],decay_a,decay_b)
+                elif kanal in new:
+                    combined[kanal]=new[kanal]
+                else:
+                    combined[kanal]=self.modifyEachValueInDictionary(old[kanal],None,decay_a,decay_b)
+
+            self.times3[date_text]=combined
             self.draw(date_text)
             datum += delta
         pygame.quit()
