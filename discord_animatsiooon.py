@@ -583,11 +583,12 @@ pygame.display.update()
 # Joonista graafik
 # Tuleb veel läbi mõelda...
 maksimumid=list()
-for i in sts.times2:
+for time in sts.times2:
     s=0
-    for x in sts.times2[i]:
-        for y in sts.times2[i][x]:
-            s+=sts.times2[i][x][y]
+    print(time)
+    for kanal in sts.times2[time]:
+        for uid in sts.times2[time][kanal]:
+            s+=sts.times2[time][kanal][uid]
     maksimumid.append(s)
 vahemiku_max=max(maksimumid)
 # list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
