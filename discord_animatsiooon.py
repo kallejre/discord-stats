@@ -142,6 +142,7 @@ class Stats:
         Kunagi võiks teha mingi seadistamisvõimaluse.
         """
         f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
+        n_counter=0
         for c in self.archive['data']:  # c = kanali id
             cur_name = self.archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
             cur_name = cur_name.split('_')[0]
@@ -192,6 +193,7 @@ class Stats:
                 if uid not in self.times2[time_str]:
                     self.times2[time_str][cur_name][uid]=0
                 self.times2[time_str][cur_name][uid]+=1
+                n_counter+=1
                 # self.times2 töötlemine läbi
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
                     if sub not in self.users[uid]['count']:         # Kui see sõnum on kasutaja
@@ -230,7 +232,7 @@ class Stats:
                     self.users[uid]['next'][prev_msg] += 1
                     self.users[uid]['prev'][uid2] += 1
                 prev_msg = uid2
-
+        print(n_counter)
         self.times = list(sorted(self.times))
         f.close()
         print()
@@ -508,7 +510,7 @@ for i in list(filter(lambda x: x[0] != '_', dir(sts))):
 x=sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))[:5]
 for i in x: print(i,'\t', sts.times2[i])
 """
-def draw_timestamp(screen, stamp, size = 50, pos=(0,0),color = (200, 000, 000),font='agencyFB'):
+def draw_timestamp(screen, stamp, size = 50, pos=(5,0),color = (200, 000, 000),font='agencyFB'):
     stamp = str(stamp)
     font = pygame.font.SysFont(font, int(size*0.8333333))
     text = font.render(stamp, True, color)
@@ -561,8 +563,6 @@ for i in range(len(sts.channels)):
     x_t=(i*s)
     draw_x_axis(lava,sts.channels[i],x_t,y_t,size=s)
     pygame.display.update()
-#pygame.image.save(lava, "screenshot.jpeg")
-#pygame.quit()
 #"""
 # Järgmine samm: teha iga kasutajale värv.
 # Legendi joonistamine:
@@ -582,3 +582,14 @@ draw_timestamp(lava,'Sat 03 Nov 2018')
 pygame.display.update()
 # Joonista graafik
 # Tuleb veel läbi mõelda...
+maksimumid=list()
+for i in sts.times2:
+    s=0
+    for x in sts.times2[i]:
+        for y in sts.times2[i][x]:
+            s+=sts.times2[i][x][y]
+    maksimumid.append(s)
+vahemiku_max=max(maksimumid)
+# list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
+pygame.image.save(lava, "screenshot.jpeg")
+pygame.quit()
