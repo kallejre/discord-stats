@@ -230,9 +230,9 @@ class Stats:
                     self.users[uid]['next'][prev_msg] += 1
                     self.users[uid]['prev'][uid2] += 1
                 prev_msg = uid2
+        print()
         self.times = list(sorted(self.times))
         f.close()
-        print()
 
     def arhiiv(self):
         """
@@ -492,35 +492,34 @@ class Stats:
         for i1 in sorted(colors):
             print(i1, colors[i1])
         pygame.quit()
+    def times2_cleanup(self,n=25):
+        ###  ----   Times2/times3 Eri
+        # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
+        self.top_n=list(filter(lambda x:x>=0,sorted(self.users,key=lambda x:self.users[x]['count']['Kokku'],reverse=True)))[:n]
+        print(self.top_n)
+        for date in self.times2:
+            for kanal in self.times2[date]:
+                counter=0
+                for uid in list(self.times2[date][kanal]):
+                    if uid not in self.top_n:
+                        counter+=self.times2[date][kanal][uid]
+                        del self.times2[date][kanal][uid]
+                self.times2[date][kanal][-1]=counter
+        ###  ----   Times2/times3 Eri läbi
 
 
-sts = Stats()
-"""
-for i in list(filter(lambda x: x[0] != '_', dir(sts))):
-    if type(eval('sts.' + i)).__name__ == 'type':
-        for x in list(filter(lambda x: x[0] != '_', dir(eval('sts.' + i)))):
-            print('sts.' + i + '.' + x, str(eval('sts.' + i + '.' + x))[:40], sep='\t')
-    else:
-        print('sts.' + i, str(eval('sts.' + i))[:35].strip(), sep='\t')
-#"""
-"""
-x=sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))[:5]
-for i in x: print(i,'\t', sts.times2[i])
-"""
 
 
-import pygame
-from math import log
 
-pygame.init()
+
 
 
 class Animate:
     ### Kogu soust tuleb nüüd ümber kirjutada
     def __init__(self, sts):
         self.s = 20  # X-telje märgete kirjasuurus                                  # Default: 50
-        self.ajatempel = 15  # Ajatempli kõrgus ülal vasakus nurgas                 # Default: 50
-        self.legend_size = 15  # Legendi kirjakõrgus                                # Default: 30
+        self.ajatempel = 25  # Ajatempli kõrgus ülal vasakus nurgas                 # Default: 50
+        self.legend_size = 30  # Legendi kirjakõrgus                                # Default: 30
         self.name_buffer = self.s * 2 + 5  # Eeldatav nimede ruum koos 5px varuga
         self.colors = dict()
         self.sts = sts
@@ -528,22 +527,26 @@ class Animate:
         self.graafiku_osa = 250
         self.font_name = 'agencyFB'
         pygame.font.init()
+        # self.sts.top_n
+        # self.sts.users
         sizes = self.draw_user_legend(simulate=True)
         ls = len(sizes)
         sizes.sort()
-        self.x2 = sizes[round(ls * 0.8)]
+        x=0.9
+        self.x2 = sizes[round(ls * x)]
         self.y2 = self.legend_size + 3
         x_columns = self.width // self.x2
-        y_lines = (len(sts.users) - 1) // x_columns
+        y_lines = (len(self.sts.top_n) - 1) // x_columns+1
         self.y_hei = y_lines * self.y2
         self.day0 = datetime.datetime.strptime(min(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)),sts.ajaformaat)
         self.day9 = datetime.datetime.strptime(max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)),sts.ajaformaat)
         c = 0
-        for i in list(filter(lambda x: x >= 0, sts.users)):
+        for i in list(filter(lambda x: x >= 0, sts.top_n)):
             self.colors[i] = tuple(map(lambda x: min([round(255 * x), 255]),
                             colorsys.hsv_to_rgb(0.618033988749895 * c, 1 - i // 5 * 0.01, 1 - i // 3 * 0.005)))
             c += 1
         # """
+        self.colors[-1]=(50,50,50)  # Ülejäänud
         self.colors[0]=(200,200,200)  # Rauno?
         self.colors[1]=(255,200,200)  # Kadri
         self.colors[2]=(200,255,200)  # Ago
@@ -590,9 +593,9 @@ class Animate:
         font = pygame.font.SysFont(self.font_name, int(size * 0.8333333))
         txt_color = (200, 000, 000)
         out = []
-        for i in list(filter(lambda x: x >= 0, self.sts.users)):
+        for i in list(filter(lambda x: x >= 0, self.sts.top_n))+[-1]:
 
-            txt = sts.users[i]['n']
+            txt = self.sts.users[i]['n']
             text = font.render(txt, True, txt_color)
             overflow = pygame.surface.Surface((text.get_size()[0] + int(size * 0.8), int(size)))
             if not simulate:
@@ -636,7 +639,7 @@ class Animate:
         self.ajatempel  # Ajatempli kõrgus ülal vasakus nurgas
         self.graafiku_osa
         for kanal in data:
-            column_nr = ani.sts.channels.index(kanal)
+            column_nr = self.sts.channels.index(kanal)
             out=self.draw_column(kanal,data)
             self.lava.blit(out,(self.s*column_nr,0))
             """
@@ -713,5 +716,20 @@ class Animate:
             self.draw(date_text)
             datum += delta
         pygame.quit()
+
+sts = Stats()
+sts.times2_cleanup()
+"""
+for i in list(filter(lambda x: x[0] != '_', dir(sts))):
+    if type(eval('sts.' + i)).__name__ == 'type':
+        for x in list(filter(lambda x: x[0] != '_', dir(eval('sts.' + i)))):
+            print('sts.' + i + '.' + x, str(eval('sts.' + i + '.' + x))[:40], sep='\t')
+    else:
+        print('sts.' + i, str(eval('sts.' + i))[:35].strip(), sep='\t')
+#"""
+import pygame
+from math import log
+
+pygame.init()
 ani = Animate(sts)
-ani.draw_main()
+#ani.draw_main()
