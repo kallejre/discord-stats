@@ -426,7 +426,7 @@ class Stats:
     def stat_msg(self):
         """Sõnumite statisika, kui palju on X->Y sõnumeid."""
         with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
-            print('X Y X->Y'.split(), file=f, sep='\t')
+            print('\t'.join('X Y X->Y').split(), file=f, sep='\t')
             for uid in self.users:
                 for nxt in self.users[uid]['next']:
                     count = self.users[uid]['next'][nxt]
@@ -518,9 +518,10 @@ pygame.init()
 class Animate:
     ### Kogu soust tuleb nüüd ümber kirjutada
     def __init__(self, sts):
-        self.s = 50  # X-telje märgete kirjasuurus
-        self.ajatempel = 50  # Ajatempli kõrgus ülal vasakus nurgas
-        self.name_buffer = 105  # Eeldatav nimede ruum koos 5px varuga
+        self.s = 20  # X-telje märgete kirjasuurus                                  # Default: 50
+        self.ajatempel = 15  # Ajatempli kõrgus ülal vasakus nurgas                 # Default: 50
+        self.legend_size = 15  # Legendi kirjakõrgus                                # Default: 30
+        self.name_buffer = self.s * 2 + 5  # Eeldatav nimede ruum koos 5px varuga
         self.colors = dict()
         self.sts = sts
         self.width = (len(sts.channels) + 1) * self.s
@@ -531,7 +532,7 @@ class Animate:
         ls = len(sizes)
         sizes.sort()
         self.x2 = sizes[round(ls * 0.8)]
-        self.y2 = 30 + 3
+        self.y2 = self.legend_size + 3
         x_columns = self.width // self.x2
         y_lines = (len(sts.users) - 1) // x_columns
         self.y_hei = y_lines * self.y2
@@ -543,6 +544,11 @@ class Animate:
                             colorsys.hsv_to_rgb(0.618033988749895 * c, 1 - i // 5 * 0.01, 1 - i // 3 * 0.005)))
             c += 1
         # """
+        self.colors[0]=(200,200,200)  # Rauno?
+        self.colors[1]=(255,200,200)  # Kadri
+        self.colors[2]=(200,255,200)  # Ago
+        self.colors[3]=(200,200,255)  # Test9
+        self.colors[4]=(255,255,200)  # Ergo
         self.hei = self.graafiku_osa + self.y_hei + self.name_buffer + self.ajatempel
         maksimumid = set()
         for time in sts.times2:
@@ -569,7 +575,7 @@ class Animate:
             x_t = (i * self.s)
             txt = str(channels[i])
             text = font.render(txt, True, color)
-            overflow = pygame.surface.Surface((100, int(self.s * 1)))
+            overflow = pygame.surface.Surface((self.s * 2, int(self.s * 1)))
             overflow.blit(text, (0, 0))
             overflow = pygame.transform.rotate(overflow, 90)
             self.lava.blit(overflow, (x_t, y_t))
@@ -580,7 +586,7 @@ class Animate:
         if not simulate:
             y = self.hei - self.y_hei
             x = 10
-        size = 30
+        size = self.legend_size
         font = pygame.font.SysFont(self.font_name, int(size * 0.8333333))
         txt_color = (200, 000, 000)
         out = []
@@ -602,6 +608,25 @@ class Animate:
 
             out.append(overflow.get_size()[0])
         return out
+    def draw_column(self,kanal,data):
+        """Koosta standartse laiuse ja kõrgusega tulp, ära joonista."""
+        # Ei tulnud hästi välja. Järgmine idee: TOP25 ja ülejäänud
+        w,h=self.s,self.graafiku_osa+self.ajatempel*1
+        column=pygame.surface.Surface((w,h))
+        column_nr = ani.sts.channels.index(kanal)
+        s = 0
+        for uid in sorted(data[kanal],reverse=True):
+            # Joonista kasutaja rect
+            y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
+            y_h2=round(log(s+data[kanal][uid]+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
+            y_h=round((s)/(self.vahemiku_max)*self.graafiku_osa)  # Loobusin logaritmidest
+            y_h2=round((s+data[kanal][uid])/(self.vahemiku_max)*self.graafiku_osa)
+            pygame.draw.rect(column,self.colors[uid], (0, h-y_h, w,h-y_h2))
+            
+            s += data[kanal][uid]
+        return column
+        #y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
+        #pygame.draw.rect(self.lava,[220]*3,(self.s*column_nr,self.graafiku_osa+self.ajatempel-y_h,self.s,y_h))
     def draw_columns(self,data=None):
         if not data:
             return
@@ -612,21 +637,22 @@ class Animate:
         self.graafiku_osa
         for kanal in data:
             column_nr = ani.sts.channels.index(kanal)
+            out=self.draw_column(kanal,data)
+            self.lava.blit(out,(self.s*column_nr,0))
+            """
+            column_nr = ani.sts.channels.index(kanal)
             s = 0
             for uid in data[kanal]:
                 s += data[kanal][uid]
             y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
             pygame.draw.rect(self.lava,[220]*3,(self.s*column_nr,self.graafiku_osa+self.ajatempel-y_h,self.s,y_h))
+            """
     def draw(self,stamp):
         """Ühe kaadri joonistamine."""
         self.lava.fill([0,0,0])
         self.draw_x_axis(sts.channels)        # X-telje joonistamine
-        self.draw_user_legend()        # Legendi joonistamine:
-        # Joonista graafik
-        # Tuleb veel läbi mõelda...
-
-        self.draw_columns(self.times3[stamp])
-
+        self.draw_user_legend()        # Legendi joonistamine
+        self.draw_columns(self.times3[stamp]) # Joonista graafik. Tuleb veel läbi mõelda...
         # list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
         self.draw_timestamp(stamp)        # Lisa ajamärge
         pygame.display.flip()
