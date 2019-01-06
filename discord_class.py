@@ -233,6 +233,7 @@ class Stats:
                     self.users[uid]['prev'][uid2] += 1
                 prev_msg = uid2
         print()
+        del self.archive
         self.times = list(sorted(self.times))
         f.close()
 
@@ -470,30 +471,30 @@ class Stats:
                             if count > 1:
                                 l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
                                 print(*l + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
-    def stat_last_24():
+    def stat_last_24(self):
         """Kasutajate aktiivsus viimased 24 tundi või päeva."""
-        e=sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))[-24:]
+        e=sorted(self.times2,key=lambda x:datetime.datetime.strptime(x,self.ajaformaat))[-24:]
         q=set()
         usrs=set()
         for i in e:
-            q=q.union(sts.times2[i])
-            for x in sts.times2[i]:
-                usrs=usrs.union(set(sts.times2[i][x]))
+            q=q.union(self.times2[i])
+            for x in self.times2[i]:
+                usrs=usrs.union(set(self.times2[i][x]))
         usrs=list(sorted(usrs))
-        us2=list(map(lambda x: sts.users[x]['n'],usrs))
+        us2=list(map(lambda x: self.users[x]['n'],usrs))
         q=list(sorted(q))
         with open('d_out_last24.txt', 'w', encoding='utf-8') as f:
             print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
             for i in e:
                 for kanal in q:
                     out=[]
-                    if kanal not in sts.times2[i]:
+                    if kanal not in self.times2[i]:
                         continue
                     out.append(i)
                     out.append(kanal)
                     for use in usrs:
-                        if use in sts.times2[i][kanal]:
-                            out.append(sts.times2[i][kanal][use])
+                        if use in self.times2[i][kanal]:
+                            out.append(self.times2[i][kanal][use])
                         else:
                             out.append(0)
                     print('\t'.join(list(map(str,out))), file=f)
@@ -756,5 +757,8 @@ from math import log
 # pygame.init()
 # ani = Animate(sts)
 # ani.draw_main()
-
-            
+'graafik'
+args=['ajatabel_vaiksem', 'graafid_edetabel']
+for fun in ['ajatabel_suur', 'arhiiv', 'out_tgf_msg', 'out_tgf_tag', 'out_users_json', 'out_users_py', 'stat_last_24', 'stat_msg', 'stat_msg2', 'stat_tag', 'stat_tag2']:
+    print(fun)
+    eval('sts.'+fun+'()')
