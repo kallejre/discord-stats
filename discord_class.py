@@ -156,7 +156,7 @@ class Stats:
                         self.lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
                     self.lyhi[message['u']] += 1
                     # continue                                      # Lühikese sõnumi saab vahele jätta
-                print(message['m'].lower(), file=f)  # Kopeeri sõnum faili
+                print(self.archive['meta']['userindex'][message['u']],message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
                 time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
                 wk = time.weekday()
                 hr = time.hour
@@ -233,7 +233,7 @@ class Stats:
                     self.users[uid]['prev'][uid2] += 1
                 prev_msg = uid2
         print()
-        del self.archive
+        # del self.archive
         self.times = list(sorted(self.times))
         f.close()
 
