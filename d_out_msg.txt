@@ -1,4 +1,4 @@
-['X', 'Y', 'X', '-', '>', 'Y']
+X	Y	X->Y
 Rauno	Kadri	117
 Rauno	Ago	52
 Rauno	test9	21

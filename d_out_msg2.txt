@@ -1,4 +1,4 @@
-['X', 'Y', 'X->Y', 'Y->X', 'Tehe']
+X	Y	X->Y	Y->X	Tehe
 Kadri	Rauno	3	3	3,0
 Rauno	Sebastian	3	5	1,7999999999999998
 Kadri	Kadri	3	3	3,0

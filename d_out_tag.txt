@@ -1,4 +1,4 @@
-['X', 'Y', 'X->Y']
+X	Y	X->Y
 Rauno	G[A]stly	1
 Rauno	Kadri	3
 Rauno	Ahti	2

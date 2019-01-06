@@ -419,7 +419,7 @@ class Stats:
     def stat_tag(self):
         """Tag statisika, kui palju on X->Y märkimisi."""
         with open('d_out_tag.txt', 'w', encoding='utf-8') as f:
-            print('X Y X->Y'.split(), file=f, sep='\t')
+            print('\t'.join('X Y X->Y'.split()), file=f)
             for uid in self.users:
                 for nxt in self.users[uid]['tag_to']:
                     count = self.users[uid]['tag_to'][nxt]
@@ -429,7 +429,7 @@ class Stats:
     def stat_msg(self):
         """Sõnumite statisika, kui palju on X->Y sõnumeid."""
         with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y').split(), file=f, sep='\t')
+            print('\t'.join('X Y X->Y'.split()), file=f)
             for uid in self.users:
                 for nxt in self.users[uid]['next']:
                     count = self.users[uid]['next'][nxt]
@@ -441,7 +441,7 @@ class Stats:
         paarid = set()
         key = 'tag_to'
         with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
-            print('X Y X->Y Y->X Tehe'.split(), file=f, sep='\t')
+            print('\t'.join('X Y X->Y Y->X Tehe'.split()), file=f)
             for uid in self.users:
                 for nxt in self.users[uid][key]:
                     if (nxt, uid) not in paarid:
@@ -743,6 +743,25 @@ class Animate:
 
 sts = Stats()
 sts.times2_cleanup()
+
+sts.ajatabel_suur()
+sts.arhiiv()
+sts.out_tgf_msg()
+sts.out_tgf_tag()
+sts.out_users_json()
+sts.out_users_py()
+sts.stat_last_24()
+sts.stat_msg()
+sts.stat_msg2()
+sts.stat_tag()
+sts.stat_tag2()
+
+import pygame
+from math import log
+# pygame.init()
+# ani = Animate(sts)
+# ani.draw_main()
+
 """
 for i in list(filter(lambda x: x[0] != '_', dir(sts))):
     if type(eval('sts.' + i)).__name__ == 'type':
@@ -750,15 +769,8 @@ for i in list(filter(lambda x: x[0] != '_', dir(sts))):
             print('sts.' + i + '.' + x, str(eval('sts.' + i + '.' + x))[:40], sep='\t')
     else:
         print('sts.' + i, str(eval('sts.' + i))[:35].strip(), sep='\t')
-#"""
-import pygame
-from math import log
-
-# pygame.init()
-# ani = Animate(sts)
-# ani.draw_main()
-'graafik'
-args=['ajatabel_vaiksem', 'graafid_edetabel']
-for fun in ['ajatabel_suur', 'arhiiv', 'out_tgf_msg', 'out_tgf_tag', 'out_users_json', 'out_users_py', 'stat_last_24', 'stat_msg', 'stat_msg2', 'stat_tag', 'stat_tag2']:
-    print(fun)
-    eval('sts.'+fun+'()')
+# """
+"""
+with open('sõnastats.txt',encoding='utf-8') as f:
+	a=json.load(f)
+# """
