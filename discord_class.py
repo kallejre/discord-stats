@@ -5,6 +5,15 @@ Asjandus discordi json-arhiivi töötlemiseks.
 Klassikaline lähenemine statistikale.
 Edasine arendamine käib siitkaudu
 
+Prototüüp animatsiooni tegemiseks.
+Ehitatud _classi põhjale
+    Kasutan pygame'i, teoreetiliselt saaks ka PIL-ga.
+Animatsioon:
+    Tulpdiagrammid,
+       1 tulp näitab inimeste osalust selles kanalis värviliselt.
+    1 tund=1 kaader
+       Plaan kasutada vajumist, näiteks postitus sisaldub statistikas 6 tundi.
+
 Stats.ajatabel_suur     Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta.
 Stats.ajatabel_vaike    UI ajatabelite kuvamiseks
 Stats.ajatabel_vaiksem  Ajatabelite sõnede tegemine.

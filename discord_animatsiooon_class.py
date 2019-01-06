@@ -2,6 +2,9 @@
 """
 Asjandus discordi json-arhiivi töötlemiseks.
 
+Klassikaline lähenemine statistikale.
+Edasine arendamine käib siitkaudu
+
 Prototüüp animatsiooni tegemiseks.
 Ehitatud _classi põhjale
     Kasutan pygame'i, teoreetiliselt saaks ka PIL-ga.
@@ -10,7 +13,6 @@ Animatsioon:
        1 tulp näitab inimeste osalust selles kanalis värviliselt.
     1 tund=1 kaader
        Plaan kasutada vajumist, näiteks postitus sisaldub statistikas 6 tundi.
-
 
 Stats.ajatabel_suur     Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta.
 Stats.ajatabel_vaike    UI ajatabelite kuvamiseks
@@ -81,7 +83,7 @@ class Stats:
         self.times = list()
         self.times2 = dict()
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
-        self.ajaformaat = '%a %d %b %Y'        # Kasutusel koos times2-ga
+        self.ajaformaat = '%a %d %b %Y'          # Kasutusel koos times2-ga
         # max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
         for x1 in range(len(self.archive['meta']['userindex'])):
             self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
@@ -111,7 +113,7 @@ class Stats:
                             "pr14": {"PR", "Kokku"}, "pr15": {"PR", "Kokku"}, "random": {"Yldine", "Kokku"},
                             "wat": {"PR", "Kokku"},
                             "stat": {"Yldine", "Kokku"}, "syvapy-general": {"Yldine", "Kokku"},
-                            "videod": {"Yldine", "Kokku"},
+                            "videod": {"Yldine", "Kokku"}, "eksam": {"Yldine", "Kokku"},
                             "xp01": {"Syva", "Kokku", "XP"}, "xp02": {"Syva", "Kokku", "XP"},
                             "xp03": {"Syva", "Kokku", "XP"},
                             "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
@@ -468,6 +470,33 @@ class Stats:
                             if count > 1:
                                 l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
                                 print(*l + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
+    def stat_last_24():
+        """Kasutajate aktiivsus viimased 24 tundi või päeva."""
+        e=sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))[-24:]
+        q=set()
+        usrs=set()
+        for i in e:
+            q=q.union(sts.times2[i])
+            for x in sts.times2[i]:
+                usrs=usrs.union(set(sts.times2[i][x]))
+        usrs=list(sorted(usrs))
+        us2=list(map(lambda x: sts.users[x]['n'],usrs))
+        q=list(sorted(q))
+        with open('d_out_last24.txt', 'w', encoding='utf-8') as f:
+            print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
+            for i in e:
+                for kanal in q:
+                    out=[]
+                    if kanal not in sts.times2[i]:
+                        continue
+                    out.append(i)
+                    out.append(kanal)
+                    for use in usrs:
+                        if use in sts.times2[i][kanal]:
+                            out.append(sts.times2[i][kanal][use])
+                        else:
+                            out.append(0)
+                    print('\t'.join(list(map(str,out))), file=f)
 
     def graafik(self):
         """Pygame joonistamine. Väga KATKI!"""
@@ -506,12 +535,6 @@ class Stats:
                         del self.times2[date][kanal][uid]
                 self.times2[date][kanal][-1]=counter
         ###  ----   Times2/times3 Eri läbi
-
-
-
-
-
-
 
 
 class Animate:
@@ -730,6 +753,8 @@ for i in list(filter(lambda x: x[0] != '_', dir(sts))):
 import pygame
 from math import log
 
-pygame.init()
-ani = Animate(sts)
-#ani.draw_main()
+# pygame.init()
+# ani = Animate(sts)
+# ani.draw_main()
+
+            
