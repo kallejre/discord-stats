@@ -89,16 +89,17 @@ with open('disc_sõnapilveks.txt', encoding='utf-8') as fin:
         s=lause.analysis
         for sona in s:
             lemmad=[sona[0]['lemma']]
-            if sona[0]['partofspeech'] in 'ZJP':
+            if sona[0]['partofspeech'] in 'Z':#'ZJP':
                 continue  # Jäta vahele sidesõnad ja üksikud tähemärgid.
-            lemmad=sona[0]['root_tokens']  # Tugi liitsõnadele
-            for lemma in lemmad:
-                if lemma not in users[uid]:
-                    users[uid][lemma]=0		
-                if lemma not in users['-1']:
-                    users['-1'][lemma]=0
-                users[uid][lemma]+=1
-                users['-1'][lemma]+=1
+            else:
+                lemmad=sona[0]['root_tokens']  # Tugi liitsõnadele
+                for lemma in lemmad:
+                    if lemma not in users[uid]:
+                        users[uid][lemma]=0		
+                    if lemma not in users['-1']:
+                        users['-1'][lemma]=0
+                    users[uid][lemma]+=1
+                    users['-1'][lemma]+=1
 import json
 use = json.dumps(users, ensure_ascii=False)
 with open('sõnastats.txt', 'w', encoding='utf-8') as f:

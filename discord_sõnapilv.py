@@ -1,51 +1,18 @@
 """Discordi sõnapilve statistika."""
 
-import re
+import json
 
-pattern = re.compile('[\W_]+')
-f = open('disc_sõnapilveks.txt', encoding='utf-8')
-s = f.read()
+with open('sõnastats.txt', encoding='utf-8') as f:
+    stats = json.loads(f.read())
+with open('users.py',encoding='utf-8') as f:
+    exec(f.read())
+with open('dht.txt', encoding='utf8') as f:
+    file = f.read()
+    indexes = eval(file)['meta']['userindex']
+c=1
+f=open('ergoOnHull.txt', 'w', encoding='utf-8')
+for i in sorted(stats['-1'], key=lambda x:stats['-1'][x], reverse=True)[:1500]:
+    try:print(c,i, stats['-1'][i], sep='\t', file=f)
+    except:pass
+    c+=1
 f.close()
-print(len(s))
-print(s.count(' '))
-for symb in '-_.:,;~<>|+?´`=()!"¤%&/\\\'*':
-    s = s.replace(symb, ' ')
-print(s.count(' '))
-for i in range(15):
-    s = s.replace('\n\n', '\n')
-    s = s.replace('  ', ' ')
-    s = s.replace('\n ', '\n')
-    s = s.replace(' \n', '\n')
-print(len(s))
-print(s.count(' '))
-for i in range(100):
-    s = s.replace('  ', ' ')
-print(len(s))
-print(s.count(' '))
-print('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-')
-a = s.split()
-d = set(a)
-q = dict()
-for i in d:
-    q[i] = a.count(i)
-    if q[i] > 5 and len(i) > 2:
-        try:
-            print(i, q[i], sep='\t')
-        except:
-            print('\t', q[i], sep='')
-# re.sub [^\w@\< \>#\n] -> " "
-"""
-f=open('C:\\Users\\kalle\\Documents\\GitHub\\discord-stats\\sõnapilv2.txt',encoding='utf-8')
-q=f.read()
-w=q.split()
-e=set(w)
-a=dict()
-for i in w:
-	if i not in a:
-		a[i]=0
-	a[i]+=1
-s=list(sorted(a,key=lambda x:a[x],reverse=True))
-d=list(filter(lambda x:len(x)>3,s))
-a['<@366546170149076993>']
-a[d[0]]
-"""
