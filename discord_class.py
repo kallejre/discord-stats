@@ -64,6 +64,7 @@ import colorsys
 import datetime
 import json
 import re
+import pickle
 
 
 class Stats:
@@ -381,6 +382,10 @@ class Stats:
             print(self.users[uid]['n'], '->', self.users[i1]['n'], ' \t', self.users[uid]['tag_to'][i1], 'korda')
         print()
 
+    def save(self, fname='d_stats.pkl'):
+        """Self -> PKL. Terve objekti salvestamine."""
+        with open(fname, 'wb') as f:
+            pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
     def out_users_py(self, fname='users.py'):
         """Self.users -> Python. Kena väljund."""
         with open(fname, 'w', encoding='utf-8') as f:
@@ -741,6 +746,15 @@ class Animate:
             datum += delta
         pygame.quit()
 
+
+
+def stats_load(fname='d_stats.pkl'):
+    """PKL -> Self. Terve objekti avamine."""
+    with open(fname, 'rb') as f:
+        print(f)
+        x = pickle.load(f)
+    return x
+
 sts = Stats()
 sts.times2_cleanup()
 
@@ -755,6 +769,7 @@ sts.stat_msg()
 sts.stat_msg2()
 sts.stat_tag()
 sts.stat_tag2()
+sts.save()
 
 import pygame
 from math import log
