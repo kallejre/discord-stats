@@ -1,8 +1,9 @@
-# -*- coding: UTF-8 -*-
+﻿# -*- coding: UTF-8 -*-
 """
 Asjandus discordi json-arhiivi töötlemiseks.
 
 Klassikaline lähenemine statistikale.
+See variant proovib kõik tabelid panna ühte exceli tabelisse.
 Edasine arendamine käib siitkaudu
 
 Prototüüp animatsiooni tegemiseks.
@@ -65,12 +66,43 @@ import datetime
 import json
 import re
 import pickle
+import xlsxwriter
+from Animate import Animate
+
+class xlsx:
+    def __init__(self, fname='stats.xlsx'):
+        self.excel=xlsxwriter.Workbook(fname)
+        self.sheets=[]
+        self.current_sheet=None
+        self.row=None
+        self.col=None
+    def ws(self,name):
+        """Lisab uue töölehe ja muudab aktiivseks."""
+        self.current_sheet = self.excel.add_worksheet(name)
+        self.sheets.append(self.current_sheet)
+        self.row=0
+        self.col=0
+    def write(self,line):
+        """Lisa \t-ga eraldatud rida faili nagu kleebiks tavalisse exceli tabelisse."""
+        if line=='\n': return
+        # print([line])
+        lines=line.rstrip('\n').split('\n')
+        for line in lines:
+            self.col=0
+            for cell in line.split('\t'):
+                try: self.current_sheet.write(self.row, self.col,float(cell))
+                except ValueError: self.current_sheet.write(self.row, self.col,cell)
+                self.col+=1
+            self.row+=1
+    def close(self):
+        self.excel.close()
+    
 
 
 class Stats:
     """Statistika."""
 
-    def __init__(self, fname='dht.txt'):
+    def __init__(self, fname='dht.txt', sname='stats.xlsx'):
         """
         ###   INIT1   ###.
 
@@ -80,18 +112,13 @@ class Stats:
             file = f.read()
         self.archive = eval(file)
         self.users = dict()
-        self.lyhi = dict()
+        self.lyhi = {-1: 0}
         self.times = list()
         self.times2 = dict()
+        self.excel=xlsx(sname)
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
         self.ajaformaat = '%a %d %b %Y'          # Kasutusel koos times2-ga
-        # max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
-        for x1 in range(len(self.archive['meta']['userindex'])):
-            self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
-                              'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
-                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
-        self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
-                          'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
+                    # Koodinäide: max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
         # Kategooria peaks algama suure tähega
         self.kategooriad = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ"},
                             "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"},
@@ -120,11 +147,17 @@ class Stats:
                             "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
                             "xp06": {"Syva", "Kokku", "XP"},
                             "xp07": {"Syva", "Kokku", "XP"}}
+        for x1 in range(len(self.archive['meta']['userindex'])):
+            self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
+                              'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
+                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
+        self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
+                          'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
         channels = list(self.kategooriad)
         for a in list(channels):
             channels += list(self.kategooriad[a])
         self.channels = list(sorted(set(channels)))
-        self.header = '\t'.join(['Nimi'] + self.channels + ['Kokku'])
+        self.header = '\t'.join(['Nimi'] + self.channels)
         head = []
         for wk in 'ETKNRLP':
             for hr in range(24):
@@ -134,15 +167,17 @@ class Stats:
         self.nimed3 = list(map(lambda x: x.lower(), self.nimed2))
         # self.week=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
         self.week = ["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
-        self.init2()
+        self.__init2()
 
-    def init2(self):
+    def __init2(self):
         """
         ###   INIT2   ###.
 
         Siin osas toimub andmete kogumine ja põhiline töötlemine.
         Alumised funktsioonid on vaid vormistamiseks ja kuvamiseks.
         Kunagi võiks teha mingi seadistamisvõimaluse.
+
+        Init-funktsioon on jagatud kaheks, sest teoreetiliselt võiks andmete lugemine ja enetav töötlemine olla eraldi.
         """
         f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
         for c in sorted(self.archive['data']):  # c = kanali id
@@ -156,6 +191,7 @@ class Stats:
                     if message['u'] not in self.lyhi:
                         self.lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
                     self.lyhi[message['u']] += 1
+                    self.lyhi[-1] += 1
                     # continue                                      # Lühikese sõnumi saab vahele jätta
                 print(self.archive['meta']['userindex'][message['u']],message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
                 time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
@@ -257,9 +293,7 @@ class Stats:
             for c in self.users[x]['count']:
                 count += self.users[x]['count'][c]
                 c_len += self.users[x]['lens'][c]
-            self.users[x]['count']['total'] = count
-            self.users[x]['lens']['total'] = c_len
-            if count < 3:
+            if count < 1:
                 continue
             out1 = [self.users[x]['n']]
             out2 = [self.users[x]['n']]
@@ -269,48 +303,39 @@ class Stats:
                     out1.append(str(self.users[x]['lens'][kanal]))
                     out2.append(str(self.users[x]['count'][kanal]))
                     out3.append(
-                        str(round(self.users[x]['lens'][kanal] / self.users[x]['count'][kanal], 3)).replace('.', ','))
+                        str(round(self.users[x]['lens'][kanal] / self.users[x]['count'][kanal], 3)))
                 else:
                     out1.append('0')
                     out2.append('0')
                     out3.append('0')
-            out1.append(str(self.users[x]['lens']['total']))
-            out2.append(str(self.users[x]['count']['total']))
-            out3.append(
-                str(round(self.users[x]['lens']['total'] / self.users[x]['count']['total'], 3)).replace('.', ','))
             pikkused.append('\t'.join(out1))
             kogus.append('\t'.join(out2))
             keskmine_pikkus.append('\t'.join(out3))
-        with open('d_out1.txt', 'w', encoding='utf-8') as f:
-            print('\n'.join([self.header] + pikkused), file=f)
-        with open('d_out2.txt', 'w', encoding='utf-8') as f:
-            f.write('\n'.join([self.header] + kogus))
-        with open('d_out3.txt', 'w', encoding='utf-8') as f:
-            f.write('\n'.join([self.header] + keskmine_pikkus))
-        sisukus.append('Jrk.\tNimi\tLühike\tKõik\t%')
+        
+        self.excel.ws('Pikkused')
+        self.excel.write('\n'.join([self.header] + pikkused))
+        self.excel.ws('Kogused')
+        self.excel.write('\n'.join([self.header] + kogus))
+        self.excel.ws('Keskmised pikkused')
+        self.excel.write('\n'.join([self.header] + keskmine_pikkus))
+        self.excel.ws('Lühikeste osa')
+        self.excel.write('Jrk.\tNimi\tLühike\tKõik\t%')
         c = 1
-        for i1 in sorted(self.lyhi, key=lambda x: self.users[x]['count']['total'], reverse=True):
-            out = '\t'.join([str(c), self.users[i1]['n'], str(self.lyhi[i1]), str(self.users[i1]['count']['total']),
-                             str(round(self.lyhi[i1] / self.users[i1]['count']['total'] * 100, 2)).replace('.', ',')])
-            sisukus.append(out)
+        for i1 in sorted(self.lyhi, key=lambda x: self.users[x]['count']['Kokku'], reverse=True):
+            self.excel.write('\t'.join([str(c), self.users[i1]['n'], str(self.lyhi[i1]), str(self.users[i1]['count']['Kokku']),
+                             str(round(self.lyhi[i1] / self.users[i1]['count']['Kokku'] * 100, 2))]))
             c += 1
-        with open('d_out4.txt', 'w', encoding='utf-8') as f:
-            f.write('\n'.join(sisukus))
 
     def ajatabel_suur(self):
         """Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta."""
-        ajad = [self.header2]
-        for x1 in list(self.users):
-            total = []
+        if not self.excel:
+            self.excel=xlsxwriter.Workbook('stats.xlsx')
+        self.excel.ws('Ajatabel')
+        self.excel.write(self.header2)
+        for x1 in list(self.users)[:5]:
             for c in sorted(self.users[x1]['times']):  # Iga kanaliga
-                total.append(self.users[x1]['times'][c])
-                ajad.append('\t'.join([self.users[x1]['n'], c] + list(map(str, total[-1]))))
-            total = list(map(sum, list(zip(*total))))
-            ajad.append('\t'.join([self.users[x1]['n'], 'Kokku'] + list(map(str, total))))
-            # print(self.users[x]['times'])
-        with open('d_out_ajatabel.txt', 'w', encoding='utf8') as f:
-            f.write('\n'.join(ajad))
-        print('done')
+                print('\t'.join([self.users[x1]['n'], c] + list(map(str, self.users[x1]['times'][c]))),file=self.excel)
+
 
     def ajatabel_vaiksem(self, uid, kanal):
         """Ajatabelite sõnede tegemine."""
@@ -363,6 +388,7 @@ class Stats:
 
     def graafid_edetabel(self, username, n=5, uid=0):
         """Kuva N populaarseimat suunda ühe kasutaja suhtes."""
+        
         if not uid:
             uid = list(filter(lambda x: username.lower() in self.users[x]['n'].lower(), self.users))[0]
         else:
@@ -384,8 +410,11 @@ class Stats:
 
     def save(self, fname='d_stats.pkl'):
         """Self -> PKL. Terve objekti salvestamine."""
+        temp = self.excel
+        self.excel = None
         with open(fname, 'wb') as f:
             pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
+        self.excel = temp
     def out_users_py(self, fname='users.py'):
         """Self.users -> Python. Kena väljund."""
         with open(fname, 'w', encoding='utf-8') as f:
@@ -423,61 +452,91 @@ class Stats:
 
     def stat_tag(self):
         """Tag statisika, kui palju on X->Y märkimisi."""
-        with open('d_out_tag.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y'.split()), file=f)
-            for uid in self.users:
-                for nxt in self.users[uid]['tag_to']:
-                    count = self.users[uid]['tag_to'][nxt]
-                    if count >= 1:
-                        print(self.users[uid]['n'], self.users[nxt]['n'], count, file=f, sep='\t')
+        if not self.excel:
+            self.excel=xlsxwriter.Workbook('stats.xlsx')
+        self.excel.ws('Tag to')
+        f=self.excel
+        print('\t'.join('X Y X->Y'.split()), file=f)
+        for uid in self.users:
+            for nxt in self.users[uid]['tag_to']:
+                count = self.users[uid]['tag_to'][nxt]
+                if count >= 1:
+                    self.excel.write('\t'.join([self.users[uid]['n'], self.users[nxt]['n'], str(count)]))
 
     def stat_msg(self):
         """Sõnumite statisika, kui palju on X->Y sõnumeid."""
-        with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y'.split()), file=f)
-            for uid in self.users:
-                for nxt in self.users[uid]['next']:
-                    count = self.users[uid]['next'][nxt]
-                    if count >= 1:
-                        print(self.users[uid]['n'], self.users[nxt]['n'], count, file=f, sep='\t')
+        if not self.excel:
+            self.excel=xlsxwriter.Workbook('stats.xlsx')
+        self.excel.ws('Msg to')
+        f=self.excel
+        print('\t'.join('X Y X->Y'.split()), file=f)
+        for uid in self.users:
+            for nxt in self.users[uid]['next']:
+                count = self.users[uid]['next'][nxt]
+                if count >= 1:
+                    self.excel.write('\t'.join([self.users[uid]['n'], self.users[nxt]['n'], str(count)]))
 
     def stat_tag2(self):
         """Kahepoolse märkimise tabel."""
+        if not self.excel:
+            self.excel=xlsxwriter.Workbook('stats.xlsx')
         paarid = set()
         key = 'tag_to'
-        with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y Y->X Tehe'.split()), file=f)
-            for uid in self.users:
-                for nxt in self.users[uid][key]:
-                    if (nxt, uid) not in paarid:
-                        paarid.add((uid, nxt))
-                        if uid in self.users[nxt][key]:
-                            sisse = self.users[nxt][key][uid]
-                            valja = self.users[uid][key][nxt]
-                            count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
-                            if count > 1:
-                                lis = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
-                                print(*lis + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
+        self.excel.ws('Tag to 2')
+        f=self.excel
+        print('X\tY\tX->Y\tY->X\tTehe', file=f)
+        for uid in self.users:
+            for nxt in self.users[uid][key]:
+                if (nxt, uid) not in paarid:
+                    paarid.add((uid, nxt))
+                    if uid in self.users[nxt][key]:
+                        sisse = self.users[nxt][key][uid]
+                        valja = self.users[uid][key][nxt]
+                        count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
+                        if count > 1:
+                            lis = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
+                            self.excel.write('\t'.join(lis + list(map(str,[valja, sisse, count]))))
 
     def stat_msg2(self):
         """Kahepoolse vestlemise tabel."""
+        if not self.excel:
+            self.excel=xlsxwriter.Workbook('stats.xlsx')
         paarid = set()
         key = 'next'
-        with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
-            print('X Y X->Y Y->X Tehe'.split(), file=f, sep='\t')
-            for uid in self.users:
-                for nxt in self.users[uid][key]:
-                    if (nxt, uid) not in paarid:  # self.users[nxt][key][uid]
-                        paarid.add((uid, nxt))
-                        if uid in self.users[nxt][key]:
-                            sisse = self.users[nxt][key][uid]
-                            valja = self.users[uid][key][nxt]
-                            count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
-                            if count > 1:
-                                l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
-                                print(*l + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
+        self.excel.ws('Msg to 2')
+        f=self.excel
+        print('X\tY\tX->Y\tY->X\tTehe', file=f)
+        for uid in self.users:
+            for nxt in self.users[uid][key]:
+                if (nxt, uid) not in paarid:  # self.users[nxt][key][uid]
+                    paarid.add((uid, nxt))
+                    if uid in self.users[nxt][key]:
+                        sisse = self.users[nxt][key][uid]
+                        valja = self.users[uid][key][nxt]
+                        count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
+                        if count > 1:
+                            l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']])) + list(map(str,[valja, sisse, count]))
+                            self.excel.write('\t'.join(l))
+                            
+    def times2_cleanup(self,n=25):
+        ###  ----   Times2/times3 Eri
+        # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
+        self.top_n=list(filter(lambda x:x>=0,sorted(self.users,key=lambda x:self.users[x]['count']['Kokku'],reverse=True)))[:n]
+        print(self.top_n)
+        for date in self.times2:
+            for kanal in self.times2[date]:
+                counter=0
+                for uid in list(self.times2[date][kanal]):
+                    if uid not in self.top_n:
+                        counter+=self.times2[date][kanal][uid]
+                        del self.times2[date][kanal][uid]
+                self.times2[date][kanal][-1]=counter
+        ###  ----   Times2/times3 Eri läbi
+    
     def stat_last_24(self):
         """Kasutajate aktiivsus viimased 24 tundi või päeva."""
+        if not self.excel:
+            self.excel=xlsxwriter.Workbook('stats.xlsx')
         e=sorted(self.times2,key=lambda x:datetime.datetime.strptime(x,self.ajaformaat))[-24:]
         q=set()
         usrs=set()
@@ -488,21 +547,22 @@ class Stats:
         usrs=list(sorted(usrs))
         us2=list(map(lambda x: self.users[x]['n'],usrs))
         q=list(sorted(q))
-        with open('d_out_last24.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
-            for i in e:
-                for kanal in q:
-                    out=[]
-                    if kanal not in self.times2[i]:
-                        continue
-                    out.append(i)
-                    out.append(kanal)
-                    for use in usrs:
-                        if use in self.times2[i][kanal]:
-                            out.append(self.times2[i][kanal][use])
-                        else:
-                            out.append(0)
-                    print('\t'.join(list(map(str,out))), file=f)
+        self.excel.ws('Last '+str(24))
+        f=self.excel
+        print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
+        for i in e:
+            for kanal in q:
+                out=[]
+                if kanal not in self.times2[i]:
+                    continue
+                out.append(i)
+                out.append(kanal)
+                for use in usrs:
+                    if use in self.times2[i][kanal]:
+                        out.append(self.times2[i][kanal][use])
+                    else:
+                        out.append(0)
+                print('\t'.join(list(map(str,out))), file=f)
 
     def graafik(self):
         """Pygame joonistamine. Väga KATKI!"""
@@ -527,224 +587,10 @@ class Stats:
         for i1 in sorted(colors):
             print(i1, colors[i1])
         pygame.quit()
-    def times2_cleanup(self,n=25):
-        ###  ----   Times2/times3 Eri
-        # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
-        self.top_n=list(filter(lambda x:x>=0,sorted(self.users,key=lambda x:self.users[x]['count']['Kokku'],reverse=True)))[:n]
-        print(self.top_n)
-        for date in self.times2:
-            for kanal in self.times2[date]:
-                counter=0
-                for uid in list(self.times2[date][kanal]):
-                    if uid not in self.top_n:
-                        counter+=self.times2[date][kanal][uid]
-                        del self.times2[date][kanal][uid]
-                self.times2[date][kanal][-1]=counter
-        ###  ----   Times2/times3 Eri läbi
 
 
-class Animate:
-    ### Kogu soust tuleb nüüd ümber kirjutada
-    def __init__(self, sts):
-        self.s = 20  # X-telje märgete kirjasuurus                                  # Default: 50
-        self.ajatempel = 25  # Ajatempli kõrgus ülal vasakus nurgas                 # Default: 50
-        self.legend_size = 30  # Legendi kirjakõrgus                                # Default: 30
-        self.name_buffer = self.s * 2 + 5  # Eeldatav nimede ruum koos 5px varuga
-        self.colors = dict()
-        self.sts = sts
-        self.width = (len(sts.channels) + 1) * self.s
-        self.graafiku_osa = 250
-        self.font_name = 'agencyFB'
-        pygame.font.init()
-        # self.sts.top_n
-        # self.sts.users
-        sizes = self.draw_user_legend(simulate=True)
-        ls = len(sizes)
-        sizes.sort()
-        x=0.9
-        self.x2 = sizes[round(ls * x)]
-        self.y2 = self.legend_size + 3
-        x_columns = self.width // self.x2
-        y_lines = (len(self.sts.top_n) - 1) // x_columns+1
-        self.y_hei = y_lines * self.y2
-        self.day0 = datetime.datetime.strptime(min(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)),sts.ajaformaat)
-        self.day9 = datetime.datetime.strptime(max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)),sts.ajaformaat)
-        c = 0
-        for i in list(filter(lambda x: x >= 0, sts.top_n)):
-            self.colors[i] = tuple(map(lambda x: min([round(255 * x), 255]),
-                            colorsys.hsv_to_rgb(0.618033988749895 * c, 1 - i // 5 * 0.01, 1 - i // 3 * 0.005)))
-            c += 1
-        # """
-        self.colors[-1]=(50,50,50)  # Ülejäänud
-        self.colors[0]=(200,200,200)  # Rauno?
-        self.colors[1]=(255,200,200)  # Kadri
-        self.colors[2]=(200,255,200)  # Ago
-        self.colors[3]=(200,200,255)  # Test9
-        self.colors[4]=(255,255,200)  # Ergo
-        self.hei = self.graafiku_osa + self.y_hei + self.name_buffer + self.ajatempel
-        maksimumid = set()
-        for time in sts.times2:
-            for kanal in sts.times2[time]:
-                s = 0
-                for uid in sts.times2[time][kanal]:
-                    s += sts.times2[time][kanal][uid]
-                maksimumid.add(s)
-        self.vahemiku_max = max(maksimumid)
 
-    def draw_timestamp(self, stamp, pos=(5, 0), color=(200, 000, 000), font='agencyFB'):
-        stamp = str(stamp)
-        font = pygame.font.SysFont(self.font_name, int(self.ajatempel * 0.8333333))
-        text = font.render(stamp, True, color)
-        self.lava.blit(text, pos)
 
-    def draw_x_axis(self, channels):
-        # X-telje joonistamine
-        y_t = self.hei - self.name_buffer - self.y_hei
-        color = (200, 000, 000)
-        
-        font = pygame.font.SysFont(self.font_name, int(self.s * 0.8333333))
-        for i in range(len(self.sts.channels)):
-            x_t = (i * self.s)
-            txt = str(channels[i])
-            text = font.render(txt, True, color)
-            overflow = pygame.surface.Surface((self.s * 2, int(self.s * 1)))
-            overflow.blit(text, (0, 0))
-            overflow = pygame.transform.rotate(overflow, 90)
-            self.lava.blit(overflow, (x_t, y_t))
-
-    def draw_user_legend(self, simulate=False):
-
-        # Legendi joonistamine:
-        if not simulate:
-            y = self.hei - self.y_hei
-            x = 10
-        size = self.legend_size
-        font = pygame.font.SysFont(self.font_name, int(size * 0.8333333))
-        txt_color = (200, 000, 000)
-        out = []
-        for i in list(filter(lambda x: x >= 0, self.sts.top_n))+[-1]:
-
-            txt = self.sts.users[i]['n']
-            text = font.render(txt, True, txt_color)
-            overflow = pygame.surface.Surface((text.get_size()[0] + int(size * 0.8), int(size)))
-            if not simulate:
-                overflow.blit(text, (int(size * 0.8), 0))
-                pygame.draw.rect(overflow, self.colors[i],
-                                 (int(size * 0.1), int(size * 0.2), int(size * 0.6), int(size * 0.6)))
-                self.lava.blit(overflow, (x, y))
-
-                y += self.y2
-                if y + self.y2 > self.hei:
-                    y = self.hei - self.y_hei
-                    x += self.x2
-
-            out.append(overflow.get_size()[0])
-        return out
-    def draw_column(self,kanal,data):
-        """Koosta standartse laiuse ja kõrgusega tulp, ära joonista."""
-        # Ei tulnud hästi välja. Järgmine idee: TOP25 ja ülejäänud
-        w,h=self.s,self.graafiku_osa+self.ajatempel*1
-        column=pygame.surface.Surface((w,h))
-        column_nr = ani.sts.channels.index(kanal)
-        s = 0
-        for uid in sorted(data[kanal],reverse=True):
-            # Joonista kasutaja rect
-            y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
-            y_h2=round(log(s+data[kanal][uid]+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
-            y_h=round((s)/(self.vahemiku_max)*self.graafiku_osa)  # Loobusin logaritmidest
-            y_h2=round((s+data[kanal][uid])/(self.vahemiku_max)*self.graafiku_osa)
-            pygame.draw.rect(column,self.colors[uid], (0, h-y_h, w,h-y_h2))
-            
-            s += data[kanal][uid]
-        return column
-        #y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
-        #pygame.draw.rect(self.lava,[220]*3,(self.s*column_nr,self.graafiku_osa+self.ajatempel-y_h,self.s,y_h))
-    def draw_columns(self,data=None):
-        if not data:
-            return
-        # Tulpade joonistamine
-        # self.vahemiku_max
-        
-        self.ajatempel  # Ajatempli kõrgus ülal vasakus nurgas
-        self.graafiku_osa
-        for kanal in data:
-            column_nr = self.sts.channels.index(kanal)
-            out=self.draw_column(kanal,data)
-            self.lava.blit(out,(self.s*column_nr,0))
-            """
-            column_nr = ani.sts.channels.index(kanal)
-            s = 0
-            for uid in data[kanal]:
-                s += data[kanal][uid]
-            y_h=round(log(s+1)/log(self.vahemiku_max+1)*self.graafiku_osa)
-            pygame.draw.rect(self.lava,[220]*3,(self.s*column_nr,self.graafiku_osa+self.ajatempel-y_h,self.s,y_h))
-            """
-    def draw(self,stamp):
-        """Ühe kaadri joonistamine."""
-        self.lava.fill([0,0,0])
-        self.draw_x_axis(sts.channels)        # X-telje joonistamine
-        self.draw_user_legend()        # Legendi joonistamine
-        self.draw_columns(self.times3[stamp]) # Joonista graafik. Tuleb veel läbi mõelda...
-        # list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
-        self.draw_timestamp(stamp)        # Lisa ajamärge
-        pygame.display.flip()
-        pygame.image.save(self.lava, 'gif/screenshot_'+"{:03d}".format(self.counter)+'_'+stamp+'.jpeg')
-        self.counter+=1
-    def modifyEachValueInDictionary(self,old,new,decay_a,decay_b):
-        # max([0,decay_a*old[kanal]-decay_b,new[kanal]])
-        # max([0,decay_a*old[kanal]-decay_b])
-        out=dict()
-        if new:
-            for k,v in new.items():
-                out[k]=v
-        for k,v in old.items():
-            if k in out:
-                out[k]=max([0,decay_a*v-decay_b,out[k]])
-            else:
-                out[k]=max([0,decay_a*v-decay_b])
-        return out
-    def draw_main(self):
-        """Ma ei tea, milleks"""
-        self.lava = pygame.display.set_mode((self.width, self.hei), 0, 32)
-        self.lava.fill([0,0,0])
-        self.times3=dict()
-        decay_a=0.8
-        decay_b=1
-        # datetime.datetime(2018, 8, 11, 2, 0)+datetime.timedelta(hours=1)
-        if self.day0.hour==0==self.day9.hour and '%H' not in self.sts.ajaformaat:
-            delta = datetime.timedelta(days=1)
-        else:
-            delta = datetime.timedelta(hours=1)
-        datum=self.day0
-        self.counter=0
-        dat_prev=0
-        # Esimene kord
-        date_text=datetime.datetime.strftime(datum,self.sts.ajaformaat)
-        self.times3[date_text]=self.sts.times2[date_text]
-        dat_prev=date_text
-        self.draw(date_text)
-        datum += delta
-        while datum<=self.day9:
-            date_text=datetime.datetime.strftime(datum,self.sts.ajaformaat)          
-            if date_text in self.sts.times2:
-                new=self.sts.times2[date_text]
-            else:
-                new=[]
-            old=self.times3[dat_prev]
-            dat_prev=date_text
-            combined=dict()
-            for kanal in set(old).union(set(new)):
-                if kanal in new and kanal in old:
-                    combined[kanal]=self.modifyEachValueInDictionary(old[kanal],new[kanal],decay_a,decay_b)
-                elif kanal in new:
-                    combined[kanal]=new[kanal]
-                else:
-                    combined[kanal]=self.modifyEachValueInDictionary(old[kanal],None,decay_a,decay_b)
-
-            self.times3[date_text]=combined
-            self.draw(date_text)
-            datum += delta
-        pygame.quit()
 
 
 
@@ -757,7 +603,6 @@ def stats_load(fname='d_stats.pkl'):
 
 sts = Stats()
 sts.times2_cleanup()
-
 sts.ajatabel_suur()
 sts.arhiiv()
 sts.out_tgf_msg()
@@ -769,6 +614,7 @@ sts.stat_msg()
 sts.stat_msg2()
 sts.stat_tag()
 sts.stat_tag2()
+sts.excel.close()
 sts.save()
 
 import pygame
@@ -778,6 +624,7 @@ from math import log
 # ani.draw_main()
 
 """
+# Kirjutab välja Stats-objekti lapsed.
 for i in list(filter(lambda x: x[0] != '_', dir(sts))):
     if type(eval('sts.' + i)).__name__ == 'type':
         for x in list(filter(lambda x: x[0] != '_', dir(eval('sts.' + i)))):
@@ -786,6 +633,7 @@ for i in list(filter(lambda x: x[0] != '_', dir(sts))):
         print('sts.' + i, str(eval('sts.' + i))[:35].strip(), sep='\t')
 # """
 """
+# JSON iga kasutaja sõnakasutusest.
 with open('sõnastats.txt',encoding='utf-8') as f:
 	a=json.load(f)
 # """
