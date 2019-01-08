@@ -68,11 +68,40 @@ import pickle
 import xlsxwriter
 from Animate import Animate
 
+class xlsx:
+    def __init__(self, fname='stats.xlsx'):
+        self.excel=xlsxwriter.Workbook(fname)
+        self.sheets=[]
+        self.current_sheet=None
+        self.row=None
+        self.col=None
+    def ws(self,name):
+        """Lisab uue töölehe ja muudab aktiivseks."""
+        self.current_sheet = self.excel.add_worksheet(name)
+        self.sheets.append(self.current_sheet)
+        self.row=0
+        self.col=0
+    def write(self,line):
+        """Lisa \t-ga eraldatud rida faili nagu kleebiks tavalisse exceli tabelisse."""
+        if line=='\n': return
+        # print([line])
+        lines=line.rstrip('\n').split('\n')
+        for line in lines:
+            self.col=0
+            for cell in line.split('\t'):
+                try: self.current_sheet.write(self.row, self.col,float(cell))
+                except ValueError: self.current_sheet.write(self.row, self.col,cell)
+                self.col+=1
+            self.row+=1
+    def close(self):
+        self.excel.close()
+    
+
 
 class Stats:
     """Statistika."""
 
-    def __init__(self, fname='dht.txt'):
+    def __init__(self, fname='dht.txt', sname='stats.xlsx'):
         """
         ###   INIT1   ###.
 
@@ -82,19 +111,13 @@ class Stats:
             file = f.read()
         self.archive = eval(file)
         self.users = dict()
-        self.lyhi = dict()
+        self.lyhi = {-1: 0}
         self.times = list()
         self.times2 = dict()
-        self.excel=None
+        self.excel=xlsx(sname)
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
         self.ajaformaat = '%a %d %b %Y'          # Kasutusel koos times2-ga
-        # max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
-        for x1 in range(len(self.archive['meta']['userindex'])):
-            self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
-                              'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
-                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
-        self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
-                          'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
+                    # Koodinäide: max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
         # Kategooria peaks algama suure tähega
         self.kategooriad = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ"},
                             "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"},
@@ -123,11 +146,17 @@ class Stats:
                             "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
                             "xp06": {"Syva", "Kokku", "XP"},
                             "xp07": {"Syva", "Kokku", "XP"}}
+        for x1 in range(len(self.archive['meta']['userindex'])):
+            self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
+                              'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
+                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
+        self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
+                          'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
         channels = list(self.kategooriad)
         for a in list(channels):
             channels += list(self.kategooriad[a])
         self.channels = list(sorted(set(channels)))
-        self.header = '\t'.join(['Nimi'] + self.channels + ['Kokku'])
+        self.header = '\t'.join(['Nimi'] + self.channels)
         head = []
         for wk in 'ETKNRLP':
             for hr in range(24):
@@ -137,15 +166,17 @@ class Stats:
         self.nimed3 = list(map(lambda x: x.lower(), self.nimed2))
         # self.week=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
         self.week = ["Esmasp.", "Teisip.", "Kolmap.", "Neljap.", "Reede", "Laup.", "Pühap."]
-        self.init2()
+        self.__init2()
 
-    def init2(self):
+    def __init2(self):
         """
         ###   INIT2   ###.
 
         Siin osas toimub andmete kogumine ja põhiline töötlemine.
         Alumised funktsioonid on vaid vormistamiseks ja kuvamiseks.
         Kunagi võiks teha mingi seadistamisvõimaluse.
+
+        Init-funktsioon on jagatud kaheks, sest teoreetiliselt võiks andmete lugemine ja enetav töötlemine olla eraldi.
         """
         f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
         for c in sorted(self.archive['data']):  # c = kanali id
@@ -159,6 +190,7 @@ class Stats:
                     if message['u'] not in self.lyhi:
                         self.lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
                     self.lyhi[message['u']] += 1
+                    self.lyhi[-1] += 1
                     # continue                                      # Lühikese sõnumi saab vahele jätta
                 print(self.archive['meta']['userindex'][message['u']],message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
                 time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
@@ -250,8 +282,6 @@ class Stats:
         d_out3 - Sõnumite keskmine pikkus kasutaja/kanali lõikes.
         d_out4 - Pikkade ja lühikeste sõnumite suhe.
         """
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         pikkused = list()
         kogus = list()
         keskmine_pikkus = list()
@@ -262,9 +292,7 @@ class Stats:
             for c in self.users[x]['count']:
                 count += self.users[x]['count'][c]
                 c_len += self.users[x]['lens'][c]
-            self.users[x]['count']['total'] = count
-            self.users[x]['lens']['total'] = c_len
-            if count < 3:
+            if count < 1:
                 continue
             out1 = [self.users[x]['n']]
             out2 = [self.users[x]['n']]
@@ -274,49 +302,39 @@ class Stats:
                     out1.append(str(self.users[x]['lens'][kanal]))
                     out2.append(str(self.users[x]['count'][kanal]))
                     out3.append(
-                        str(round(self.users[x]['lens'][kanal] / self.users[x]['count'][kanal], 3)).replace('.', ','))
+                        str(round(self.users[x]['lens'][kanal] / self.users[x]['count'][kanal], 3)))
                 else:
                     out1.append('0')
                     out2.append('0')
                     out3.append('0')
-            out1.append(str(self.users[x]['lens']['total']))
-            out2.append(str(self.users[x]['count']['total']))
-            out3.append(
-                str(round(self.users[x]['lens']['total'] / self.users[x]['count']['total'], 3)).replace('.', ','))
             pikkused.append('\t'.join(out1))
             kogus.append('\t'.join(out2))
             keskmine_pikkus.append('\t'.join(out3))
-        with open('d_out1.txt', 'w', encoding='utf-8') as f:
-            print('\n'.join([self.header] + pikkused), file=f)
-        with open('d_out2.txt', 'w', encoding='utf-8') as f:
-            f.write('\n'.join([self.header] + kogus))
-        with open('d_out3.txt', 'w', encoding='utf-8') as f:
-            f.write('\n'.join([self.header] + keskmine_pikkus))
-        sisukus.append('Jrk.\tNimi\tLühike\tKõik\t%')
+        
+        self.excel.ws('Pikkused')
+        self.excel.write('\n'.join([self.header] + pikkused))
+        self.excel.ws('Kogused')
+        self.excel.write('\n'.join([self.header] + kogus))
+        self.excel.ws('Keskmised pikkused')
+        self.excel.write('\n'.join([self.header] + keskmine_pikkus))
+        self.excel.ws('Lühikeste osa')
+        self.excel.write('Jrk.\tNimi\tLühike\tKõik\t%')
         c = 1
-        for i1 in sorted(self.lyhi, key=lambda x: self.users[x]['count']['total'], reverse=True):
-            out = '\t'.join([str(c), self.users[i1]['n'], str(self.lyhi[i1]), str(self.users[i1]['count']['total']),
-                             str(round(self.lyhi[i1] / self.users[i1]['count']['total'] * 100, 2)).replace('.', ',')])
-            sisukus.append(out)
+        for i1 in sorted(self.lyhi, key=lambda x: self.users[x]['count']['Kokku'], reverse=True):
+            self.excel.write('\t'.join([str(c), self.users[i1]['n'], str(self.lyhi[i1]), str(self.users[i1]['count']['Kokku']),
+                             str(round(self.lyhi[i1] / self.users[i1]['count']['Kokku'] * 100, 2))]))
             c += 1
-        with open('d_out4.txt', 'w', encoding='utf-8') as f:
-            f.write('\n'.join(sisukus))
 
     def ajatabel_suur(self):
         """Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta."""
         if not self.excel:
             self.excel=xlsxwriter.Workbook('stats.xlsx')
-        ajad = [self.header2]
-        for x1 in list(self.users):
-            total = []
+        self.excel.ws('Ajatabel')
+        self.excel.write(self.header2)
+        for x1 in list(self.users)[:5]:
             for c in sorted(self.users[x1]['times']):  # Iga kanaliga
                 total.append(self.users[x1]['times'][c])
-                ajad.append('\t'.join([self.users[x1]['n'], c] + list(map(str, total[-1]))))
-            total = list(map(sum, list(zip(*total))))
-            ajad.append('\t'.join([self.users[x1]['n'], 'Kokku'] + list(map(str, total))))
-            # print(self.users[x]['times'])
-        with open('d_out_ajatabel.txt', 'w', encoding='utf8') as f:
-            f.write('\n'.join(ajad))
+                print('\t'.join([self.users[x1]['n'], c] + list(map(str, total[-1]))),file=self.excel)
         print('done')
 
     def ajatabel_vaiksem(self, uid, kanal):
@@ -370,8 +388,7 @@ class Stats:
 
     def graafid_edetabel(self, username, n=5, uid=0):
         """Kuva N populaarseimat suunda ühe kasutaja suhtes."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
+        
         if not uid:
             uid = list(filter(lambda x: username.lower() in self.users[x]['n'].lower(), self.users))[0]
         else:
@@ -434,25 +451,27 @@ class Stats:
         """Tag statisika, kui palju on X->Y märkimisi."""
         if not self.excel:
             self.excel=xlsxwriter.Workbook('stats.xlsx')
-        with open('d_out_tag.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y'.split()), file=f)
-            for uid in self.users:
-                for nxt in self.users[uid]['tag_to']:
-                    count = self.users[uid]['tag_to'][nxt]
-                    if count >= 1:
-                        print(self.users[uid]['n'], self.users[nxt]['n'], count, file=f, sep='\t')
+        self.excel.ws('Tag to')
+        f=self.excel
+        print('\t'.join('X Y X->Y'.split()), file=f)
+        for uid in self.users:
+            for nxt in self.users[uid]['tag_to']:
+                count = self.users[uid]['tag_to'][nxt]
+                if count >= 1:
+                    self.excel.write('\t'.join([self.users[uid]['n'], self.users[nxt]['n'], str(count)]))
 
     def stat_msg(self):
         """Sõnumite statisika, kui palju on X->Y sõnumeid."""
         if not self.excel:
             self.excel=xlsxwriter.Workbook('stats.xlsx')
-        with open('d_out_msg.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y'.split()), file=f)
-            for uid in self.users:
-                for nxt in self.users[uid]['next']:
-                    count = self.users[uid]['next'][nxt]
-                    if count >= 1:
-                        print(self.users[uid]['n'], self.users[nxt]['n'], count, file=f, sep='\t')
+        self.excel.ws('Msg to')
+        f=self.excel
+        print('\t'.join('X Y X->Y'.split()), file=f)
+        for uid in self.users:
+            for nxt in self.users[uid]['next']:
+                count = self.users[uid]['next'][nxt]
+                if count >= 1:
+                    self.excel.write('\t'.join([self.users[uid]['n'], self.users[nxt]['n'], str(count)]))
 
     def stat_tag2(self):
         """Kahepoolse märkimise tabel."""
@@ -460,19 +479,20 @@ class Stats:
             self.excel=xlsxwriter.Workbook('stats.xlsx')
         paarid = set()
         key = 'tag_to'
-        with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join('X Y X->Y Y->X Tehe'.split()), file=f)
-            for uid in self.users:
-                for nxt in self.users[uid][key]:
-                    if (nxt, uid) not in paarid:
-                        paarid.add((uid, nxt))
-                        if uid in self.users[nxt][key]:
-                            sisse = self.users[nxt][key][uid]
-                            valja = self.users[uid][key][nxt]
-                            count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
-                            if count > 1:
-                                lis = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
-                                print(*lis + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
+        self.excel.ws('Tag to 2')
+        f=self.excel
+        print('X\tY\tX->Y\tY->X\tTehe', file=f)
+        for uid in self.users:
+            for nxt in self.users[uid][key]:
+                if (nxt, uid) not in paarid:
+                    paarid.add((uid, nxt))
+                    if uid in self.users[nxt][key]:
+                        sisse = self.users[nxt][key][uid]
+                        valja = self.users[uid][key][nxt]
+                        count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
+                        if count > 1:
+                            lis = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
+                            self.excel.write('\t'.join(lis + list(map(str,[valja, sisse, count]))))
 
     def stat_msg2(self):
         """Kahepoolse vestlemise tabel."""
@@ -480,19 +500,36 @@ class Stats:
             self.excel=xlsxwriter.Workbook('stats.xlsx')
         paarid = set()
         key = 'next'
-        with open('d_out_msg2.txt', 'w', encoding='utf-8') as f:
-            print('X Y X->Y Y->X Tehe'.split(), file=f, sep='\t')
-            for uid in self.users:
-                for nxt in self.users[uid][key]:
-                    if (nxt, uid) not in paarid:  # self.users[nxt][key][uid]
-                        paarid.add((uid, nxt))
-                        if uid in self.users[nxt][key]:
-                            sisse = self.users[nxt][key][uid]
-                            valja = self.users[uid][key][nxt]
-                            count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
-                            if count > 1:
-                                l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']]))
-                                print(*l + [valja, sisse, str(count).replace('.', ',')], file=f, sep='\t')
+        self.excel.ws('Msg to 2')
+        f=self.excel
+        print('X\tY\tX->Y\tY->X\tTehe', file=f)
+        for uid in self.users:
+            for nxt in self.users[uid][key]:
+                if (nxt, uid) not in paarid:  # self.users[nxt][key][uid]
+                    paarid.add((uid, nxt))
+                    if uid in self.users[nxt][key]:
+                        sisse = self.users[nxt][key][uid]
+                        valja = self.users[uid][key][nxt]
+                        count = min([sisse / valja, valja / sisse]) * min([sisse, valja])
+                        if count > 1:
+                            l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']])) + list(map(str,[valja, sisse, count]))
+                            self.excel.write('\t'.join(l))
+                            
+    def times2_cleanup(self,n=25):
+        ###  ----   Times2/times3 Eri
+        # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
+        self.top_n=list(filter(lambda x:x>=0,sorted(self.users,key=lambda x:self.users[x]['count']['Kokku'],reverse=True)))[:n]
+        print(self.top_n)
+        for date in self.times2:
+            for kanal in self.times2[date]:
+                counter=0
+                for uid in list(self.times2[date][kanal]):
+                    if uid not in self.top_n:
+                        counter+=self.times2[date][kanal][uid]
+                        del self.times2[date][kanal][uid]
+                self.times2[date][kanal][-1]=counter
+        ###  ----   Times2/times3 Eri läbi
+    
     def stat_last_24(self):
         """Kasutajate aktiivsus viimased 24 tundi või päeva."""
         if not self.excel:
@@ -507,21 +544,22 @@ class Stats:
         usrs=list(sorted(usrs))
         us2=list(map(lambda x: self.users[x]['n'],usrs))
         q=list(sorted(q))
-        with open('d_out_last24.txt', 'w', encoding='utf-8') as f:
-            print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
-            for i in e:
-                for kanal in q:
-                    out=[]
-                    if kanal not in self.times2[i]:
-                        continue
-                    out.append(i)
-                    out.append(kanal)
-                    for use in usrs:
-                        if use in self.times2[i][kanal]:
-                            out.append(self.times2[i][kanal][use])
-                        else:
-                            out.append(0)
-                    print('\t'.join(list(map(str,out))), file=f)
+        self.excel.ws('Last '+str(24))
+        f=self.excel
+        print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
+        for i in e:
+            for kanal in q:
+                out=[]
+                if kanal not in self.times2[i]:
+                    continue
+                out.append(i)
+                out.append(kanal)
+                for use in usrs:
+                    if use in self.times2[i][kanal]:
+                        out.append(self.times2[i][kanal][use])
+                    else:
+                        out.append(0)
+                print('\t'.join(list(map(str,out))), file=f)
 
     def graafik(self):
         """Pygame joonistamine. Väga KATKI!"""
@@ -546,20 +584,7 @@ class Stats:
         for i1 in sorted(colors):
             print(i1, colors[i1])
         pygame.quit()
-    def times2_cleanup(self,n=25):
-        ###  ----   Times2/times3 Eri
-        # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
-        self.top_n=list(filter(lambda x:x>=0,sorted(self.users,key=lambda x:self.users[x]['count']['Kokku'],reverse=True)))[:n]
-        print(self.top_n)
-        for date in self.times2:
-            for kanal in self.times2[date]:
-                counter=0
-                for uid in list(self.times2[date][kanal]):
-                    if uid not in self.top_n:
-                        counter+=self.times2[date][kanal][uid]
-                        del self.times2[date][kanal][uid]
-                self.times2[date][kanal][-1]=counter
-        ###  ----   Times2/times3 Eri läbi
+
 
 
 
@@ -576,7 +601,8 @@ def stats_load(fname='d_stats.pkl'):
 sts = Stats()
 sts.times2_cleanup()
 
-sts.ajatabel_suur()
+#sts.ajatabel_suur()
+#"""
 sts.arhiiv()
 sts.out_tgf_msg()
 sts.out_tgf_tag()
@@ -587,7 +613,9 @@ sts.stat_msg()
 sts.stat_msg2()
 sts.stat_tag()
 sts.stat_tag2()
-sts.save()
+# """
+sts.excel.close()
+# sts.save()
 
 import pygame
 from math import log
