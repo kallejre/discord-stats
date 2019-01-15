@@ -207,7 +207,7 @@ class Stats:
                     self.lyhi[message['u']] += 1
                     self.lyhi[-1] += 1
                     # continue                                      # Lühikese sõnumi saab vahele jätta
-                print(self.archive['meta']['userindex'][message['u']],message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
+                print(c,self.archive['meta']['userindex'][message['u']],message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
                 time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
                 wk = time.weekday()
                 hr = time.hour
@@ -603,7 +603,23 @@ def stats_load(fname='d_stats.pkl'):
         x = pickle.load(f)
     return x
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
-# sts = Stats()
+print('Pyyton')
+sts = Stats()
+sts.times2_cleanup()
+sts.ajatabel_suur()
+sts.arhiiv()
+sts.out_tgf_msg()
+sts.out_tgf_tag()
+sts.out_users_json()
+sts.out_users_py()
+sts.stat_last_24()
+sts.stat_msg()
+sts.stat_msg2()
+sts.stat_tag()
+sts.stat_tag2()
+sts.excel.close()
+sts.save()
+print('Java')
 sts = Stats('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 sts.times2_cleanup()
 sts.ajatabel_suur()

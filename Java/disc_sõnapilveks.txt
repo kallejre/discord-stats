@@ -1,46 +1,46 @@
-366546170149076993	häid jõule!
-366546170149076993	head vana aasta lõppu!
-366546170149076993	head uut aastat!
-366546170149076993	tere tulemast java serverisse!
-366546170149076993	ootan siin esimesi ülesande lahendajaid...
-488447033066127360	☕
-366546170149076993	nonii 😃
-488447033066127360	keegi on siin terved pühad ära pidanud 😃
-236460404446855168	õige generatsiooni otsimine oli huvitav
-236460404446855168	aga siis  leidus selline auk
-366546170149076993	jah, originaalis oli õige asukoht ka kuskil 10k, -7k piirkonnas. aga siis kartsin, et läheb keerukaks
-236460404446855168	mul muidu oli juba plaan olemas, kuidas see leida
-236460404446855168	ei oleks väga
-236460404446855168	lihtsalt x kordinaat peab enamvähem sama olema kõigil
-236460404446855168	x1 +- 10 ja oleks saanud paar sobivad linki millest 1 õige
-366546170149076993	👍
-236460404446855168	juba ootan seda erikursuse asja, loodetavasti seal ikka antakse tuld
-366546170149076993	😄
-392707534764376074	tere
-178281452952092672	tervist rahvas
-366546170149076993	tere-tere. vaatan, et osadel on olnud aega väike pythoni üll lahendada. positiivne.
-488447033066127360	mis python, paberil pliiatsiga...
-362645092978393099	hommik 😃
-366546170149076993	hommik jah
-482189197671923713	oli küll exceliga lahendatav.
-366546170149076993	kuidas?
-366546170149076993	panid eraldi veergudesse?
-366546170149076993	tegelt vist saab jah
-366546170149076993	aga kui sammude arv oleks olnud 100x suurem, siis ka?
-488447033066127360	kui nad kuskile 0 juurde lähenevad, siis iteratsioonid suht välja arvutatavad.
-482189197671923713	ma vaatasin lihtsalt millal on skaala kõige väiksem.
-482189197671923713	<@366546170149076993>  kus on statsbot?  https://discordbots.org/bot/491769129318088714
-366546170149076993	mhmh, seega oleks pidanud tulemuse koondama kuskile 0 punktist eemale
-366546170149076993	järgmine aasta olen targem 😛
-362645092978393099	üldiselt oleks võinud mainimata jätta, et see aoc ül
-362645092978393099	ma olin laisk ja guugeldasin lahendust
-482189197671923713	kus on :agoquestion:?
-488447033066127360	ma mingi hetk mõtlesin, et ei tea kas peaks pikslid pilti joonistama, aga õnneks nii keeruliseks ei jõudnud ajada.
-366546170149076993	<@362645092978393099> hea point. samas eesmärk on tudengid ikka siia saada 😛
-488447033066127360	verikäkk massidesse!
-392707534764376074	
-178281452952092672	
-178281452952092672	jõuxigäng on laivis
-392707534764376074	
-392707534764376074	sefiiritort kohal
-366546170149076993	tort on hea
+523436468908064770	366546170149076993	häid jõule!
+523436468908064770	366546170149076993	head vana aasta lõppu!
+523436468908064770	366546170149076993	head uut aastat!
+523436468908064770	366546170149076993	tere tulemast java serverisse!
+523436468908064770	366546170149076993	ootan siin esimesi ülesande lahendajaid...
+523436468908064770	488447033066127360	☕
+523436468908064770	366546170149076993	nonii 😃
+523436468908064770	488447033066127360	keegi on siin terved pühad ära pidanud 😃
+523436468908064770	236460404446855168	õige generatsiooni otsimine oli huvitav
+523436468908064770	236460404446855168	aga siis  leidus selline auk
+523436468908064770	366546170149076993	jah, originaalis oli õige asukoht ka kuskil 10k, -7k piirkonnas. aga siis kartsin, et läheb keerukaks
+523436468908064770	236460404446855168	mul muidu oli juba plaan olemas, kuidas see leida
+523436468908064770	236460404446855168	ei oleks väga
+523436468908064770	236460404446855168	lihtsalt x kordinaat peab enamvähem sama olema kõigil
+523436468908064770	236460404446855168	x1 +- 10 ja oleks saanud paar sobivad linki millest 1 õige
+523436468908064770	366546170149076993	👍
+523436468908064770	236460404446855168	juba ootan seda erikursuse asja, loodetavasti seal ikka antakse tuld
+523436468908064770	366546170149076993	😄
+523436468908064770	392707534764376074	tere
+523436468908064770	178281452952092672	tervist rahvas
+523436468908064770	366546170149076993	tere-tere. vaatan, et osadel on olnud aega väike pythoni üll lahendada. positiivne.
+523436468908064770	488447033066127360	mis python, paberil pliiatsiga...
+523436468908064770	362645092978393099	hommik 😃
+523436468908064770	366546170149076993	hommik jah
+523436468908064770	482189197671923713	oli küll exceliga lahendatav.
+523436468908064770	366546170149076993	kuidas?
+523436468908064770	366546170149076993	panid eraldi veergudesse?
+523436468908064770	366546170149076993	tegelt vist saab jah
+523436468908064770	366546170149076993	aga kui sammude arv oleks olnud 100x suurem, siis ka?
+523436468908064770	488447033066127360	kui nad kuskile 0 juurde lähenevad, siis iteratsioonid suht välja arvutatavad.
+523436468908064770	482189197671923713	ma vaatasin lihtsalt millal on skaala kõige väiksem.
+523436468908064770	482189197671923713	<@366546170149076993>  kus on statsbot?  https://discordbots.org/bot/491769129318088714
+523436468908064770	366546170149076993	mhmh, seega oleks pidanud tulemuse koondama kuskile 0 punktist eemale
+523436468908064770	366546170149076993	järgmine aasta olen targem 😛
+523436468908064770	362645092978393099	üldiselt oleks võinud mainimata jätta, et see aoc ül
+523436468908064770	362645092978393099	ma olin laisk ja guugeldasin lahendust
+523436468908064770	482189197671923713	kus on :agoquestion:?
+523436468908064770	488447033066127360	ma mingi hetk mõtlesin, et ei tea kas peaks pikslid pilti joonistama, aga õnneks nii keeruliseks ei jõudnud ajada.
+523436468908064770	366546170149076993	<@362645092978393099> hea point. samas eesmärk on tudengid ikka siia saada 😛
+523436571647803425	488447033066127360	verikäkk massidesse!
+523436571647803425	392707534764376074	
+523436571647803425	178281452952092672	
+523436571647803425	178281452952092672	jõuxigäng on laivis
+523436571647803425	392707534764376074	
+523436571647803425	392707534764376074	sefiiritort kohal
+523436571647803425	366546170149076993	tort on hea
