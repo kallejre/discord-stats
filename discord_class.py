@@ -68,6 +68,7 @@ import re
 import pickle
 import xlsxwriter
 from Animate import Animate
+from os import makedirs
 
 class xlsx:
     def __init__(self, fname='stats.xlsx'):
@@ -96,13 +97,48 @@ class xlsx:
             self.row+=1
     def close(self):
         self.excel.close()
-    
+
+# Kategooria peaks algama suure tähega
+kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ"},
+                    "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"},
+                    "ex03": {"EX", "Kokku"}, "ex04": {"EX", "Kokku"}, "ex05": {"EX", "Kokku"},
+                    "ex06": {"EX", "Kokku"},
+                    "ex07": {"EX", "Kokku"}, "ex08": {"EX", "Kokku"}, "ex09": {"EX", "Kokku"},
+                    "ex11": {"EX", "Kokku"},
+                    "ex12": {"EX", "Kokku"}, "ex13": {"EX", "Kokku"}, "ex14": {"EX", "Kokku"},
+                    "ex15": {"EX", "Kokku"},
+                    "food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"}, "git": {"Yldine", "Kokku"},
+                    "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
+                    "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"},
+                    "pr03": {"PR", "Kokku"}, "java": {"Yldine", "Kokku"},
+                    "olulised-teadaanded": {"Yldine", "Kokku"}, "pr01": {"PR", "Kokku"},
+                    "pr02": {"PR", "Kokku"},
+                    "pr04": {"PR", "Kokku"}, "pr06": {"PR", "Kokku"}, "pr07": {"PR", "Kokku"},
+                    "pr08": {"PR", "Kokku"},
+                    "pr09": {"PR", "Kokku"}, "pr11": {"PR", "Kokku"}, "pr12": {"PR", "Kokku"},
+                    "pr13": {"PR", "Kokku"},
+                    "pr14": {"PR", "Kokku"}, "pr15": {"PR", "Kokku"}, "random": {"Yldine", "Kokku"},
+                    "wat": {"PR", "Kokku"},
+                    "stat": {"Yldine", "Kokku"}, "syvapy-general": {"Yldine", "Kokku"},
+                    "videod": {"Yldine", "Kokku"}, "eksam": {"Yldine", "Kokku"},
+                    "xp01": {"Syva", "Kokku", "XP"}, "xp02": {"Syva", "Kokku", "XP"},
+                    "xp03": {"Syva", "Kokku", "XP"},
+                    "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
+                    "xp06": {"Syva", "Kokku", "XP"},
+                    "xp07": {"Syva", "Kokku", "XP"}}
+
+kategooriad_java = {"food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"},
+                    "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
+                    "java": {"Yldine", "Kokku"},
+                    "random": {"Yldine", "Kokku"},
+                    "stat": {"Yldine", "Kokku"}}
+
 
 # OUTPUT_FOLDER-i Lõppu käib kaldkriips
 class Stats:
     """Statistika."""
 
-    def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/'  sname='stats.xlsx'):
+    def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
         """
         ###   INIT1   ###.
 
@@ -116,38 +152,15 @@ class Stats:
         self.times = list()
         self.times2 = dict()
         self.OUTPUT_FOLDER = OUTPUT_FOLDER
+        try:makedirs(OUTPUT_FOLDER)
+        except FileExistsError: pass
         self.excel=xlsx(OUTPUT_FOLDER+sname)
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
         self.ajaformaat = '%a %d %b %Y'          # Kasutusel koos times2-ga
                     # Koodinäide: max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
         # Kategooria peaks algama suure tähega
-        self.kategooriad = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ"},
-                            "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"},
-                            "ex03": {"EX", "Kokku"}, "ex04": {"EX", "Kokku"}, "ex05": {"EX", "Kokku"},
-                            "ex06": {"EX", "Kokku"},
-                            "ex07": {"EX", "Kokku"}, "ex08": {"EX", "Kokku"}, "ex09": {"EX", "Kokku"},
-                            "ex11": {"EX", "Kokku"},
-                            "ex12": {"EX", "Kokku"}, "ex13": {"EX", "Kokku"}, "ex14": {"EX", "Kokku"},
-                            "ex15": {"EX", "Kokku"},
-                            "food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"}, "git": {"Yldine", "Kokku"},
-                            "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
-                            "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"},
-                            "pr03": {"PR", "Kokku"},
-                            "olulised-teadaanded": {"Yldine", "Kokku"}, "pr01": {"PR", "Kokku"},
-                            "pr02": {"PR", "Kokku"},
-                            "pr04": {"PR", "Kokku"}, "pr06": {"PR", "Kokku"}, "pr07": {"PR", "Kokku"},
-                            "pr08": {"PR", "Kokku"},
-                            "pr09": {"PR", "Kokku"}, "pr11": {"PR", "Kokku"}, "pr12": {"PR", "Kokku"},
-                            "pr13": {"PR", "Kokku"},
-                            "pr14": {"PR", "Kokku"}, "pr15": {"PR", "Kokku"}, "random": {"Yldine", "Kokku"},
-                            "wat": {"PR", "Kokku"},
-                            "stat": {"Yldine", "Kokku"}, "syvapy-general": {"Yldine", "Kokku"},
-                            "videod": {"Yldine", "Kokku"}, "eksam": {"Yldine", "Kokku"},
-                            "xp01": {"Syva", "Kokku", "XP"}, "xp02": {"Syva", "Kokku", "XP"},
-                            "xp03": {"Syva", "Kokku", "XP"},
-                            "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
-                            "xp06": {"Syva", "Kokku", "XP"},
-                            "xp07": {"Syva", "Kokku", "XP"}}
+        self.kategooriad = kategooria
+        
         for x1 in range(len(self.archive['meta']['userindex'])):
             self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
                               'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
@@ -589,8 +602,9 @@ def stats_load(fname='d_stats.pkl'):
         print(f)
         x = pickle.load(f)
     return x
-
-sts = Stats()
+# def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
+# sts = Stats()
+sts = Stats('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 sts.times2_cleanup()
 sts.ajatabel_suur()
 sts.arhiiv()
