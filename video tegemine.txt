@@ -1,2 +1,0 @@
-kõigepealt monkeyjamis -> võimalikult väike FPS.
-seejärel myffvideoconverter -> Võimalikult väike bitrate, failisuurus alla 8MB.

@@ -98,11 +98,11 @@ class xlsx:
         self.excel.close()
     
 
-
+# OUTPUT_FOLDER-i Lõppu käib kaldkriips
 class Stats:
     """Statistika."""
 
-    def __init__(self, fname='dht.txt', sname='stats.xlsx'):
+    def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/'  sname='stats.xlsx'):
         """
         ###   INIT1   ###.
 
@@ -115,7 +115,8 @@ class Stats:
         self.lyhi = {-1: 0}
         self.times = list()
         self.times2 = dict()
-        self.excel=xlsx(sname)
+        self.OUTPUT_FOLDER = OUTPUT_FOLDER
+        self.excel=xlsx(OUTPUT_FOLDER+sname)
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
         self.ajaformaat = '%a %d %b %Y'          # Kasutusel koos times2-ga
                     # Koodinäide: max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
@@ -179,7 +180,7 @@ class Stats:
 
         Init-funktsioon on jagatud kaheks, sest teoreetiliselt võiks andmete lugemine ja enetav töötlemine olla eraldi.
         """
-        f = open('disc_sõnapilveks.txt', 'w', encoding='utf8')
+        f = open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', 'w', encoding='utf8')
         for c in sorted(self.archive['data']):  # c = kanali id
             cur_name = self.archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
             cur_name = cur_name.split('_')[0]
@@ -328,11 +329,9 @@ class Stats:
 
     def ajatabel_suur(self):
         """Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         self.excel.ws('Ajatabel')
         self.excel.write(self.header2)
-        for x1 in list(self.users)[:5]:
+        for x1 in list(self.users):
             for c in sorted(self.users[x1]['times']):  # Iga kanaliga
                 print('\t'.join([self.users[x1]['n'], c] + list(map(str, self.users[x1]['times'][c]))),file=self.excel)
 
@@ -412,23 +411,23 @@ class Stats:
         """Self -> PKL. Terve objekti salvestamine."""
         temp = self.excel
         self.excel = None
-        with open(fname, 'wb') as f:
+        with open(self.OUTPUT_FOLDER+fname, 'wb') as f:
             pickle.dump(self, f, pickle.HIGHEST_PROTOCOL)
         self.excel = temp
     def out_users_py(self, fname='users.py'):
         """Self.users -> Python. Kena väljund."""
-        with open(fname, 'w', encoding='utf-8') as f:
+        with open(self.OUTPUT_FOLDER+fname, 'w', encoding='utf-8') as f:
             f.write('users=' + str(self.users))
 
     def out_users_json(self, fname='ergo.json'):
         """Self.users -> JSON. Kole väljund."""
         use = json.dumps(self.users)
-        with open(fname, 'w', encoding='utf-8') as f:
+        with open(self.OUTPUT_FOLDER+fname, 'w', encoding='utf-8') as f:
             f.write(str(use))
 
     def out_tgf_tag(self, fname='disco_tag.tgf'):
         """Märkimiste põhjal TGF-graaf."""
-        with open(fname, 'w', encoding='utf-8') as f:
+        with open(self.OUTPUT_FOLDER+fname, 'w', encoding='utf-8') as f:
             for i1 in filter(lambda x: x > -1, self.users):
                 print(i1, self.users[i1]['n'], file=f)
             print('#', file=f)
@@ -440,7 +439,7 @@ class Stats:
 
     def out_tgf_msg(self, fname='disco_msg.tgf'):
         """Kirjavahetuse põhjal TGF-graaf."""
-        with open(fname, 'w', encoding='utf-8') as f:
+        with open(self.OUTPUT_FOLDER+fname, 'w', encoding='utf-8') as f:
             for i1 in filter(lambda x: x > -1, self.users):
                 print(i1, self.users[i1]['n'], file=f)
             print('#', file=f)
@@ -452,8 +451,6 @@ class Stats:
 
     def stat_tag(self):
         """Tag statisika, kui palju on X->Y märkimisi."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         self.excel.ws('Tag to')
         f=self.excel
         print('\t'.join('X Y X->Y'.split()), file=f)
@@ -465,8 +462,6 @@ class Stats:
 
     def stat_msg(self):
         """Sõnumite statisika, kui palju on X->Y sõnumeid."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         self.excel.ws('Msg to')
         f=self.excel
         print('\t'.join('X Y X->Y'.split()), file=f)
@@ -478,8 +473,6 @@ class Stats:
 
     def stat_tag2(self):
         """Kahepoolse märkimise tabel."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         paarid = set()
         key = 'tag_to'
         self.excel.ws('Tag to 2')
@@ -499,8 +492,6 @@ class Stats:
 
     def stat_msg2(self):
         """Kahepoolse vestlemise tabel."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         paarid = set()
         key = 'next'
         self.excel.ws('Msg to 2')
@@ -535,8 +526,6 @@ class Stats:
     
     def stat_last_24(self):
         """Kasutajate aktiivsus viimased 24 tundi või päeva."""
-        if not self.excel:
-            self.excel=xlsxwriter.Workbook('stats.xlsx')
         e=sorted(self.times2,key=lambda x:datetime.datetime.strptime(x,self.ajaformaat))[-24:]
         q=set()
         usrs=set()
@@ -583,7 +572,7 @@ class Stats:
             self.users[x1]['count']['total'] = count
             self.users[x1]['lens']['total'] = c_len
             pygame.display.update()
-        pygame.image.save(lava, "screenshot.jpeg")
+        pygame.image.save(lava, self.OUTPUT_FOLDER+"screenshot.jpeg")
         for i1 in sorted(colors):
             print(i1, colors[i1])
         pygame.quit()
@@ -617,7 +606,7 @@ sts.stat_tag2()
 sts.excel.close()
 sts.save()
 
-import pygame
+
 from math import log
 # pygame.init()
 # ani = Animate(sts)
