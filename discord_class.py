@@ -398,26 +398,35 @@ class Stats:
         except KeyboardInterrupt:
             pass
 
-    def graafid_edetabel(self, username, n=5, uid=0):
+    def graafid_edetabel(self, username, n=5, uid=False):
         """Kuva N populaarseimat suunda ühe kasutaja suhtes."""
         
         if not uid:
             uid = list(filter(lambda x: username.lower() in self.users[x]['n'].lower(), self.users))[0]
         else:
             uid = username
+        print('\nKirjutamised:')
         # Enne/Peale keda kirjutad
         for i1 in sorted(self.users[uid]['prev'], key=lambda i: self.users[uid]['prev'][i])[-n:]:
-            print(self.users[i1]['n'], '->', self.users[uid]['n'], ' \t', self.users[uid]['prev'][i1], 'korda')
+            x=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            y=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            print(x, '->', y, ' \t', self.users[uid]['prev'][i1], 'korda')
         print()
         for i1 in sorted(self.users[uid]['next'], key=lambda i: self.users[uid]['next'][i])[-n:]:
-            print(self.users[uid]['n'], '->', self.users[i1]['n'], ' \t', self.users[uid]['next'][i1], 'korda')
+            x=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            y=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            print(x, '->', y, ' \t', self.users[uid]['next'][i1], 'korda')
         print('\nMärkimised:')
         # Kes keda märgib
         for i1 in sorted(self.users[uid]['tag_by'], key=lambda i: self.users[uid]['tag_by'][i])[-n:]:
-            print(self.users[i1]['n'], '->', self.users[uid]['n'], ' \t', self.users[uid]['tag_by'][i1], 'korda')
+            x=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            y=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            print(x, '->', y, ' \t', self.users[uid]['tag_by'][i1], 'korda')
         print()
         for i1 in sorted(self.users[uid]['tag_to'], key=lambda i: self.users[uid]['tag_to'][i])[-n:]:
-            print(self.users[uid]['n'], '->', self.users[i1]['n'], ' \t', self.users[uid]['tag_to'][i1], 'korda')
+            x=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            y=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
+            print(x, '->', y, ' \t', self.users[uid]['tag_to'][i1], 'korda')
         print()
 
     def save(self, fname='d_stats.pkl'):
@@ -602,6 +611,7 @@ def stats_load(fname='d_stats.pkl'):
         print(f)
         x = pickle.load(f)
     return x
+
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
 sts = Stats()
@@ -617,8 +627,13 @@ sts.stat_msg()
 sts.stat_msg2()
 sts.stat_tag()
 sts.stat_tag2()
+sts.graafid_edetabel(-1,n=5,uid=True)
+sts.graafid_edetabel('ago',n=5,uid=False)
+sts.graafid_edetabel(-1,n=10,uid=True)
+sts.graafid_edetabel('ago',n=5,uid=False)
 sts.excel.close()
 sts.save()
+"""
 print('Java')
 sts = Stats('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 sts.times2_cleanup()
@@ -633,9 +648,13 @@ sts.stat_msg()
 sts.stat_msg2()
 sts.stat_tag()
 sts.stat_tag2()
+sts.graafid_edetabel(-1,n=5,uid=True)
+sts.graafid_edetabel('ago',n=5,uid=False)
+sts.graafid_edetabel(-1,n=5,uid=True)
+sts.graafid_edetabel('ago',n=5,uid=False)
 sts.excel.close()
 sts.save()
-
+"""
 
 from math import log
 # pygame.init()
