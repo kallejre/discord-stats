@@ -108,7 +108,7 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
                     "ex12": {"EX", "Kokku"}, "ex13": {"EX", "Kokku"}, "ex14": {"EX", "Kokku"},
                     "ex15": {"EX", "Kokku"},
                     "food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"}, "git": {"Yldine", "Kokku"},
-                    "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
+                    "kaugõpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
                     "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"},
                     "pr03": {"PR", "Kokku"}, "java": {"Yldine", "Kokku"},
                     "olulised-teadaanded": {"Yldine", "Kokku"}, "pr01": {"PR", "Kokku"},
@@ -128,10 +128,12 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
                     "xp07": {"Syva", "Kokku", "XP"}}
 
 kategooriad_java = {"food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"},
-                    "kaugōpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
-                    "java": {"Yldine", "Kokku"},
+                    "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
                     "random": {"Yldine", "Kokku"},
                     "stat": {"Yldine", "Kokku"}}
+
+kategooriad_kaug = {"üld-vestlus": {"Yldine", "Kokku"}, "statsionaar": {"Yldine", "Kokku"},
+                    "kaugõpe": {"Yldine", "Kokku"}, "kasulik-info": {"Yldine", "Kokku"}}
 
 
 # OUTPUT_FOLDER-i Lõppu käib kaldkriips
@@ -194,7 +196,10 @@ class Stats:
         Init-funktsioon on jagatud kaheks, sest teoreetiliselt võiks andmete lugemine ja enetav töötlemine olla eraldi.
         """
         f = open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', 'w', encoding='utf8')
-        for c in sorted(self.archive['data']):  # c = kanali id
+        print('Server','Channel','User','Timestamp','Message', file=f,sep='\t')
+        for c in sorted(self.archive['data'], key=lambda x:(self.archive['meta']['channels'][x]['server'],x)):  # c = kanali id
+            server_id=self.archive['meta']['channels'][c]['server']
+            server_name=self.archive['meta']['servers'][server_id]['name']
             cur_name = self.archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
             cur_name = cur_name.split('_')[0]
             prev_msg = -1
@@ -207,7 +212,7 @@ class Stats:
                     self.lyhi[message['u']] += 1
                     self.lyhi[-1] += 1
                     # continue                                      # Lühikese sõnumi saab vahele jätta
-                print(c,self.archive['meta']['userindex'][message['u']],message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
+                print(server_id,c,self.archive['meta']['userindex'][message['u']],message['t'] // 1000,message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
                 time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
                 wk = time.weekday()
                 hr = time.hour
@@ -400,34 +405,35 @@ class Stats:
 
     def graafid_edetabel(self, username, n=5, uid=False):
         """Kuva N populaarseimat suunda ühe kasutaja suhtes."""
-        
+        out=''
         if not uid:
             uid = list(filter(lambda x: username.lower() in self.users[x]['n'].lower(), self.users))[0]
         else:
             uid = username
-        print('\nKirjutamised:')
+        out+='\nKirjutamised:\n'
         # Enne/Peale keda kirjutad
         for i1 in sorted(self.users[uid]['prev'], key=lambda i: self.users[uid]['prev'][i])[-n:]:
             x=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
             y=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
-            print(x, '->', y, ' \t', self.users[uid]['prev'][i1], 'korda')
-        print()
+            out+=' '.join(list(map(str,[x, '->', y, '\t', self.users[uid]['prev'][i1], 'korda'])))+'\n'
+        out+='\n'
         for i1 in sorted(self.users[uid]['next'], key=lambda i: self.users[uid]['next'][i])[-n:]:
             x=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
             y=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
-            print(x, '->', y, ' \t', self.users[uid]['next'][i1], 'korda')
-        print('\nMärkimised:')
+            out+=' '.join(list(map(str,[x, '->', y, ' \t', self.users[uid]['next'][i1], 'korda'])))+'\n'
+        out+='\nMärkimised:\n'
         # Kes keda märgib
         for i1 in sorted(self.users[uid]['tag_by'], key=lambda i: self.users[uid]['tag_by'][i])[-n:]:
             x=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
             y=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
-            print(x, '->', y, ' \t', self.users[uid]['tag_by'][i1], 'korda')
-        print()
+            out+=' '.join(list(map(str,[x, '->', y, ' \t', self.users[uid]['tag_by'][i1], 'korda'])))+'\n'
+        out+='\n'
         for i1 in sorted(self.users[uid]['tag_to'], key=lambda i: self.users[uid]['tag_to'][i])[-n:]:
             x=self.users[uid]['n'].encode('iso8859_13','replace').decode('iso8859_13')
             y=self.users[i1]['n'].encode('iso8859_13','replace').decode('iso8859_13')
-            print(x, '->', y, ' \t', self.users[uid]['tag_to'][i1], 'korda')
-        print()
+            out+=' '.join(list(map(str,[x, '->', y, ' \t', self.users[uid]['tag_to'][i1], 'korda'])))+'\n'
+        out+='\n'
+        return out
 
     def save(self, fname='d_stats.pkl'):
         """Self -> PKL. Terve objekti salvestamine."""
@@ -599,12 +605,6 @@ class Stats:
             print(i1, colors[i1])
         pygame.quit()
 
-
-
-
-
-
-
 def stats_load(fname='d_stats.pkl'):
     """PKL -> Self. Terve objekti avamine."""
     with open(fname, 'rb') as f:
@@ -612,49 +612,44 @@ def stats_load(fname='d_stats.pkl'):
         x = pickle.load(f)
     return x
 
+def stat_full(*args, **kwargs):
+    print('Algus', end=' ')
+    sts = Stats(*args, **kwargs)
+    print('1', end=' ')
+    sts.times2_cleanup()
+    sts.ajatabel_suur()
+    print('2', end=' ')
+    sts.arhiiv()
+    print('3', end=' ')
+    sts.out_tgf_msg()
+    sts.out_tgf_tag()
+    sts.out_users_json()
+    sts.out_users_py()
+    print('4', end=' ')
+    sts.stat_last_24()
+    sts.stat_msg()
+    sts.stat_msg2()
+    sts.stat_tag()
+    sts.stat_tag2()
+    print('5', end=' ')
+    sts.graafid_edetabel(-1,n=5,uid=True)
+    sts.graafid_edetabel('ago',n=5,uid=False)
+    sts.graafid_edetabel(-1,n=10,uid=True)
+    sts.graafid_edetabel('ago',n=5,uid=False)
+    print('6', end=' ')
+    sts.excel.close()
+    sts.save()
+    print('done')
+    return sts
+
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
-sts = Stats()
-sts.times2_cleanup()
-sts.ajatabel_suur()
-sts.arhiiv()
-sts.out_tgf_msg()
-sts.out_tgf_tag()
-sts.out_users_json()
-sts.out_users_py()
-sts.stat_last_24()
-sts.stat_msg()
-sts.stat_msg2()
-sts.stat_tag()
-sts.stat_tag2()
-sts.graafid_edetabel(-1,n=5,uid=True)
-sts.graafid_edetabel('ago',n=5,uid=False)
-sts.graafid_edetabel(-1,n=10,uid=True)
-sts.graafid_edetabel('ago',n=5,uid=False)
-sts.excel.close()
-sts.save()
-"""
+sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
-sts = Stats('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
-sts.times2_cleanup()
-sts.ajatabel_suur()
-sts.arhiiv()
-sts.out_tgf_msg()
-sts.out_tgf_tag()
-sts.out_users_json()
-sts.out_users_py()
-sts.stat_last_24()
-sts.stat_msg()
-sts.stat_msg2()
-sts.stat_tag()
-sts.stat_tag2()
-sts.graafid_edetabel(-1,n=5,uid=True)
-sts.graafid_edetabel('ago',n=5,uid=False)
-sts.graafid_edetabel(-1,n=5,uid=True)
-sts.graafid_edetabel('ago',n=5,uid=False)
-sts.excel.close()
-sts.save()
-"""
+sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
+print('Kaug')
+sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
+
 
 from math import log
 # pygame.init()

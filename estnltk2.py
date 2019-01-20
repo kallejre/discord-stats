@@ -76,13 +76,14 @@ from estnltk import Text
 users={'-1':dict()}
 c=0
 with open('disc_sõnapilveks.txt', encoding='utf-8') as fin:
+    fin.readline()
     for line in fin:
         c+=1
         if c%10000==0:print(c)
         if len(line)>17 and line.split()[0].isdigit() and len(line.split()[0])==18:
             # See on kasutaja sõnumi algus
             uid=line.split()[0]
-            line='\t'.join(line.split('\t')[1:])
+            line='\t'.join(line.split('\t')[4:])
         lause=Text(line)
         if uid not in users:
             users[uid]=dict()
