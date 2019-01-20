@@ -76,13 +76,13 @@ from estnltk import Text
 users={'-1':dict()}
 c=0
 with open('disc_sõnapilveks.txt', encoding='utf-8') as fin:
-    fin.readline()
     for line in fin:
         c+=1
+        if c==1: continue
         if c%10000==0:print(c)
-        if len(line)>17 and line.split()[0].isdigit() and len(line.split()[0])==18:
+        if len(line)>50 and line.split()[0].isdigit() and len(line.split()[2])==18:
             # See on kasutaja sõnumi algus
-            uid=line.split()[0]
+            uid=line.split()[2]
             line='\t'.join(line.split('\t')[4:])
         lause=Text(line)
         if uid not in users:
@@ -105,4 +105,11 @@ import json
 use = json.dumps(users, ensure_ascii=False)
 with open('sõnastats.txt', 'w', encoding='utf-8') as f:
     f.write(use)
+c=1
 
+f=open('sõnastats2.txt', 'w', encoding='utf-8')
+for i in list(sorted(users['-1'], key=lambda x:users['-1'][x], reverse=True))[:1500]:
+    try:print(c,i, users['-1'][i], sep='\t', file=f)
+    except:pass
+    c+=1
+f.close()

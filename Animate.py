@@ -1,7 +1,11 @@
 import pygame
+import datetime, colorsys, os
+from math import log
 class Animate:
     ### Kogu soust tuleb nüüd ümber kirjutada
     def __init__(self, sts):
+        try: pygame.init()
+        except:pass
         self.s = 20  # X-telje märgete kirjasuurus                                  # Default: 50
         self.ajatempel = 25  # Ajatempli kõrgus ülal vasakus nurgas                 # Default: 50
         self.legend_size = 30  # Legendi kirjakõrgus                                # Default: 30
@@ -101,7 +105,7 @@ class Animate:
         # Ei tulnud hästi välja. Järgmine idee: TOP25 ja ülejäänud
         w,h=self.s,self.graafiku_osa+self.ajatempel*1
         column=pygame.surface.Surface((w,h))
-        column_nr = ani.sts.channels.index(kanal)
+        column_nr = self.sts.channels.index(kanal)
         s = 0
         for uid in sorted(data[kanal],reverse=True):
             # Joonista kasutaja rect
@@ -138,13 +142,15 @@ class Animate:
     def draw(self,stamp):
         """Ühe kaadri joonistamine."""
         self.lava.fill([0,0,0])
-        self.draw_x_axis(sts.channels)        # X-telje joonistamine
+        self.draw_x_axis(self.sts.channels)        # X-telje joonistamine
         self.draw_user_legend()        # Legendi joonistamine
         self.draw_columns(self.times3[stamp]) # Joonista graafik. Tuleb veel läbi mõelda...
         # list(sorted(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat)))
         self.draw_timestamp(stamp)        # Lisa ajamärge
         pygame.display.flip()
-        pygame.image.save(self.lava, 'gif/screenshot_'+"{:03d}".format(self.counter)+'_'+stamp+'.jpeg')
+        path=self.sts.OUTPUT_FOLDER+'gif/screenshot_'+"{:03d}".format(self.counter)+'_'+stamp+'.jpeg'
+        os.makedirs(os.path.dirname(path), exist_ok=True)
+        pygame.image.save(self.lava, path)
         self.counter+=1
     def modifyEachValueInDictionary(self,old,new,decay_a,decay_b):
         # max([0,decay_a*old[kanal]-decay_b,new[kanal]])

@@ -61,7 +61,7 @@ meta:
         name - kasutaja kuvatav nimi
 """
 
-import colorsys
+
 import datetime
 import json
 import re
@@ -639,8 +639,13 @@ def stat_full(*args, **kwargs):
     print('6', end=' ')
     sts.excel.close()
     sts.save()
+    print('7',end=' ')
+    ani = Animate(sts)
+    ani.draw_main()
     print('done')
     return sts
+
+
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
@@ -651,10 +656,6 @@ print('Kaug')
 sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
 
 
-from math import log
-# pygame.init()
-# ani = Animate(sts)
-# ani.draw_main()
 
 """
 # Kirjutab välja Stats-objekti lapsed.
