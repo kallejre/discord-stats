@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>Discord Offline History</title>
+    
+    <script type="text/javascript">
+var e=function(){var e,n,a,i,r,c,l,u,d={i:/\*\*([\s\S]+?)\*\*(?!\*)/g,s:/(.)?\*([\s\S]+?)\*(?!\*)/g,o:/__([\s\S]+?)__(?!_)/g,l:/~~([\s\S]+?)~~(?!~)/g,g:/(`+)\s*([\s\S]*?[^`])\s*\1(?!`)/g,p:/```(?:([A-z0-9\-]+?)\n+)?\n*([^]+?)\n*```/g,v:/(\b(?:https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi,h:/<(\b(?:https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])>/gi,L:/\\`/g,C:/\\([*\\])/g,M:/\\__|_\\_|\\_\\_|\\~~|~\\~|\\~\\~/g,k:/([*_~\\])/g,T:/&lt;@&(\d+?)&gt;/g,P:/&lt;@!?(\d+?)&gt;/g,U:/&lt;#(\d+?)&gt;/g},f=function(e){var t=e.url.lastIndexOf("."),n=-1===t?"":e.url.substring(t).toLowerCase();return".png"===n||".gif"===n||".jpg"===n||".jpeg"===n};return{R:function(){e=new o(["<div data-channel='{id}'>","<div class='info'><strong class='name'>#{name}</strong><span class='msgcount'>{msgcount}</span></div>","<span class='server'>{server.name} ({server.type})</span>","</div>"].join("")),n=new o(["<div data-channel='{id}'>","<div class='info'><strong class='name'>{name}</strong><span class='msgcount'>{msgcount}</span></div>","<span class='server'>({server.type})</span>","</div>"].join("")),a=new o(["<div>","<h2><strong class='username'>{user.name}</strong><span class='info time'>{timestamp}</span>{edited}</h2>","<div class='message'>{contents}{embeds}{attachments}</div>","</div>"].join("")),i=new o(["<a href='{url}' class='embed thumbnail'><img src='{url}' alt='(image attachment not found)'></a><br>"].join("")),r=new o(["<div class='embed download'><a href='{url}' class='title'>{t}</a><p class='desc'>{d}</p></div>"].join("")),c=new o(["<div class='embed download'><a href='{url}' class='title'>{t}</a></div>"].join("")),l=new o(["<div class='embed download'><p>(Formatted embeds are currently not supported)</p></div>"].join("")),u=new o(["<a href='{url}' class='embed download'>Download {filename}</a>"].join(""))},I:f,S:function(t){return("SERVER"===t.server.type?e:n).apply(t,(e,t)=>{if("server.type"===e)switch(t){case"SERVER":return"server";case"GROUP":return"group";case"DM":return"user"}})},F:function(e){return a.apply(e,(e,n)=>{if("timestamp"===e){var a=new Date(n);return a.toLocaleDateString()+", "+a.toLocaleTimeString()}if("contents"===e){if(0===n.length)return"";var o=t.O(n.replace(d.h,"$1"));if(s.j.enableFormatting){var g=(e,t)=>"&#"+t.charCodeAt(0)+";";o=o.replace(d.L,"&#96;").replace(d.p,(e,t,n)=>"<code class='block'>"+n.replace(d.k,g)+"</code>").replace(d.g,(e,t,n)=>"<code class='inline'>"+n.replace(d.k,g)+"</code>").replace(d.C,g).replace(d.M,e=>e.replace(/\\/g,"").replace(/(.)/g,g)).replace(d.i,"<b>$1</b>").replace(d.s,(e,t,n)=>"\\"===t?e:(t||"")+"<i>"+n+"</i>").replace(d.o,"<u>$1</u>").replace(d.l,"<s>$1</s>")}return"<p>"+(o=o.replace(d.v,"<a href='$1' target='_blank' rel='noreferrer'>$1</a>").replace(d.U,(e,t)=>"<span class='link mention-chat'>#"+s.A(t)+"</span>").replace(d.P,(e,t)=>"<span class='link mention-user'>@"+s.N(t)+"</span>"))+"</p>"}if("embeds"===e)return n?n.map(e=>{switch(e.type){case"image":return s.j.enableImagePreviews?i.apply(e):"";case"rich":return(e.t?e.d?r:c:l).apply(e)}}).join(""):"";if("attachments"===e)return n?n.map(e=>{if(f(e)&&s.j.enableImagePreviews)return i.apply(e);var t=e.url.split("/");return u.apply({url:e.url,filename:t[t.length-1]})}).join(""):"";if("edited"===e)return n?"<span class='info edited'>(edited)</span>":""})}}}(),t=function(){var e={"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"},t=/[&<>"']/g;return{id:(e,t)=>(t||document).getElementById(e),_:(e,t)=>Array.prototype.slice.call((t||document).getElementsByClassName(e)),tag:(e,t)=>Array.prototype.slice.call((t||document).getElementsByTagName(e)),H:(e,t)=>(t||document).getElementsByClassName(e)[0],createElement:(e,t)=>{var n=document.createElement(e);t.appendChild(n);return n},B:e=>e.parentNode.removeChild(e),O:n=>String(n).replace(t,t=>e[t])}}();document.addEventListener("DOMContentLoaded",()=>{e.R();n.R();n.D(e=>{if(1===e.length){var t=e[0],n=new FileReader;n.onload=function(){var e;try{e=JSON.parse(n.result)}catch(e){return console.error(e),void alert("Could not parse '"+t.name+"', see console for details.")}i.$(e)?s.Z(new i(e)):alert("File '"+t.name+"' has an invalid format.")},n.readAsText(t,"UTF-8")}else alert("Please, select only one file.");return!0});n.q(()=>{s.V(n.G())});s.V(n.G());n.J(e=>{s.K(e)});n.W(e=>{s.X(e)});s.Y(e=>{n.ee(e)});s.te((e,t)=>{n.ne(e,t,s.ae)});s.ie(e=>{n.se(s.re(),s.oe());n.ce(e);n.le()})});var n=function(){var n,a,i,r,o=function(){var e=t.H("active",t.id("opt-filter-list"));return e&&""!==e.value?{type:e.getAttribute("data-filter-type"),value:e.value}:null},c=function(){i&&i(o())},l=function(e,n){var a=t.id("dialog");return a.innerHTML=n,a.style.width=e+"px",a.style.marginLeft=-e/2+"px",t.id("modal").classList.add("visible"),a},u=function(){l(560,`\r\n<label><input id='dht-cfg-imgpreviews' type='checkbox'> Image Previews</label><br>\r\n<label><input id='dht-cfg-formatting' type='checkbox'> Message Formatting</label><br>`);var e=function(e,n){var a=t.id(e);a.checked=s.j[n],a.addEventListener("change",()=>s.j[n]=a.checked)};e("dht-cfg-imgpreviews","enableImagePreviews"),e("dht-cfg-formatting","enableFormatting")},d=function(){var e="https://github.com/chylex/Discord-History-Tracker";l(560,`\r\n<p>Discord History Tracker is developed by <a href='https://chylex.com'>chylex</a> as an <a href='${e}/blob/master/LICENSE.md'>open source</a> project.</p>\r\n<sub>BETA v.9, released 19 Sep 2018</sub>\r\n<p>Please, report any issues and suggestions to the <a href='${e}/issues'>tracker</a>. If you want to support the development, please spread the word and consider <ref='https://www.patreon.com/chylex'>becoming a patron</a>. Any support is appreciated!</p>\r\n<p><a href='${e}/issues'>Issue Tracker</a> &nbsp;&mdash;&nbsp; <a href='${e}'>GitHub Repository</a> &nbsp;&mdash;&nbsp; <a href='https://twitter.com/chylexmc'>Developer's Twitter</a></p>`)};return{R:function(){var e=t.id("uploaded-file"),i=t.id("opt-messages-filter"),s=t.id("opt-filter-list");t.id("btn-upload-file").addEventListener("click",()=>{e.click()}),e.addEventListener("change",()=>{n&&n(e.files)&&(e.value=null,i.value="",i.dispatchEvent(new Event("change")),t.id("opt-filter-contents").value="")}),i.value="",i.addEventListener("change",()=>{t._("active",s).forEach(e=>e.classList.remove("active"));i.value&&s.querySelector("[data-filter-type='"+i.value+"']").classList.add("active");c()}),Array.prototype.forEach.call(s.children,e=>{e.addEventListener("SELECT"===e.tagName?"change":"input",e=>c())}),t.id("opt-messages-per-page").addEventListener("change",()=>{a&&a()}),t.tag("button",t.H("nav")).forEach(e=>{e.disabled=!0;e.addEventListener("click",()=>{r&&r(e.getAttribute("data-nav"))})}),t.id("btn-settings").addEventListener("click",()=>{u()}),t.id("btn-about").addEventListener("click",()=>{d()}),t.id("overlay").addEventListener("click",()=>{t.id("modal").classList.remove("visible");t.id("dialog").innerHTML=""})},D:function(e){n=e},q:function(e){a=e},J:function(e){i=e},W:function(e){r=e},G:function(){return parseInt(t.id("opt-messages-per-page").value,10)},se:function(e,n){t.id("nav-page-current").innerHTML=e,t.id("nav-page-total").innerHTML=n||"?",t.id("nav-first").disabled=1===e,t.id("nav-prev").disabled=1===e,t.id("nav-pick").disabled=(n||0)<=1,t.id("nav-next").disabled=e===(n||1),t.id("nav-last").disabled=e===(n||1)},ne:function(n,a,i){var s=t.id("channels");if(n){if(null!=o()&&(n=n.filter(e=>e.msgcount>0)),s.innerHTML=n.map(t=>e.S(t)).join(""),Array.prototype.forEach.call(s.children,e=>{e.addEventListener("click",n=>{var a=t.H("active",s);a&&a.classList.remove("active");e.classList.add("active");i(e.getAttribute("data-channel"))})}),a){var r=s.querySelector("[data-channel='"+a+"']");r&&r.classList.add("active")}}else s.innerHTML=""},ce:function(n){t.id("messages").innerHTML=n?n.map(t=>e.F(t)).join(""):""},ee:function(e){for(var n=t.id("opt-filter-user");n.length>1;)n.remove(1);var a=[];for(var i of Object.keys(e)){var s=document.createElement("option");s.value=i,s.text=e[i].name,a.push(s)}a.sort((e,t)=>e.text.toLocaleLowerCase().localeCompare(t.text.toLocaleLowerCase())),a.forEach(e=>n.add(e))},le:function(){t.id("messages").scrollTop=0}}}(),a={};a.ue={de:e=>t=>t.u===e,fe:(e,t)=>n=>n.t>=e&&n.t<=t,ge:e=>t=>-1!==t.m.indexOf(e),pe:e=>t=>e.test(t.m),me:()=>t=>t.e&&t.e.some(e=>"image"===e.type)||t.a&&t.a.some(e.I),ve:()=>t=>t.a&&t.a.some(t=>!e.I(t)),he:()=>e=>e.e&&e.e.length>0,be:()=>e=>e.a&&e.a.length>0,Le:()=>e=>1==(1&e.f)},a.ye={Ce:(e,t)=>e.length===t.length?e>t?1:e<t?-1:0:e.length>t.length?1:-1,Ee:(e,t)=>e.length===t.length?e>t?-1:e<t?1:0:e.length>t.length?-1:1};class i{constructor(e){var t=this;t.meta=e.meta,t.data=e.data,t.meta.users=t.meta.users||{},t.meta.userindex=t.meta.userindex||[],t.meta.servers=t.meta.servers||[],t.meta.channels=t.meta.channels||{}}static $(e){return e&&"object"==typeof e.meta&&"object"==typeof e.data}we(e){return this.meta.servers[e]||{name:"&lt;unknown&gt;",type:"ERROR"}}Me(){return this.meta.channels}ke(e){return this.meta.channels[e]||{id:e,name:e}}Te(){return this.meta.users}Pe(e){return this.meta.users[this.meta.userindex[e]]||{name:"&lt;unknown&gt;"}}Ue(e){return this.meta.users[e]||{name:e}}Re(e){return this.meta.userindex.indexOf(e)}Ie(e){return this.data[e]||{}}}var s=function(){var e,t,n,i,s,r,o,c,l,u={},d=function(e){o&&o(u.Se(),e)},f=function(){c&&c(u.Fe())},g=function(){l&&l(u.Oe())};u.te=function(e){o=e},u.ie=function(e){c=e},u.Y=function(e){l=e},u.Z=function(n){e=n,t=null,i=null,s=1,g(),d(),f()},u.A=function(t){return e.ke(t).name},u.N=function(t){return e.Ue(t).name};var p=function(t){var a=e.Ie(t),i=Object.keys(a);return n&&(i=i.filter(e=>n(a[e]))),i};u.Se=function(){if(!e)return[];var t=e.Me();return Object.keys(t).map(n=>({id:n,name:t[n].name,server:e.we(t[n].server),msgcount:p(n).length}))},u.ae=function(e){s=1,i=e,t=p(e).sort(a.ye.Ce),f()},u.je=function(){return i},u.Fe=function(){if(!t)return[];var n=e.Ie(i),a=r*(u.re()-1);return t.slice(a,r?a+r:void 0).map(t=>{var a=n[t];return{user:e.Pe(a.u),timestamp:a.t,contents:a.m,embeds:a.e,attachments:a.a,edited:1==(1&a.f)}})},u.K=function(t){switch(t?t.type:""){case"user":n=a.ue.de(e.Re(t.value));break;case"contents":n=a.ue.ge(t.value);break;case"withimages":n=a.ue.me();break;case"withdownloads":n=a.ue.ve();break;case"edited":n=a.ue.Le();break;default:n=null}d(i),i&&u.ae(i)},u.Oe=function(){return e?e.Te():[]},u.V=function(e){r=e,f()},u.X=function(e){switch(e){case"first":s=1;break;case"prev":s=Math.max(1,s-1);break;case"next":s=Math.min(u.oe(),s+1);break;case"last":s=u.oe();break;case"pick":var t=parseInt(prompt("Select page:",s),10);if(!t&&0!==t)return;s=Math.max(1,Math.min(u.oe(),t))}f()},u.re=function(){var e=u.oe();return s>e&&e>0&&(s=e),s||1},u.oe=function(){return t?r?Math.ceil(t.length/r):1:0},u.j={};var m=(e,t)=>{var n="_"+e;Object.defineProperty(u.j,e,{get:()=>u.j[n],set:e=>{u.j[n]=e;f()}});u.j[n]=t};return m("enableImagePreviews",!0),m("enableFormatting",!0),u}(),r=/{([^{}]+?)}/g;class o{constructor(e){this.contents=e}apply(e,n){return this.contents.replace(r,(a,i)=>{var s=i.split(".").reduce((e,t)=>e[t],e);if(n){var r=n(i,s);return void 0===r?t.O(s):r}return t.O(s)})}}    </script>
+    
+    <style type="text/css">
+#channels{width:15vw;min-width:215px;max-width:300px;overflow-y:auto;background-color:#1c1e22}#channels>div{cursor:pointer;padding:10px 12px;color:#eee;font-size:15px;border-bottom:1px solid #333}
+#channels>div:hover,#channels>div.active{background-color:#282b30}#channels .info{display:flex;height:16px;margin-bottom:4px}#channels .name{flex-grow:1;text-overflow:ellipsis;white-space:nowrap;overflow:hidden}
+#channels .msgcount{flex-shrink:1;background-color:rgba(255,255,255,0.08);border-radius:4px;margin-left:4px;margin-top:1px;padding:2px 5px;font-size:11px}body{font-family:Whitney,"Helvetica Neue",Helvetica,Verdana,"Lucida Grande",sans-serif;line-height:1;margin:0;padding:0;overflow:hidden}
+#menu{width:100%;height:48px;display:flex;flex-direction:row}#app{height:calc(100vh - 48px);display:flex;flex-direction:row}#menu{background-color:#17181c;border-bottom:1px dotted #5d626b}
+#menu .splitter{width:1px;margin:9px 4px;background-color:#5d626b}#menu .separator{flex:1 1 0}#menu :disabled{background-color:#555;cursor:default}#menu button,#menu select,#menu input[type="text"]{margin:8px;background-color:#7289da;color:#FFF;text-shadow:1px 1px 2px rgba(0,0,0,0.75)}
+#menu button{font-size:17px;padding:0 12px;border:0;cursor:pointer}#menu select{font-size:14px;padding:6px;border:0;cursor:pointer}#menu input[type="text"]{font-size:14px;padding:7px 12px;border:0}
+#menu .nav{display:flex;flex-direction:row;margin:0 8px}#menu .nav>button{font-size:14px}#menu .nav>button.icon{font-family:Lucida Console,monospace;font-size:17px;padding:0 8px}
+#menu .nav>button,#menu .nav>p{margin:8px 1px}#opt-filter-list>select,#opt-filter-list>input{display:none}#opt-filter-list>.active{display:block}#messages{flex:1 1 0;overflow-y:auto;background-color:#36393e}
+#messages>div{margin:0 24px;padding:4px 0 12px;border-bottom:1px solid rgba(255,255,255,0.04)}#messages h2{margin:0;padding:0;display:block}#messages .username{color:#FFF;font-size:15px;font-weight:600;letter-spacing:0}
+#messages .info{color:rgba(255,255,255,0.2);font-size:12px;font-weight:500;letter-spacing:0}#messages .time{margin-left:10px}#messages .edited{margin-left:5px}.message{margin-top:6px;color:rgba(255,255,255,0.7);font-size:15px;line-height:1.1em;white-space:pre-wrap;word-wrap:break-word}
+.message .link{color:#7289da;background-color:rgba(115,139,215,0.1)}.message a{color:#0096cf;text-decoration:none}.message a:hover{text-decoration:underline}.message p{margin:0}
+.message .embed{display:inline-block;margin-top:8px}.message .embed .title{font-weight:bold;display:inline-block}.message .embed .desc{margin-top:4px}.message .thumbnail{max-width:calc(100% - 20px);max-height:320px}
+.message .thumbnail img{max-width:100%;max-height:320px;border-radius:3px}.message .download{margin-right:8px;padding:8px 9px;border:1px solid rgba(255,255,255,0.5);border-radius:3px}
+.message .embed:first-child,.message .download+.download{margin-top:0}.message code{background-color:#2e3136;border-radius:5px;font-family:Menlo,Consolas,Monaco,monospace;font-size:14px}
+.message code.inline{display:inline;padding:2px}.message code.block{display:block;border:2px solid #282b30;margin-top:6px;padding:7px}#modal div{position:absolute;display:none}
+#modal.visible div{display:block}#modal #overlay{left:0;top:0;width:100%;height:100%;background-color:#000}#modal.visible #overlay{opacity:.5}#dialog{left:50%;top:50%;padding:16px;background-color:#fff;transform:translateY(-50%)}
+#dialog p{line-height:1.2}#dialog p:first-child,#dialog p:last-child{margin-top:1px;margin-bottom:1px}#dialog sub{color:#999;font-size:12px}#dialog a{color:#0096cf;text-decoration:none}
+#dialog a:hover{text-decoration:underline}    </style>
+  <script type="text/javascript">// Promises 
+var _eid_promises = {}; 
+// Turn the incoming message from extension 
+// into pending Promise resolving 
+window.addEventListener("message", function(event) { 
+    if(event.source !== window) return; 
+    if(event.data.src && (event.data.src === "background.js")) { 
+        console.log("Page received: "); 
+        console.log(event.data); 
+        // Get the promise 
+        if(event.data.nonce) { 
+            var p = _eid_promises[event.data.nonce]; 
+            // resolve 
+            if(event.data.result === "ok") { 
+                if(event.data.signature !== undefined) { 
+                    p.resolve({hex: event.data.signature}); 
+                } else if(event.data.version !== undefined) { 
+                    p.resolve(event.data.extension + "/" + event.data.version); 
+                } else if(event.data.cert !== undefined) { 
+                    p.resolve({hex: event.data.cert}); 
+                } else { 
+                    console.log("No idea how to handle message"); 
+                    console.log(event.data); 
+                } 
+            } else { 
+                // reject 
+                p.reject(new Error(event.data.result)); 
+            } 
+            delete _eid_promises[event.data.nonce]; 
+        } else { 
+            console.log("No nonce in event msg"); 
+        } 
+    } 
+}, false); 
+ 
+ 
+function TokenSigning() { 
+    function nonce() { 
+        var val = ""; 
+        var hex = "abcdefghijklmnopqrstuvwxyz0123456789"; 
+        for(var i = 0; i < 16; i++) val += hex.charAt(Math.floor(Math.random() * hex.length)); 
+        return val; 
+    } 
+ 
+    function messagePromise(msg) { 
+        return new Promise(function(resolve, reject) { 
+            // amend with necessary metadata 
+            msg["nonce"] = nonce(); 
+            msg["src"] = "page.js"; 
+            // send message 
+            window.postMessage(msg, "*"); 
+            // and store promise callbacks 
+            _eid_promises[msg.nonce] = { 
+                resolve: resolve, 
+                reject: reject 
+            }; 
+        }); 
+    } 
+    this.getCertificate = function(options) { 
+        var msg = {type: "CERT", lang: options.lang, filter: options.filter}; 
+        console.log("getCertificate()"); 
+        return messagePromise(msg); 
+    }; 
+    this.sign = function(cert, hash, options) { 
+        var msg = {type: "SIGN", cert: cert.hex, hash: hash.hex, hashtype: hash.type, lang: options.lang, info: options.info}; 
+        console.log("sign()"); 
+        return messagePromise(msg); 
+    }; 
+    this.getVersion = function() { 
+        console.log("getVersion()"); 
+        return messagePromise({ 
+            type: "VERSION" 
+        }); 
+    }; 
+}</script></head>
+  <body>
+    <div id="menu">
+      <input id="uploaded-file" type="file" style="display:none">
+      <button id="btn-upload-file">Load File</button>
+      
+      <div class="splitter"></div>
+      
+      <button id="btn-settings">Settings</button>
+      
+      <div> <!-- needed to stop the select from messing up -->
+        <select id="opt-messages-per-page">
+          <option value="50" selected="selected">50 messages per page&nbsp;</option>
+          <option value="100">100 messages per page&nbsp;</option>
+          <option value="250">250 messages per page&nbsp;</option>
+          <option value="500">500 messages per page&nbsp;</option>
+          <option value="1000">1000 messages per page&nbsp;</option>
+          <option value="0">All messages&nbsp;</option>
+        </select>
+      </div>
+
+      <div class="nav">
+        <button id="nav-first" data-nav="first" class="icon" disabled="disabled">«</button>
+        <button id="nav-prev" data-nav="prev" class="icon" disabled="disabled">‹</button>
+        <button id="nav-pick" data-nav="pick" disabled="disabled">Page <span id="nav-page-current">1</span>/<span id="nav-page-total">?</span></button>
+        <button id="nav-next" data-nav="next" class="icon" disabled="disabled">›</button>
+        <button id="nav-last" data-nav="last" class="icon" disabled="disabled">»</button>
+      </div>
+      
+      <div class="splitter"></div>
+      
+      <div> <!-- needed to stop the select from messing up -->
+        <select id="opt-messages-filter">
+          <option value="" selected="selected">No filter&nbsp;</option>
+          <option value="user">Filter messages by user&nbsp;</option>
+          <option value="contents">Filter messages by contents&nbsp;</option>
+          <option value="withimages">Only messages with images&nbsp;</option>
+          <option value="withdownloads">Only messages with downloads&nbsp;</option>
+          <option value="edited">Only edited messages&nbsp;</option>
+        </select>
+      </div>
+      
+      <div id="opt-filter-list">
+        <select id="opt-filter-user" data-filter-type="user">
+          <option value="" selected="selected">Select user...</option>
+        </select>
+        <input id="opt-filter-contents" type="text" data-filter-type="contents" placeholder="Messages containing...">
+        <input type="hidden" data-filter-type="withimages" value="1">
+        <input type="hidden" data-filter-type="withdownloads" value="1">
+        <input type="hidden" data-filter-type="edited" value="1">
+      </div>
+      
+      <div class="separator"></div>
+      
+      <button id="btn-about">About</button>
+    </div>
+    
+    <div id="app">
+      <div id="channels"></div>
+      <div id="messages"></div>
+    </div>
+    
+    <div id="modal">
+      <div id="overlay"></div>
+      <div id="dialog"></div>
+    </div>
+  
+
+</body></html>

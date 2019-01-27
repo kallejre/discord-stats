@@ -540,7 +540,7 @@ class Stats:
                             l = list(sorted([self.users[uid]['n'], self.users[nxt]['n']])) + list(map(str,[valja, sisse, count]))
                             self.excel.write('\t'.join(l))
 
-    def stat_weeks(self):
+    def stat_weeks(self):  # Kutsuda välja enne cleanup-i
         weeks=dict()
         self.ajaformaat
         """
@@ -550,20 +550,32 @@ class Stats:
         """
         # Times2 on halb, sest seal on ainulttop25 ja kõik ülejäänud.
         for aeg in self.times2:
-            print(aeg)
+            #print(aeg)
             asd=datetime.datetime.strptime(aeg,self.ajaformaat).isocalendar()
             week=datetime.datetime.strptime(aeg,self.ajaformaat).isocalendar()[:2]
             if week not in weeks:
                 weeks[week]=dict()
             for kanal in self.times2[aeg]:
-                print(kanal)
+                #print(kanal)
                 for uid in self.times2[aeg][kanal]:
-                    print(uid)
+                    #print(uid)
                     if uid not in weeks[week]:
                         weeks[week][uid]=0
                     weeks[week][uid]+=self.times2[aeg][kanal][uid]
-        #for week in sorted(weeks):
-        #    print(week, weeks[week])
+        self.weeks=weeks
+        ########  Start tabeli tegemine
+        
+        self.excel.ws('Nädalad')
+        head=['Aasta','Nädal']+ list(map(lambda x:self.users[x]['n'], sorted(self.users)))
+        self.excel.write('\t'.join(head))
+        for week in sorted(weeks):
+            out=[str(week[0]),str(week[1])]
+            for uid in sorted(self.users):
+                if uid in weeks[week]:
+                    out.append(str(weeks[week][uid]))
+                else:out.append('')
+            self.excel.write('\t'.join(out))
+            # print(week, weeks[week])
     def times2_cleanup(self,n=25):
         ###  ----   Times2/times3 Eri
         # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
@@ -643,6 +655,8 @@ def stat_full(*args, **kwargs):
     print('Algus', end=' ')
     sts = Stats(*args, **kwargs)
     print('1', end=' ')
+    sts.stat_weeks()
+    
     sts.times2_cleanup()
     sts.ajatabel_suur()
     print('2', end=' ')
@@ -653,9 +667,7 @@ def stat_full(*args, **kwargs):
     sts.out_users_json()
     sts.out_users_py()
 
-    sts.stat_weeks()
     
-    """
     print('4', end=' ')
     sts.stat_last_24()
     sts.stat_msg()
@@ -672,7 +684,7 @@ def stat_full(*args, **kwargs):
     sts.save()
     print('7',end=' ')
     ani = Animate(sts)
-    ani.draw_main()"""
+    ani.draw_main()
     print('done')
     return sts
 
