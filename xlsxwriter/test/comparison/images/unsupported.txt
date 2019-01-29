@@ -1,2 +1,0 @@
-Simulate an unsupported image file format for testing.
-

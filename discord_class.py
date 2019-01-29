@@ -682,9 +682,10 @@ def stat_full(*args, **kwargs):
     print('6', end=' ')
     sts.excel.close()
     sts.save()
+    """
     print('7',end=' ')
     ani = Animate(sts)
-    ani.draw_main()
+    ani.draw_main()"""
     print('done')
     return sts
 
@@ -694,9 +695,9 @@ def stat_full(*args, **kwargs):
 print('Pyyton')
 sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
-sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
+#sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')
-sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
+#sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
