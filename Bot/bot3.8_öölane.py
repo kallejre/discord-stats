@@ -1,3 +1,4 @@
+# coding: utf-8
 # Bot versioon 4. Eesmärk asjast aru saada.
 # Ühildub nüüd ka python 3.7-ga. Discord.py versioon 1.0 (poolik).
 import discord
@@ -7,16 +8,20 @@ import re
 import funk
 import random, time, pickle, os
 from discord_class import Stats
+import urllib.request
+import shlex
+from sys import exit
 
 
-# Helin = 392707534764376074
-Helin = '<@392707534764376074>'
+helin = '<@392707534764376074>'
 test='<@482189197671923713>'
 ago='<@366546170149076993>'
 BOT_PREFIX = ("?", "!")
-TOKEN = 'NDg2NDQ1MTA5NjQ3MjQ1MzMy.DnELrQ.WDT1RXBmKt61KbX9MgtoDYGgt8A'
+võti = 'NDg2NDQ1MTA5NjQ3MjQ1MzMy.DnEL'
+rõngas='rQ.WDT1RXBmKt61KbX9MgtoDYGgt8A'
 bot = commands.Bot(command_prefix=BOT_PREFIX,
                       description='Bot for tests')
+# Docs: https://discordpy.readthedocs.io/en/rewrite/
 # Link: https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
 # ATVS: Võimalus teoreetiliselt botti konfida serveri liidesest. KATKI!
 atvs=0
@@ -132,9 +137,41 @@ textid=[['Mine magama'],   # 0
  ['Ära istu arvuti taga, mine õue!'],   # 18
  ['Ära istu arvuti taga, mine õue!'],   # 19
  ['Ära istu arvuti taga, mine õue!'],   # 20
- ['Mine varsti magama!'],   # 21
- ['Mine varsti magama!'],   # 22
+ ['Mine varsti magama!','Mine varsti pelmeene keetma!'],   # 21
+ ['Mine varsti magama!','Mine varsti pelmeene keetma!','Mine varsti pelmeene praadima!'],   # 22
  ['Mine varsti magama!','Mine varsti pelmeene keetma!']]   # 23
+
+def ilma_output(asd):
+    msg='Kuupäev: '+asd['vt1dailyForecast']['validDate'][0].split('T')[0]+', \n'+asd['vt1dailyForecast']['dayOfWeek'][1]+':\n'
+    msg+=asd['vt1dailyForecast']['day']['narrative'][1]+'\n'
+    msg+=asd['vt1dailyForecast']['night']['dayPartName'][1]+':\n'
+    msg+=asd['vt1dailyForecast']['night']['narrative'][1]
+    return msg
+def ilma_output2(data):
+    # Kõigepealt millist infot koguda?
+    # id - koordinaadid
+    # Hetkeilm: (vt1observation)
+    #   Õhuniiskus
+    #   Temperatuur
+    #   Näiv temp.
+    #   Tuule suund, kiirus (kmh)
+    #   phrase
+    #   Sademed
+    # Ilmateade:
+    #   Asd
+    #   icon: Url: http://l.yimg.com/a/i/us/we/52/XX.gif
+    #   rh - suhteline õhuniiskus
+    #   Temperatuur
+    #   Näiv temp.
+    # vt1alerts - hoiatused
+    #   headline
+    
+    embed = discord.Embed(title="Hetkeilm Tallinnas", description=data['vt1observation']['phrase'], color=0x1ad6e0, type='rich')
+    embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/'+str(data['vt1observation']['icon'])+'.gif')
+    embed.add_field(name='Temperatuur '+str(data['vt1observation']['temperature'])+'C', value='Näiv temperatuur '+str(data['vt1observation']['feelsLike'])+'C', inline=False)
+    embed.add_field(name='Tuule suund '+str(data['vt1observation']['windDirCompass'])+'', value='Tuule kiirus '+str(round(data['vt1observation']['windSpeed']/3.6,1))+'m/s', inline=False)
+    embed.add_field(name='Õhuniiskus '+str(data['vt1observation']['humidity'])+'%', value='Kastepunkt '+str(data['vt1observation']['dewPoint'])+'C', inline=False)
+    return embed
 
 @bot.event
 async def on_message(message):
@@ -142,10 +179,12 @@ async def on_message(message):
     sisu=message.content
     #if str(message.channel) not in ['botnet', 'random']:
     #    return
-    uid=-int(message.author.id )
+    uid=int(message.author.id )
     user=message.author.name
+    if len(sisu)>2 and sisu[0]=='?':
+        print(str(message.created_at)[:-10], sisu,user, sep='\t')
+    if user.lower().startswith('kadri'): await message.add_reaction(u"\U0001F916")
     if sisu.startswith('?math'):
-        print('math by ',user)
         if user in blacklist:
             return await channel.send('blacklisted')
         a=' '.join(sisu.split()[1:])
@@ -159,18 +198,13 @@ async def on_message(message):
             await channel.send("Result: "+str(eval(result)))
         except Exception as err:await channel.send(err)
         return
-    if sisu.startswith('?ilm2'):  # {'lat': 59.43696079999999, 'lng': 24.7535747}
-        print('ilm2 by ',user)
+    elif sisu.startswith('?ilm2'):  # {'lat': 59.43696079999999, 'lng': 24.7535747}
         x={'lat': 59.43696079999999, 'lng': 24.7535747}
         asd=funk.ilm.weatherAPI(x['lat'],x['lng'])
-        msg='Kuupäev:\n'+asd['vt1dailyForecast']['validDate'][0].split('T')[0]+', '+asd['vt1dailyForecast']['dayOfWeek'][1]+':\n'
-        msg+=asd['vt1dailyForecast']['day']['narrative'][1]+'\n'
-        msg+=asd['vt1dailyForecast']['night']['dayPartName'][1]+':\n'
-        msg+=asd['vt1dailyForecast']['night']['narrative'][1]
-        await channel.send(msg)
+        msg=ilma_output2(asd)
+        await channel.send(embed=msg)
         return
-    if sisu.startswith('?ilm'):
-        print('ilm by ',user)
+    elif sisu.startswith('?ilm'):
         if user in blacklist:
             return await channel.send('blacklisted')
         a=' '.join(sisu.split()[1:])
@@ -185,15 +219,11 @@ async def on_message(message):
         stri="Asukoht: {0}\nLat: {1}, Lng: {2}".format(x2['results'][0]['formatted_address'],x['lat'],x['lng'])
         await channel.send(stri)
         asd=funk.ilm.weatherAPI(x['lat'],x['lng'])
-        print(a)
-        msg='Kuupäev: '+asd['vt1dailyForecast']['validDate'][0].split('T')[0]+', \n'+asd['vt1dailyForecast']['dayOfWeek'][1]+':\n'
-        msg+=asd['vt1dailyForecast']['day']['narrative'][1]+'\n'
-        msg+=asd['vt1dailyForecast']['night']['dayPartName'][1]+':\n'
-        msg+=asd['vt1dailyForecast']['night']['narrative'][1]
+        print(asd)
+        msg=ilma_output(asd)
         await channel.send(msg)
         return
-    if sisu.startswith('?help'):
-        print('help by ',user)
+    elif sisu.startswith('?help'):
         embed = discord.Embed(title="Not a nice bot", description="A Very un-Nice bot. List of commands are:", color=0x41e510)
 
         # embed.add_field(name="?add X Y", value="Gives the addition of **X** and **Y**", inline=False)
@@ -204,13 +234,17 @@ async def on_message(message):
         # embed.add_field(name="?cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
         embed.add_field(name="?spam", value="Mine magama", inline=False)
         embed.add_field(name="?wait", value="Spämmib rohkem", inline=False)
-        embed.add_field(name="?stats", value="Ei tööta", inline=False)
+        embed.add_field(name="?stats", value="Statistika", inline=False)
+        embed.add_field(name="?define", value="Ei guugelda, vaid ÕS-ib", inline=False)
+        embed.add_field(name="?pelmeen", value="Söö pelmeene", inline=False)
         # embed.add_field(name="?loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
         embed.add_field(name="?help", value="Gives this message", inline=False)
+        embed.add_field(name="tere", value="Teeb tuju heaks :)", inline=False)
 
         await channel.send(embed=embed)
-    if sisu.startswith('?wait'):
-        print('wait by ',user)
+    elif sisu.startswith('?pelmeen'):
+        return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
+    elif sisu.startswith('?wait'):
         if user in blacklist:
             return await channel.send('blacklisted')
         try:
@@ -223,7 +257,30 @@ async def on_message(message):
             await channel.send(''+str(x))
         except Exception as err:
             await channel.send(str(err))
-    if sisu.startswith('?spam'):
+    elif sisu.startswith('?customspam'):
+        # bot.get_channel(537315188039221301)
+        if user in blacklist:
+            return await channel.send('blacklisted')
+        try:
+            x=' '.join(sisu.split()[2:])
+            a=int(sisu.split()[1])
+            kanal2=channel
+            print(x)
+            print(sisu.split()[2])
+            if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>') :
+                idd=int(sisu.split()[2][2:-1])
+                kanal2=bot.get_channel(idd)
+                x=' '.join(sisu.split()[3:])
+            if a>120:
+                await channel.send('Vastu võetud '+str(x)+', esitamisel '+time.strftime('%d.%m %H:%M',time.localtime(time.time()+a)))
+            await asyncio.sleep(a)
+            # await channel.send('- '+str(x))
+            iad='<@'+str(abs(uid))+'> '
+            # iad=''
+            await kanal2.send(iad+str(x))
+        except Exception as err:
+            await channel.send(str(err))
+    elif sisu.startswith('?spam'):
         """
         juutuub = '://www.youtube.com/watch' in sisu or 'yt.be' in sisu
         if juutuub or 1:
@@ -233,13 +290,10 @@ async def on_message(message):
                     # await channel.send(random.choice(videod))
                     await channel.send('Kell on '+str(a.tm_hour)+':'+str(a.tm_min)+', mine magama!')
         """
-        print('spam by ',user)
         a=time.localtime()
         await channel.send('Kell on '+time.strftime('%H:%M',a)+', '+random.choice(textid[a.tm_hour]))
-        
     
-    if sisu.startswith('?stats'):
-        print('stats by ',user)
+    elif sisu.startswith('?stats'):
         commands=sisu.split()[1:]
         print(commands)
         if len(commands)==0:
@@ -283,8 +337,52 @@ async def on_message(message):
         else:
             await channel.send('No! Katkine asi. Proovi **stats help**')
         #await channel.send('No! Katkine asi.')
-    if sisu.lower().startswith('tere'):
-        print('tere by ',user)
+    elif sisu.startswith('?define'):
+        splt=sisu.split()[1:]
+        try:
+            asd=0
+            if len(splt)>=2:
+                if splt[-1].isdigit():
+                    asd=int(splt.pop(-1))
+            ms=' '.join(splt)
+            regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
+            adr=urllib.request.quote(ms)
+            adr='https://www.eki.ee/dict/ekss/index.cgi?Q='+adr
+            req = urllib.request.Request(adr)
+            response = urllib.request.urlopen(req)
+            the_page = response.read().decode('utf8')
+            matches = re.finditer(regex, the_page, re.MULTILINE)
+
+            for matchNum, match in enumerate(matches, start=1):
+                text=match.group()
+                break
+            try:
+                text=text.replace('<br>', '\n')
+            except Exception:
+                await channel.send('Tulemusi ei leitud.')
+                return
+            text2=re.sub('<[\s\S]*?>','',text)
+            if asd:
+                if len(text2)<1300:
+                    return await channel.send(text2)
+                else:
+                    return await channel.send('Liiga pikk vastus\n'+text2[:1300])
+            defin=re.split('\. [A-Z\d]',text2)[0]+'.'
+            await channel.send(defin)
+            return
+        except Exception as err:
+            await channel.send(err)
+            return
+    elif sisu.startswith('shutdown'):
+        print(uid, type(uid))
+        if int(uid)==482189197671923713:
+            await channel.send('shutdown...')
+            exit()
+            return
+        else:
+            await channel.send('no')
+    elif sisu.lower().startswith('tere'):
+        print(str(message.created_at)[:-10], sisu,user, sep='\t')
         if user.lower().startswith('tere'):return
         elif user.lower().startswith('kadri'):return await channel.send('<@'+str(abs(uid))+'>'+', **pelmeen!**')
         await channel.send('<@'+str(abs(uid))+'>'+', **tere!**')
@@ -305,11 +403,12 @@ async def info(ctx):
 async def list_servers():
     await bot.wait_until_ready()
     while not bot.is_closed():
-        print("\nCurrent servers:")
+        print("\nCurrent servers: ",end='')
         for server in bot.guilds:
-            print(server.name)
+            print(server.name,end=', ')
+        print()
         await asyncio.sleep(600)#600
     await ctx.send(embed=embed)
 
 bot.loop.create_task(list_servers())
-bot.run(TOKEN)
+bot.run(võti+rõngas)
