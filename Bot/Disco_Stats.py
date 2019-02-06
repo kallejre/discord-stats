@@ -1,19 +1,6 @@
 ﻿# -*- coding: UTF-8 -*-
 """
-Asjandus discordi json-arhiivi töötlemiseks.
-
-Klassikaline lähenemine statistikale.
-See variant proovib kõik tabelid panna ühte exceli tabelisse.
-Edasine arendamine käib siitkaudu
-
-Prototüüp animatsiooni tegemiseks.
-Ehitatud _classi põhjale
-    Kasutan pygame'i, teoreetiliselt saaks ka PIL-ga.
-Animatsioon:
-    Tulpdiagrammid,
-       1 tulp näitab inimeste osalust selles kanalis värviliselt.
-    1 tund=1 kaader
-       Plaan kasutada vajumist, näiteks postitus sisaldub statistikas 6 tundi.
+Discordi statistika objekti lugemise moodul.
 
 Stats.ajatabel_suur     Koosta suur tabel iga nime, kanali, kellaaja ja kuupäeva kohta.
 Stats.ajatabel_vaike    UI ajatabelite kuvamiseks
@@ -33,32 +20,6 @@ Stats.stat_tag          Tag statisika, kui palju on X->Y märkimisi.
 Stats.stat_tag2         Kahepoolse märkimise tabel.
 Stats.users             Põhiline muutuja, kus on kasutajate info.
 
-Nädalapäev: E = 0, P = 6
-Andmete kogumiseks: https://dht.chylex.com/
-Andmeformaat:
-data:
-    kanali kood
-        postituse kood.
-            m - sõnum
-            t - ajatempel millisekundites
-            u - kasutaja kohalik id
-            a - lisad
-                <index 0..>
-                url - veebiaadress faili, pildi, lingini
-            e - ka lisa
-                type - video, link, article, gifv, rich, image
-                url
-meta:
-    channels (dict)
-        kanali id
-            name
-            server
-    servers - serveri(te) info
-        name
-        type
-    userindex - list kasutajate ID-ga
-    users - dict kasutaja globaalse ID ja nime sidumine.
-        name - kasutaja kuvatav nimi
 """
 
 
@@ -648,5 +609,3 @@ def stat_full(*args, **kwargs):
     ani.draw_main()
     print('done')
     return sts
-
-
