@@ -127,15 +127,36 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
                     "xp06": {"Syva", "Kokku", "XP"},
                     "xp07": {"Syva", "Kokku", "XP"}}
 
-kategooriad_java = {"food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"},
-                    "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
-                    "random": {"Yldine", "Kokku"}, "setup": {"Yldine", "Kokku"},
-                    "stat": {"Yldine", "Kokku"},"teated": {"Yldine", "Kokku"},"music": {"Yldine", "Kokku"},
-                    "codera": {"Yldine", "Kokku"},"videod": {"Yldine", "Kokku"},
-                    "ülesanded": {"Kalmo", "Kokku"},"korraldus": {"Kalmo", "Kokku"}}
+kategooriad_java = {"setup": {"Yldine", "Kokku"}, 
+                    "general": {"Yldine", "Kokku"}, 
+                    "teated": {"Yldine", "Kokku"}, 
+                    "food": {"Yldine", "Kokku"}, 
+                    "ülesanded": {"Kalmo", "Kokku"}, 
+                    "meme": {"Yldine", "Kokku"}, 
+                    "pr00-hello": {"PR", "Kokku"}, 
+                    "teadaanded": {"Yldine", "Kokku"}, 
+                    "java": {"Kalmo", "Kokku"}, 
+                    "projekt": {"Yldine", "Kokku"}, 
+                    "ex02-cpu": {"EX", "Kokku"}, 
+                    "music": {"Yldine", "Kokku"}, 
+                    "codera": {"Yldine", "Kokku"}, 
+                    "ex01-id-code": {"EX", "Kokku"}, 
+                    "pr01-introduction": {"PR", "Kokku"}, 
+                    "korraldus": {"Kalmo", "Kokku"}, 
+                    "wat": {"Kalmo", "Kokku"}, 
+                    "random": {"Yldine", "Kokku"}, 
+                    "pr02-strings": {"PR", "Kokku"}, 
+                    "videod": {"Yldine", "Kokku"}}
 
-kategooriad_kaug = {"üld-vestlus": {"Yldine", "Kokku"}, "statsionaar": {"Yldine", "Kokku"},
-                    "kaugõpe": {"Yldine", "Kokku"}, "kasulik-info": {"Yldine", "Kokku"}}
+kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2semester", "Kokku"}, 
+                    "statsionaar": {"Yldine", "Kokku"}, 
+                    "kaugõpe": {"Yldine", "Kokku"}, 
+                    "kasulik-info": {"Yldine", "Kokku"}, 
+                    "operatsioonisüsteemid-ja-nende-haldamine": {"2semester", "Kokku"}, 
+                    "üld-vestlus": {"Yldine", "Kokku"}, 
+                    "arvutivõrgud": {"2semester", "Kokku"}, 
+                    "arvutid": {"2semester", "Kokku"}, 
+                    "kõrgem_matemaatika": {"2semester", "Kokku"}}
 
 
 
@@ -199,6 +220,7 @@ class Stats:
         Init-funktsioon on jagatud kaheks, sest teoreetiliselt võiks andmete lugemine ja enetav töötlemine olla eraldi.
         """
         f = open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', 'w', encoding='utf8')
+        # print(self.archive['meta']['channels'])
         print('Server','Channel','User','Timestamp','Message', file=f,sep='\t')
         for c in sorted(self.archive['data'], key=lambda x:(self.archive['meta']['channels'][x]['server'],x)):  # c = kanali id
             server_id=self.archive['meta']['channels'][c]['server']
@@ -656,7 +678,6 @@ def stat_full(*args, **kwargs):
     sts = Stats(*args, **kwargs)
     print('1', end=' ')
     sts.stat_weeks()
-    
     sts.times2_cleanup()
     sts.ajatabel_suur()
     print('2', end=' ')
@@ -666,8 +687,6 @@ def stat_full(*args, **kwargs):
     sts.out_tgf_tag()
     sts.out_users_json()
     sts.out_users_py()
-
-    
     print('4', end=' ')
     sts.stat_last_24()
     sts.stat_msg()
@@ -695,9 +714,9 @@ def stat_full(*args, **kwargs):
 print('Pyyton')
 sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
-#sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
+sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')
-#sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
+sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
