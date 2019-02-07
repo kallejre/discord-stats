@@ -12,7 +12,7 @@ from sys import exit
 import funk
 from discord.ext import commands
 import discord
-
+from bot_funk import *
 """
 Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid (+tugi kellaajale?).
@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Integreerid statistika ja boti koodid.
 """
 
-VERSION='4.0.0.1'
+VERSION='4.0.1.0'
 helin = '<@392707534764376074>'
 test = '<@482189197671923713>'
 ago = '<@366546170149076993>'
@@ -33,7 +33,6 @@ bot = commands.Bot(command_prefix=BOT_PREFIX,
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 # Link: https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
 kell = ''
-
 
 def stats_load(fname='d_stats.pkl'):
     """PKL -> Self. Terve objekti avamine."""
@@ -53,41 +52,6 @@ def stats_load(fname='d_stats.pkl'):
 from Disco_Stats import Stats
 data = stats_load()
 
-'''
-def base36encode(number):
-    """Converts an integer to a base36 string."""
-    alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    base36 = ''
-    sign = ''
-    if number < 0:
-        sign = '-'
-        number = -number
-    if 0 <= number < 36:
-        return sign + alphabet[number]
-    while number != 0:
-        number, i = divmod(number, 36)
-        base36 = alphabet[i] + base36
-    return sign + base36
-
-
-def atvs_init():
-    global atvs
-    pin = random.randint(60466176, 2176782330)
-    atvs = base36encode(pin)
-    print(atvs)
-
-
-def atvsvc(accessToken):
-    """Access Token Verification Service"""
-    global atvs
-    if accessToken.upper() == atvs:
-        atvs_init()
-        return True
-    else:
-        return False
-'''
-
-
 @bot.event
 async def on_ready():
     print('Logged in as')
@@ -95,21 +59,7 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 
-
-videod = ['https://youtu.be/q-q8HUtCM4w',  # Kesköödisko
-          'https://youtu.be/YEc19rkkMdg',  # Öö laps
-          'https://youtu.be/6iVEH8TIfB4',  # Meeletu öö
-          'https://youtu.be/YuBeBjqKSGQ',  # Öökuninganna aaria
-          'https://youtu.be/jWFXiBzcDBg',  # Caater Feat. Trinity - The Queen Of Night
-          'https://youtu.be/VL7MRMMbmug',  # Ei taha magama jääda
-          'https://youtu.be/8DNQRtmIMxk',  # Saturday night
-          'https://www.youtube.com/watch?v=dcnd55tLCv8',
-          'https://www.youtube.com/watch?v=ADmCFmYLns4',
-          'https://www.youtube.com/watch?v=uNSBq6hvU1s',
-          'https://www.youtube.com/watch?v=VOrEdIxGPoA',  # Tahan olla öö
-          'https://www.youtube.com/watch?v=egX9N8yOgaU']
-
-@client.command(name='bitcoin',
+@bot.command(name='bitcoin',
                 description="Uses Coindesk API to get BitCoin price in USD.",
                 brief="Returns BTC/USD.",
                 pass_context=True)
@@ -119,15 +69,15 @@ async def bitcoin():
         raw_response = await session.get(url)
         response = await raw_response.text()
         response = json.loads(response)
-        await client.say("Bitcoin price is: $" + response['bpi']['USD']['rate'])
+        await bot.say("Bitcoin price is: $" + response['bpi']['USD']['rate'])
 
 async def troll_task():
-    while not client.is_closed:
+    while not bot.is_closed:
         tt=10
         try:
-            await client.change_presence(game=Game(name="with humanoids"))
+            await bot.change_presence(game=Game(name="with humanoids"))
             await asyncio.sleep(tt)
-            await client.change_presence(game=Game(name="with animals"))
+            await bot.change_presence(game=Game(name="with animals"))
             await asyncio.sleep(tt)
         except websockets.exceptions.ConnectionClosed:
             return
@@ -137,7 +87,7 @@ async def add(ctx, a: int, b: int):
     await ctx.send(a+b)
 async def square(number):
     squared_value = int(number) * int(number)
-    await client.say(str(number) + " squared is " + str(squared_value))
+    await bot.say(str(number) + " squared is " + str(squared_value))
 
 @bot.command()
 async def multiply(ctx, a: int, b: int):
@@ -161,8 +111,7 @@ async def hi(ctx):
     await ctx.send(out)
     await ctx.send('I heard you! {1}, {0}'.format(t.mention,t.name))
     # await ctx.send('I heard you! {0} <@{1}>'.format(*str(ctx.author).split('#')))
-
-
+          
 def find_user(text):
     nimi = text
     if nimi[:2] == '<@':
@@ -188,44 +137,7 @@ def find_channel(kanal):
         return kanal
 
 
-blacklist = []
-
-textid = [['Mine magama'],  # 0
-          ['Mine magama'],  # 1
-          ['Mine magama'],  # 2
-          ['Mine magama'],  # 3
-          ['Mine magama', 'Mine prae pelmeene!'],  # 4
-          ['Mine magama'],  # 5
-          ['Mine magama'],  # 6
-          ['Ärka üles'],  # 7
-          ['Ärka üles'],  # 8
-          ['Ärka üles'],  # 9
-          ['Ärka üles'],  # 10
-          ['Ärka üles'],  # 11
-          ['Ärka üles', 'Mine prae pelmeene!'],  # 12
-          ['Head isu', 'Mine prae pelmeene!'],  # 13
-          ['Head isu', 'Mine prae pelmeene!'],  # 14
-          ['Head isu', 'Mine prae pelmeene!'],  # 15
-          ['Ära istu arvuti taga, mine õue!', 'Mine prae pelmeene!'],  # 16
-          ['Ära istu arvuti taga, mine õue!', 'Mine prae pelmeene!'],  # 17
-          ['Ära istu arvuti taga, mine õue!'],  # 18
-          ['Ära istu arvuti taga, mine õue!'],  # 19
-          ['Ära istu arvuti taga, mine õue!'],  # 20
-          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!'],  # 21
-          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!', 'Mine varsti pelmeene praadima!'],  # 22
-          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!']]  # 23
-
-
-def ilma_output(asd):
-    msg = 'Kuupäev: ' + asd['vt1dailyForecast']['validDate'][0].split('T')[0] + ', \n' + \
-          asd['vt1dailyForecast']['dayOfWeek'][1] + ':\n'
-    msg += asd['vt1dailyForecast']['day']['narrative'][1] + '\n'
-    msg += asd['vt1dailyForecast']['night']['dayPartName'][1] + ':\n'
-    msg += asd['vt1dailyForecast']['night']['narrative'][1]
-    return msg
-
-
-def ilma_output2(data):
+def ilma_output(data, location):
     # Kõigepealt millist infot koguda?
     # id - koordinaadid
     # Hetkeilm: (vt1observation)
@@ -236,7 +148,7 @@ def ilma_output2(data):
     #   phrase
     #   Sademed
     # Ilmateade:
-    #   Asd
+    #   data
     #   icon: Url: http://l.yimg.com/a/i/us/we/52/XX.gif
     #   rh - suhteline õhuniiskus
     #   Temperatuur
@@ -244,7 +156,7 @@ def ilma_output2(data):
     # vt1alerts - hoiatused
     #   headline
 
-    embed = discord.Embed(title="Hetkeilm Tallinnas", description=data['vt1observation']['phrase'], color=0x1ad6e0,
+    embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed,
                           type='rich')
     embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
     embed.add_field(name='Temperatuur ' + str(data['vt1observation']['temperature']) + 'C',
@@ -254,7 +166,20 @@ def ilma_output2(data):
                     inline=False)
     embed.add_field(name='Õhuniiskus ' + str(data['vt1observation']['humidity']) + '%',
                     value='Kastepunkt ' + str(data['vt1observation']['dewPoint']) + 'C', inline=False)
+    
+    embed.add_field(name=data['vt1dailyForecast']['dayOfWeek'][1], value=data['vt1dailyForecast']['day']['narrative'][1])
+    embed.add_field(name=data['vt1dailyForecast']['night']['dayPartName'][1], value=data['vt1dailyForecast']['night']['narrative'][1])
+    
+    achtung = []
+    if data['vt1alerts']:
+        for i in range(len(data['vt1alerts']['headline'])):
+            achtung.append(data['vt1alerts']['areaName'][i]+' - '+data['vt1alerts']['headline'][i])
+        achtung='\n'.join(achtung)
+    else: achtung='Puuduvad'
+    embed.add_field(name='Hoiatused:', value=achtung, inline=False)
+    
     return embed
+
 
 
 @bot.event
@@ -283,30 +208,23 @@ async def on_message(message):
         except Exception as err:
             await channel.send(err)
         return
-    elif sisu.startswith('?ilm2'):  # {'lat': 59.43696079999999, 'lng': 24.7535747}
-        x = {'lat': 59.43696079999999, 'lng': 24.7535747}
-        asd = funk.ilm.weatherAPI(x['lat'], x['lng'])
-        msg = ilma_output2(asd)
-        await channel.send(embed=msg)
-        return
     elif sisu.startswith('?ilm'):
         if user in blacklist:
             return await channel.send('blacklisted')
         a = ' '.join(sisu.split()[1:])
         if a == '':
-            await channel.send("ERROR: Asukoht on puudu.")
-            return
-        x2 = funk.coord(a)
-        if len(x2['results']) == 0:
-            await channel.send("ERROR: Asukohta ei leitud.")
-            return
-        x = x2['results'][0]['geometry']['location']
-        stri = "Asukoht: {0}\nLat: {1}, Lng: {2}".format(x2['results'][0]['formatted_address'], x['lat'], x['lng'])
-        await channel.send(stri)
+            x = {'lat': 59.43696079999999, 'lng': 24.7535747}
+            loc='Tallinn'
+        else:
+            x2 = funk.coord(a)
+            if len(x2['results']) == 0:
+                await channel.send("ERROR: Asukohta ei leitud.")
+                return
+            x = x2['results'][0]['geometry']['location']
+            loc=x2['results'][0]['formatted_address']
         asd = funk.ilm.weatherAPI(x['lat'], x['lng'])
-        print(asd)
-        msg = ilma_output(asd)
-        await channel.send(msg)
+        msg = ilma_output(asd, loc)
+        await channel.send(embed=msg)
         return
     elif sisu.startswith('?help'):
         embed = discord.Embed(title="Not a nice bot", description="A Very un-Nice bot. List of commands are:",
@@ -315,8 +233,7 @@ async def on_message(message):
         # embed.add_field(name="?add X Y", value="Gives the addition of **X** and **Y**", inline=False)
         # embed.add_field(name="?multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
         embed.add_field(name="?math <tehe>", value="Resolves math problems", inline=False)
-        embed.add_field(name="?ilm <asukoht>", value="Tagastab eestikeelse ilmateate homseks", inline=False)
-        embed.add_field(name="?ilm2", value="Tagastab homse ilmateate tallinna kohta", inline=False)
+        embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
         # embed.add_field(name="?cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
         embed.add_field(name="?spam", value="Mine magama", inline=False)
         embed.add_field(name="?wait", value="Spämmib rohkem", inline=False)
@@ -513,6 +430,7 @@ async def list_servers():
         await asyncio.sleep(600)  # 600
     await ctx.send(embed=embed)
 
+"""
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="nice bot", description="A Very Nice bot. List of commands are:", color=0xeee657)
@@ -526,8 +444,8 @@ async def help(ctx):
     embed.add_field(name="$info", value="Gives a little info about the bot", inline=False)
     embed.add_field(name="$loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
     embed.add_field(name="$help", value="Gives this message", inline=False)
-
     await ctx.send(embed=embed)
+    """
 bot.loop.create_task(list_servers())
 # client.loop.create_task(list_servers())
 # client.loop.create_task(troll_task())
