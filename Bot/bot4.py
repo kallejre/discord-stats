@@ -1,5 +1,5 @@
 # coding: utf-8
-# Bot versioon 4. Eesmärk asjast aru saada.
+# Bot versioon 4. Eesmärk midagi kasulikku teha.
 # Ühildub nüüd ka python 3.7-ga. Discord.py versioon 1.0 (poolik).
 import asyncio
 import os
@@ -13,6 +13,15 @@ import funk
 from discord.ext import commands
 import discord
 
+"""
+Asjad, mida muuta:
+    Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid (+tugi kellaajale?).
+    Customspam võtab nime ära.
+    Statistika andmete laadimine.
+    Integreerid statistika ja boti koodid.
+"""
+
+VERSION='4.0.0.1'
 helin = '<@392707534764376074>'
 test = '<@482189197671923713>'
 ago = '<@366546170149076993>'
@@ -23,8 +32,6 @@ bot = commands.Bot(command_prefix=BOT_PREFIX,
                    description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 # Link: https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
-# ATVS: Võimalus teoreetiliselt botti konfida serveri liidesest. KATKI!
-atvs = 0
 kell = ''
 
 
@@ -32,8 +39,11 @@ def stats_load(fname='d_stats.pkl'):
     """PKL -> Self. Terve objekti avamine."""
     global kell
     statbuf = os.stat(fname)
-    kell = time.localtime(statbuf.st_mtime)
-    kell = time.strftime('%d.%m.%Y %H:%M', kell)
+    
+    temp = time.strftime('%d.%m.%Y %H:%M', time.localtime(statbuf.st_mtime))
+    if kell==temp:
+        return False
+    kell = temp
     print("Modification time: {}".format(kell))
     with open(fname, 'rb') as f:
         print(f)
@@ -43,7 +53,7 @@ def stats_load(fname='d_stats.pkl'):
 from Disco_Stats import Stats
 data = stats_load()
 
-
+'''
 def base36encode(number):
     """Converts an integer to a base36 string."""
     alphabet = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ'
@@ -75,6 +85,7 @@ def atvsvc(accessToken):
         return True
     else:
         return False
+'''
 
 
 @bot.event
@@ -82,7 +93,6 @@ async def on_ready():
     print('Logged in as')
     print(bot.user.name)
     print(bot.user.id)
-    atvs_init()
     print('------')
 
 
@@ -97,9 +107,60 @@ videod = ['https://youtu.be/q-q8HUtCM4w',  # Kesköödisko
           'https://www.youtube.com/watch?v=ADmCFmYLns4',
           'https://www.youtube.com/watch?v=uNSBq6hvU1s',
           'https://www.youtube.com/watch?v=VOrEdIxGPoA',  # Tahan olla öö
-          'https://www.youtube.com/watch?v=egX9N8yOgaU',
+          'https://www.youtube.com/watch?v=egX9N8yOgaU']
 
-          ]
+@client.command(name='bitcoin',
+                description="Uses Coindesk API to get BitCoin price in USD.",
+                brief="Returns BTC/USD.",
+                pass_context=True)
+async def bitcoin():
+    url = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
+    async with aiohttp.ClientSession() as session:  # Async HTTP request
+        raw_response = await session.get(url)
+        response = await raw_response.text()
+        response = json.loads(response)
+        await client.say("Bitcoin price is: $" + response['bpi']['USD']['rate'])
+
+async def troll_task():
+    while not client.is_closed:
+        tt=10
+        try:
+            await client.change_presence(game=Game(name="with humanoids"))
+            await asyncio.sleep(tt)
+            await client.change_presence(game=Game(name="with animals"))
+            await asyncio.sleep(tt)
+        except websockets.exceptions.ConnectionClosed:
+            return
+
+@bot.command()
+async def add(ctx, a: int, b: int):
+    await ctx.send(a+b)
+async def square(number):
+    squared_value = int(number) * int(number)
+    await client.say(str(number) + " squared is " + str(squared_value))
+
+@bot.command()
+async def multiply(ctx, a: int, b: int):
+    await ctx.send(a*b)
+
+@bot.command()
+async def divide(ctx, a: float, b: float):
+    await ctx.send(a/b)
+
+@bot.command()
+async def hi(ctx):
+    t=ctx.author
+    his=ctx.history(limit=5)
+    out=''
+    async for msg in his:
+        out+=''.join([msg.author.name,': ',msg.content])+'\n'
+        # print(dir(msg))
+    out=out.replace('@','(ät)')
+    print(out)
+    print(t.name, t.id)
+    await ctx.send(out)
+    await ctx.send('I heard you! {1}, {0}'.format(t.mention,t.name))
+    # await ctx.send('I heard you! {0} <@{1}>'.format(*str(ctx.author).split('#')))
 
 
 def find_user(text):
@@ -442,14 +503,32 @@ async def info(ctx):
 
 async def list_servers():
     await bot.wait_until_ready()
+    global data
     while not bot.is_closed():
         print("\nCurrent servers: ", end='')
         for server in bot.guilds:
             print(server.name, end=', ')
         print()
+        data=stats_load()
         await asyncio.sleep(600)  # 600
     await ctx.send(embed=embed)
 
+@bot.command()
+async def help(ctx):
+    embed = discord.Embed(title="nice bot", description="A Very Nice bot. List of commands are:", color=0xeee657)
 
+    embed.add_field(name="$add X Y", value="Gives the addition of **X** and **Y**", inline=False)
+    embed.add_field(name="$multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
+    embed.add_field(name="$help", value="Gives this message", inline=False)
+    embed.add_field(name="$math", value="Resolves maath problems", inline=False)
+    embed.add_field(name="$ilm", value="Tagastab estikeelse ilmateate homseks", inline=False)
+    embed.add_field(name="$cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
+    embed.add_field(name="$info", value="Gives a little info about the bot", inline=False)
+    embed.add_field(name="$loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
+    embed.add_field(name="$help", value="Gives this message", inline=False)
+
+    await ctx.send(embed=embed)
 bot.loop.create_task(list_servers())
+# client.loop.create_task(list_servers())
+# client.loop.create_task(troll_task())
 bot.run(võti + rõngas)
