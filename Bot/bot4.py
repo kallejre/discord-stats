@@ -1,5 +1,5 @@
 # coding: utf-8
-# Bot versioon 3.8. Eesmärk asjast aru saada.
+# Bot versioon 4. Eesmärk asjast aru saada.
 # Ühildub nüüd ka python 3.7-ga. Discord.py versioon 1.0 (poolik).
 import asyncio
 import os
