@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Integreerid statistika ja boti koodid.
 """
 
-VERSION='4.0.1.0'
+VERSION='4.0.2.0'
 helin = '<@392707534764376074>'
 test = '<@482189197671923713>'
 ago = '<@366546170149076993>'
@@ -58,6 +58,49 @@ async def on_ready():
     print(bot.user.name)
     print(bot.user.id)
     print('------')
+def gg(sisu):
+    sisu='?guugle tallinna linn'
+    splt = sisu.split()[1:]
+    # try:
+    asd = 0
+    """if len(splt) >= 2:
+        if splt[-1].isdigit():
+            asd = int(splt.pop(-1))"""
+    ms = ' '.join(splt)
+    regex = re.compile('<div class="g">')
+    adr = urllib.request.quote(ms)
+    adr = 'https://www.startpage.com/do/search?q=' + adr
+    print(adr)
+    user_agent = ''#'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
+    headers={'User-Agent':user_agent,}
+
+    req=urllib.request.Request(adr,None,headers)
+    # req = urllib.request.Request(adr)
+    response = urllib.request.urlopen(req)
+    the_page = response.read().decode('utf8').split('<ol class="list-flat">')[1].split('</ol>')[0]
+    the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>','').split('</li>')
+    print(len(the_page))
+    #matches = regex.split(the_page)
+    #zz=matches.pop(0)
+    #del zz
+    for m in range(len(the_page)):
+        text=the_page[m]
+        try:
+            text = text.replace('<br>', '\n')
+        except Exception:pass
+        the_page[m] = re.sub('<[\s\S]*?>', ' ', text)
+    if 1:
+        for m in the_page[:3]:
+            print(len(m))
+            m=m.replace('&lt;','<').replace('&nbsp;',' ').replace('&gt;','>')
+            hd,li=m.strip().split('  \n \n ')
+            link,desc=li.split(' \n \n\n \n \n ')
+            print(hd,': ',desc,' - ',link)
+    # defin = re.split('\. [A-Z\d]', text2)[0] + '.'
+    # print(defin)
+    # except Exception as err:
+    # print(err)
+
 
 @bot.command(name='bitcoin',
                 description="Uses Coindesk API to get BitCoin price in USD.",
