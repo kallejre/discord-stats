@@ -1824,6 +1824,21 @@ seal on ka kalmo ainete kanalid.
 *iadb11 2018*: <https://www.facebook.com/groups/309927762890560/>
 *iaib14 2018*: <https://www.facebook.com/groups/343067233097535/>
 *iabb 2018*: <https://www.facebook.com/groups/1283860858420393/>
+0	541541492628652034	491192543321522187	1549483127	kas siin aines ka mingi moodle juba valmis?
+0	541541492628652034	481778359043358720	1549483161	õppejõud täna kirjutas:
+0	541541492628652034	481778359043358720	1549483163	edmundlaugassontoday at 8:41 pm
+moodles on testid ja wikist lingitud materjalid - seal ei ole midagi rohkem kui wikis, pigem vähem
+hetkel veel kolitakse kursuseid üle hitsa moodlest taltechi moodlesse
+6 testi tuleb ja iga testiga on 1 nädal aega teha
+0	541541492628652034	481778359043358720	1549483180	liitu aine discordi grupiga, wikis link olemas mu meelest.
+0	541541492628652034	491192543321522187	1549484379	ma ei saa sellest lehest eriti aru, millal meil esimene test tuleb?
+0	541541492628652034	481778359043358720	1549484403	pole veel välja kuulutatud. eks annab teada, ma usun.
+0	541541492628652034	491192543321522187	1549484604	selge, tänud
+0	541541492628652034	268817928835694593	1549540549	mis wiki lehe url on?
+0	541541492628652034	257216582793560065	1549540567	https://wiki.itcollege.ee/index.php/category:operatsioonis%c3%bcsteemide_administreerimine_ja_sidumine
+0	541541492628652034	257216582793560065	1549540617	peaks vist olema...
+0	541541492628652034	268817928835694593	1549540695	thx
+0	541541492628652034	392707534764376074	1549549676	keegi teab kus kaugõppe opsys videosalvestused on? ning mis selle slacki aadress on?
 0	541541630692556800	486905181468885002	1549187130	keegi rühmatööd ei taha koos teha/ kellegil liikmeid puudu? oleks huvitatud.
 0	541541630692556800	414440233577349153	1549238480	it eetikas on rühmatood??
 0	541541630692556800	414440233577349153	1549238484	meil küll ei olnud

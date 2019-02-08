@@ -128,25 +128,26 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
                     "xp07": {"Syva", "Kokku", "XP"}}
 
 kategooriad_java = {"setup": {"Yldine", "Kokku"}, 
-                    "general": {"Yldine", "Kokku"}, 
-                    "teated": {"Yldine", "Kokku"}, 
-                    "food": {"Yldine", "Kokku"}, 
                     "ülesanded": {"Kalmo", "Kokku"}, 
-                    "meme": {"Yldine", "Kokku"}, 
-                    "pr00-hello": {"PR", "Kokku"}, 
-                    "teadaanded": {"Yldine", "Kokku"}, 
-                    "java": {"Kalmo", "Kokku"}, 
-                    "projekt": {"Yldine", "Kokku"}, 
-                    "ex02-cpu": {"EX", "Kokku"}, 
-                    "music": {"Yldine", "Kokku"}, 
                     "codera": {"Yldine", "Kokku"}, 
                     "ex01-id-code": {"EX", "Kokku"}, 
-                    "pr01-introduction": {"PR", "Kokku"}, 
+                    "ex02-cpu": {"EX", "Kokku"}, 
+                    "food": {"Yldine", "Kokku"}, 
+                    "general": {"Yldine", "Kokku"}, 
+                    "java": {"Kalmo", "Kokku"}, 
                     "korraldus": {"Kalmo", "Kokku"}, 
-                    "wat": {"Kalmo", "Kokku"}, 
-                    "random": {"Yldine", "Kokku"}, 
+                    "meme": {"Yldine", "Kokku"}, 
+                    "music": {"Yldine", "Kokku"}, 
+                    "pr00-hello": {"PR", "Kokku"}, 
+                    "pr01-introduction": {"PR", "Kokku"}, 
                     "pr02-strings": {"PR", "Kokku"}, 
-                    "videod": {"Yldine", "Kokku"}}
+                    "projekt": {"Yldine", "Kokku"}, 
+                    "random": {"Yldine", "Kokku"}, 
+                    "stat": {"Yldine", "Kokku"}, 
+                    "teadaanded": {"Yldine", "Kokku"}, 
+                    "teated": {"Yldine", "Kokku"}, 
+                    "videod": {"Yldine", "Kokku"},
+                    "wat": {"Kalmo", "Kokku"}}
 
 kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2semester", "Kokku"}, 
                     "statsionaar": {"Yldine", "Kokku"}, 
@@ -712,7 +713,7 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
-sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
+# sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')
