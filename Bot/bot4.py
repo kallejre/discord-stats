@@ -10,7 +10,7 @@ import time
 import urllib.request
 from sys import exit
 import funk
-import html.unescape
+import html
 from discord.ext import commands
 import discord
 from bot_funk import *  # Hunnik konstante
@@ -74,7 +74,6 @@ def gg(sisu):
         the_page[m] = re.sub('<[\s\S]*?>', ' ', text)
     tulem=[]
     for m in the_page[:3]:
-        print(len(m))
         m=html.unescape(m)
         hd,li=m.strip().split('  \n \n ')
         t=li.split(' \n \n\n \n \n ')
@@ -83,7 +82,9 @@ def gg(sisu):
             link=t[0]
         else:
             link,desc=t
-        tulem.append(''.join(['**',hd,'**\n',desc,' - <',link,'>']))
+        if link[:4]!='http':
+            link='http://'+link
+        tulem.append([hd,desc,'<'+link+'>'])
     return tulem
 
 
@@ -293,8 +294,7 @@ async def on_message(message):
         await channel.send(embed=msg)
         return
     elif sisu.startswith('?help'):
-        embed=help()
-        await channel.send(embed=embed)
+        return await channel.send(embed=help())
     elif sisu.startswith('?pelmeen'):
         return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
     elif sisu.startswith('?wait'):
@@ -311,7 +311,6 @@ async def on_message(message):
         except Exception as err:
             await channel.send(str(err))
     elif sisu.startswith('?customspam'):
-        # bot.get_channel(537315188039221301)
         if user in blacklist:
             return await channel.send('blacklisted')
         try:
@@ -325,9 +324,8 @@ async def on_message(message):
                 kanal2 = bot.get_channel(idd)
                 x = ' '.join(sisu.split()[3:])
             if a > 120:
-                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + time.strftime('%d.%m %H:%M',
-                                                                                              time.localtime(
-                                                                                                  time.time() + a)))
+                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' +
+                                    time.strftime('%d.%m %H:%M', time.localtime( time.time() + a)))
             await asyncio.sleep(a)
             # await channel.send('- '+str(x))
             iad = '<@' + str(abs(uid)) + '> '
@@ -336,22 +334,20 @@ async def on_message(message):
         except Exception as err:
             await channel.send(str(err))
     elif sisu.startswith('?spam'):
-        """
-        juutuub = '://www.youtube.com/watch' in sisu or 'yt.be' in sisu
-        if juutuub or 1:
-            if message.author.mention in [Helin, ago] or 1:
-                a=time.localtime()
-                if a.tm_hour in range(6):#1,6):
-                    # await channel.send(random.choice(videod))
-                    await channel.send('Kell on '+str(a.tm_hour)+':'+str(a.tm_min)+', mine magama!')
-        """
         a = time.localtime()
         await channel.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
-
     elif sisu.startswith('?stats'):
         return await channel.send(stats(sisu))
     elif sisu.startswith('?define'):
         return await channel.send(define(sisu))
+    elif sisu.startswith('?search'):
+        reso=gg(sisu)
+        if len(reso)==1 and reso[0].startswith('You did it!'):
+            return await channel.send(reso[0])
+        embed = discord.Embed(title='Otsingutulemused', description=sisu[8:], color=0xd81c0f, type='rich')
+        for res in reso:
+            embed.add_field(name=res[0], value=res[1]+'\n'+res[2], inline=False)
+        return await channel.send(embed=embed)
     elif sisu.startswith('shutdown'):
         print(uid, type(uid))
         if int(uid) == 482189197671923713:

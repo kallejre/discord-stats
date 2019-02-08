@@ -24,9 +24,9 @@ textid = [['Mine magama'],  # 0
           ['Ärka üles'],  # 10
           ['Ärka üles'],  # 11
           ['Ärka üles', 'Mine prae pelmeene!'],  # 12
-          ['Head isu', 'Mine prae pelmeene!'],  # 13
-          ['Head isu', 'Mine prae pelmeene!'],  # 14
-          ['Head isu', 'Mine prae pelmeene!'],  # 15
+          ['Head isu', 'Mine prae pelmeene!', 'Bon appétit'],  # 13
+          ['Head isu', 'Mine prae pelmeene!', 'Bon appétit'],  # 14
+          ['Head isu', 'Mine prae pelmeene!', 'Bon appétit'],  # 15
           ['Ära istu arvuti taga, mine õue!', 'Mine prae pelmeene!'],  # 16
           ['Ära istu arvuti taga, mine õue!', 'Mine prae pelmeene!'],  # 17
           ['Ära istu arvuti taga, mine õue!'],  # 18
