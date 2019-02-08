@@ -60,15 +60,11 @@ def gg(sisu):
     req=urllib.request.Request(adr,None,{'User-Agent': ''})
     response = urllib.request.urlopen(req)
     htm = response.read().decode('utf8')
-    try:
-        the_page = htm.split('<ol class="list-flat">')[1].split('</ol>')[0]
+    try: the_page = htm.split('<ol class="list-flat">')[1].split('</ol>')[0]
     except IndexError:
         return ['You did it! [Tulemusi ei leitud.]\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
     the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>','').split('</li>')
-    for m in range(len(the_page)):
-        text=the_page[m]
-        text = text.replace('<br>', '\n')
-        the_page[m] = re.sub('<[\s\S]*?>', ' ', text)
+    for m in range(len(the_page)): the_page[m] = re.sub('<[\s\S]*?>', ' ', the_page[m].replace('<br>', '\n'))
     tulem=[]
     for m in the_page[:3]:
         m=html.unescape(m)
@@ -77,13 +73,10 @@ def gg(sisu):
         if len(t)==1:
             desc='[Kirjeldus puudub]'
             link=t[0]
-        else:
-            link,desc=t
-        if link[:4]!='http':
-            link='http://'+link
+        else: link,desc=t
+        if link[:4]!='http': link='http://'+link
         tulem.append([hd,desc,'<'+link+'>'])
     return tulem
-
 
 def help():
     embed = discord.Embed(title="Botten von Bot", description="Mõnede enam-vähem avalikult saadaval käskude nimekiri:", color=0x41e510)
@@ -101,17 +94,7 @@ def help():
     embed.add_field(name="tere", value="Teeb tuju heaks :smiley:", inline=False)
     return embed
     
-@bot.command(name='bitcoin',
-                description="Uses Coindesk API to get BitCoin price in USD.",
-                brief="Returns BTC/USD.",
-                pass_context=True)
-async def bitcoin():
-    url = 'https://api.coindesk.com/v1/bpi/currentprice/BTC.json'
-    async with aiohttp.ClientSession() as session:  # Async HTTP request
-        raw_response = await session.get(url)
-        response = await raw_response.text()
-        response = json.loads(response)
-        await bot.say("Bitcoin price is: $" + response['bpi']['USD']['rate'])
+
 
 async def troll_task():
     while not bot.is_closed:
@@ -121,10 +104,7 @@ async def troll_task():
             await asyncio.sleep(tt)
             await bot.change_presence(game=Game(name="with animals"))
             await asyncio.sleep(tt)
-        except websockets.exceptions.ConnectionClosed:
-            return
-
-
+        except websockets.exceptions.ConnectionClosed: return
 
 @bot.command()
 async def hi(ctx):
@@ -138,19 +118,16 @@ async def hi(ctx):
     out=out.replace('@','(ät)')
     await ctx.send(out)
     await ctx.send('I heard you! {1}, {0}'.format(t.mention,t.name))
-    # await ctx.send('I heard you! {0} <@{1}>'.format(*str(ctx.author).split('#')))
           
 def find_user(text):
     nimi = text
     if nimi[:2] == '<@':
         uid = data.archive['meta']['userindex'].index(nimi[2:-1])
-    elif nimi == '-1':
-        uid = int(nimi)
+    elif nimi == '-1': return -1
     elif nimi.isdecimal():
         if len(nimi) > 10:
             uid = data.archive['meta']['userindex'].index(nimi)
-        else:
-            uid = int(nimi)
+        else: return int(nimi)
     else:
         uid = list(filter(lambda x: nimi.lower() in data.users[x]['n'].lower(), data.users))[0]
     return uid
@@ -294,37 +271,30 @@ async def on_message(message):
     elif sisu.startswith('?pelmeen'):
         return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
     elif sisu.startswith('?wait'):
-        if user in blacklist: return await channel.send('blacklisted')
-        try:
-            x = ' '.join(sisu.split()[2:])
-            a = int(sisu.split()[1])
-            if a > 120:
-                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' +
-                                    time.strftime('%d.%m %H:%M',  time.localtime( time.time() + a)))
-            await asyncio.sleep(a)
-            # await channel.send('- '+str(x))
-            await channel.send('' + str(x))
-        except Exception as err:
-            await channel.send(str(err))
-    elif sisu.startswith('?customspam'):
         # ?wait 3 ?customspam 5 wut #katse
         if user in blacklist:
             return await channel.send('blacklisted')
         try:
             x = ' '.join(sisu.split()[2:])
-            a = int(sisu.split()[1])
+            a=sisu.split()[1]
+            if a.isdecimal():
+                 a = int(a)
+                 stamp=time.strftime('%d.%m.%y %H:%M', time.localtime( time.time() + a))
+            else:
+                time.strptime(a,'%d.%m.%y %H:%M')
+                stamp=a
+                # TODO: Asju, mida parandada.
+                # Meil on käes sihtaeg. Läbimõelda, kuidas saada kätte sekundid.
+                
             kanal2 = channel
             if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
                 idd = int(sisu.split()[2][2:-1])
                 kanal2 = bot.get_channel(idd)
                 x = ' '.join(sisu.split()[3:])
             if a > 120:
-                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' +
-                                    time.strftime('%d.%m %H:%M', time.localtime( time.time() + a)))
+                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
             await asyncio.sleep(a)
-            # await channel.send('- '+str(x))
-            iad = '<@' + str(abs(uid)) + '> '
-            # iad=''
+            iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]
             await kanal2.send(iad + str(x))
         except Exception as err:
             await channel.send(str(err))
@@ -363,13 +333,9 @@ async def list_servers():
     await bot.wait_until_ready()
     global data
     while not bot.is_closed():
-        print("Current servers: ", end='')
-        for server in bot.guilds:
-            print(server.name, end=', ')
-        print()
+        print("Current servers: "+', '.join(list(map(lambda x:x.name,bot.guilds))))
         d=stats_load()
-        if d[0]:
-            data=d[1]
+        if d[0]: data=d[1]
         await asyncio.sleep(600)  # 600
     await ctx.send(embed=embed)
 
