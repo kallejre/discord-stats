@@ -26,39 +26,37 @@ Asjad, mida muuta:
 VERSION='4.0.2.0'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
-# Link: https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
+Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
+    'permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot'
 kell = ''
 
 def stats_load(fname='d_stats.pkl'):
     """PKL -> Self. Terve objekti avamine."""
-    global kell
+    global kell,videod,textid,blacklist
     statbuf = os.stat(fname)
-    
     temp = time.strftime('%d.%m.%Y %H:%M', time.localtime(statbuf.st_mtime))
     if kell==temp:
         return (False,'')
     kell = temp
-    print("Modification time: {}".format(kell))
+    print("Modification time: {}, filename: ".format(kell)+fname)
     with open(fname, 'rb') as f:
-        print(f)
         x = pickle.load(f)
+    from bot_funk import videod,textid,blacklist
     return (True,x)
 
 data = stats_load()[1]
 
 @bot.event
 async def on_ready():
-    print('Logged in as')
-    print(bot.user.name)
-    print(bot.user.id)
-    print('------')
+    print('Logged in as  '+bot.user.name)
+    print('User ID '+bot.user.id)
+    print('----------------------')
 def gg(sisu):
     splt = sisu.split()[1:]
     ms = ' '.join(splt)
     regex = re.compile('<div class="g">')
     adr = urllib.request.quote(ms)
     adr = 'https://www.startpage.com/do/search?q=' + adr
-    # print(adr)
     req=urllib.request.Request(adr,None,{'User-Agent': ''})
     response = urllib.request.urlopen(req)
     htm = response.read().decode('utf8')
@@ -88,21 +86,19 @@ def gg(sisu):
 
 
 def help():
-    embed = discord.Embed(title="Not a nice bot", description="A Very un-Nice bot. List of commands are:",
-                          color=0x41e510)
-    # embed.add_field(name="?add X Y", value="Gives the addition of **X** and **Y**", inline=False)
-    # embed.add_field(name="?multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
-    embed.add_field(name="?math <tehe>", value="Resolves math problems", inline=False)
+    embed = discord.Embed(title="Botten von Bot", description="Mõnede enam-vähem avalikult saadaval käskude nimekiri:", color=0x41e510)
+    embed.add_field(name="?math <tehe>", value="Kalkulaator", inline=False)
     embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
-    # embed.add_field(name="?cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
-    embed.add_field(name="?spam", value="Mine magama", inline=False)
-    embed.add_field(name="?wait", value="Spämmib rohkem", inline=False)
-    embed.add_field(name="?stats", value="Statistika", inline=False)
-    embed.add_field(name="?define", value="Ei guugelda, vaid ÕS-ib", inline=False)
-    embed.add_field(name="?pelmeen", value="Söö pelmeene", inline=False)
-    # embed.add_field(name="?loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
-    embed.add_field(name="?help", value="Gives this message", inline=False)
-    embed.add_field(name="tere", value="Teeb tuju heaks :)", inline=False)
+    embed.add_field(name="?spam", value="Saadab magama.", inline=False)
+    embed.add_field(name="?customspam <aeg> [kanal] <sõnum>", value="Ajastatud toimingute defineerimine.", inline=False)
+    embed.add_field(name="?wait <aeg> <sõnum>", value="Spämmib rohkem.", inline=False)
+    embed.add_field(name="?stats [help]", value="Statistika", inline=False)
+    embed.add_field(name="?search <märksõnad>", value="Guugeldab.", inline=False)
+    embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
+    embed.add_field(name="?pelmeen", value="Söö pelmeene.", inline=False)
+    embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
+    embed.add_field(name="?invite", value="Link boti lisamiseks.", inline=False)
+    embed.add_field(name="tere", value="Teeb tuju heaks :smiley:", inline=False)
     return embed
     
 @bot.command(name='bitcoin',
@@ -132,15 +128,14 @@ async def troll_task():
 
 @bot.command()
 async def hi(ctx):
+    # Väike demo ajaloo vaatamisest.
+    # Koosolekute ID: 499629361713119264
     t=ctx.author
     his=ctx.history(limit=5)
     out=''
     async for msg in his:
         out+=''.join([msg.author.name,': ',msg.content])+'\n'
-        # print(dir(msg))
     out=out.replace('@','(ät)')
-    print(out)
-    print(t.name, t.id)
     await ctx.send(out)
     await ctx.send('I heard you! {1}, {0}'.format(t.mention,t.name))
     # await ctx.send('I heard you! {0} <@{1}>'.format(*str(ctx.author).split('#')))
@@ -148,7 +143,6 @@ async def hi(ctx):
 def find_user(text):
     nimi = text
     if nimi[:2] == '<@':
-        print(nimi[2:-1])
         uid = data.archive['meta']['userindex'].index(nimi[2:-1])
     elif nimi == '-1':
         uid = int(nimi)
@@ -207,11 +201,9 @@ def stats(sisu):
     commands = sisu.split()[1:]
     kanalid='**Võimalikud ühendatud kanalid:**\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
     help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kanal>\n\n'+kanalid
-    print(commands)
     if len(commands) == 0: return('Viga, katkine asi. \n'+help_msg)
     if commands[0] == 'help': return(help_msg)
     elif commands[0] == 'edetabel':
-        print(commands[1])
         if len(commands) < 3:
             if len(commands) == 1: return('Viga, kasutajatunnus on puudu.')
             if len(commands) == 2: num = 5
@@ -219,7 +211,6 @@ def stats(sisu):
         nimi = commands[1]
         try: uid = find_user(nimi)
         except IndexError: return('Viga, kasutajat ei leitud.')
-        print(nimi, uid)
         return('Statistika ' + kell + ' seisuga.' + data.graafid_edetabel(uid, uid=True, n=num))
     elif commands[0] == 'ajatabel':
         if len(commands) < 3:
@@ -264,7 +255,7 @@ async def on_message(message):
     uid = int(message.author.id)
     user = message.author.name
     if len(sisu) > 2 and sisu[0] == '?':
-        print(str(message.created_at)[:-10], sisu, user, sep='\t')
+        print(str(message.created_at)[:-10]+'    '+sisu, user, sep='\t')
     if user.lower().startswith('kadri'): await message.add_reaction(u"\U0001F916")
     if sisu.startswith('?math'):
         if user in blacklist:
@@ -352,47 +343,30 @@ async def on_message(message):
         for res in reso:  # Kuvab 3 tulemust.
             embed.add_field(name=res[0], value=res[1]+'\n'+res[2], inline=False)
         return await channel.send(embed=embed)
+    elif sisu.startswith('?invite'):
+        return await channel.send('Call me maybe:\n'+Link)
     elif sisu.strip()=='shutdown':
-        print(uid, type(uid))
         if int(uid) == 482189197671923713:
-            await channel.send('shutdown...')
+            await channel.send('Shutdown...')
             exit()
             return
         else:
             await channel.send('no')
     elif sisu.lower().startswith('tere'):
-        print(str(message.created_at)[:-10], sisu, user, sep='\t')
+        print(str(message.created_at)[:-10], sisu, user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
-
-
-@bot.event
-async def on_command_error(ctx, error):
-    print(str(error))
-
-
-@bot.command()
-async def info(ctx):
-    embed = discord.Embed(title="nice bot", description="Nicest bot there is ever.", color=0xeee657)
-    # give info about you here
-    embed.add_field(name="Author", value="#3355")
-    # Shows the number of servers the bot is member of.
-    embed.add_field(name="Server count", value=f"{len(bot.guilds)}")
-    # give users a link to invite thsi bot to their server
-    embed.add_field(name="Invite", value="[Invite link](<insert your OAuth invitation link here>)")
-    await ctx.send(embed=embed)
 
 
 async def list_servers():
     await bot.wait_until_ready()
     global data
     while not bot.is_closed():
-        print("\nCurrent servers: ", end='')
+        print("Current servers: ", end='')
         for server in bot.guilds:
             print(server.name, end=', ')
         print()
-        
         d=stats_load()
         if d[0]:
             data=d[1]
@@ -401,39 +375,5 @@ async def list_servers():
 
 
 bot.loop.create_task(list_servers())
-# client.loop.create_task(list_servers())
-# client.loop.create_task(troll_task())
+# bot.loop.create_task(troll_task())
 bot.run(võti + rõngas)
-
-"""
-@bot.command()
-async def add(ctx, a: int, b: int):
-    await ctx.send(a+b)
-async def square(number):
-    squared_value = int(number) * int(number)
-    await bot.say(str(number) + " squared is " + str(squared_value))
-
-@bot.command()
-async def multiply(ctx, a: int, b: int):
-    await ctx.send(a*b)
-
-@bot.command()
-async def divide(ctx, a: float, b: float):
-    await ctx.send(a/b)
-
-@bot.command()
-async def help(ctx):
-    embed = discord.Embed(title="nice bot", description="A Very Nice bot. List of commands are:", color=0xeee657)
-
-    embed.add_field(name="$add X Y", value="Gives the addition of **X** and **Y**", inline=False)
-    embed.add_field(name="$multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
-    embed.add_field(name="$help", value="Gives this message", inline=False)
-    embed.add_field(name="$math", value="Resolves maath problems", inline=False)
-    embed.add_field(name="$ilm", value="Tagastab estikeelse ilmateate homseks", inline=False)
-    embed.add_field(name="$cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
-    embed.add_field(name="$info", value="Gives a little info about the bot", inline=False)
-    embed.add_field(name="$loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
-    embed.add_field(name="$help", value="Gives this message", inline=False)
-    await ctx.send(embed=embed)
-"""
-
