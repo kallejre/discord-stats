@@ -36,15 +36,15 @@ def stats_load(fname='d_stats.pkl'):
     
     temp = time.strftime('%d.%m.%Y %H:%M', time.localtime(statbuf.st_mtime))
     if kell==temp:
-        return False
+        return (False,'')
     kell = temp
     print("Modification time: {}".format(kell))
     with open(fname, 'rb') as f:
         print(f)
         x = pickle.load(f)
-    return x
+    return (True,x)
 
-data = stats_load()
+data = stats_load()[1]
 
 @bot.event
 async def on_ready():
@@ -203,8 +203,9 @@ def define(sisu):
     except Exception as err:
         return err
 def stats(sisu):
+    global data
     commands = sisu.split()[1:]
-    kanalid='Võimalikud ühendatud kanalid:\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
+    kanalid='**Võimalikud ühendatud kanalid:**\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
     help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kanal>\n\n'+kanalid
     print(commands)
     if len(commands) == 0: return('Viga, katkine asi. \n'+help_msg)
@@ -228,6 +229,11 @@ def stats(sisu):
         kanal = find_channel(commands[2])
         try: return('Statistika ' + kell + ' seisuga.\n'+'```' + data.ajatabel_vaiksem(uid, kanal) + '```')
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
+    elif commands[0] == 'update':
+        d=stats_load()
+        if d[0]:
+            data=d[1]
+            return 'Uuendatud '+kell
     else: return('Viga, katkine asi.\n'+help_msg)
 def ilma_output(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
@@ -386,7 +392,10 @@ async def list_servers():
         for server in bot.guilds:
             print(server.name, end=', ')
         print()
-        data=stats_load()
+        
+        d=stats_load()
+        if d[0]:
+            data=d[1]
         await asyncio.sleep(600)  # 600
     await ctx.send(embed=embed)
 
