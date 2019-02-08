@@ -6,7 +6,7 @@ import os
 import pickle
 import random
 import re
-import time
+import time, datetime
 import urllib.request
 from sys import exit
 import funk
@@ -271,7 +271,7 @@ async def on_message(message):
     elif sisu.startswith('?pelmeen'):
         return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
     elif sisu.startswith('?wait'):
-        # ?wait 3 ?customspam 5 wut #katse
+        # time.mktime(datetime.datetime.today().timetuple())
         if user in blacklist:
             return await channel.send('blacklisted')
         try:
@@ -281,11 +281,9 @@ async def on_message(message):
                  a = int(a)
                  stamp=time.strftime('%d.%m.%y %H:%M', time.localtime( time.time() + a))
             else:
-                time.strptime(a,'%d.%m.%y %H:%M')
-                stamp=a
-                # TODO: Asju, mida parandada.
-                # Meil on käes sihtaeg. Läbimõelda, kuidas saada kätte sekundid.
-                
+                stamp=str(a)
+                a=time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y %H:%M').timetuple())-int(time.time())
+            # Siit edasi parandada.
             kanal2 = channel
             if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
                 idd = int(sisu.split()[2][2:-1])
