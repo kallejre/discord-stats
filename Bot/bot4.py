@@ -49,7 +49,7 @@ data = stats_load()[1]
 @bot.event
 async def on_ready():
     print('Logged in as  '+bot.user.name)
-    print('User ID '+bot.user.id)
+    print('User ID '+str(bot.user.id))
     print('----------------------')
 def gg(sisu):
     splt = sisu.split()[1:]
@@ -80,21 +80,18 @@ def gg(sisu):
 
 def help():
     embed = discord.Embed(title="Botten von Bot", description="Mõnede enam-vähem avalikult saadaval käskude nimekiri:", color=0x41e510)
-    embed.add_field(name="?math <tehe>", value="Kalkulaator", inline=False)
-    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
-    embed.add_field(name="?spam", value="Saadab magama.", inline=False)
-    embed.add_field(name="?customspam <aeg> [kanal] <sõnum>", value="Ajastatud toimingute defineerimine.", inline=False)
-    embed.add_field(name="?wait <aeg> <sõnum>", value="Spämmib rohkem.", inline=False)
-    embed.add_field(name="?stats [help]", value="Statistika", inline=False)
-    embed.add_field(name="?search <märksõnad>", value="Guugeldab.", inline=False)
     embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
-    embed.add_field(name="?pelmeen", value="Söö pelmeene.", inline=False)
     embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
+    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
     embed.add_field(name="?invite", value="Link boti lisamiseks.", inline=False)
+    embed.add_field(name="?math <tehe>", value="Kalkulaator", inline=False)
+    embed.add_field(name="?pelmeen", value="Söö pelmeene.", inline=False)
+    embed.add_field(name="?search <märksõnad>", value="Guugeldab.", inline=False)
+    embed.add_field(name="?spam", value="Saadab magama.", inline=False)
+    embed.add_field(name="?stats [help]", value="Statistika", inline=False)
+    embed.add_field(name="?wait  <aeg> [kanal] <sõnum>", value="Ajastatud toimingute defineerimine.", inline=False)
     embed.add_field(name="tere", value="Teeb tuju heaks :smiley:", inline=False)
     return embed
-    
-
 
 async def troll_task():
     while not bot.is_closed:
@@ -159,16 +156,12 @@ def define(sisu):
         for matchNum, match in enumerate(matches, start=1):
             text = match.group()
             break
-        try:
-            text = text.replace('<br>', '\n')
-        except Exception:
-            return 'Tulemusi ei leitud.'
+        try: text = text.replace('<br>', '\n')
+        except Exception: return 'Tulemusi ei leitud.'
         text2 = re.sub('<[\s\S]*?>', '', text)
         if asd:
-            if len(text2) < 1300:
-                return text2
-            else:
-                return 'Liiga pikk vastus\n' + text2[:1300]
+            if len(text2) < 1300: return text2
+            else: return 'Liiga pikk vastus\n' + text2[:1300]
         defin = re.split('\. [A-Z\d]', text2)[0] + '.'
         return defin
     except Exception as err:
@@ -201,7 +194,7 @@ def stats(sisu):
         d=stats_load()
         if d[0]:
             data=d[1]
-            return 'Uuendatud '+kell
+        return 'Uuendatud '+kell
     else: return('Viga, katkine asi.\n'+help_msg)
 def ilma_output(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
@@ -279,10 +272,10 @@ async def on_message(message):
             a=sisu.split()[1]
             if a.isdecimal():
                  a = int(a)
-                 stamp=time.strftime('%d.%m.%y %H:%M', time.localtime( time.time() + a))
+                 stamp=time.strftime('%d.%m.%y_%H:%M', time.localtime( time.time() + a))
             else:
                 stamp=str(a)
-                a=time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y %H:%M').timetuple())-int(time.time())
+                a=time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y_%H:%M').timetuple())-int(time.time())
             # Siit edasi parandada.
             kanal2 = channel
             if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
@@ -321,7 +314,7 @@ async def on_message(message):
         else:
             await channel.send('no')
     elif sisu.lower().startswith('tere'):
-        print(str(message.created_at)[:-10], sisu, user, sep='\t')  # Logimine tere jaoks.
+        print(str(message.created_at)[:-10]+'    '+sisu, user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
