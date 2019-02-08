@@ -10,9 +10,11 @@ import time
 import urllib.request
 from sys import exit
 import funk
+import html.unescape
 from discord.ext import commands
 import discord
-from bot_funk import *
+from bot_funk import *  # Hunnik konstante
+from Disco_Stats import Stats  # Spetsiaalne moodul statistika kuvamiseks. Natuke erinev originaalist.
 """
 Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid (+tugi kellaajale?).
@@ -22,12 +24,6 @@ Asjad, mida muuta:
 """
 
 VERSION='4.0.2.0'
-helin = '<@392707534764376074>'
-test = '<@482189197671923713>'
-ago = '<@366546170149076993>'
-BOT_PREFIX = ("?", "!")
-võti = 'NDg2NDQ1MTA5NjQ3MjQ1MzMy.DnEL'
-rõngas = 'rQ.WDT1RXBmKt61KbX9MgtoDYGgt8A'
 bot = commands.Bot(command_prefix=BOT_PREFIX,
                    description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
@@ -49,7 +45,6 @@ def stats_load(fname='d_stats.pkl'):
         x = pickle.load(f)
     return x
 
-from Disco_Stats import Stats
 data = stats_load()
 
 @bot.event
@@ -59,49 +54,57 @@ async def on_ready():
     print(bot.user.id)
     print('------')
 def gg(sisu):
-    sisu='?guugle tallinna linn'
     splt = sisu.split()[1:]
-    # try:
-    asd = 0
-    """if len(splt) >= 2:
-        if splt[-1].isdigit():
-            asd = int(splt.pop(-1))"""
     ms = ' '.join(splt)
     regex = re.compile('<div class="g">')
     adr = urllib.request.quote(ms)
     adr = 'https://www.startpage.com/do/search?q=' + adr
-    print(adr)
-    user_agent = ''#'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.9.0.7) Gecko/2009021910 Firefox/3.0.7'
-    headers={'User-Agent':user_agent,}
-
-    req=urllib.request.Request(adr,None,headers)
-    # req = urllib.request.Request(adr)
+    # print(adr)
+    req=urllib.request.Request(adr,None,{'User-Agent': ''})
     response = urllib.request.urlopen(req)
-    the_page = response.read().decode('utf8').split('<ol class="list-flat">')[1].split('</ol>')[0]
+    htm = response.read().decode('utf8')
+    try:
+        the_page = htm.split('<ol class="list-flat">')[1].split('</ol>')[0]
+    except IndexError:
+        return ['You did it!\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
     the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>','').split('</li>')
-    print(len(the_page))
-    #matches = regex.split(the_page)
-    #zz=matches.pop(0)
-    #del zz
     for m in range(len(the_page)):
         text=the_page[m]
-        try:
-            text = text.replace('<br>', '\n')
-        except Exception:pass
+        text = text.replace('<br>', '\n')
         the_page[m] = re.sub('<[\s\S]*?>', ' ', text)
-    if 1:
-        for m in the_page[:3]:
-            print(len(m))
-            m=m.replace('&lt;','<').replace('&nbsp;',' ').replace('&gt;','>')
-            hd,li=m.strip().split('  \n \n ')
-            link,desc=li.split(' \n \n\n \n \n ')
-            print(hd,': ',desc,' - ',link)
-    # defin = re.split('\. [A-Z\d]', text2)[0] + '.'
-    # print(defin)
-    # except Exception as err:
-    # print(err)
+    tulem=[]
+    for m in the_page[:3]:
+        print(len(m))
+        m=html.unescape(m)
+        hd,li=m.strip().split('  \n \n ')
+        t=li.split(' \n \n\n \n \n ')
+        if len(t)==1:
+            desc='[Kirjeldus puudub]'
+            link=t[0]
+        else:
+            link,desc=t
+        tulem.append(''.join(['**',hd,'**\n',desc,' - <',link,'>']))
+    return tulem
 
 
+def help():
+    embed = discord.Embed(title="Not a nice bot", description="A Very un-Nice bot. List of commands are:",
+                          color=0x41e510)
+    # embed.add_field(name="?add X Y", value="Gives the addition of **X** and **Y**", inline=False)
+    # embed.add_field(name="?multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
+    embed.add_field(name="?math <tehe>", value="Resolves math problems", inline=False)
+    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
+    # embed.add_field(name="?cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
+    embed.add_field(name="?spam", value="Mine magama", inline=False)
+    embed.add_field(name="?wait", value="Spämmib rohkem", inline=False)
+    embed.add_field(name="?stats", value="Statistika", inline=False)
+    embed.add_field(name="?define", value="Ei guugelda, vaid ÕS-ib", inline=False)
+    embed.add_field(name="?pelmeen", value="Söö pelmeene", inline=False)
+    # embed.add_field(name="?loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
+    embed.add_field(name="?help", value="Gives this message", inline=False)
+    embed.add_field(name="tere", value="Teeb tuju heaks :)", inline=False)
+    return embed
+    
 @bot.command(name='bitcoin',
                 description="Uses Coindesk API to get BitCoin price in USD.",
                 brief="Returns BTC/USD.",
@@ -125,20 +128,7 @@ async def troll_task():
         except websockets.exceptions.ConnectionClosed:
             return
 
-@bot.command()
-async def add(ctx, a: int, b: int):
-    await ctx.send(a+b)
-async def square(number):
-    squared_value = int(number) * int(number)
-    await bot.say(str(number) + " squared is " + str(squared_value))
 
-@bot.command()
-async def multiply(ctx, a: int, b: int):
-    await ctx.send(a*b)
-
-@bot.command()
-async def divide(ctx, a: float, b: float):
-    await ctx.send(a/b)
 
 @bot.command()
 async def hi(ctx):
@@ -179,40 +169,77 @@ def find_channel(kanal):
     else:
         return kanal
 
+def define(sisu):
+    splt = sisu.split()[1:]
+    try:
+        asd = 0
+        if len(splt) >= 2:
+            if splt[-1].isdigit():
+                asd = int(splt.pop(-1))
+        ms = ' '.join(splt)
+        regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
+        adr = urllib.request.quote(ms)
+        adr = 'https://www.eki.ee/dict/ekss/index.cgi?Q=' + adr
+        req = urllib.request.Request(adr)
+        response = urllib.request.urlopen(req)
+        the_page = response.read().decode('utf8')
+        matches = re.finditer(regex, the_page, re.MULTILINE)
 
+        for matchNum, match in enumerate(matches, start=1):
+            text = match.group()
+            break
+        try:
+            text = text.replace('<br>', '\n')
+        except Exception:
+            return 'Tulemusi ei leitud.'
+        text2 = re.sub('<[\s\S]*?>', '', text)
+        if asd:
+            if len(text2) < 1300:
+                return text2
+            else:
+                return 'Liiga pikk vastus\n' + text2[:1300]
+        defin = re.split('\. [A-Z\d]', text2)[0] + '.'
+        return defin
+    except Exception as err:
+        return err
+def stats(sisu):
+    commands = sisu.split()[1:]
+    kanalid='Võimalikud ühendatud kanalid:\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
+    help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kanal>\n\n'+kanalid
+    print(commands)
+    if len(commands) == 0: return('Viga, katkine asi. \n'+help_msg)
+    if commands[0] == 'help': return(help_msg)
+    elif commands[0] == 'edetabel':
+        print(commands[1])
+        if len(commands) < 3:
+            if len(commands) == 1: return('Viga, kasutajatunnus on puudu.')
+            if len(commands) == 2: num = 5
+        else: num = int(commands[2])
+        nimi = commands[1]
+        try: uid = find_user(nimi)
+        except IndexError: return('Viga, kasutajat ei leitud.')
+        print(nimi, uid)
+        return('Statistika ' + kell + ' seisuga.' + data.graafid_edetabel(uid, uid=True, n=num))
+    elif commands[0] == 'ajatabel':
+        if len(commands) < 3:
+            return('Viga, vaja on kasutajat ja kanalit.')
+        try: uid = find_user(commands[1])
+        except IndexError: return('Viga, kasutajat ei leitud.')
+        kanal = find_channel(commands[2])
+        try: return('Statistika ' + kell + ' seisuga.\n'+'```' + data.ajatabel_vaiksem(uid, kanal) + '```')
+        except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
+    else: return('Viga, katkine asi.\n'+help_msg)
 def ilma_output(data, location):
-    # Kõigepealt millist infot koguda?
-    # id - koordinaadid
-    # Hetkeilm: (vt1observation)
-    #   Õhuniiskus
-    #   Temperatuur
-    #   Näiv temp.
-    #   Tuule suund, kiirus (kmh)
-    #   phrase
-    #   Sademed
-    # Ilmateade:
-    #   data
-    #   icon: Url: http://l.yimg.com/a/i/us/we/52/XX.gif
-    #   rh - suhteline õhuniiskus
-    #   Temperatuur
-    #   Näiv temp.
-    # vt1alerts - hoiatused
-    #   headline
-
-    embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed,
-                          type='rich')
+    embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
     embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
     embed.add_field(name='Temperatuur ' + str(data['vt1observation']['temperature']) + 'C',
                     value='Näiv temperatuur ' + str(data['vt1observation']['feelsLike']) + 'C', inline=False)
     embed.add_field(name='Tuule suund ' + str(data['vt1observation']['windDirCompass']) + '',
-                    value='Tuule kiirus ' + str(round(data['vt1observation']['windSpeed'] / 3.6, 1)) + 'm/s',
-                    inline=False)
+                    value='Tuule kiirus ' + str(round(data['vt1observation']['windSpeed'] / 3.6, 1)) + 'm/s', inline=False)
     embed.add_field(name='Õhuniiskus ' + str(data['vt1observation']['humidity']) + '%',
                     value='Kastepunkt ' + str(data['vt1observation']['dewPoint']) + 'C', inline=False)
-    
     embed.add_field(name=data['vt1dailyForecast']['dayOfWeek'][1], value=data['vt1dailyForecast']['day']['narrative'][1])
     embed.add_field(name=data['vt1dailyForecast']['night']['dayPartName'][1], value=data['vt1dailyForecast']['night']['narrative'][1])
-    
     achtung = []
     if data['vt1alerts']:
         for i in range(len(data['vt1alerts']['headline'])):
@@ -220,10 +247,7 @@ def ilma_output(data, location):
         achtung='\n'.join(achtung)
     else: achtung='Puuduvad'
     embed.add_field(name='Hoiatused:', value=achtung, inline=False)
-    
     return embed
-
-
 
 @bot.event
 async def on_message(message):
@@ -261,8 +285,7 @@ async def on_message(message):
         else:
             x2 = funk.coord(a)
             if len(x2['results']) == 0:
-                await channel.send("ERROR: Asukohta ei leitud.")
-                return
+                return await channel.send("ERROR: Asukohta ei leitud.")
             x = x2['results'][0]['geometry']['location']
             loc=x2['results'][0]['formatted_address']
         asd = funk.ilm.weatherAPI(x['lat'], x['lng'])
@@ -270,36 +293,18 @@ async def on_message(message):
         await channel.send(embed=msg)
         return
     elif sisu.startswith('?help'):
-        embed = discord.Embed(title="Not a nice bot", description="A Very un-Nice bot. List of commands are:",
-                              color=0x41e510)
-
-        # embed.add_field(name="?add X Y", value="Gives the addition of **X** and **Y**", inline=False)
-        # embed.add_field(name="?multiply X Y", value="Gives the multiplication of **X** and **Y**", inline=False)
-        embed.add_field(name="?math <tehe>", value="Resolves math problems", inline=False)
-        embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
-        # embed.add_field(name="?cat", value="Gives a cute cat gif to lighten up the mood.", inline=False)
-        embed.add_field(name="?spam", value="Mine magama", inline=False)
-        embed.add_field(name="?wait", value="Spämmib rohkem", inline=False)
-        embed.add_field(name="?stats", value="Statistika", inline=False)
-        embed.add_field(name="?define", value="Ei guugelda, vaid ÕS-ib", inline=False)
-        embed.add_field(name="?pelmeen", value="Söö pelmeene", inline=False)
-        # embed.add_field(name="?loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
-        embed.add_field(name="?help", value="Gives this message", inline=False)
-        embed.add_field(name="tere", value="Teeb tuju heaks :)", inline=False)
-
+        embed=help()
         await channel.send(embed=embed)
     elif sisu.startswith('?pelmeen'):
         return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
     elif sisu.startswith('?wait'):
-        if user in blacklist:
-            return await channel.send('blacklisted')
+        if user in blacklist: return await channel.send('blacklisted')
         try:
             x = ' '.join(sisu.split()[2:])
             a = int(sisu.split()[1])
             if a > 120:
-                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + time.strftime('%d.%m %H:%M',
-                                                                                              time.localtime(
-                                                                                                  time.time() + a)))
+                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' +
+                                    time.strftime('%d.%m %H:%M',  time.localtime( time.time() + a)))
             await asyncio.sleep(a)
             # await channel.send('- '+str(x))
             await channel.send('' + str(x))
@@ -344,89 +349,9 @@ async def on_message(message):
         await channel.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
 
     elif sisu.startswith('?stats'):
-        commands = sisu.split()[1:]
-        print(commands)
-        if len(commands) == 0:
-            await channel.send('No! Katkine asi. Proovi **stats help**')
-            return
-        if commands[0] == 'help':
-            await channel.send('No! Katkine asi. \n**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n'
-                               '?stats ajatabel <kanal>')
-        elif commands[0] == 'edetabel':
-            print(commands[1])
-            if len(commands) < 3:
-                if len(commands) == 1:
-                    await channel.send('Viga, kasutajatunnus on puudu')
-                    return
-                if len(commands) == 2:
-                    num = 5
-            else:
-                num = int(commands[2])
-            nimi = commands[1]
-            try:
-                uid = find_user(nimi)
-            except IndexError:
-                await channel.send('Kasutajat ei leitud.')
-                return
-            print(nimi, uid)
-            await channel.send('Statistika ' + kell + ' seisuga.')
-            await channel.send(data.graafid_edetabel(uid, uid=True, n=num))
-        elif commands[0] == 'ajatabel':
-            # ajatabel_vaiksem
-            if len(commands) < 3:
-                await channel.send('Vaja on kasutajat ja kanalit')
-                return
-            try:
-                uid = find_user(commands[1])
-            except IndexError:
-                await channel.send('Kasutajat ei leitud.')
-                return
-            kanal = find_channel(commands[2])
-            await channel.send('Statistika ' + kell + ' seisuga.')
-            try:
-                await channel.send('```' + data.ajatabel_vaiksem(uid, kanal) + '```')
-            except KeyError:
-                await channel.send(
-                    """Tundmatu kanal. Vt alla.\n Ühendatud kanalid:\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`""")
-        else:
-            await channel.send('No! Katkine asi. Proovi **stats help**')
-        # await channel.send('No! Katkine asi.')
+        return await channel.send(stats(sisu))
     elif sisu.startswith('?define'):
-        splt = sisu.split()[1:]
-        try:
-            asd = 0
-            if len(splt) >= 2:
-                if splt[-1].isdigit():
-                    asd = int(splt.pop(-1))
-            ms = ' '.join(splt)
-            regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
-            adr = urllib.request.quote(ms)
-            adr = 'https://www.eki.ee/dict/ekss/index.cgi?Q=' + adr
-            req = urllib.request.Request(adr)
-            response = urllib.request.urlopen(req)
-            the_page = response.read().decode('utf8')
-            matches = re.finditer(regex, the_page, re.MULTILINE)
-
-            for matchNum, match in enumerate(matches, start=1):
-                text = match.group()
-                break
-            try:
-                text = text.replace('<br>', '\n')
-            except Exception:
-                await channel.send('Tulemusi ei leitud.')
-                return
-            text2 = re.sub('<[\s\S]*?>', '', text)
-            if asd:
-                if len(text2) < 1300:
-                    return await channel.send(text2)
-                else:
-                    return await channel.send('Liiga pikk vastus\n' + text2[:1300])
-            defin = re.split('\. [A-Z\d]', text2)[0] + '.'
-            await channel.send(defin)
-            return
-        except Exception as err:
-            await channel.send(err)
-            return
+        return await channel.send(define(sisu))
     elif sisu.startswith('shutdown'):
         print(uid, type(uid))
         if int(uid) == 482189197671923713:
@@ -437,9 +362,7 @@ async def on_message(message):
             await channel.send('no')
     elif sisu.lower().startswith('tere'):
         print(str(message.created_at)[:-10], sisu, user, sep='\t')
-        if user.lower().startswith('tere'):
-            return
-        elif user.lower().startswith('kadri'):
+        if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
 
@@ -473,7 +396,28 @@ async def list_servers():
         await asyncio.sleep(600)  # 600
     await ctx.send(embed=embed)
 
+
+bot.loop.create_task(list_servers())
+# client.loop.create_task(list_servers())
+# client.loop.create_task(troll_task())
+bot.run(võti + rõngas)
+
 """
+@bot.command()
+async def add(ctx, a: int, b: int):
+    await ctx.send(a+b)
+async def square(number):
+    squared_value = int(number) * int(number)
+    await bot.say(str(number) + " squared is " + str(squared_value))
+
+@bot.command()
+async def multiply(ctx, a: int, b: int):
+    await ctx.send(a*b)
+
+@bot.command()
+async def divide(ctx, a: float, b: float):
+    await ctx.send(a/b)
+
 @bot.command()
 async def help(ctx):
     embed = discord.Embed(title="nice bot", description="A Very Nice bot. List of commands are:", color=0xeee657)
@@ -488,8 +432,5 @@ async def help(ctx):
     embed.add_field(name="$loop", value="Args: key, time, funk, args (ainult ilm ja math)", inline=False)
     embed.add_field(name="$help", value="Gives this message", inline=False)
     await ctx.send(embed=embed)
-    """
-bot.loop.create_task(list_servers())
-# client.loop.create_task(list_servers())
-# client.loop.create_task(troll_task())
-bot.run(võti + rõngas)
+"""
+
