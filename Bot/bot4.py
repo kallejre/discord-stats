@@ -20,12 +20,11 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid (+tugi kellaajale?).
     Customspam võtab nime ära.
     Statistika andmete laadimine.
-    Integreerid statistika ja boti koodid.
+    Integreerida statistika ja boti koodid.
 """
 
 VERSION='4.0.2.0'
-bot = commands.Bot(command_prefix=BOT_PREFIX,
-                   description='Bot for tests')
+bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 # Link: https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot
 kell = ''
@@ -66,7 +65,7 @@ def gg(sisu):
     try:
         the_page = htm.split('<ol class="list-flat">')[1].split('</ol>')[0]
     except IndexError:
-        return ['You did it!\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
+        return ['You did it! [Tulemusi ei leitud.]\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
     the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>','').split('</li>')
     for m in range(len(the_page)):
         text=the_page[m]
@@ -311,14 +310,13 @@ async def on_message(message):
         except Exception as err:
             await channel.send(str(err))
     elif sisu.startswith('?customspam'):
+        # ?wait 3 ?customspam 5 wut #katse
         if user in blacklist:
             return await channel.send('blacklisted')
         try:
             x = ' '.join(sisu.split()[2:])
             a = int(sisu.split()[1])
             kanal2 = channel
-            print(x)
-            print(sisu.split()[2])
             if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
                 idd = int(sisu.split()[2][2:-1])
                 kanal2 = bot.get_channel(idd)
@@ -343,12 +341,12 @@ async def on_message(message):
     elif sisu.startswith('?search'):
         reso=gg(sisu)
         if len(reso)==1 and reso[0].startswith('You did it!'):
-            return await channel.send(reso[0])
+            return await channel.send(reso[0])  # Tulemusi ei leitud.
         embed = discord.Embed(title='Otsingutulemused', description=sisu[8:], color=0xd81c0f, type='rich')
-        for res in reso:
+        for res in reso:  # Kuvab 3 tulemust.
             embed.add_field(name=res[0], value=res[1]+'\n'+res[2], inline=False)
         return await channel.send(embed=embed)
-    elif sisu.startswith('shutdown'):
+    elif sisu.strip()=='shutdown':
         print(uid, type(uid))
         if int(uid) == 482189197671923713:
             await channel.send('shutdown...')
