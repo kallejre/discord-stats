@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE LexicalResource SYSTEM "http://globalwordnet.github.io/schemas/WN-LMF-1.0.dtd">
+<LexicalResource
+    xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <Lexicon confidenceScore="1.0" email="heili.orav@ut.ee" id="estwn" label="Estonian Wordnet" language="et" license="https://creativecommons.org/licenses/by-sa/" note="Work in progress. Previous name for this dataset was 'koondbaas 74'." status="unchecked" version="2.1.0.wip">
+        <LexicalEntry id="w526582">
+            <Lemma partOfSpeech="n" writtenForm="" />
+            <Sense id="s--n1" status="unchecked" synset="estwn-et-5275-n" />
+        </LexicalEntry>
+        <LexicalEntry id="w526583">
+            <Lemma partOfSpeech="n" writtenForm="õäöü" />
+            <Sense id="s-õäöü-n1" status="unchecked" synset="estwn-et-5275-n" />
+        </LexicalEntry>
+        <LexicalEntry id="w526584">
+            <Lemma partOfSpeech="n" writtenForm="0-tüüpi grammatika" />
+            <Sense id="s-0-tüüpi_grammatika-n1" status="unchecked" synset="estwn-et-44468-n" />
+        </LexicalEntry>
+    <LexicalEntry id="w797879">
+            <Lemma partOfSpeech="n" writtenForm="β-kiirgus" />
+            <Sense id="s-β-kiirgus-n1" status="unchecked" synset="estwn-et-83938-n" />
+        </LexicalEntry>
+        <LexicalEntry id="w797884">
+            <Lemma partOfSpeech="n" writtenForm="β-lagunemine" />
+            <Sense id="s-β-lagunemine-n1" status="unchecked" synset="estwn-et-83940-n" />
+        </LexicalEntry>
+        <LexicalEntry id="w797881">
+            <Lemma partOfSpeech="n" writtenForm="β-osake" />
+            <Sense id="s-β-osake-n1" status="unchecked" synset="estwn-et-83939-n" />
+        </LexicalEntry>
+        <LexicalEntry id="w797887">
+            <Lemma partOfSpeech="n" writtenForm="β-raud" />
+            <Sense id="s-β-raud-n1" status="unchecked" synset="estwn-et-83942-n" />
+        </LexicalEntry>
+        <LexicalEntry id="w798130">
+            <Lemma partOfSpeech="n" writtenForm="δ-elektron" />
+            <Sense id="s-δ-elektron-n1" status="unchecked" synset="estwn-et-84028-n" />
+        </LexicalEntry>
+        <Synset confidenceScore="0.5" dc:type="C" id="estwn-et-10000-n" ili="" status="checked">
+            <Definition language="et" sourceSense="s-laba-n1">tööriista, eseme vm. lai ja lame osa</Definition>
+            <SynsetRelation confidenceScore="1.0" relType="hypernym" status="unchecked" target="estwn-et-22447-n" />
+        </Synset>
+        <Synset confidenceScore="0.5" dc:type="C" id="estwn-et-10001-n" ili="" status="checked">
+            <Definition language="et" sourceSense="s-laba-n2">jala- v. käelaba; neid kattev suka, jalatsi v. kinda osa</Definition>
+            <SynsetRelation confidenceScore="1.0" relType="hypernym" status="unchecked" target="estwn-et-1793-n" />
+            <SynsetRelation confidenceScore="1.0" relType="similar" status="unchecked" target="estwn-et-53576-n" />
+        </Synset>
+    <Synset confidenceScore="0.5" dc:type="C" id="estwn-et-18629-n" ili="" status="checked">
+            <Definition language="et" sourceSense="s-lipuvargus-n1">pulmas lapuliste ja langude vaheline mäng. Lapud püüavad justkui pulmi nurja ajada peiu lippu ära varastades, lapuliste ülesandeks on lippu kaitsta</Definition>
+            <SynsetRelation confidenceScore="1.0" relType="hypernym" status="unchecked" target="estwn-et-21930-n" />
+        </Synset>
+        <Synset confidenceScore="1.0" dc:type="C" id="estwn-et-1862-n" ili="i112219" status="checked">
+            <Definition language="et" sourceSense="s-valu-n1">füüsilise vigastuse v. haiguse sümptom</Definition>
+            <ILIDefinition>füüsilise vigastuse v. haiguse sümptom</ILIDefinition>
+            <SynsetRelation confidenceScore="1.0" relType="be_in_state" status="unchecked" target="estwn-et-58255-n" />
+            <SynsetRelation confidenceScore="1.0" relType="be_in_state" status="unchecked" target="estwn-et-58019-a" />
+            <SynsetRelation confidenceScore="1.0" relType="hypernym" status="unchecked" target="estwn-et-2334-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62427-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-66610-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-70167-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-74081-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62399-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-83854-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-42046-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62388-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-4502-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-4503-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-5827-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-6520-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-6879-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-8839-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-13429-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-15528-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-25936-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-40111-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-42013-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-42014-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-45905-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-45906-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-45990-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46045-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46049-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46175-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46365-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46388-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46399-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46400-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-46402-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-49968-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-50734-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-51409-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-51567-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-51588-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-51591-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-58561-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-61490-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62370-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62371-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62372-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62373-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62374-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62375-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62376-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62377-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62378-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62380-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62381-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62382-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62384-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62385-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62387-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62389-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62390-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62391-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62392-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62393-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62395-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62396-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62397-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62398-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62400-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62402-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62403-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62404-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62405-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62406-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62408-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62409-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62411-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62412-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62415-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62417-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62418-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62419-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62420-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62421-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62422-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62423-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62424-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62425-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62426-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62428-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62429-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62430-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62431-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62432-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62433-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62434-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62435-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62436-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62437-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62438-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62439-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62440-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62441-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-62442-n" />
+            <SynsetRelation confidenceScore="1.0" relType="hyponym" status="unchecked" target="estwn-et-63493-n" />
+            <SynsetRelation confidenceScore="1.0" relType="is_caused_by" status="unchecked" target="estwn-et-70500-n" />
+            <SynsetRelation confidenceScore="1.0" relType="is_caused_by" status="unchecked" target="estwn-et-46451-n" />
+            <SynsetRelation confidenceScore="1.0" relType="is_caused_by" status="unchecked" target="estwn-et-46057-n" />
+            <SynsetRelation confidenceScore="1.0" relType="role" status="unchecked" target="estwn-et-11280-v" />
+            <SynsetRelation confidenceScore="1.0" relType="role" status="unchecked" target="estwn-et-29130-n" />
+            <SynsetRelation confidenceScore="1.0" relType="similar" status="unchecked" target="estwn-et-37850-n" />
+            <SynsetRelation confidenceScore="1.0" relType="similar" status="unchecked" target="estwn-et-45120-n" />
+        </Synset>
+        <Synset confidenceScore="0.5" dc:type="C" id="estwn-et-18630-n" ili="" status="checked">
+            <Definition language="et" sourceSense="s-pruudivargus-n1">rahvalikku pulmakombestikku kuuluv pruudi röövimine (EKSS)</Definition>
+            <SynsetRelation confidenceScore="1.0" relType="hypernym" status="unchecked" target="estwn-et-21930-n" />
+            <SynsetRelation confidenceScore="1.0" relType="meronym" status="unchecked" target="estwn-et-22015-n" />
+        </Synset>
+        <Synset confidenceScore="0.5" dc:type="C" id="estwn-et-18631-n" ili="" status="checked">
+            <Definition language="et" sourceSense="s-järelpulm-n1">peeti üks nädal pärast pulmi või pulmadele järgneval pühapäeval mõrsja kodus ja sellest nädal hiljem peiu kodus</Definition>
+            <SynsetRelation confidenceScore="1.0" relType="hypernym" status="unchecked" target="estwn-et-10746-n" />
+        </Synset>
+    </Lexicon>
+</LexicalResource>

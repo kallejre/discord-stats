@@ -713,7 +713,7 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
-# sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
+sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')
