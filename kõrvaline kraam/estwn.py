@@ -11,9 +11,9 @@ def b(st):
 fn='estwn-vaike'
 fn='estwn-et-2.1.0.wip'
 b('start1')
-#jss=xmltodict.parse(open(fn+'.xml',encoding='utf8').read())
+# jss=xmltodict.parse(open(fn+'.xml',encoding='utf8').read())
 b('start1.1')
-#json.dump(jss,open(fn+'.json','w',encoding='utf8'),ensure_ascii=False, indent=2, sort_keys=True)
+# json.dump(jss,open(fn+'.json','w',encoding='utf8'),ensure_ascii=False)#, indent=2, sort_keys=True)
 b('start1.2 (Json load)')
 jss=json.load(open(fn+'.json',encoding='utf8'))
 b('Klassid')
