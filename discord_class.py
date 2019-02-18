@@ -60,6 +60,22 @@ meta:
     users - dict kasutaja globaalse ID ja nime sidumine.
         name - kasutaja kuvatav nimi
 """
+# https://stackoverflow.com/questions/1855095
+"""
+import os
+import zipfile
+
+def zipdir(path, ziph):
+    # ziph is zipfile handle
+    for root, dirs, files in os.walk(path):
+        for file in files:
+            ziph.write(os.path.join(root, file))
+
+if __name__ == '__main__':
+    zipf = zipfile.ZipFile('Python.zip', 'w', zipfile.ZIP_DEFLATED)
+    zipdir('tmp/', zipf)
+    zipf.close()
+"""
 
 
 import datetime
@@ -132,6 +148,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku"},
                     "codera": {"Yldine", "Kokku"}, 
                     "ex01-id-code": {"EX", "Kokku"}, 
                     "ex02-cpu": {"EX", "Kokku"}, 
+                    "ex03-social-network": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku"}, 
                     "general": {"Yldine", "Kokku"}, 
                     "java": {"Kalmo", "Kokku"}, 
@@ -140,13 +157,17 @@ kategooriad_java = {"setup": {"Yldine", "Kokku"},
                     "music": {"Yldine", "Kokku"}, 
                     "pr00-hello": {"PR", "Kokku"}, 
                     "pr01-introduction": {"PR", "Kokku"}, 
-                    "pr02-strings": {"PR", "Kokku"}, 
+                    "pr02-strings": {"PR", "Kokku"},
+                    "pr03-sentence": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku"}, 
                     "random": {"Yldine", "Kokku"}, 
                     "stat": {"Yldine", "Kokku"}, 
                     "teadaanded": {"Yldine", "Kokku"}, 
                     "teated": {"Yldine", "Kokku"}, 
+                    "gomoku": {"Yldine", "Kokku"}, 
                     "videod": {"Yldine", "Kokku"},
+                    "hw03": {"Kalmo", "Kokku"},
+                    "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
                     "wat": {"Kalmo", "Kokku"}}
 
 kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2semester", "Kokku"}, 
@@ -157,7 +178,7 @@ kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2
                     "üld-vestlus": {"Yldine", "Kokku"}, 
                     "arvutivõrgud": {"2semester", "Kokku"}, 
                     "arvutid": {"2semester", "Kokku"}, 
-                    "kõrgem_matemaatika": {"2semester", "Kokku"}}
+                    "kõrgem-matemaatika": {"2semester", "Kokku"}}
 
 
 
@@ -713,7 +734,7 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
-sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
+#sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')
