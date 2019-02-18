@@ -60,23 +60,6 @@ meta:
     users - dict kasutaja globaalse ID ja nime sidumine.
         name - kasutaja kuvatav nimi
 """
-# https://stackoverflow.com/questions/1855095
-"""
-import os
-import zipfile
-
-def zipdir(path, ziph):
-    # ziph is zipfile handle
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            ziph.write(os.path.join(root, file))
-
-if __name__ == '__main__':
-    zipf = zipfile.ZipFile('Python.zip', 'w', zipfile.ZIP_DEFLATED)
-    zipdir('tmp/', zipf)
-    zipf.close()
-"""
-
 
 import datetime
 import json
@@ -84,7 +67,8 @@ import re
 import pickle
 import xlsxwriter
 from Animate import Animate
-from os import makedirs
+import os
+import zipfile
 
 class xlsx:
     def __init__(self, fname='stats.xlsx'):
@@ -200,7 +184,7 @@ class Stats:
         self.times = list()
         self.times2 = dict()
         self.OUTPUT_FOLDER = OUTPUT_FOLDER
-        try:makedirs(OUTPUT_FOLDER)
+        try:os.makedirs(OUTPUT_FOLDER)
         except FileExistsError: pass
         self.excel=xlsx(OUTPUT_FOLDER+sname)
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
@@ -482,7 +466,7 @@ class Stats:
         out+='\n'
         return out
 
-    def save(self, fname='d_stats.pkl'):
+    def save_pkl(self, fname='d_stats.pkl'):
         """Self -> PKL. Terve objekti salvestamine."""
         temp = self.excel
         self.excel = None
@@ -687,6 +671,16 @@ class Stats:
         for i1 in sorted(colors):
             print(i1, colors[i1])
         pygame.quit()
+    def save_zip(self, screenshots=False):
+        # https://stackoverflow.com/questions/1855095
+        absf=os.path.abspath(self.OUTPUT_FOLDER)
+        fn=os.path.split(absf)[-1]
+        ziph = zipfile.ZipFile(fn+'.zip', 'w', zipfile.ZIP_LZMA)#ZIP_DEFLATED)
+        for root,dirs, files in os.walk(absf, topdown=True):
+            dirs.remove('gif')
+            for file in files:
+                ziph.write(os.path.join(root, file), file)  # root
+        ziph.close()
 
 def stats_load(fname='d_stats.pkl'):
     """PKL -> Self. Terve objekti avamine."""
@@ -722,9 +716,11 @@ def stat_full(*args, **kwargs):
     sts.graafid_edetabel('ago',n=5,uid=False)
     print('6', end=' ')
     sts.excel.close()
-    sts.save()
+    sts.save_pkl()
+    print('7', end=' ')
+    sts.save_zip()
     """
-    print('7',end=' ')
+    print('8',end=' ')
     ani = Animate(sts)
     ani.draw_main()"""
     print('done')
@@ -734,7 +730,7 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
-#sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
+sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')
