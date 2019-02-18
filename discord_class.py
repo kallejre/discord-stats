@@ -719,10 +719,11 @@ def stat_full(*args, **kwargs):
     sts.save_pkl()
     print('7', end=' ')
     sts.save_zip()
-    """
+    #"""
     print('8',end=' ')
     ani = Animate(sts)
-    ani.draw_main()"""
+    ani.draw_main()
+    #"""
     print('done')
     return sts
 
