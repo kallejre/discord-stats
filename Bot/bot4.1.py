@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.1.0'
+VERSION='4.1.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -95,12 +95,18 @@ def help():
     return embed
 
 async def troll_task():
-    while not bot.is_closed:
+    await bot.wait_until_ready()
+    while not bot.is_closed():
         tt=10
+        gg=discord.Spotify(title='Music',start=datetime.datetime.now(), end=datetime.datetime.now()+datetime.timedelta(minutes=1), duration=datetime.timedelta(minutes=1))
+        gg2=discord.Game('Games', start=datetime.datetime.now(), end=datetime.datetime.now()+datetime.timedelta(minutes=1))
+        
+        await bot.change_presence(activity=gg)
+        await asyncio.sleep(60)
         try:
-            await bot.change_presence(game=Game(name="with humanoids"))
+            await bot.change_presence(activity=discord.Game(name="with humanoids"))
             await asyncio.sleep(tt)
-            await bot.change_presence(game=Game(name="with animals"))
+            await bot.change_presence(activity=discord.Game(name="with animals"))
             await asyncio.sleep(tt)
         except websockets.exceptions.ConnectionClosed: return
 
@@ -226,7 +232,9 @@ def ilm_getData(a):
             return channel.send("ERROR: Asukohta ei leitud.")
         x = x2['results'][0]['geometry']['location']
         loc=x2['results'][0]['formatted_address']
-    return funk.ilm.weatherAPI(x['lat'], x['lng'])
+    return funk.ilm.weatherAPI(x['lat'], x['lng']),loc
+yldkanalid=['general','random','food','meme','wat']
+xx=bot.get_emoji(547512864252887041)
 @bot.event
 async def on_message(message):
     channel = message.channel
@@ -237,7 +245,22 @@ async def on_message(message):
     user = message.author.name
     if len(sisu) > 2 and sisu[0] == '?':
         print(str(message.created_at)[:-10]+'    '+sisu, user, sep='\t')
-    if user.lower().startswith('kadri'): await message.add_reaction(u"\U0001F916")
+    #print(message.guild)
+    #print(message.guild.emojis)
+    if str(message.channel) in yldkanalid:
+        if user.lower().startswith('kadri'):
+            if str(message.guild)=='java 2019':
+                await message.add_reaction(bot.get_emoji(547512864252887041))#'<:547512864252887041>')#u"\U0001F916")
+            else:
+                await message.add_reaction(u"\U0001F916")
+        if user.lower().startswith('ago'):
+            if str(message.guild)=='java 2019':
+                await message.add_reaction(bot.get_emoji(535201597131849768))
+            if str(message.guild)=='py2018':
+                await message.add_reaction(bot.get_emoji(507250218484629524))
+        if user.lower().startswith('test9'):
+            if str(message.guild)=='py2018':
+                await message.add_reaction(bot.get_emoji(506934160250765323))
     if sisu.startswith('?math'):
         if user in blacklist:
             return await channel.send('blacklisted')
@@ -263,7 +286,7 @@ async def on_message(message):
     elif sisu.startswith('?ilm'):
         if user in blacklist:
             return await channel.send('blacklisted')
-        asd=ilm_getData(' '.join(sisu.split()[1:]))
+        asd,loc=ilm_getData(' '.join(sisu.split()[1:]))
         msg = ilma_output(asd, loc)
         await channel.send(embed=msg)
         return
@@ -340,5 +363,5 @@ async def list_servers():
 
 
 bot.loop.create_task(list_servers())
-# bot.loop.create_task(troll_task())
+#bot.loop.create_task(troll_task())
 bot.run(võti + rõngas)
