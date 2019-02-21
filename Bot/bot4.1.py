@@ -45,7 +45,7 @@ def stats_load(fname='d_stats.pkl'):
     return (True,x)
 
 data = stats_load()[1]
-
+last_reac=0
 @bot.event
 async def on_ready():
     print('Logged in as  '+bot.user.name)
@@ -242,7 +242,11 @@ def ilm_getData(a):
         loc=x2['results'][0]['formatted_address']
     return funk.ilm.weatherAPI(x['lat'], x['lng']),loc
 async def reactor(message):
+    global last_reac
     user=message.author.name
+    if time.time()-last_reac<45:
+        return False
+    last_reac=time.time()
     if user.lower().startswith('kadri'):
         if str(message.guild)=='java 2019':
             await message.add_reaction(bot.get_emoji(547512864252887041))
@@ -260,6 +264,8 @@ async def reactor(message):
         if str(message.channel) == 'food':
             await message.add_reaction(u"\U0001F34D")
             await message.add_reaction(u"\U0001F355")
+    if user.lower().startswith('elvar'):
+        await message.add_reaction(u"\U0001F37A")
 async def wait(channel, sisu,user,uid):
     try:
         x = ' '.join(sisu.split()[2:])
@@ -316,11 +322,10 @@ async def on_message(message):
             await channel.send(err)
         return
     elif sisu.startswith('?ilm_raw'):
+        asd,loc=ilm_getData(' '.join(sisu.split()[1:]))
         fn='ilm.json'
-        asd=ilm_getData(' '.join(sisu.split()[1:]))
         json.dump(asd,open(fn,'w',encoding='utf8'),ensure_ascii=False, indent=2)
-        f=discord.File(fn)
-        await channel.send('ilmast', file=f)
+        await channel.send('ilmast', file=discord.File(fn))
         return
     elif sisu.startswith('?miniilm'):
         asd,loc=ilm_getData(' '.join(sisu.split()[1:]))
@@ -328,8 +333,6 @@ async def on_message(message):
         await channel.send(embed=msg)
         return
     elif sisu.startswith('?ilm'):
-        if user in blacklist:
-            return await channel.send('blacklisted')
         asd,loc=ilm_getData(' '.join(sisu.split()[1:]))
         msg = ilma_output(asd, loc)
         await channel.send(embed=msg)
@@ -339,7 +342,6 @@ async def on_message(message):
     elif sisu.startswith('?pelmeen'):
         return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
     elif sisu.startswith('?wait'):
-        # time.mktime(datetime.datetime.today().timetuple())
         if user in blacklist:
             return await channel.send('blacklisted')
         await wait(channel, sisu,user,uid)
