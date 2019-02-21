@@ -45,7 +45,7 @@ def stats_load(fname='d_stats.pkl'):
     return (True,x)
 
 data = stats_load()[1]
-last_reac=0
+last_reac=dict()
 @bot.event
 async def on_ready():
     print('Logged in as  '+bot.user.name)
@@ -244,24 +244,29 @@ def ilm_getData(a):
 async def reactor(message):
     global last_reac
     user=message.author.name
-    if time.time()-last_reac<45:
+    srv=str(message.guild)
+    if user not in last_reac:
+        last_reac[user]=dict()
+    if srv not in last_reac[user]:
+        last_reac[user][srv]=0
+    if time.time()-last_reac[user][srv]<45:
         return False
-    last_reac=time.time()
+    last_reac[user][srv] = time.time()
     if user.lower().startswith('kadri'):
-        if str(message.guild)=='java 2019':
+        if srv=='java 2019':
             await message.add_reaction(bot.get_emoji(547512864252887041))
         else:
             await message.add_reaction(u"\U0001F916")
     if user.lower().startswith('ago'):
-        if str(message.guild)=='java 2019':
+        if srv=='java 2019':
             await message.add_reaction(bot.get_emoji(535201597131849768))
-        if str(message.guild)=='py2018':
+        if srv=='py2018':
             await message.add_reaction(bot.get_emoji(507250218484629524))
     if user.lower().startswith('test9'):
-        if str(message.guild)=='py2018':
+        if srv=='py2018':
             await message.add_reaction(bot.get_emoji(506934160250765323))
     if user.lower().startswith('sebastian'):
-        if str(message.channel) == 'food':
+        if srv == 'food':
             await message.add_reaction(u"\U0001F34D")
             await message.add_reaction(u"\U0001F355")
     if user.lower().startswith('elvar'):
