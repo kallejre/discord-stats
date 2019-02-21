@@ -741,12 +741,12 @@ def stat_full(*args, **kwargs):
 
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
-print('Pyyton')
-#sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
+print('Python')
+sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
 print('Java')
-sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
+sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
 print('Kaug')
-sts = stat_full('dht_kaug.txt', 'Kaug/', kategooria=kategooriad_kaug)  # Kaug
+sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
