@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.1.4'
+VERSION='4.1.5'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -80,18 +80,18 @@ def gg(sisu):
     return tulem
 
 def help():
-    embed = discord.Embed(title="Botten von Bot", description="Mõnede enam-vähem avalikult saadaval käskude nimekiri:", color=0x41e510)
+    embed = discord.Embed(title="Botten von Bot", description="Enamiku saadaval käskude nimekiri:", color=0x41e510)
     embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
     embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
-    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.", inline=False)
+    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.\nLisavõimalustena saab valida\n?miniilm (lühike ilmateade) või\n?ilm_raw (põhjalik info JSONina).", inline=False)
     embed.add_field(name="?invite", value="Link boti lisamiseks.", inline=False)
     embed.add_field(name="?math <tehe>", value="Kalkulaator", inline=False)
-    embed.add_field(name="?pelmeen", value="Söö pelmeene.", inline=False)
-    embed.add_field(name="?search <märksõnad>", value="Guugeldab.", inline=False)
-    embed.add_field(name="?spam", value="Saadab magama.", inline=False)
-    embed.add_field(name="?stats [help]", value="Statistika", inline=False)
-    embed.add_field(name="?wait  <aeg> [kanal] <sõnum>", value="Ajastatud toimingute defineerimine.", inline=False)
-    embed.add_field(name="tere", value="Teeb tuju heaks :smiley:", inline=False)
+    embed.add_field(name="?pelmeen", value="Toitvad soovitused.", inline=False)
+    embed.add_field(name="?search <märksõnad>", value="*~~Guugeldab~~ StartPage'ib.", inline=False)
+    embed.add_field(name="?spam", value="Saadab räpsu.", inline=False)
+    embed.add_field(name="?stats [help]", value="Statistika **KATKI**", inline=False)
+    embed.add_field(name="?wait  <aeg> [kanal] <sõnum>", value="Ajastatud toimingute defineerimine.\nAega saab anda sekundites (?wait 10) ja kellaajana (?wait 30.01.19_13:14).", inline=False)
+    embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
     return embed
 
 async def troll_task():
@@ -241,8 +241,27 @@ def ilm_getData(a):
         x = x2['results'][0]['geometry']['location']
         loc=x2['results'][0]['formatted_address']
     return funk.ilm.weatherAPI(x['lat'], x['lng']),loc
-yldkanalid=['general','random','food','meme','wat']
-xx=bot.get_emoji(547512864252887041)
+async def reactor(message):
+    user=message.author.name
+    if user.lower().startswith('kadri'):
+        if str(message.guild)=='java 2019':
+            await message.add_reaction(bot.get_emoji(547512864252887041))
+        else:
+            await message.add_reaction(u"\U0001F916")
+    if user.lower().startswith('ago'):
+        if str(message.guild)=='java 2019':
+            await message.add_reaction(bot.get_emoji(535201597131849768))
+        if str(message.guild)=='py2018':
+            await message.add_reaction(bot.get_emoji(507250218484629524))
+    if user.lower().startswith('test9'):
+        if str(message.guild)=='py2018':
+            await message.add_reaction(bot.get_emoji(506934160250765323))
+    if user.lower().startswith('sebastian'):
+        if str(message.channel) == 'food':
+            await message.add_reaction(u"\U0001F34D")
+            await message.add_reaction(u"\U0001F355")
+yldkanalid=['general','random','food','meme','wat',
+            'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded']
 @bot.event
 async def on_message(message):
     channel = message.channel
@@ -256,19 +275,8 @@ async def on_message(message):
     #print(message.guild)
     #print(message.guild.emojis)
     if str(message.channel) in yldkanalid:
-        if user.lower().startswith('kadri'):
-            if str(message.guild)=='java 2019':
-                await message.add_reaction(bot.get_emoji(547512864252887041))#'<:547512864252887041>')#u"\U0001F916")
-            else:
-                await message.add_reaction(u"\U0001F916")
-        if user.lower().startswith('ago'):
-            if str(message.guild)=='java 2019':
-                await message.add_reaction(bot.get_emoji(535201597131849768))
-            if str(message.guild)=='py2018':
-                await message.add_reaction(bot.get_emoji(507250218484629524))
-        if user.lower().startswith('test9'):
-            if str(message.guild)=='py2018':
-                await message.add_reaction(bot.get_emoji(506934160250765323))
+        await reactor(message)
+        
     if sisu.startswith('?math'):
         if user in blacklist:
             return await channel.send('blacklisted')
