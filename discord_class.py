@@ -130,19 +130,21 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
 kategooriad_java = {"setup": {"Yldine", "Kokku"}, 
                     "ülesanded": {"Kalmo", "Kokku"}, 
                     "codera": {"Yldine", "Kokku"}, 
-                    "ex01-id-code": {"EX", "Kokku"}, 
-                    "ex02-cpu": {"EX", "Kokku"}, 
-                    "ex03-social-network": {"EX", "Kokku"}, 
+                    "ex01": {"EX", "Kokku"}, 
+                    "ex02": {"EX", "Kokku"}, 
+                    "ex03": {"EX", "Kokku"}, 
+                    "ex04": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku"}, 
                     "general": {"Yldine", "Kokku"}, 
                     "java": {"Kalmo", "Kokku"}, 
                     "korraldus": {"Kalmo", "Kokku"}, 
                     "meme": {"Yldine", "Kokku"}, 
                     "music": {"Yldine", "Kokku"}, 
-                    "pr00-hello": {"PR", "Kokku"}, 
-                    "pr01-introduction": {"PR", "Kokku"}, 
-                    "pr02-strings": {"PR", "Kokku"},
-                    "pr03-sentence": {"PR", "Kokku"},
+                    "pr00": {"PR", "Kokku"}, 
+                    "pr01": {"PR", "Kokku"}, 
+                    "pr02": {"PR", "Kokku"},
+                    "pr03": {"PR", "Kokku"},
+                    "pr04": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku"}, 
                     "random": {"Yldine", "Kokku"}, 
                     "stat": {"Yldine", "Kokku"}, 
@@ -151,6 +153,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku"},
                     "gomoku": {"Yldine", "Kokku"}, 
                     "videod": {"Yldine", "Kokku"},
                     "hw03": {"Kalmo", "Kokku"},
+                    "hw04": {"Kalmo", "Kokku"},
                     "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
                     "wat": {"Kalmo", "Kokku"}}
 
@@ -233,6 +236,8 @@ class Stats:
             server_name=self.archive['meta']['servers'][server_id]['name']
             cur_name = self.archive['meta']['channels'][c]['name']  # Praeguse kanali nimi
             cur_name = cur_name.split('_')[0]
+            if len(cur_name)>5:
+                if cur_name[4]=='-':cur_name = cur_name.split('-')[0]
             prev_msg = -1
             print(cur_name[:1] + cur_name[-2:], end=' ')
             for m in sorted(self.archive['data'][c]):  # m = sõnumi ID
@@ -282,6 +287,12 @@ class Stats:
                     self.times2[time_str][cur_name][uid] = 0
                 self.times2[time_str][cur_name][uid] += 1
                 # self.times2 töötlemine läbi
+                if (cur_name.startswith('ex0') or cur_name.startswith('ex1')) and cur_name not in self.kategooriad:
+                    self.kategooriad[cur_name]={"EX", "Kokku"}
+                elif (cur_name.startswith('hw0') or cur_name.startswith('hw1')) and cur_name not in self.kategooriad:
+                    self.kategooriad[cur_name]={"Kalmo", "Kokku"}
+                elif (cur_name.startswith('pr0') or cur_name.startswith('pr1')) and cur_name not in self.kategooriad:
+                    self.kategooriad[cur_name]={"PR", "Kokku"}
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
                     if sub not in self.users[uid]['count']:  # Kui see sõnum on kasutaja
                         self.users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
@@ -719,7 +730,7 @@ def stat_full(*args, **kwargs):
     sts.save_pkl()
     print('7', end=' ')
     sts.save_zip()
-    #"""
+    """
     print('8',end=' ')
     ani = Animate(sts)
     ani.draw_main()
@@ -731,7 +742,7 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Pyyton')
-sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
+#sts = stat_full('dht.txt', 'Python/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'Java/', kategooria=kategooriad_java)  # Java
 print('Kaug')

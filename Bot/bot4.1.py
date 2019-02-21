@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.1.7'
+VERSION='4.1.8'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -175,6 +175,9 @@ def define(sisu):
         return err
 def stats(sisu):
     global data
+    
+    #srv=str(message.guild)
+    #    if srv=='java 2019':
     commands = sisu.split()[1:]
     kanalid='**Võimalikud ühendatud kanalid:**\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
     help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kanal>\n\n'+kanalid
