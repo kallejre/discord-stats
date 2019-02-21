@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.1.6'
+VERSION='4.1.7'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -251,7 +251,8 @@ async def reactor(message):
         last_reac[user][srv]=0
     if time.time()-last_reac[user][srv]<45:
         return False
-    last_reac[user][srv] = time.time()
+    last_reac[user][srv] = int(time.time())
+    
     if user.lower().startswith('kadri'):
         if srv=='java 2019':
             await message.add_reaction(bot.get_emoji(547512864252887041))
@@ -266,9 +267,8 @@ async def reactor(message):
         if srv=='py2018':
             await message.add_reaction(bot.get_emoji(506934160250765323))
     if user.lower().startswith('sebastian'):
-        if srv == 'food':
-            await message.add_reaction(u"\U0001F34D")
-            await message.add_reaction(u"\U0001F355")
+        await message.add_reaction(u"\U0001F34D")
+        await message.add_reaction(u"\U0001F355")
     if user.lower().startswith('elvar'):
         await message.add_reaction(u"\U0001F37A")
 async def wait(channel, sisu,user,uid):
@@ -294,7 +294,7 @@ async def wait(channel, sisu,user,uid):
         await kanal2.send(iad + str(x))
     except Exception as err:
         await channel.send(str(err))
-yldkanalid=['general','random','food','meme','wat',
+yldkanalid=['general','random','food','meme','wat','botnet','katse'
             'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded']
 @bot.event
 async def on_message(message):
@@ -306,8 +306,6 @@ async def on_message(message):
     user = message.author.name
     if len(sisu) > 2 and sisu[0] == '?':
         print(str(message.created_at)[:-10]+'    '+sisu, user, sep='\t')
-    #print(message.guild)
-    #print(message.guild.emojis)
     if str(message.channel) in yldkanalid:
         await reactor(message)
         
