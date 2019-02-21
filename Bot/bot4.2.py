@@ -17,13 +17,12 @@ from bot_funk import *  # Hunnik konstante
 from Disco_Stats import Stats  # Spetsiaalne moodul statistika kuvamiseks. Natuke erinev originaalist.
 """
 Asjad, mida muuta:
-    Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid (+tugi kellaajale?).
-    Customspam võtab nime ära.
-    Statistika andmete laadimine.
+    Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
+    TÄIESTI UUS statistika andmete laadimine.
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.2.0'
+VERSION='4.2.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -31,26 +30,17 @@ Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'
 kell = ''
 kellad=dict()
 
-def stats_load(fname='d_stats.pkl'):
-    """PKL -> Self. Terve objekti avamine."""
-    global videod,textid,blacklist
-    from bot_funk import videod,textid,blacklist
-    global kell
-    temp = time.strftime('%d.%m.%Y %H:%M', time.localtime(os.stat(fname).st_mtime))
-    if kell==temp:
-        return (False,'')
-    kell = temp
-    print("Modification time: {}, filename: ".format(kell)+fname)
-    with open(fname, 'rb') as f:
-        x = pickle.load(f)
-    return (True,x)
-def stats_load2(srv='d_stats.pkl'): # Serveri nimi
+def stats_load2(srv='py2018'): # Serveri nimi
     """PKL -> Self. Terve objekti avamine."""
     global videod,textid,blacklist
     from bot_funk import videod,textid,blacklist
     global kellad
     kell=kellad[srv]
-    temp = time.strftime('%d.%m.%Y %H:%M', time.localtime(os.stat(fname).st_mtime))
+    fname='../'+srv+'/d_stats.pkl'
+    try:
+        temp = time.strftime('%d.%m.%Y %H:%M', time.localtime(os.stat(fname).st_mtime))
+    except FileNotFoundError:
+        return (False,'')
     if kell==temp:
         return (False,'')
     kellad[srv] = temp
@@ -58,7 +48,8 @@ def stats_load2(srv='d_stats.pkl'): # Serveri nimi
     with open(fname, 'rb') as f:
         x = pickle.load(f)
     return (True,x)
-data = stats_load()[1]
+#data = stats_load()[1]
+data=dict()
 last_reac=dict()
 @bot.event
 async def on_ready():
@@ -137,24 +128,24 @@ async def hi(ctx):
     await ctx.send(out)
     await ctx.send('I heard you! {1}, {0}'.format(t.mention,t.name))
           
-def find_user(text):
+def find_user(text, server):
     nimi = text
     if nimi[:2] == '<@':
-        uid = data.archive['meta']['userindex'].index(nimi[2:-1])
+        uid = data[server].archive['meta']['userindex'].index(nimi[2:-1])
     elif nimi == '-1': return -1
     elif nimi.isdecimal():
         if len(nimi) > 10:
-            uid = data.archive['meta']['userindex'].index(nimi)
+            uid = data[server].archive['meta']['userindex'].index(nimi)
         else: return int(nimi)
     else:
-        uid = list(filter(lambda x: nimi.lower() in data.users[x]['n'].lower(), data.users))[0]
+        uid = list(filter(lambda x: nimi.lower() in data[server].users[x]['n'].lower(), data[server].users))[0]
     return uid
 
 
-def find_channel(kanal):
+def find_channel(kanal, server):
     if kanal[:2] == '<#':
-        xid = data.archive['meta']['channels'][kanal[2:-1]]
-        return data.archive['meta']['channels'][xid]['name']
+        xid = data[server].archive['meta']['channels'][kanal[2:-1]]
+        return data[server].archive['meta']['channels'][xid]['name']
     else:
         return kanal
 
@@ -187,12 +178,15 @@ def define(sisu):
         return defin
     except Exception as err:
         return err
-def stats(sisu):
+def stats(message):
     global data
-    
+    sisu=message.content
     #srv=str(message.guild)
     #    if srv=='java 2019':
     server=str(message.guild)
+    if server not in data:
+        server = 'java 2019'
+        #return 'Selles serveris statisika ei tööta' # str(list(data))
     commands = sisu.split()[1:]
     kanalid='**Võimalikud ühendatud kanalid:**\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
     help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kanal>\n\n'+kanalid
@@ -204,22 +198,23 @@ def stats(sisu):
             if len(commands) == 2: num = 5
         else: num = int(commands[2])
         nimi = commands[1]
-        try: uid = find_user(nimi)
+        try: uid = find_user(nimi, server)
         except IndexError: return('Viga, kasutajat ei leitud.')
-        return('Statistika ' + kell + ' seisuga.' + data.graafid_edetabel(uid, uid=True, n=num))
+        return('Statistika ' + kellad[server] + ' seisuga.' + data[server].graafid_edetabel(uid, uid=True, n=num))
     elif commands[0] == 'ajatabel':
         if len(commands) < 3:
             return('Viga, vaja on kasutajat ja kanalit.')
-        try: uid = find_user(commands[1])
+        try: uid = find_user(commands[1], server)
         except IndexError: return('Viga, kasutajat ei leitud.')
-        kanal = find_channel(commands[2])
-        try: return('Statistika ' + kell + ' seisuga.\n'+'```' + data.ajatabel_vaiksem(uid, kanal) + '```')
+        kanal = find_channel(commands[2], server)
+        try: return('Statistika ' + kellad[server] + ' seisuga.\n'+'```' + data[server].ajatabel_vaiksem(uid, kanal) + '```')
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
     elif commands[0] == 'update':
-        d=stats_load()
+        #d=stats_load()
+        d=stats_load2(server)
         if d[0]:
-            data=d[1]
-        return 'Uuendatud '+kell
+            data[server]=d[1]
+        return 'Uuendatud '+kellad[server]
     else: return('Viga, katkine asi.\n'+help_msg)
 def ilma_output(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
@@ -370,7 +365,7 @@ async def on_message(message):
         a = time.localtime()
         await channel.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
     elif sisu.startswith('?stats'):
-        return await channel.send(stats(sisu))
+        return await channel.send(stats(message))
     elif sisu.startswith('?define'):
         return await channel.send(define(sisu))
     elif sisu.startswith('?search'):
@@ -402,13 +397,13 @@ async def list_servers():
     global data
     while not bot.is_closed():
         print("Current servers: "+', '.join(list(map(lambda x:x.name,bot.guilds))))
-        d=stats_load()
-        if d[0]: data=d[1]
+        # d=stats_load()
+        # if d[0]: data=d[1]
         for srv in list(map(lambda x:x.name,bot.guilds)):
             if srv not in kellad:
                 kellad[srv]=''
             tmp=stats_load2(srv)
-        
+            if tmp[0]:data[srv]=tmp[1]
         await asyncio.sleep(600)  # 600
     await ctx.send(embed=embed)
 
