@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.1.5'
+VERSION='4.1.6'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -260,6 +260,29 @@ async def reactor(message):
         if str(message.channel) == 'food':
             await message.add_reaction(u"\U0001F34D")
             await message.add_reaction(u"\U0001F355")
+async def wait(channel, sisu,user,uid):
+    try:
+        x = ' '.join(sisu.split()[2:])
+        a=sisu.split()[1]
+        if a.isdecimal():
+             a = int(a)
+             stamp=time.strftime('%d.%m.%y_%H:%M', time.localtime( time.time() + a))
+        else:
+            stamp=str(a)
+            a=time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y_%H:%M').timetuple())-int(time.time())
+        # Siit edasi parandada.
+        kanal2 = channel
+        if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
+            idd = int(sisu.split()[2][2:-1])
+            kanal2 = bot.get_channel(idd)
+            x = ' '.join(sisu.split()[3:])
+        if a > 120:
+            await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
+        await asyncio.sleep(a)
+        iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]
+        await kanal2.send(iad + str(x))
+    except Exception as err:
+        await channel.send(str(err))
 yldkanalid=['general','random','food','meme','wat',
             'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded']
 @bot.event
@@ -319,28 +342,7 @@ async def on_message(message):
         # time.mktime(datetime.datetime.today().timetuple())
         if user in blacklist:
             return await channel.send('blacklisted')
-        try:
-            x = ' '.join(sisu.split()[2:])
-            a=sisu.split()[1]
-            if a.isdecimal():
-                 a = int(a)
-                 stamp=time.strftime('%d.%m.%y_%H:%M', time.localtime( time.time() + a))
-            else:
-                stamp=str(a)
-                a=time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y_%H:%M').timetuple())-int(time.time())
-            # Siit edasi parandada.
-            kanal2 = channel
-            if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
-                idd = int(sisu.split()[2][2:-1])
-                kanal2 = bot.get_channel(idd)
-                x = ' '.join(sisu.split()[3:])
-            if a > 120:
-                await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
-            await asyncio.sleep(a)
-            iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]
-            await kanal2.send(iad + str(x))
-        except Exception as err:
-            await channel.send(str(err))
+        await wait(channel, sisu,user,uid)
     elif sisu.startswith('?spam'):
         a = time.localtime()
         await channel.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
