@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.2.3'
+VERSION='4.2.3.1'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -209,6 +209,10 @@ def stats(message):
         kanal = find_channel(commands[2], server)
         try: return('Statistika ' + kellad[server] + ' seisuga.\n'+'```' + data[server].ajatabel_vaiksem(uid, kanal) + '```')
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
+    elif commands[0] == 'top':
+        n=int(commands[1])
+        # Esitab top N praeguses kanalis ja kokku.
+        # data['java 2019'].users[uid]['count']
     elif commands[0] == 'update':
         #d=stats_load()
         d=stats_load2(server)
