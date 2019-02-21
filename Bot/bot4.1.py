@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.1.3'
+VERSION='4.1.4'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -222,6 +222,14 @@ def ilma_output(data, location):
     else: achtung='Puuduvad'
     embed.add_field(name='Hoiatused:', value=achtung, inline=False)
     return embed
+def ilma_output2(data, location):
+    embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
+    embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
+    embed.add_field(name='Temperatuur ' + str(data['vt1observation']['temperature']) + 'C',
+                    value='Näiv temperatuur ' + str(data['vt1observation']['feelsLike']) + 'C', inline=False)
+    embed.add_field(name='Tuule suund ' + str(data['vt1observation']['windDirCompass']) + '',
+                    value='Tuule kiirus ' + str(round(data['vt1observation']['windSpeed'] / 3.6, 1)) + 'm/s', inline=False)
+    return embed
 def ilm_getData(a):
     if a == '':
         x = {'lat': 59.43696079999999, 'lng': 24.7535747}
@@ -282,6 +290,11 @@ async def on_message(message):
         json.dump(asd,open(fn,'w',encoding='utf8'),ensure_ascii=False, indent=2)
         f=discord.File(fn)
         await channel.send('ilmast', file=f)
+        return
+    elif sisu.startswith('?miniilm'):
+        asd,loc=ilm_getData(' '.join(sisu.split()[1:]))
+        msg = ilma_output2(asd, loc)
+        await channel.send(embed=msg)
         return
     elif sisu.startswith('?ilm'):
         if user in blacklist:
