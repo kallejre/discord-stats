@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.2.3.1'
+VERSION='4.2.4.0'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -211,8 +211,28 @@ def stats(message):
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
     elif commands[0] == 'top':
         n=int(commands[1])
+        embed = discord.Embed(title='Statistika', description=message.author.name+': '+' '.join(commands))
         # Esitab top N praeguses kanalis ja kokku.
         # data['java 2019'].users[uid]['count']
+        def helper(x,cha):
+            if cha in data[server].users[x]['count']: return data[server].users[x]['count'][cha]
+            else: return 0
+            
+        out=''
+        ch=str(message.channel)
+        kokku=list(sorted(data[server].users, key=lambda x:data[server].users[x]['count']['Kokku']))[-abs(n)-1:]
+        kanalis=list(sorted(filter(lambda x:helper(x,ch), data[server].users), key=lambda x:helper(x,ch)))[-abs(n)-1:]
+        print(kokku, kanalis)
+        for i in kokku:
+            out+=data[server].users[i]['n']+'\t'+str(data[server].users[i]['count']['Kokku'])+'\n'
+        if len(out)==0:out='<tühi>'
+        embed.add_field(name='Kogu serveris:', value=out)
+        out=''
+        for i in kanalis:
+            out+=data[server].users[i]['n']+'\t'+str(data[server].users[i]['count'][ch])+'\n'
+        if len(out)==0:out='<tühi>'
+        embed.add_field(name='Siin kanalis:', value=out)
+        return embed
     elif commands[0] == 'update':
         #d=stats_load()
         d=stats_load2(server)
@@ -369,7 +389,9 @@ async def on_message(message):
         a = time.localtime()
         await channel.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
     elif sisu.startswith('?stats'):
-        return await channel.send(stats(message))
+        x=stats(message)
+        if type(x)==discord.Embed: return await channel.send(embed=x)
+        else: return await channel.send(x)
     elif sisu.startswith('?define'):
         return await channel.send(define(sisu))
     elif sisu.startswith('?search'):
