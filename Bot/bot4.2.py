@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.2.4.2'
+VERSION='4.2.5'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -145,7 +145,7 @@ def find_user(text, server):
 def find_channel(kanal, server):
     if kanal[:2] == '<#':
         xid = data[server].archive['meta']['channels'][kanal[2:-1]]
-        return data[server].archive['meta']['channels'][xid]['name']
+        return xid['name']
     else:
         return kanal
 
@@ -190,7 +190,7 @@ def stats(message):
         #return 'Selles serveris statisika ei tööta' # str(list(data))
     commands = sisu.split()[1:]
     kanalid='**Võimalikud ühendatud kanalid:**\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
-    help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kasutajanimi> <kanal>\n?stats top <n>\n\n'+kanalid
+    help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kasutajanimi> <kanal>\n?stats ajatabel2 <kasutajanimi> <kanal> *- Graafik*\n?stats top <n>\n\n'+kanalid
     if len(commands) == 0: return('Viga, katkine asi. \n'+help_msg)
     if commands[0] == 'help': return(help_msg)
     elif commands[0] == 'edetabel':
@@ -217,9 +217,17 @@ def stats(message):
         kanal = find_channel(commands[2], server)
         try: return('Statistika ' + kellad[server] + ' seisuga.\n'+'```' + data[server].ajatabel_vaiksem(uid, kanal) + '```')
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
+    elif commands[0] == 'ajatabel2':
+        if len(commands) < 3:
+            return('Viga, vaja on kasutajat ja kanalit.')
+        try: uid = find_user(commands[1], server)
+        except IndexError: return('Viga, kasutajat ei leitud.')
+        kanal = find_channel(commands[2], server)
+        try: return('Statistika ' + kellad[server] + ' seisuga.\n'+'```' + data[server].ajatabel_vaiksem2(uid, kanal) + '```')
+        except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
     elif commands[0] == 'top':
         n=int(commands[1])
-        embed = discord.Embed(title='Statistika', description=message.author.name+': '+' '.join(commands), color=stat_col)
+        embed = discord.Embed(title='Statistika'+kellad[server] + ' seisuga.', description=message.author.name+': '+' '.join(commands), color=stat_col)
         # Esitab top N praeguses kanalis ja kokku.
         # data['java 2019'].users[uid]['count']
         def helper(x,cha):

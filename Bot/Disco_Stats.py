@@ -326,7 +326,21 @@ class Stats:
         out2=[''.join(list(map(lambda x: "{0:5}".format(x),i))) for i in zip(*out2)]
         
         return '\n'.join(out2)
-
+    def render(self,x,mVal):
+        if not x.isdigit():return x
+        arr=['░   ', '░░  ', '░░░ ', '░░░░', '▒░░░', '▒▒░░', '▒▒▒░', '▒▒▒▒', '▓▒▒▒', '▓▓▒▒', '▓▓▓▒', '▓▓▓▓', '█▓▓▓', '██▓▓', '███▓', '████']
+        return arr[min([(16*int(x))//mVal,15])]
+    def ajatabel_vaiksem2(self, uid, kanal):
+        """Ajatabelite sõnede tegemine."""
+        out2 = [[self.users[uid]['n'], 'Kell'] + list(map(lambda x:str(x)+' ', range(24)))]
+        week='ETKNRLP'
+        mVal=max(self.users[uid]['times'][kanal])
+        for i1 in range(7):
+            out = ['', week[i1]] + list(map(str, self.users[uid]['times'][kanal][24 * i1:24 * (i1 + 1)]))
+            out2.append(out)
+        out2=[''.join(list(map(lambda x: "{0:5}".format(self.render(x,mVal)),i))) for i in zip(*out2)]
+        
+        return '\n'.join(out2)
     def ajatabel_vaike(self):
         """UI ajatabelite kuvamiseks."""
         print('''
