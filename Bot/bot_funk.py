@@ -43,4 +43,4 @@ ago = '<@366546170149076993>'
 BOT_PREFIX = ("?", "!")
 võti = 'NDg2NDQ1MTA5NjQ3MjQ1MzMy.DnEL'
 rõngas = 'rQ.WDT1RXBmKt61KbX9MgtoDYGgt8A'
-
+bvb = '<@486445109647245332>'

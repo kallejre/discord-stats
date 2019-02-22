@@ -88,13 +88,13 @@ def help():
     embed = discord.Embed(title="Botten von Bot", description="Enamiku saadaval käskude nimekiri:", color=0x41e510)
     embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
     embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
-    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.\nLisavõimalustena saab valida\n?miniilm (lühike ilmateade) või\n?ilm_raw (põhjalik info JSONina).", inline=False)
+    embed.add_field(name="?ilm [asukoht]", value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.\nLisavõimalustena saab valida\n**?miniilm** (lühike ilmateade) või\n**?ilm_raw** (põhjalik info JSONina).", inline=False)
     embed.add_field(name="?invite", value="Link boti lisamiseks.", inline=False)
     embed.add_field(name="?math <tehe>", value="Kalkulaator", inline=False)
     embed.add_field(name="?pelmeen", value="Toitvad soovitused.", inline=False)
-    embed.add_field(name="?search <märksõnad>", value="*~~Guugeldab~~ StartPage'ib.", inline=False)
-    embed.add_field(name="?spam", value="Saadab räpsu.", inline=False)
-    embed.add_field(name="?stats [help]", value="Statistika **KATKI**", inline=False)
+    embed.add_field(name="?search <märksõnad>", value="~~Guugeldab~~ StartPage'ib.", inline=False)
+    embed.add_field(name="?spam", value="Saadab rämpsu.", inline=False)
+    embed.add_field(name="?stats [help]", value="Statistika. Lisakäsud on help, edetabel, ajatabel ja top.", inline=False)
     embed.add_field(name="?wait  <aeg> [kanal] <sõnum>", value="Ajastatud toimingute defineerimine.\nAega saab anda sekundites (?wait 10) ja kellaajana (?wait 30.01.19_13:14).", inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
     return embed
@@ -190,7 +190,7 @@ def stats(message):
         #return 'Selles serveris statisika ei tööta' # str(list(data))
     commands = sisu.split()[1:]
     kanalid='**Võimalikud ühendatud kanalid:**\n`    Kokku`\n`    ├───EX`\n`    ├───PR`\n`    ├───Syva`\n`    │   ├───DJ`\n`    │   └───XP`\n`    └───Üldine`'
-    help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kanal>\n\n'+kanalid
+    help_msg='**Docs:**\n?stats edetabel <kasutajanimi> *<n>*\n?stats ajatabel <kasutajanimi> <kanal>\n?stats top <n>\n\n'+kanalid
     if len(commands) == 0: return('Viga, katkine asi. \n'+help_msg)
     if commands[0] == 'help': return(help_msg)
     elif commands[0] == 'edetabel':
@@ -364,8 +364,8 @@ async def on_message(message):
         result = re.sub('[^0-9^.^*^+^/^\-^(^)^ ^%]', '', a)
         print(result)
         try:
-            await channel.send("Understood as " + result)
-            await channel.send("Result: " + str(eval(result)))
+            await channel.send("Tuvastatud kui " + result)
+            await channel.send("Tulem: " + str(eval(result)))
         except Exception as err:
             await channel.send(err)
         return
