@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.2.4.0'
+VERSION='4.2.4.1'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -211,7 +211,7 @@ def stats(message):
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
     elif commands[0] == 'top':
         n=int(commands[1])
-        embed = discord.Embed(title='Statistika', description=message.author.name+': '+' '.join(commands))
+        embed = discord.Embed(title='Statistika', description=message.author.name+': '+' '.join(commands), color=0xf27e54)
         # Esitab top N praeguses kanalis ja kokku.
         # data['java 2019'].users[uid]['count']
         def helper(x,cha):
