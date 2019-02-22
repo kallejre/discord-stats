@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Integreerida statistika ja boti koodid.
 """
 
-VERSION='4.2.4.1'
+VERSION='4.2.4.2'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -180,6 +180,7 @@ def define(sisu):
         return err
 def stats(message):
     global data
+    stat_col=0xf27e54
     sisu=message.content
     #srv=str(message.guild)
     #    if srv=='java 2019':
@@ -193,6 +194,7 @@ def stats(message):
     if len(commands) == 0: return('Viga, katkine asi. \n'+help_msg)
     if commands[0] == 'help': return(help_msg)
     elif commands[0] == 'edetabel':
+        embed = discord.Embed(title='Statistika', description=kellad[server] + ' seisuga.', color=stat_col)
         if len(commands) < 3:
             if len(commands) == 1: return('Viga, kasutajatunnus on puudu.')
             if len(commands) == 2: num = 5
@@ -200,7 +202,13 @@ def stats(message):
         nimi = commands[1]
         try: uid = find_user(nimi, server)
         except IndexError: return('Viga, kasutajat ei leitud.')
-        return('Statistika ' + kellad[server] + ' seisuga.' + data[server].graafid_edetabel(uid, uid=True, n=num))
+        stri=data[server].graafid_edetabel(uid, uid=True, n=num)
+        for part in stri.strip().split('\n\n**'):
+            part=part.strip()
+            hdr=part.split('\n')[0].strip('*')
+            part='\n'.join(part.strip().split('\n')[1:])
+            embed.add_field(name=hdr, value=part, inline=False)
+        return embed #('Statistika ' + kellad[server] + ' seisuga.' +stri)
     elif commands[0] == 'ajatabel':
         if len(commands) < 3:
             return('Viga, vaja on kasutajat ja kanalit.')
@@ -211,7 +219,7 @@ def stats(message):
         except KeyError: return('Viga, tundmatu kanal.\n '+kanalid)
     elif commands[0] == 'top':
         n=int(commands[1])
-        embed = discord.Embed(title='Statistika', description=message.author.name+': '+' '.join(commands), color=0xf27e54)
+        embed = discord.Embed(title='Statistika', description=message.author.name+': '+' '.join(commands), color=stat_col)
         # Esitab top N praeguses kanalis ja kokku.
         # data['java 2019'].users[uid]['count']
         def helper(x,cha):
