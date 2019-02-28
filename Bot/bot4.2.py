@@ -361,7 +361,6 @@ async def on_message(message):
         print(str(message.created_at)[:-10]+'    '+sisu, user, sep='\t')
     if str(message.channel) in yldkanalid:
         await reactor(message)
-        
     if sisu.startswith('?math'):
         if user in blacklist:
             return await channel.send('blacklisted')
@@ -427,6 +426,8 @@ async def on_message(message):
             return
         else:
             await channel.send('no')
+    elif bvb in sisu.lower():
+        await channel.send('I heard you! {1}, {0}'.format(message.author.mention, user))
     elif sisu.lower().startswith('tere'):
         print(str(message.created_at)[:-10]+'    '+sisu, user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):

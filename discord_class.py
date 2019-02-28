@@ -154,6 +154,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku"},
                     "videod": {"Yldine", "Kokku"},
                     "hw03": {"Kalmo", "Kokku"},
                     "hw04": {"Kalmo", "Kokku"},
+                    "hw05": {"Kalmo", "Kokku"},
                     "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
                     "wat": {"Kalmo", "Kokku"}}
 
@@ -730,7 +731,7 @@ def stat_full(*args, **kwargs):
     sts.save_pkl()
     print('7', end=' ')
     sts.save_zip()
-    """
+    #"""
     print('8',end=' ')
     ani = Animate(sts)
     ani.draw_main()
