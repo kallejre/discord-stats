@@ -1,6 +1,5 @@
 # coding: utf-8
-# Bot versioon 4. Eesmärk midagi kasulikku teha.
-# Ühildub nüüd ka python 3.7-ga. Discord.py versioon 1.0 (poolik).
+# Bot versioon 4.3. Trips-traps-trulli prototüüp.
 import asyncio
 import os
 import pickle, json
@@ -18,11 +17,10 @@ from Disco_Stats import Stats  # Spetsiaalne moodul statistika kuvamiseks. Natuk
 """
 Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
-    TÄIESTI UUS statistika andmete laadimine.
-    Integreerida statistika ja boti koodid.
+    
 """
 
-VERSION='4.2.5'
+VERSION='4.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
