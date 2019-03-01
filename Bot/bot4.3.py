@@ -1,5 +1,6 @@
 # coding: utf-8
 # Bot versioon 4.3. Trips-traps-trulli prototüüp.
+# Lisaks saab nüüd suure on_message laiali lammutada.
 import asyncio
 import os
 import pickle, json
@@ -17,10 +18,9 @@ from Disco_Stats import Stats  # Spetsiaalne moodul statistika kuvamiseks. Natuk
 """
 Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
-    
 """
 
-VERSION='4.3'
+VERSION='4.3.1'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 Link='https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&'\
@@ -51,9 +51,7 @@ data=dict()
 last_reac=dict()
 @bot.event
 async def on_ready():
-    print('Logged in as  '+bot.user.name)
-    print('User ID '+str(bot.user.id))
-    print('----------------------')
+    print('--- Logged in as  '+bot.user.name+' --- User ID '+str(bot.user.id)+' ---')
 def gg(sisu):
     # internetiotsing
     splt = sisu.split()[1:]
@@ -317,6 +315,15 @@ async def reactor(message):
     if user.lower().startswith('test9'):
         if srv=='py2018':
             await message.add_reaction(bot.get_emoji(506934160250765323))
+        elif False:
+            for i in range(18):
+                await message.add_reaction(random.choice(all_emojis))
+    if user.lower().startswith('rauno'):
+        for i in range(18):
+            try: await message.add_reaction(random.choice(all_emojis))
+            except discord.errors.HTTPException:
+                try: await message.add_reaction(random.choice(all_emojis))
+                except:pass
     if user.lower().startswith('sebastian'):
         await message.add_reaction(u"\U0001F34D")
         await message.add_reaction(u"\U0001F355")
@@ -345,7 +352,7 @@ async def wait(channel, sisu,user,uid):
         await kanal2.send(iad + str(x))
     except Exception as err:
         await channel.send(str(err))
-yldkanalid=['general','random','food','meme','wat','botnet','katse'
+yldkanalid=['general','random','food','meme','wat','botnet','katse', 'games',
             'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded']
 @bot.event
 async def on_message(message):
@@ -431,15 +438,17 @@ async def on_message(message):
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
-
+    await bot.process_commands(message)
+@bot.command(pass_context=True)
+async def hallo(ctx, *args):
+    # Args tuple sõnedega, mis tulid argumentidena.
+    await ctx.send(str(args))
 
 async def list_servers():
     await bot.wait_until_ready()
     global data
     while not bot.is_closed():
         print("Current servers: "+', '.join(list(map(lambda x:x.name,bot.guilds))))
-        # d=stats_load()
-        # if d[0]: data=d[1]
         for srv in list(map(lambda x:x.name,bot.guilds)):
             if srv not in kellad:
                 kellad[srv]=''
