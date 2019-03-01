@@ -127,35 +127,37 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
                     "xp06": {"Syva", "Kokku", "XP"},
                     "xp07": {"Syva", "Kokku", "XP"}}
 
-kategooriad_java = {"setup": {"Yldine", "Kokku"}, 
+kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"}, 
                     "ülesanded": {"Kalmo", "Kokku"}, 
-                    "codera": {"Yldine", "Kokku"}, 
+                    "codera": {"Yldine", "Kokku", "NotFun"}, 
                     "ex01": {"EX", "Kokku"}, 
                     "ex02": {"EX", "Kokku"}, 
                     "ex03": {"EX", "Kokku"}, 
                     "ex04": {"EX", "Kokku"}, 
-                    "food": {"Yldine", "Kokku"}, 
-                    "general": {"Yldine", "Kokku"}, 
+                    "ex05": {"EX", "Kokku"}, 
+                    "food": {"Yldine", "Kokku", "Fun"}, 
+                    "games": {"Yldine", "Kokku", "Fun"}, 
+                    "general": {"Yldine", "Kokku", "NotFun"}, 
+                    "gomoku": {"Yldine", "Kokku", "NotFun"}, 
+                    "hw03": {"Kalmo", "Kokku"},
+                    "hw04": {"Kalmo", "Kokku"},
+                    "hw05": {"Kalmo", "Kokku"},
                     "java": {"Kalmo", "Kokku"}, 
                     "korraldus": {"Kalmo", "Kokku"}, 
-                    "meme": {"Yldine", "Kokku"}, 
-                    "music": {"Yldine", "Kokku"}, 
+                    "meme": {"Yldine", "Kokku", "Fun"}, 
+                    "music": {"Yldine", "Kokku", "Fun"}, 
+                    "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
                     "pr00": {"PR", "Kokku"}, 
                     "pr01": {"PR", "Kokku"}, 
                     "pr02": {"PR", "Kokku"},
                     "pr03": {"PR", "Kokku"},
                     "pr04": {"PR", "Kokku"},
-                    "projekt": {"Yldine", "Kokku"}, 
-                    "random": {"Yldine", "Kokku"}, 
-                    "stat": {"Yldine", "Kokku"}, 
-                    "teadaanded": {"Yldine", "Kokku"}, 
-                    "teated": {"Yldine", "Kokku"}, 
-                    "gomoku": {"Yldine", "Kokku"}, 
-                    "videod": {"Yldine", "Kokku"},
-                    "hw03": {"Kalmo", "Kokku"},
-                    "hw04": {"Kalmo", "Kokku"},
-                    "hw05": {"Kalmo", "Kokku"},
-                    "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
+                    "projekt": {"Yldine", "Kokku", "NotFun"}, 
+                    "random": {"Yldine", "Kokku", "Fun"}, 
+                    "stat": {"Yldine", "Kokku", "NotFun"}, 
+                    "teadaanded": {"Yldine", "Kokku", "NotFun"}, 
+                    "teated": {"Yldine", "Kokku", "NotFun"}, 
+                    "videod": {"Yldine", "Kokku", "NotFun"},
                     "wat": {"Kalmo", "Kokku"}}
 
 kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2semester", "Kokku"}, 
@@ -743,11 +745,11 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Python')
-sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
+#sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
 print('Kaug')
-sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+#sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
 
 
 

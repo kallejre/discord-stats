@@ -251,8 +251,8 @@ def stats(message):
             return ('Viga, kasutajat ei leitud.')
         kanal = find_channel(commands[2], server)
         try:
-            return ('Statistika ' + kellad[server] + ' seisuga.\n' + '```' + data[server].ajatabel_vaiksem(uid,
-                                                                                                           kanal) + '```')
+            return ('Statistika ' + kellad[server] + ' seisuga.\n' + '```' +
+                    data[server].ajatabel_vaiksem(uid, kanal) + '```')
         except KeyError:
             return ('Viga, tundmatu kanal.\n ' + kanalid)
     elif commands[0] == 'ajatabel2':
@@ -264,8 +264,8 @@ def stats(message):
             return ('Viga, kasutajat ei leitud.')
         kanal = find_channel(commands[2], server)
         try:
-            return ('Statistika ' + kellad[server] + ' seisuga.\n' + '```' + data[server].ajatabel_vaiksem2(uid,
-                                                                                                            kanal) + '```')
+            return ('Statistika ' + kellad[server] + ' seisuga.\n' + '```' +
+                    data[server].ajatabel_vaiksem2(uid, kanal) + '```')
         except KeyError:
             return ('Viga, tundmatu kanal.\n ' + kanalid)
     elif commands[0] == 'top':
