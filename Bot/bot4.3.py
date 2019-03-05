@@ -358,7 +358,7 @@ def ilm_getData(a):
 
 async def reactor(message):
     global last_reac
-    user = message.author.name
+    user = message.author.name.lower()
     srv = str(message.guild)
     if user not in last_reac:
         last_reac[user] = dict()
@@ -367,25 +367,25 @@ async def reactor(message):
     if time.time() - last_reac[user][srv] < 45:
         return False
     last_reac[user][srv] = int(time.time())
-
-    if user.lower().startswith('kadri'):
+    if user.startswith('kadri'):
         if srv == 'java 2019':
             await message.add_reaction(bot.get_emoji(547512864252887041))
         else:
             await message.add_reaction(u"\U0001F916")
-    if user.lower().startswith('ago'):
+    if user.startswith('ago'):
         if srv == 'java 2019':
             await message.add_reaction(bot.get_emoji(535201597131849768))
         if srv == 'py2018':
             await message.add_reaction(bot.get_emoji(507250218484629524))
-    if user.lower().startswith('test9'):
+    if user.startswith('test9'):
         if srv == 'py2018':
             await message.add_reaction(bot.get_emoji(506934160250765323))
         elif False:
             for i in range(18):
                 await message.add_reaction(random.choice(all_emojis))
-    if user.lower().startswith('rauno'):
-        for i in range(18):
+    if user.startswith('rauno'):
+        last_reac[user][srv] = 0
+        for i in range(19):
             try:
                 await message.add_reaction(random.choice(all_emojis))
             except discord.errors.HTTPException:
@@ -393,10 +393,10 @@ async def reactor(message):
                     await message.add_reaction(random.choice(all_emojis))
                 except:
                     pass
-    if user.lower().startswith('sebastian'):
+    if user.startswith('sebastian'):
         await message.add_reaction(u"\U0001F34D")
         await message.add_reaction(u"\U0001F355")
-    if user.lower().startswith('elvar'):
+    if user.startswith('elvar'):
         await message.add_reaction(u"\U0001F37A")
 
 
@@ -426,7 +426,7 @@ async def wait(channel, sisu, user, uid):
 
 
 yldkanalid = ['general', 'random', 'food', 'meme', 'wat', 'botnet', 'katse', 'games',
-              'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded']
+              'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded', 'java']
 
 
 @bot.event

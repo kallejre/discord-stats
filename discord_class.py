@@ -152,6 +152,8 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "pr02": {"PR", "Kokku"},
                     "pr03": {"PR", "Kokku"},
                     "pr04": {"PR", "Kokku"},
+                    "pr05": {"PR", "Kokku"},
+                    "pr06": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku", "NotFun"}, 
                     "random": {"Yldine", "Kokku", "Fun"}, 
                     "stat": {"Yldine", "Kokku", "NotFun"}, 
@@ -733,7 +735,7 @@ def stat_full(*args, **kwargs):
     sts.save_pkl()
     print('7', end=' ')
     sts.save_zip()
-    #"""
+    """
     print('8',end=' ')
     ani = Animate(sts)
     ani.draw_main()
