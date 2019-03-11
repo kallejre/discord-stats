@@ -46,6 +46,11 @@ rõngas = 'rQ.WDT1RXBmKt61KbX9MgtoDYGgt8A'
 bvb = '<@486445109647245332>'
 kadri = '<@533051185892950017>'
 
+yldkanalid = ['general', 'random', 'food', 'meme', 'wat', 'botnet', 'katse', 'games',
+              'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded', 'java']
+Link = 'https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&' \
+       'permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot'
+# Siit allpool rohkemat ei tule.
 all_emojis=['*', '0', '1', '2', '3', '4', '5', '6', '7', '8',
 '9', '©', '®', '‼', '⁉', '™', 'ℹ', '↔', '↕', '↖',
 '↗', '↘', '↙', '↩', '↪', '⌚', '⌛', '⌨', '⏏', '⏩',

@@ -21,11 +21,9 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.3.2'
+VERSION = '4.3.5'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
-Link = 'https://discordapp.com/api/oauth2/authorize?client_id=486445109647245332&' \
-       'permissions=227328&redirect_uri=https%3A%2F%2Fdiscordapp.com%2Fapi%2Foauth2%2Fauthorize&scope=bot'
 kell = ''
 kellad = dict()
 
@@ -91,8 +89,9 @@ def gg(sisu):
         tulem.append([hd, desc, '<' + link + '>'])
     return tulem
 
-
-def help():
+bot.remove_command("help")
+@bot.command(pass_context=True)
+async def help(ctx, *args):
     embed = discord.Embed(title="Botten von Bot", description="Enamiku saadaval käskude nimekiri:", color=0x41e510)
     embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
     embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
@@ -110,7 +109,8 @@ def help():
                     value="Ajastatud toimingute defineerimine.\nAega saab anda sekundites (?wait 10) ja kellaajana (?wait 30.01.19_13:14).",
                     inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
-    return embed
+    
+    return await ctx.send(embed=embed)
 
 
 async def troll_task():
@@ -122,7 +122,6 @@ async def troll_task():
                              duration=datetime.timedelta(minutes=1))
         gg2 = discord.Game('Games', start=datetime.datetime.now(),
                            end=datetime.datetime.now() + datetime.timedelta(minutes=1))
-
         await bot.change_presence(activity=gg)
         await asyncio.sleep(60)
         try:
@@ -384,7 +383,7 @@ async def reactor(message):
             for i in range(18):
                 await message.add_reaction(random.choice(all_emojis))
     if user.startswith('rauno'):
-        last_reac[user][srv] = 0
+        last_reac[user][srv] = int(time.time())+15
         for i in range(19):
             try:
                 await message.add_reaction(random.choice(all_emojis))
@@ -424,9 +423,30 @@ async def wait(channel, sisu, user, uid):
     except Exception as err:
         await channel.send(str(err))
 
+@bot.command(pass_context=True)
+async def spam(ctx, *args):
+    a = time.localtime()
+    await ctx.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
 
-yldkanalid = ['general', 'random', 'food', 'meme', 'wat', 'botnet', 'katse', 'games',
-              'stat', 'mitteniiolulisedagasiiskiolulised-teadaanded', 'java']
+@bot.command(pass_context=True)
+async def pelmeen(ctx, *args):
+    return await ctx.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
+
+
+@bot.command(pass_context=True)
+async def invite(ctx, *args):
+    return await ctx.send('Call me maybe:\n' + Link)
+
+
+@bot.command(pass_context=True)
+async def week(ctx, *args):
+    await ctx.send(str(datetime.datetime.utcnow().isocalendar()[1]-4)+'. nädal.')
+
+
+@bot.command(pass_context=True)
+async def hallo(ctx, *args):
+    # Args tuple sõnedega, mis tulid argumentidena.
+    await ctx.send(str(args))
 
 
 @bot.event
@@ -472,17 +492,10 @@ async def on_message(message):
         msg = ilma_output(asd, loc)
         await channel.send(embed=msg)
         return
-    elif sisu.startswith('?help'):
-        return await channel.send(embed=help())
-    elif sisu.startswith('?pelmeen'):
-        return await channel.send('https://nami-nami.ee/retsept/2442/pelmeenid_lihaga')
     elif sisu.startswith('?wait'):
         if user in blacklist:
             return await channel.send('blacklisted')
         await wait(channel, sisu, user, uid)
-    elif sisu.startswith('?spam'):
-        a = time.localtime()
-        await channel.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
     elif sisu.startswith('?stats'):
         x = stats(message)
         if type(x) == discord.Embed:
@@ -499,8 +512,6 @@ async def on_message(message):
         for res in reso:  # Kuvab 3 tulemust.
             embed.add_field(name=res[0], value=res[1] + '\n' + res[2], inline=False)
         return await channel.send(embed=embed)
-    elif sisu.startswith('?invite'):
-        return await channel.send('Call me maybe:\n' + Link)
     elif sisu.strip() == 'shutdown':
         if int(uid) == 482189197671923713:
             await channel.send('Shutdown...')
@@ -511,17 +522,11 @@ async def on_message(message):
     elif bvb in sisu.lower():
         await channel.send('I heard you! {1}, {0}'.format(message.author.mention, user))
     elif sisu.lower().startswith('tere'):
-        print(str(message.created_at)[:-10] + '    ' + sisu, user, sep='\t')  # Logimine tere jaoks.
+        print(str(message.created_at)[:-10] + '    ' + 'tere', user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
     await bot.process_commands(message)
-
-
-@bot.command(pass_context=True)
-async def hallo(ctx, *args):
-    # Args tuple sõnedega, mis tulid argumentidena.
-    await ctx.send(str(args))
 
 
 async def list_servers():
