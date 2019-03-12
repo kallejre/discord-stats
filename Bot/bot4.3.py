@@ -26,13 +26,13 @@ bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
 kellad = dict()
+print('Run')
 
 
 def stats_load2(srv='py2018'):  # Serveri nimi
     """PKL -> Self. Terve objekti avamine."""
     global videod, textid, blacklist
     global kellad
-    from bot_funk import videod,textid,blacklist
     kell = kellad[srv]
     fname = '../' + srv + '/d_stats.pkl'
     try:
@@ -89,7 +89,10 @@ def gg(sisu):
         tulem.append([hd, desc, '<' + link + '>'])
     return tulem
 
+
 bot.remove_command("help")
+
+
 @bot.command(pass_context=True)
 async def help(ctx, *args):
     embed = discord.Embed(title="Botten von Bot", description="Enamiku saadaval käskude nimekiri:", color=0x41e510)
@@ -109,7 +112,7 @@ async def help(ctx, *args):
                     value="Ajastatud toimingute defineerimine.\nAega saab anda sekundites (?wait 10) ja kellaajana (?wait 30.01.19_13:14).",
                     inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
-    
+
     return await ctx.send(embed=embed)
 
 
@@ -383,7 +386,7 @@ async def reactor(message):
             for i in range(18):
                 await message.add_reaction(random.choice(all_emojis))
     if user.startswith('rauno'):
-        last_reac[user][srv] = int(time.time())+15
+        last_reac[user][srv] = int(time.time()) + 15
         for i in range(19):
             try:
                 await message.add_reaction(random.choice(all_emojis))
@@ -423,10 +426,12 @@ async def wait(channel, sisu, user, uid):
     except Exception as err:
         await channel.send(str(err))
 
+
 @bot.command(pass_context=True)
 async def spam(ctx, *args):
     a = time.localtime()
     await ctx.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
+
 
 @bot.command(pass_context=True)
 async def pelmeen(ctx, *args):
@@ -440,7 +445,7 @@ async def invite(ctx, *args):
 
 @bot.command(pass_context=True)
 async def week(ctx, *args):
-    await ctx.send(str(datetime.datetime.utcnow().isocalendar()[1]-4)+'. nädal.')
+    await ctx.send(str(datetime.datetime.utcnow().isocalendar()[1] - 4) + '. nädal.')
 
 
 @bot.command(pass_context=True)
