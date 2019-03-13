@@ -478,6 +478,7 @@ async def on_message(message):
     #    return
     uid = int(message.author.id)
     user = message.author.name
+    tag = message.author.mention
     if len(sisu) > 2 and sisu[0] == '?':
         print(str(message.created_at)[:-10] + '    ' + sisu, user, sep='\t')
     if str(message.channel) in yldkanalid:
@@ -532,17 +533,17 @@ async def on_message(message):
             embed.add_field(name=res[0], value=res[1] + '\n' + res[2], inline=False)
         return await channel.send(embed=embed)
     elif sisu.strip() == 'shutdown':
-        if int(uid) == 482189197671923713:
+        if tag == test:
             await channel.send('Shutdown...')
             exit()
             return
         else:
             await channel.send('no')
     elif bvb in sisu.lower():
-        if message.author.mention!=bvb:
-            await channel.send('I heard you! {1}, {0}'.format(message.author.mention, user))
+        if tag!=bvb:
+            await channel.send('I heard you! {1}, {0}'.format(tag, user))
     elif sisu.lower().startswith('tere'):
-        if message.author.mention==bvb: return
+        if tag==bvb: return
         print(str(message.created_at)[:-10] + '    ' + 'tere', user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
