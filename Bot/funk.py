@@ -17,7 +17,7 @@ printer = False
 def coord(address):
     params = {'address': address, 'sensor': 'false'}
     hmm = 'zaSyD7ffhr22Fo8AMiGc0KPYw0L_MrPFft'
-    url = 'https://maps.googleapis.com/maps/api/elevation/json?key=AI' + hmm + 'dMI&' + impo.urllib.parse.urlencode(
+    url = 'https://maps.google.com/maps/api/geocode/json?key=AI' + hmm + 'dMI&' + impo.urllib.parse.urlencode(
         params)
     response = impo.urllib.request.urlopen(url)
     result = impo.json.loads(response.read().decode(response.headers.get_content_charset()))
