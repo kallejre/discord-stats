@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.4.0'
+VERSION = '4.4.2'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -179,8 +179,7 @@ def find_channel(kanal, server):
 #        return await channel.send(define(sisu))
 
 @bot.command()
-async def define(ctx, *args):
-# def define(sisu):
+async def define_old(ctx, *args):
     print(args)
     splt = list(args)
     await ctx.send(define_wrap(splt))
@@ -217,7 +216,53 @@ def define_wrap(splt):
     except Exception as err:
         return err
 
+def define_wrapper(sisu):
+    results=define2(sisu)  # Tagastab listi tulemustest.
+    embed = discord.Embed(title=' '.join(sisu.split()[1:]), color=0xc904e2, type='rich')
+    for res in results:
+        temp=res.strip().split('  ')
+        if len(temp)==1:
+            field=res.strip().split(' ')[0].strip()
+            defi=res.strip()
+        else:
+            field=temp[0].strip()
+            defi='  '.join(temp[1:]).strip()
+        embed.add_field(name=field, value=defi, inline=False)
+    return embed
 
+def define2(sisu):
+    splt = sisu.split()[1:]
+    try:
+        asd = 1
+        ms = ' '.join(splt)
+        regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
+        adr = urllib.request.quote(ms)
+        adr = 'https://www.eki.ee/dict/ekss/index.cgi?Q=' + adr
+        req = urllib.request.Request(adr)
+        response = urllib.request.urlopen(req)
+        the_page = response.read().decode('utf8')
+        matches = re.finditer(regex, the_page, re.MULTILINE)
+        results=[]
+        for matchNum, match in enumerate(matches, start=1):
+            text = match.group()
+            try:
+                text = text.replace('<br>', '\n')
+            except Exception:
+                return []
+            text2 = re.sub('<[\s\S]*?>', '', text)
+            if asd:
+                if len(text2) < 1020:
+                    results.append(text2)
+                else:
+                    results.append('Liiga pikk vastus\n' + text2[:1005])
+            else:
+                defin = re.split('\. [A-Z\d]', text2)[0] + '.'
+                results.append(defin)
+        return results
+    except Exception as err:
+        return err
+
+    
 def stats(message):
     global data
     stat_col = 0xf27e54
@@ -524,6 +569,8 @@ async def on_message(message):
             return await channel.send(embed=x)
         else:
             return await channel.send(x)
+    elif sisu.startswith('?define '):
+        return await channel.send(embed=define_wrapper(sisu))
     elif sisu.startswith('?search'):
         reso = gg(sisu)
         if len(reso) == 1 and reso[0].startswith('You did it!'):

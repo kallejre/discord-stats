@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.3.6'
+VERSION = '4.3.7'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -97,6 +97,7 @@ bot.remove_command("help")
 async def help(ctx, *args):
     embed = discord.Embed(title="Botten von Bot", description="Enamiku saadaval käskude nimekiri:", color=0x41e510)
     embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
+    embed.add_field(name="?define_old <märksõnad> [0 või 1]", value="Tekstipõhine vastus.", inline=False)
     embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
     embed.add_field(name="?ilm [asukoht]",
                     value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.\nLisavõimalustena saab valida\n**?miniilm** (lühike ilmateade) või\n**?ilm_raw** (põhjalik info JSONina).",
@@ -174,7 +175,7 @@ def find_channel(kanal, server):
         return kanal
 
 
-def define(sisu):
+def define_old(sisu):
     splt = sisu.split()[1:]
     try:
         asd = 0
@@ -205,6 +206,52 @@ def define(sisu):
                 return 'Liiga pikk vastus\n' + text2[:1300]
         defin = re.split('\. [A-Z\d]', text2)[0] + '.'
         return defin
+    except Exception as err:
+        return err
+
+def define_wrapper(sisu):
+    results=define2(sisu)  # Tagastab listi tulemustest.
+    embed = discord.Embed(title=' '.join(sisu.split()[1:]), color=0xc904e2, type='rich')
+    for res in results:
+        temp=res.strip().split('  ')
+        if len(temp)==1:
+            field=res.strip().split(' ')[0].strip()
+            defi=res.strip()
+        else:
+            field=temp[0].strip()
+            defi='  '.join(temp[1:]).strip()
+        embed.add_field(name=field, value=defi, inline=False)
+    return embed
+
+def define2(sisu):
+    splt = sisu.split()[1:]
+    try:
+        asd = 1
+        ms = ' '.join(splt)
+        regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
+        adr = urllib.request.quote(ms)
+        adr = 'https://www.eki.ee/dict/ekss/index.cgi?Q=' + adr
+        req = urllib.request.Request(adr)
+        response = urllib.request.urlopen(req)
+        the_page = response.read().decode('utf8')
+        matches = re.finditer(regex, the_page, re.MULTILINE)
+        results=[]
+        for matchNum, match in enumerate(matches, start=1):
+            text = match.group()
+            try:
+                text = text.replace('<br>', '\n')
+            except Exception:
+                return []
+            text2 = re.sub('<[\s\S]*?>', '', text)
+            if asd:
+                if len(text2) < 1020:
+                    results.append(text2)
+                else:
+                    results.append('Liiga pikk vastus\n' + text2[:1005])
+            else:
+                defin = re.split('\. [A-Z\d]', text2)[0] + '.'
+                results.append(defin)
+        return results
     except Exception as err:
         return err
 
@@ -507,8 +554,10 @@ async def on_message(message):
             return await channel.send(embed=x)
         else:
             return await channel.send(x)
+    elif sisu.startswith('?define_old'):
+        return await channel.send(define_old(sisu))
     elif sisu.startswith('?define'):
-        return await channel.send(define(sisu))
+        return await channel.send(embed=define_wrapper(sisu))
     elif sisu.startswith('?search'):
         reso = gg(sisu)
         if len(reso) == 1 and reso[0].startswith('You did it!'):

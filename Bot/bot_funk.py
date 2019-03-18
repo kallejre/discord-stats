@@ -30,11 +30,11 @@ textid = [['Mine magama'],  # 0
           ['Ära istu arvuti taga, mine õue!', 'Mine prae pelmeene!'],  # 16
           ['Ära istu arvuti taga, mine õue!', 'Mine prae pelmeene!'],  # 17
           ['Ära istu arvuti taga, mine õue!'],  # 18
-          ['Ära istu arvuti taga, mine õue!'],  # 19
-          ['Ära istu arvuti taga, mine õue!'],  # 20
-          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!'],  # 21
+          ['Ära istu arvuti taga, mine õue!', 'Hakka progema!'],  # 19
+          ['Ära istu arvuti taga, mine õue!', 'Hakka progema!'],  # 20
+          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!', 'Hakka progema!'],  # 21
           ['Mine varsti magama!', 'Mine varsti pelmeene keetma!', 'Mine varsti pelmeene praadima!'],  # 22
-          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!']]  # 23
+          ['Mine varsti magama!', 'Mine varsti pelmeene keetma!', 'Viimane hetk progema hakata!']]  # 23
 
 blacklist = []
 helin = '<@392707534764376074>'
