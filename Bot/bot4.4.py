@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.4.2'
+VERSION = '4.4.3.2'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -215,27 +215,36 @@ def define_wrap(splt):
         return defin
     except Exception as err:
         return err
-
-def define_wrapper(sisu):
-    results=define2(sisu)  # Tagastab listi tulemustest.
-    embed = discord.Embed(title=' '.join(sisu.split()[1:]), color=0xc904e2, type='rich')
+    
+@bot.command()
+async def define(ctx, *args):
+    results=define2(' '.join(args))  # Tagastab listi tulemustest.
+    embed = discord.Embed(title=' '.join(args), color=0xc904e2, type='rich')
+    c=0
     for res in results:
-        temp=res.strip().split('  ')
+        c+=len(res)
+        temp=res.strip().split('\n')
         if len(temp)==1:
             field=res.strip().split(' ')[0].strip()
             defi=res.strip()
         else:
             field=temp[0].strip()
-            defi='  '.join(temp[1:]).strip()
-        embed.add_field(name=field, value=defi, inline=False)
-    return embed
-
-def define2(sisu):
-    splt = sisu.split()[1:]
+            defi='\n'.join(temp[1:]).strip()
+        if c<5900:
+            embed.add_field(name=field, value=defi, inline=False)
+        else:
+            embed.add_field(name='Liiga palju tulemusi', value='Rohkem vastuseid ei saa kuvada', inline=False)
+            break
+    if not results:
+        embed.add_field(name='. . .', value='Tulemusi ei leitud', inline=False)
+    await ctx.send(embed=embed)
+    
+def define2(msg):
     try:
         asd = 1
-        ms = ' '.join(splt)
+        ms = msg
         regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
+        regex2= r"<span class=\"leitud_ss\">([.\s\S\d\D]*?)<\/span>"
         adr = urllib.request.quote(ms)
         adr = 'https://www.eki.ee/dict/ekss/index.cgi?Q=' + adr
         req = urllib.request.Request(adr)
@@ -246,21 +255,20 @@ def define2(sisu):
         for matchNum, match in enumerate(matches, start=1):
             text = match.group()
             try:
-                text = text.replace('<br>', '\n')
-            except Exception:
-                return []
+                text = text.replace('<br/>', '\n').replace('\n\n', '\n')
+            except Exception as err:
+                return [err]
+            for matchNum, match in enumerate(re.finditer(regex2, text, re.MULTILINE)):
+                title=match.group(1)
+                break
             text2 = re.sub('<[\s\S]*?>', '', text)
-            if asd:
-                if len(text2) < 1020:
-                    results.append(text2)
-                else:
-                    results.append('Liiga pikk vastus\n' + text2[:1005])
+            if len(text2) < 1020:
+                results.append(text2)
             else:
-                defin = re.split('\. [A-Z\d]', text2)[0] + '.'
-                results.append(defin)
+                results.append(text2.split('\n')[0]+'\n**Liiga pikk vastus**\n' + '\n'.join(text2.split('\n')[1:])[:1000])
         return results
     except Exception as err:
-        return err
+        return [err]
 
     
 def stats(message):
@@ -569,8 +577,8 @@ async def on_message(message):
             return await channel.send(embed=x)
         else:
             return await channel.send(x)
-    elif sisu.startswith('?define '):
-        return await channel.send(embed=define_wrapper(sisu))
+    #elif sisu.startswith('?define '):
+    #    return await channel.send(embed=define_wrapper(sisu))
     elif sisu.startswith('?search'):
         reso = gg(sisu)
         if len(reso) == 1 and reso[0].startswith('You did it!'):
