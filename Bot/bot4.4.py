@@ -22,7 +22,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.4.3.2'
+VERSION = '4.4.4'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -597,12 +597,15 @@ async def on_message(message):
     elif bvb in sisu.lower():
         if tag!=bvb:
             await channel.send('I heard you! {1}, {0}'.format(tag, user))
+    elif list(re.finditer(r"\bhmm\b", sisu, re.IGNORECASE)) and not sisu.startswith('?') and tag!=bvb:
+        await channel.send('Mitte hmm, vaid hm või hmh!')
     elif sisu.lower().startswith('tere'):
         if tag==bvb: return
         print(str(message.created_at)[:-10] + '    ' + 'tere', user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
+    
     await bot.process_commands(message)
 
 
