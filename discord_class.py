@@ -69,6 +69,11 @@ import xlsxwriter
 from Animate import Animate
 import os
 import zipfile
+LINUX= os.name=='posix'
+if LINUX:  # Mõeldud töötamiseks spetsiaalsel linuxi VMil.
+    import estnltk3
+    
+    
 
 class xlsx:
     def __init__(self, fname='stats.xlsx'):
@@ -135,6 +140,9 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "ex03": {"EX", "Kokku"}, 
                     "ex04": {"EX", "Kokku"}, 
                     "ex05": {"EX", "Kokku"}, 
+                    "ex06": {"EX", "Kokku"}, 
+                    "ex07": {"EX", "Kokku"}, 
+                    "ex08": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku", "Fun"}, 
                     "games": {"Yldine", "Kokku", "Fun"}, 
                     "general": {"Yldine", "Kokku", "NotFun"}, 
@@ -142,6 +150,9 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "hw03": {"Kalmo", "Kokku"},
                     "hw04": {"Kalmo", "Kokku"},
                     "hw05": {"Kalmo", "Kokku"},
+                    "hw06": {"Kalmo", "Kokku"}, 
+                    "hw07": {"Kalmo", "Kokku"},
+                    "hw08": {"Kalmo", "Kokku"}, 
                     "java": {"Kalmo", "Kokku"}, 
                     "korraldus": {"Kalmo", "Kokku"}, 
                     "meme": {"Yldine", "Kokku", "Fun"}, 
@@ -152,8 +163,9 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "pr02": {"PR", "Kokku"},
                     "pr03": {"PR", "Kokku"},
                     "pr04": {"PR", "Kokku"},
-                    "pr05": {"PR", "Kokku"},
                     "pr06": {"PR", "Kokku"},
+                    "pr07": {"PR", "Kokku"},
+                    "pr08": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku", "NotFun"}, 
                     "random": {"Yldine", "Kokku", "Fun"}, 
                     "stat": {"Yldine", "Kokku", "NotFun"}, 
@@ -693,7 +705,8 @@ class Stats:
         fn=os.path.split(absf)[-1]
         ziph = zipfile.ZipFile(fn+'.zip', 'w', zipfile.ZIP_LZMA)#ZIP_DEFLATED)
         for root,dirs, files in os.walk(absf, topdown=True):
-            dirs.remove('gif')
+            if 'gif' in dirs:
+                dirs.remove('gif')
             for file in files:
                 ziph.write(os.path.join(root, file), file)  # root
         ziph.close()
@@ -708,38 +721,44 @@ def stats_load(fname='d_stats.pkl'):
 def stat_full(*args, **kwargs):
     print('Algus', end=' ')
     sts = Stats(*args, **kwargs)
-    print('1', end=' ')
+    print('1')
     sts.stat_weeks()
     sts.times2_cleanup()
     sts.ajatabel_suur()
-    print('2', end=' ')
+    print('2')
     sts.arhiiv()
-    print('3', end=' ')
+    print('3')
     sts.out_tgf_msg()
     sts.out_tgf_tag()
     sts.out_users_json()
     sts.out_users_py()
-    print('4', end=' ')
+    print('4')
     sts.stat_last_24()
     sts.stat_msg()
     sts.stat_msg2()
     sts.stat_tag()
     sts.stat_tag2()
-    print('5', end=' ')
+    print('5')  # See on kõigest teksti genereerimine.
+    """
     sts.graafid_edetabel(-1,n=5,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
     sts.graafid_edetabel(-1,n=10,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
-    print('6', end=' ')
+    """
+    print('6')
     sts.excel.close()
     sts.save_pkl()
-    print('7', end=' ')
-    sts.save_zip()
-    """
-    print('8',end=' ')
+    print('7')
+    if LINUX:
+        estnltk3.main(sts)
+    #"""
+    print('8')
     ani = Animate(sts)
     ani.draw_main()
     #"""
+    print('9')
+    sts.save_zip()
+    
     print('done')
     return sts
 
@@ -747,11 +766,11 @@ def stat_full(*args, **kwargs):
 
 # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
 print('Python')
-#sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
+sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
 print('Java')
 sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
 print('Kaug')
-#sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
