@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.5.3'
+VERSION = '4.5.4'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -307,7 +307,30 @@ async def define(ctx, *args):
     if not results:
         embed.add_field(name='. . .', value='Tulemusi ei leitud', inline=False)
     await ctx.send(embed=embed)
-    
+
+def is_me(m):
+    #print(m.author == bot.user)
+    #print(m.content)
+    return (m.author == bot.user and m.content.startswith('**ID')) or \
+            m.content.startswith('?cleanup') or m.content.startswith('?g ') or\
+            (m.author == bot.user and m.content.startswith('ID')) or \
+            (m.author == bot.user and 'hangman' in m.content.lower()) or \
+            (m.author == bot.user and m.content.startswith('Mängu ID'))
+
+
+@bot.command()
+async def cleanup(ctx, n=15):
+    if n>300:n=200
+    if n<2:n=2
+    t = ctx.author
+    his = ctx.history(limit=5)
+    deleted = await ctx.channel.purge(limit=n, check=is_me)
+    await ctx.send('deleted '+str(len(deleted)))
+    return
+    async for msg in his:
+        out += ''.join([msg.author.name, ': ', msg.content]) + '\n'
+    out = out.replace('@', '(ät)')
+    await ctx.send(out)
 def define2(msg):
     try:
         asd = 1
