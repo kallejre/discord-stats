@@ -1,75 +1,95 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import random
-import sys
 
-wordList = list(map(lambda x:x.strip(),open('hang_estonian-words.txt').readlines()))
-wordList.sort(key=len)
-wordList=wordList[-10:]
-cheats=False
-guess_word = []
-secretWord = random.choice(wordList)  # lets randomize single word from the list
-length_word = len(secretWord)
-alphabet = " !'-abcdefghijklmnopqrstuvwxyzäéõöüšž"
-letter_storage = []
-if cheats:print(''.join(sorted(set(secretWord),key=lambda x:secretWord.count(x))))
-def mad_stuff(fname='estonian-words.txt'):
+def mad_stuff(fname='estonian-words.txt'):  # Tähestiku statistika.
     f=''.join(sorted(open(fname).read().lower())).strip()
-    for i in sorted(set(f)):
-        print(i, f.count(i))
-#print(secretWord)
+    for i in sorted(set(f)): print(i, f.count(i))
+def let2regi(letter):
+    if letter=='_':
+        return '||:stop_button:||'
+    if letter in "abcdefghijklmnopqrstuvwxyz":
+        return ':regional_indicator_'+letter+':'
+    return letter
+class hangman():
+    def __init__(self,diff=None):
+        self.cheats= 0  # Annab juurde 16 lisakatset ja näitab, mis tähed on sõnas.
+        self.alphabet = " !'-abcdefghijklmnopqrstuvwxyzäéõöüšž"
+        self.alp2="` !'-äéõöüšž` või `a-z` (kaasa arvatud tühik)"
+        self.letter_storage = []
+        # Osa, mis sõltub sõna valimisest.
+        if not diff:
+            diff=3
+        if diff==1:
+            fname = 'hang_estonian-words.txt'
+            self.wordList=list(filter(lambda x:4<len(x)<=8, map(lambda x:x.strip(),open(fname).readlines())))
+        if diff==2:
+            fname = 'hang_estonian-words.txt'
+            self.wordList=list(filter(lambda x:8<len(x)<=12, map(lambda x:x.strip(),open(fname).readlines())))
+        if diff==3:
+            fname = 'hang_estonian-words2.txt'
+            self.wordList=list(filter(lambda x:len(x)<=16, map(lambda x:x.strip(),open(fname).readlines())))
+        if diff==4:
+            fname = 'hang_estonian-words2.txt'
+            self.wordList=list(filter(lambda x:16<len(x)<=20, map(lambda x:x.strip(),open(fname).readlines())))
+        if diff==5:
+            fname = 'hang_estonian-words2.txt'
+            self.wordList=list(filter(lambda x:20<len(x), map(lambda x:x.strip(),open(fname).readlines())))
+        self.secretWord = random.choice(self.wordList)  # lets randomize single word from the list
+        self.wlen = len(self.secretWord)
+        self.guess_word = ['_'] * self.wlen
 
-def change():
-    for character in secretWord:  # printing blanks for each letter in secret word
-        guess_word.append('_')
-
-    print ('Ok, so the word You need to guess has', length_word,
-           'characters')
-
-    print( 'Be aware that You can enter only 1 letter from a-z\n\n')
-    print(guess_word)
-def guessing():
-    guess_taken = 1
-    max_guess=10+16*int(cheats)
-    while guess_taken < max_guess:
-        print(' '.join(sorted(letter_storage)))
-        print(''.join(guess_word))
-        print(guess_taken, '/',max_guess)
-        guess = input('Pick a letter\n').lower()
-        if not (guess in alphabet or guess in secretWord):  # checking input
-            print('Enter a letter from a-z alphabet')
-        elif guess in letter_storage:
-            # checking if letter has been already used
-            print('You have already guessed that letter!')
+        
+        self.guess_taken = 1
+        self.max_guess=10+16*int(self.cheats)
+        if self.cheats:
+            print(''.join(sorted(set(self.secretWord),key=lambda x:self.secretWord.count(x))))
+        self.startup='Otsitava sõna pikkus on '+str(self.wlen)+' tähte.\nVõimalikud tähed saavad olla '+self.alp2
+    @property
+    def type(self):
+        return 'Hangman `'+''.join(self.guess_word)+'`'
+    def guess(self, guess):
+        guess = guess.lower()
+        output = []
+        gameOver=False
+        if not (guess in self.alphabet or guess in self.secretWord):  # checking input
+            output.append('Täht peab olema vahemikust '+self.alp2)
+        elif guess in self.letter_storage:
+            output.append('Seda on juba proovitud!')
         else:
-            letter_storage.append(guess)
-            if guess in secretWord:
-                print('You guessed correctly!')
+            self.letter_storage.append(guess)
+            if guess in self.secretWord:
+                output.append('Õige!')
                 if len(guess)==1:
-                    for x in range(0, length_word):
-                        # This Part I just don't get it
-                        if secretWord[x] == guess:
-                            guess_word[x] = guess
+                    for x in range(0, self.wlen):
+                        if self.secretWord[x] == guess:
+                            self.guess_word[x] = guess
                 else:
-                    for x in range(0, length_word-len(guess)+1):### töödeldud
-                        if secretWord[x:x+len(guess)] == guess:
+                    for x in range(0, self.wlen-len(guess)+1):  # töödeldud
+                        if self.secretWord[x:x+len(guess)] == guess:
                             for y in range(x,x+len(guess)):
-                                guess_word[y] = guess[y-x]
-                print(''.join(guess_word))
+                                self.guess_word[y] = guess[y-x]
 
-                if not '_' in guess_word:
-                    print('You won!')
-                    break
+                if not '_' in self.guess_word:
+                    gameOver=True
+                    output.append('Mäng läbi :grinning:\nVastus oli '+self.secretWord)
+                    return '\n'.join(output), gameOver
             else:
-                print('The letter is not in the word. Try Again!')
-                guess_taken += 1
-                if guess_taken == 10:
-                    print (' Sorry Mate, You lost :<! The secret word was'
-                           , secretWord)
-
-
-change()
-guessing()
-
-print('Game Over!')
-#mad_stuff()		
+                output.append('Vale!')
+                if self.guess_taken == self.max_guess:
+                    gameOver=True
+                    output.append('Mäng läbi! :frowning2:\nVastus oli '+self.secretWord)
+                self.guess_taken += 1
+        
+        output.append('Proovitud: '+' '.join(sorted(self.letter_storage))+'\nSõna: **'+
+              ''.join(list(map(let2regi,self.guess_word)))+ '**\nValesti proovitud: '+ str(self.guess_taken-1) + '/'+ str(self.max_guess) + 'korda.')
+        return '  '.join(output), gameOver
+"""     
+game=hangman()
+print(game.guess('a'))
+print(game.guess('e'))
+print(game.guess('i'))
+print(game.guess('o'))
+print(game.guess('k'))
+print(game.guess('s'))
+"""

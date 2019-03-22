@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.5.0'
+VERSION = '4.5.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -114,8 +114,8 @@ async def help(ctx, *args):
     embed.add_field(name="?wait  <aeg> [kanal] <sõnum>",
                     value="Ajastatud toimingute defineerimine.\nAega saab anda sekundites (?wait 10) ja kellaajana (?wait 30.01.19_13:14).",
                     inline=False)
-    embed.add_field(name="?g  <Valmimisel>",
-                    value="Hetkel ainult hangman.",
+    embed.add_field(name="?g  [new|end|list|<ID>]",
+                    value="Hetkel ainult hangman. Lisainfo käsuga `? help`",
                     inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
 
@@ -150,9 +150,61 @@ async def g(ctx, *args):
             idd=len(games)
             games.append(0)
         ty=args[1]
-        
+        if ty=='hangman':
+            dif=None
+            if len(args)>2:
+                if args[2].isnumeric():
+                    if 1<=int(args[2])<=5:
+                        dif=int(args[2])
+            game=hangman(dif)
+            games[idd]=game
+            await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
+        else:
+            await ctx.send('Hetkel on toetatud ainult hangman.')
+        return
+    elif args[0]=='help':
+        embed=discord.Embed(title='Funktsiooni ?g abi.'.join(args), color=0x443eef, type='rich')
+        embed.add_field(name="?g new [Mängu nimi] <Raskusaste 1-5>", value="Alustab uue mänguga ja tagastab mängu ID. Hetkel on olemas vaid hangman (sõnade arvamine).", inline=False)
+        embed.add_field(name="?g end [Mängu ID]", value="Lõpetab ID põhjal käimasoleva mängu.", inline=False)
+        embed.add_field(name="?g list", value="Käimasolevate mängude ja seisude info.", inline=False)
+        embed.add_field(name="?g [Mängu ID] <Käik/käsud>", value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke.", inline=False)
+        await ctx.send(embed=embed)
+        return
     elif args[0]=='end':
-        pass
+        t=args[1]
+        if not t.isnumeric():
+            await ctx.send('ID ei ole nuber.')
+            return
+        t=int(t)-1
+        if t not in range(len(games)) or games[t]==0:
+            await ctx.send('ID ei ole kehtiv.')
+            return
+        games[t]=0
+        await ctx.send('Mäng nr '+args[1]+' on lõpetatud.')
+        return
+    elif args[0]=='list':
+        c=0
+        for i in range(len(games)):
+            if games[i]==0:continue
+            await ctx.send(str(i+1)+'    '+games[i].type)
+            c+=1
+        if c==0: await ctx.send('Käimasolevaid mänge ei ole.')
+        return
+    elif args[0].isnumeric():
+        t=int(args[0])-1
+        if t not in range(len(games)) or games[t]==0:
+            await ctx.send('ID ei ole kehtiv.')
+            return
+        game=games[t]
+        res, go=game.guess(args[1])
+        await ctx.send('**ID: '+args[0]+'**  '+res)
+        if go:
+            games[t]=0
+            await ctx.send(ctx.author.mention+' oli viimane.')
+        return
+    await ctx.send('Proovi `?g help`')
+    return
+        
     
 @bot.command()
 async def hi(ctx):
