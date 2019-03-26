@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.5.4'
+VERSION = '4.5.7'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -93,6 +93,30 @@ def gg(sisu):
     return tulem
 
 
+def gg_img(sisu):
+    # interneti pildiotsing
+    splt = sisu.split()[1:]
+    ms = ' '.join(splt)
+    regex = re.compile('<div class="g">')
+    adr = urllib.request.quote(ms)
+    adr = 'https://www.startpage.com/do/search?cat=pics&q=' + adr
+    req = urllib.request.Request(adr, None, {'User-Agent': ''})
+    response = urllib.request.urlopen(req)
+    htm = response.read().decode('utf8')
+    try:
+        the_page = htm.split('<ul class=\'image-results\' id=\'image-results\'>')[1].split('</ul>')[0]
+    except IndexError:
+        return [
+            'You did it! [Tulemusi ei leitud.]\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
+    the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>', '').split('</li>')
+    for m in range(min([10,len(the_page)])):
+        img_tag=list(enumerate(re.finditer(r"<img[\s\S]*?>", the_page[m], re.MULTILINE)))[0][1].group()
+        the_page[m]=re.findall(r"url=[\s\S]*?\&",img_tag, re.MULTILINE)[0][4:-1]
+        the_page[m]=urllib.request.unquote(the_page[m])
+    the_page=the_page[:m+1]
+    return the_page
+
+
 bot.remove_command("help")
 
 
@@ -140,9 +164,11 @@ async def troll_task():
             await asyncio.sleep(tt)
         except websockets.exceptions.ConnectionClosed:
             return
+def alll(ctx):return True
 
 @bot.command(pass_context=True)
 async def g(ctx, *args):
+    await ctx.message.delete()
     if args[0]=='new':
         if 0 in games:
             idd=games.index(0)
@@ -157,6 +183,10 @@ async def g(ctx, *args):
                     if 1<=int(args[2])<=5:
                         dif=int(args[2])
             game=hangman(dif)
+            games[idd]=game
+            await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
+        elif ty=='ttt':
+            game=titato.game_warp(args)
             games[idd]=game
             await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
         else:
@@ -180,8 +210,11 @@ async def g(ctx, *args):
             await ctx.send('ID ei ole kehtiv.')
             return
         games[t]=0
-        await ctx.send('Mäng nr '+args[1]+' on lõpetatud.')
-        return
+        # cleanup(ctx, 30)
+        
+        #input()
+        await ctx.send('Mängu ID '+args[1]+' on lõpetatud.')
+        return await ctx.channel.send('?cleanup')
     elif args[0]=='list':
         c=0
         for i in range(len(games)):
@@ -197,6 +230,9 @@ async def g(ctx, *args):
             return
         game=games[t]
         res, go=game.guess(args[1])
+        if go:
+            # cleanup(ctx, 50)
+            await ctx.send('?cleanup 50')
         await ctx.send('**ID: '+args[0]+'**  '+res)
         if go:
             games[t]=0
@@ -311,16 +347,18 @@ async def define(ctx, *args):
 def is_me(m):
     #print(m.author == bot.user)
     #print(m.content)
-    return (m.author == bot.user and m.content.startswith('**ID')) or \
+    return (m.author == bot.user and m.content.startswith('**ID')) or m.content.startswith('? g') or \
             m.content.startswith('?cleanup') or m.content.startswith('?g ') or\
             (m.author == bot.user and m.content.startswith('ID')) or \
             (m.author == bot.user and 'hangman' in m.content.lower()) or \
+            (m.author == bot.user and '> oli viimane.' in m.content.lower()) or \
             (m.author == bot.user and m.content.startswith('Mängu ID'))
 
 
 @bot.command()
+@commands.check(alll)
 async def cleanup(ctx, n=15):
-    if n>300:n=200
+    if n>1000:n=200
     if n<2:n=2
     t = ctx.author
     his = ctx.history(limit=5)
@@ -669,8 +707,14 @@ async def on_message(message):
             return await channel.send(embed=x)
         else:
             return await channel.send(x)
-    #elif sisu.startswith('?define '):
-    #    return await channel.send(embed=define_wrapper(sisu))
+    elif sisu.startswith('?search_img'):
+        reso = gg_img(sisu)
+        if len(reso) == 1 and reso[0].startswith('You did it!'):
+            return await channel.send('Tulemusi ei leitud.')
+        e = discord.Embed(title='Juhuslik otsingutulemus',color=0xd81c0f)
+        e.set_image(url=reso[random.randint(0,9)])
+        await channel.send(embed=e)
+        return
     elif sisu.startswith('?search'):
         reso = gg(sisu)
         if len(reso) == 1 and reso[0].startswith('You did it!'):
@@ -686,18 +730,20 @@ async def on_message(message):
             return
         else:
             await channel.send('no')
-    elif bvb in sisu.lower():
-        if tag!=bvb:
-            await channel.send('I heard you! {1}, {0}'.format(tag, user))
-    elif list(re.finditer(r"\bhmm\b", sisu, re.IGNORECASE)) and not sisu.startswith('?') and tag!=bvb:
+    elif list(re.finditer(r"\bhmm\b", sisu, re.IGNORECASE)) and not sisu.startswith('?') and tag!=bvb and user!='anubis':
         await channel.send('Mitte hmm, vaid hm või hmh!')
     elif sisu.lower().startswith('tere'):
         if tag==bvb: return
-        print(str(message.created_at)[:-10] + '    ' + 'tere', user, sep='\t')  # Logimine tere jaoks.
+        if '<@' in sisu and bvb not in sisu: return
+        for n in ['kadri', 'piret', 'sebastian', 'elvar', 'anubis', 'test', 'ago']:
+            if n in sisu.lower() and 'bot' not in sisu.lower():return
+        print(str(message.created_at)[:-10] + '    ' + sisu, user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
-    
+    elif bvb in sisu.lower():
+        if tag!=bvb:
+            await channel.send('I heard you! {1}, {0}'.format(tag, user))
     await bot.process_commands(message)
 
 

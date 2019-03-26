@@ -7,7 +7,7 @@ def mad_stuff(fname='estonian-words.txt'):  # Tähestiku statistika.
     for i in sorted(set(f)): print(i, f.count(i))
 def let2regi(letter):
     if letter=='_':
-        return '||:stop_button:||'
+        return '||:black_large_square:||'
     if letter in "abcdefghijklmnopqrstuvwxyz":
         return ':regional_indicator_'+letter+':'
     return letter

@@ -175,19 +175,49 @@ def test_all():
     print(game.check_win() == no_win)
 
 
-class game_warp(object):
-    def __init__(into):  # into = käsutaja käivituskäsk
-        s = into.aplit()
+class game_warp:
+    def __init__(self,into):  # into = käsutaja käivituskäsk
+        s = ['?g']+into
+        # Sisend on list argumentidega. alates ttt-st.
         # ?game ttt suurus win oselejad...
+        print(s)
         if s[1].lower() != 'ttt':
-            return 'Preagu on toetatud vaid tripstrapstrull,\n `?game ttt [väljaku suurus] <võidurea pikkus> oselejad...` (tühikutega eraldatud)'
-        elif s[1].lower() == 'ttt':
-            suurus = int(s[2])
-            if suurus > 31 or suurus < 2:
-                return 'Discordi piirangute tõttu on max väljaku suurus 31.'
-            if s[3].isnumeric():
-                win = max([min([int(s[3]), suurus]), 1])
-                start = 4
-            else:
-                start = 3
-                win = suurus
+            return 'Praegu on toetatud vaid tripstrapstrull,\n `?game ttt [väljaku suurus] <võidurea pikkus> oselejad...` (tühikutega eraldatud)'
+        
+        suurus = int(s[2])
+        if suurus > 31 or suurus < 2:
+            return 'Discordi piirangute tõttu on max väljaku suurus 31.'
+        if s[3].isnumeric():
+            win = max([min([int(s[3]), suurus]), 1])
+            start = 4
+        else:
+            start = 3  # Start on index, mitmendalt positsioonilt hakkab mängijate nimekiri.
+            win = suurus
+        self.players=s[start:]
+        print(self.players)
+        self.next=0
+        self.game = tic_tac_toe(suurus, win, len(self.players))
+    def move(self, player, x,y):
+        # Sisaldab ka käimisvõimaluse kontrolli.
+        # def play(self, player, x, y):
+        if player!=self.players[self.next]:
+            return -1
+        player=self.next+1
+        self.next=player
+        if self.next==len(self.players):
+            self.next=0
+        if self.game.board[x][y]==0:
+            self.game.play(player,x,y)
+            self.game.board[x][y] = player
+            return self.game.check_win()
+        else:
+            return -1
+    def show(self):
+        return self.game.view2()
+    @property
+    def next_player(self):
+        return self.players[self.next]
+
+    @property
+    def win(self):
+        return self.game.check_win()
