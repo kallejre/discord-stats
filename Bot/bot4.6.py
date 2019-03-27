@@ -1,5 +1,5 @@
 # coding: utf-8
-# Bot versioon 4.3. Trips-traps-trulli prototüüp.
+# Bot versioon 4.6. Trips-traps-trulli prototüüp.
 # Lisaks saab nüüd suure on_message laiali lammutada.
 import asyncio
 import os
@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.5.7'
+VERSION = '4.6.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -187,18 +187,30 @@ async def g(ctx, *args):
             games[idd]=game
             await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
         elif ty=='ttt':
-            game=titato.game_warp(args)
+            # `?game ttt [väljaku suurus] <võidurea pikkus> oselejad...` (tühikutega eraldatud)'
+            print(args)
+            try:
+                game=titato.game_warp(args)
+            except SyntaxError as err:
+                game =str(err)
+            if type(game)==str:
+                # Tagastati veateade
+                await ctx.send('Viga, '+game)
+                return
             games[idd]=game
             await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
         else:
-            await ctx.send('Hetkel on toetatud ainult hangman.')
+            await ctx.send('Hetkel on toetatud ainult hangman ja trips-traps-trull (ttt).')
         return
     elif args[0]=='help':
         embed=discord.Embed(title='Funktsiooni ?g abi.'.join(args), color=0x443eef, type='rich')
-        embed.add_field(name="?g new [Mängu nimi] <Raskusaste 1-5>", value="Alustab uue mänguga ja tagastab mängu ID. Hetkel on olemas vaid hangman (sõnade arvamine).", inline=False)
+        embed.add_field(name="?g new [Mängu nimi] [Seaded]", value="Alustab uue mänguga ja tagastab mängu ID. Hetkel on olemas vaid hangman (sõnade arvamine) ja ttt (tripstrapstrull)."\
+                        "Formaadid:\nHangman: `?g new hangman <raskusaste 1-5>` (viimane on vabatahtlik)\n"\
+                        "TTT: `?g new ttt [väljaku suurus] <võidurea pikkus> [Mängijate nimekiri...]` Mängijad eraldatud tühikutega, **kasutada @-märgendeid**!", inline=False)
         embed.add_field(name="?g end [Mängu ID]", value="Lõpetab ID põhjal käimasoleva mängu.", inline=False)
         embed.add_field(name="?g list", value="Käimasolevate mängude ja seisude info.", inline=False)
-        embed.add_field(name="?g [Mängu ID] <Käik/käsud>", value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke.", inline=False)
+        embed.add_field(name="?g [Mängu ID] <Käik/käsud>", value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke. "\
+                        "Formaadid:\nHangman: `?g [ID] [täht]`\nTTT: `?g [ID] [X (1..n)] [Y (1..n)]`", inline=False)
         await ctx.send(embed=embed)
         return
     elif args[0]=='end':
@@ -230,10 +242,20 @@ async def g(ctx, *args):
             await ctx.send('ID ei ole kehtiv.')
             return
         game=games[t]
-        res, go=game.guess(args[1])
-        if go:
+        try:
+            if type(game)==hangman:
+                res, go=game.guess(args[1])
+            elif type(game)==titato.game_warp:
+                res,go=game.move(ctx.author.mention, int(args[2]), int(args[1]))
+        except SyntaxError as err:
+            print('SyntaxErr', err)
+            res, go=str(err), False
+        except Exception as err:
+            print('Exception', err)
+            res, go=str(err), False
+        #if go:
             # cleanup(ctx, 50)
-            await ctx.send('?cleanup 50')
+            #await ctx.send('?cleanup 50')
         await ctx.send('**ID: '+args[0]+'**  '+res)
         if go:
             games[t]=0

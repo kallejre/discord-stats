@@ -20,13 +20,21 @@ needs to do branch prediction. (Still need to run benchmarks)
 import operator
 from functools import reduce
 
-
+def let2regi(letter, size):
+    letter=letter.lower()
+    if size >9:
+        return letter.upper()
+    if letter=='.':
+        return ':black_large_square:'
+    if letter in "abcdefghijklmnopqrstuvwxyz":
+        return ':regional_indicator_'+letter+':'
+    return letter
 class tic_tac_toe(object):
     def __init__(self, size=3, win=None, players=2):
         self.size = size
         self.reset()
         self.players = players
-        self.show = list('.ABCDEFGHIJKLMNOPQRSŠZŽTUVWÕÄÖÜXY')
+        self.show = list('.ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         if win:
             wins = win
         else:
@@ -177,16 +185,13 @@ def test_all():
 
 class game_warp:
     def __init__(self,into):  # into = käsutaja käivituskäsk
-        s = ['?g']+into
+        s = ['?g']+list(into[1:])
         # Sisend on list argumentidega. alates ttt-st.
-        # ?game ttt suurus win oselejad...
-        print(s)
-        if s[1].lower() != 'ttt':
-            return 'Praegu on toetatud vaid tripstrapstrull,\n `?game ttt [väljaku suurus] <võidurea pikkus> oselejad...` (tühikutega eraldatud)'
-        
+        # ?g new ttt suurus win oselejad...
+        if len(s)<4:raise SyntaxError( 'Liiga vähe argumente')
         suurus = int(s[2])
-        if suurus > 31 or suurus < 2:
-            return 'Discordi piirangute tõttu on max väljaku suurus 31.'
+        if suurus > 30 or suurus < 2:
+            raise SyntaxError('Discordi piirangute tõttu on max väljaku suurus 30.')
         if s[3].isnumeric():
             win = max([min([int(s[3]), suurus]), 1])
             start = 4
@@ -194,26 +199,49 @@ class game_warp:
             start = 3  # Start on index, mitmendalt positsioonilt hakkab mängijate nimekiri.
             win = suurus
         self.players=s[start:]
-        print(self.players)
+        # print(self.players)
         self.next=0
         self.game = tic_tac_toe(suurus, win, len(self.players))
+        self.startup='Mäng läks käima, osalevad '+', '.join(self.players)+'.'
     def move(self, player, x,y):
         # Sisaldab ka käimisvõimaluse kontrolli.
         # def play(self, player, x, y):
+        x=int(x)-1
+        y=int(y)-1
         if player!=self.players[self.next]:
-            return -1
-        player=self.next+1
-        self.next=player
-        if self.next==len(self.players):
-            self.next=0
+            return 'Hetkel on '+self.players[self.next]+' käik.', 0
         if self.game.board[x][y]==0:
+            player=self.next+1
+            self.next=player
+            if self.next==len(self.players):
+                self.next=0
             self.game.play(player,x,y)
             self.game.board[x][y] = player
-            return self.game.check_win()
+            x=list(map(lambda x:let2regi(x,self.game.size), self.show2()))
+            if self.game.size>9:
+                x='```'+' '.join(x).replace('   ','\n')+'```'
+            else:
+                x=''.join(x).replace(' ','\n')
+            out='\n'+x+''
+            win=self.game.check_win()
+            # print(self.game.check_win())
+            if win:
+                out+='\n'+self.players[self.game.check_win()-1]+'võitis.'
+            elif 'black_large_square' not in out and '.' not in out:
+                out+='\nViik!'
+                win=True
+            return out, win
         else:
-            return -1
+            return 'See koht on juba kinni.', 0
     def show(self):
         return self.game.view2()
+    
+    def show2(self):
+        return ' '.join(list(map(lambda row: ''.join(list(map(
+            lambda x: self.game.show[x], row))), self.game.board)))
+    @property
+    def type(self):
+        return 'TicTacToe `'+self.show2()+'`'
     @property
     def next_player(self):
         return self.players[self.next]
@@ -221,3 +249,6 @@ class game_warp:
     @property
     def win(self):
         return self.game.check_win()
+#  ?g new ttt 4 @test9#0460
+g=game_warp('new ttt 4 @test9#0460'.split())
+print(g.type)
