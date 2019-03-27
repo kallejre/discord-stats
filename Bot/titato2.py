@@ -25,10 +25,9 @@ def let2regi(letter, size):
         return ':regional_indicator_'+letter+':'
     return letter
 class tic_tac_toe(object):
-    def __init__(self, size=3, win=None, players=2):
+    def __init__(self, size=3, win=None):
         self.size = size
         self.reset()
-        self.players = players
         self.show = list('.ABCDEFGHIJKLMNOPQRSTUVWXYZ')
         if win:
             wins = win
@@ -36,14 +35,6 @@ class tic_tac_toe(object):
             wins = size
         self.wins = wins
         # positions_groups on see koht, kus genereeritakse võimalikud võidujadad.
-        """
-        self.positions_groups = (
-            [[(x, y) for y in range(size)] for x in range(size)] + # horizontals
-            [[(x, y) for x in range(size)] for y in range(size)] + # verticals
-            [[(d, d) for d in range(size)]] + # diagonal from top-left to bottom-right
-            [[(size-1-d, d) for d in range(size)]] # diagonal from top-right to bottom-left
-            )
-        #"""
         self.positions_groups = list()
         for d in range(size - wins + 1):
             for y in range(size):
@@ -77,12 +68,6 @@ class tic_tac_toe(object):
     def play(self, player, x, y):
         self.board[x][y] = player
 
-    def play_x(self, x, y):
-        self.board[x][y] = 1
-
-    def play_o(self, x, y):
-        self.board[x][y] = 2
-
     def check_win(self):
         """
         check_win returns:
@@ -107,77 +92,6 @@ class tic_tac_toe(object):
             print(''.join(list(map(lambda x: self.show[x], row))))
 
 
-def test_all():
-    # Testing check_win
-    #
-    # We just covering the basics, not full coverage
-    # since there are (p+1)^(n*n) possible end states (not accounting for symmetry),
-    # where p is the number of players, and n is the board_size
-
-    board_size = 4
-    no_win = 0
-    x_win = 1
-    y_win = 2
-    game = tic_tac_toe(board_size)
-
-    # Kuvab erinevaid võiduolukordi.
-    """
-    g2=tic_tac_toe(4)
-    for arr in game.positions_groups:
-        g2.reset()
-        for (x,y) in arr:
-            g2.play_x(x,y)
-        g2.view2()
-        print()
-    """
-
-    # Test Empty
-    print(game.check_win() == no_win)
-
-    # Test Horizontals
-    for x in range(board_size):
-        game.reset()
-        [game.play_o(x, y) for y in range(board_size)]
-        print(game.check_win() == y_win)
-        game.reset()
-        [game.play_x(x, y) for y in range(board_size)]
-        print(game.check_win() == x_win)
-
-    # Test Verticals
-    for y in range(board_size):
-        game.reset()
-        [game.play_o(x, y) for x in range(board_size)]
-        print(game.check_win() == y_win)
-
-        game.reset()
-        [game.play_x(x, y) for x in range(board_size)]
-        print(game.check_win() == x_win)
-
-    # Test Diagonal top-left to bottom-right
-    game.reset()
-    [game.play_o(n, n) for n in range(board_size)]
-    print(game.check_win() == y_win)
-
-    game.reset()
-    [game.play_x(n, n) for n in range(board_size)]
-    print(game.check_win() == x_win)
-
-    # Test Diagonal top-right to bottom-left
-    game.reset()
-    [game.play_o(board_size - 1 - n, n) for n in range(board_size)]
-    print(game.check_win() == y_win)
-
-    game.reset()
-    [game.play_x(board_size - 1 - n, n) for n in range(board_size)]
-    print(game.check_win() == x_win)
-    # Spot Check Cats Game
-    game.reset()
-    [game.play_x(x, y) for x in range(board_size - 1) for y in range(board_size - 1)]
-    [game.play_o(n, n) for n in range(board_size)]
-    game.play_x(0, 0)
-    print(game.check_win() == no_win)
-
-
 class game_warp:
     def __init__(self,into):  # into = käsutaja käivituskäsk
         s = ['?g']+list(into[1:])
@@ -193,25 +107,26 @@ class game_warp:
         else:
             start = 3  # Start on index, mitmendalt positsioonilt hakkab mängijate nimekiri.
             win = suurus
-        self.players=s[start:]
+        self.players=[]
         # print(self.players)
         self.next=0
-        self.game = tic_tac_toe(suurus, win, len(self.players))
-        self.startup='Mäng läks käima, osalevad '+', '.join(self.players)+'.'
+        self.game = tic_tac_toe(suurus, win)
+        self.startup='Mäng läks käima, osalejad ega järjekord ei ole fikseeritud.'
     def move(self, player, x,y):
         # Sisaldab ka käimisvõimaluse kontrolli.
         # def play(self, player, x, y):
         x=int(x)-1
         y=int(y)-1
-        if player!=self.players[self.next]:
-            return 'Hetkel on '+self.players[self.next]+' käik.', 0
+        if max(x,y)>=self.game.size:
+            return 'Sobimatu asukoht.', 0
         if self.game.board[x][y]==0:
-            player=self.next+1
-            self.next=player
+            if player not in self.players:
+                self.players.append(player)
+            player_id=self.players.index(player)+1
+            self.next=player_id
             if self.next==len(self.players):
                 self.next=0
-            self.game.play(player,x,y)
-            self.game.board[x][y] = player
+            self.game.play(player_id,x,y)
             x=list(map(lambda x:let2regi(x,self.game.size), self.show2()))
             if self.game.size>9:
                 x='```'+' '.join(x).replace('   ','\n')+'```'
@@ -221,7 +136,7 @@ class game_warp:
             win=self.game.check_win()
             # print(self.game.check_win())
             if win:
-                out+='\n'+self.players[self.game.check_win()-1]+'võitis.'
+                out+='\n'+self.players[self.game.check_win()-1]+' võitis.'
             elif 'black_large_square' not in out and '.' not in out:
                 out+='\nViik!'
                 win=True
@@ -236,7 +151,7 @@ class game_warp:
             lambda x: self.game.show[x], row))), self.game.board)))
     @property
     def type(self):
-        return 'TicTacToe `'+self.show2()+'`'
+        return 'TicTacToe2 `'+self.show2()+'`'
     @property
     def next_player(self):
         return self.players[self.next]

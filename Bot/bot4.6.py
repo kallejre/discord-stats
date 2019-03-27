@@ -16,7 +16,7 @@ import discord
 from bot_funk import *  # Hunnik konstante
 from Disco_Stats import Stats  # Spetsiaalne moodul statistika kuvamiseks. Natuke erinev originaalist.
 from hangman import hangman
-import titato
+import titato, titato2
 """
 Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
@@ -188,9 +188,22 @@ async def g(ctx, *args):
             await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
         elif ty=='ttt':
             # `?game ttt [väljaku suurus] <võidurea pikkus> oselejad...` (tühikutega eraldatud)'
-            print(args)
+            # print(args)
             try:
                 game=titato.game_warp(args)
+            except SyntaxError as err:
+                game =str(err)
+            if type(game)==str:
+                # Tagastati veateade
+                await ctx.send('Viga, '+game)
+                return
+            games[idd]=game
+            await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
+        elif ty=='tt2':
+            # `?game tt2 [väljaku suurus] <võidurea pikkus>`
+            # print(args)
+            try:
+                game=titato2.game_warp(args)
             except SyntaxError as err:
                 game =str(err)
             if type(game)==str:
@@ -206,7 +219,8 @@ async def g(ctx, *args):
         embed=discord.Embed(title='Funktsiooni ?g abi.'.join(args), color=0x443eef, type='rich')
         embed.add_field(name="?g new [Mängu nimi] [Seaded]", value="Alustab uue mänguga ja tagastab mängu ID. Hetkel on olemas vaid hangman (sõnade arvamine) ja ttt (tripstrapstrull)."\
                         "Formaadid:\nHangman: `?g new hangman <raskusaste 1-5>` (viimane on vabatahtlik)\n"\
-                        "TTT: `?g new ttt [väljaku suurus] <võidurea pikkus> [Mängijate nimekiri...]` Mängijad eraldatud tühikutega, **kasutada @-märgendeid**!", inline=False)
+                        "TTT: `?g new ttt [väljaku suurus] <võidurea pikkus> [Mängijate nimekiri...]` Mängijad eraldatud tühikutega, **kasutada @-märgendeid**!\n"\
+                        "Teistmoodi TTT: `?g new tt2 [väljaku suurus] <võidurea pikkus>` Fikseerimata mängijateta. Käikude järjekord ja mängijate arv võib muutuda.", inline=False)
         embed.add_field(name="?g end [Mängu ID]", value="Lõpetab ID põhjal käimasoleva mängu.", inline=False)
         embed.add_field(name="?g list", value="Käimasolevate mängude ja seisude info.", inline=False)
         embed.add_field(name="?g [Mängu ID] <Käik/käsud>", value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke. "\
@@ -246,6 +260,8 @@ async def g(ctx, *args):
             if type(game)==hangman:
                 res, go=game.guess(args[1])
             elif type(game)==titato.game_warp:
+                res,go=game.move(ctx.author.mention, int(args[2]), int(args[1]))
+            elif type(game)==titato2.game_warp:
                 res,go=game.move(ctx.author.mention, int(args[2]), int(args[1]))
         except SyntaxError as err:
             print('SyntaxErr', err)
