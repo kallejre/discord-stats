@@ -143,8 +143,10 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "ex06": {"EX", "Kokku"}, 
                     "ex07": {"EX", "Kokku"}, 
                     "ex08": {"EX", "Kokku"}, 
+                    "ex09": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku", "Fun"}, 
                     "games": {"Yldine", "Kokku", "Fun"}, 
+                    "vegan-blog": {"Yldine", "Kokku", "Fun"}, 
                     "general": {"Yldine", "Kokku", "NotFun"}, 
                     "gomoku": {"Yldine", "Kokku", "NotFun"}, 
                     "hw03": {"Kalmo", "Kokku"},
@@ -153,6 +155,8 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "hw06": {"Kalmo", "Kokku"}, 
                     "hw07": {"Kalmo", "Kokku"},
                     "hw08": {"Kalmo", "Kokku"}, 
+                    "hw09": {"Kalmo", "Kokku"}, 
+                    "hw10": {"Kalmo", "Kokku"}, 
                     "java": {"Kalmo", "Kokku"}, 
                     "korraldus": {"Kalmo", "Kokku"}, 
                     "meme": {"Yldine", "Kokku", "Fun"}, 
@@ -166,6 +170,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "pr06": {"PR", "Kokku"},
                     "pr07": {"PR", "Kokku"},
                     "pr08": {"PR", "Kokku"},
+                    "pr09": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku", "NotFun"}, 
                     "random": {"Yldine", "Kokku", "Fun"}, 
                     "stat": {"Yldine", "Kokku", "NotFun"}, 
@@ -182,6 +187,8 @@ kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2
                     "üld-vestlus": {"Yldine", "Kokku"}, 
                     "arvutivõrgud": {"2semester", "Kokku"}, 
                     "arvutid": {"2semester", "Kokku"}, 
+                    "hw03": {"Veebitehnoloogia", "Kokku"}, 
+                    "hw02": {"Veebitehnoloogia", "Kokku"}, 
                     "kõrgem-matemaatika": {"2semester", "Kokku"}}
 
 
@@ -721,45 +728,44 @@ def stats_load(fname='d_stats.pkl'):
 def stat_full(*args, **kwargs):
     print('Algus', end=' ')
     sts = Stats(*args, **kwargs)
-    print('1')
+    print('1 Ajatabelid')
     sts.stat_weeks()
     sts.times2_cleanup()
     sts.ajatabel_suur()
-    print('2')
+    print('2 Arhiiv')
     sts.arhiiv()
-    print('3')
+    print('3 Graafid')
     sts.out_tgf_msg()
     sts.out_tgf_tag()
     sts.out_users_json()
     sts.out_users_py()
-    print('4')
+    print('4 Msg/tag')
     sts.stat_last_24()
     sts.stat_msg()
     sts.stat_msg2()
     sts.stat_tag()
     sts.stat_tag2()
-    print('5')  # See on kõigest teksti genereerimine.
+    print('5 Jääb vahele')  # See on kõigest teksti genereerimine.
     """
     sts.graafid_edetabel(-1,n=5,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
     sts.graafid_edetabel(-1,n=10,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
     """
-    print('6')
+    print('6 Excel+PKL')
     sts.excel.close()
     sts.save_pkl()
-    print('7')
+    print('7 Linux (estnltk)')
     if LINUX:
         estnltk3.main(sts)
     #"""
-    print('8')
+    print('8 Animate')
     ani = Animate(sts)
     ani.draw_main()
     #"""
-    print('9')
+    print('9 ZIP')
     sts.save_zip()
-    
-    print('done')
+    print('10 Done')
     return sts
 
 
