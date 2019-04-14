@@ -23,7 +23,7 @@ Asjad, mida muuta:
     Viia asi laiali alamfunktsioonidesse.
 """
 
-VERSION = '4.6.3'
+VERSION = '4.6.4'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -142,6 +142,7 @@ async def help(ctx, *args):
     embed.add_field(name="?g  [new|end|list|<ID>]",
                     value="Hetkel ainult hangman. Lisainfo käsuga `?g help`",
                     inline=False)
+    embed.add_field(name="?cleanup [sõnumite hulk 1..999]", value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
 
     return await ctx.send(embed=embed)
@@ -387,12 +388,14 @@ async def define(ctx, *args):
 def is_me(m):
     #print(m.author == bot.user)
     #print(m.content)
-    return (m.author == bot.user and m.content.startswith('**ID')) or m.content.startswith('? g') or \
-            m.content.startswith('?cleanup') or m.content.startswith('?g ') or\
-            (m.author == bot.user and m.content.startswith('ID')) or \
-            (m.author == bot.user and 'hangman' in m.content.lower()) or \
-            (m.author == bot.user and '> oli viimane.' in m.content.lower()) or \
-            (m.author == bot.user and m.content.startswith('Mängu ID'))
+    if m.content.startswith('? g'): return True
+    if not (m.author == bot.user or m.content.startswith('?cleanup') or m.content.startswith('?g ')):
+        return False
+    return (m.content.startswith('**ID'))  or \
+            (m.content.startswith('ID')) or m.content.startswith('?wait') or \
+            ('hangman' in m.content.lower()) or \
+            ('> oli viimane.' in m.content.lower()) or \
+            (m.content.startswith('Mängu ID'))
 
 
 @bot.command()
