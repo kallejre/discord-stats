@@ -225,6 +225,7 @@ async def g(ctx, *args):
         embed.add_field(name="?g list", value="Käimasolevate mängude ja seisude info.", inline=False)
         embed.add_field(name="?g [Mängu ID] <Käik/käsud>", value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke. "\
                         "Formaadid:\nHangman: `?g [ID] [täht]`\nTTT: `?g [ID] [X (1..n)] [Y (1..n)]`", inline=False)
+        embed.add_field(name="?cleanup [sõnumite hulk 1..999]", value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
         await ctx.send(embed=embed)
         return
     elif args[0]=='end':
