@@ -214,7 +214,7 @@ async def g(ctx, *args):
             games[idd]=game
             await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
         else:
-            await ctx.send('Hetkel on toetatud ainult hangman ja trips-traps-trull (ttt).')
+            await ctx.send('Hetkel on toetatud ainult hangman ja trips-traps-trull (ttt või tt2).')
         return
     elif args[0]=='help':
         embed=discord.Embed(title='Funktsiooni ?g abi.'.join(args), color=0x443eef, type='rich')
