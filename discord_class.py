@@ -145,6 +145,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "ex08": {"EX", "Kokku"}, 
                     "ex09": {"EX", "Kokku"}, 
                     "ex11": {"EX", "Kokku"}, 
+                    "ex12": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku", "Fun"}, 
                     "games": {"Yldine", "Kokku", "Fun"}, 
                     "vegan-blog": {"Yldine", "Kokku", "Fun"}, 
@@ -173,6 +174,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "pr08": {"PR", "Kokku"},
                     "pr09": {"PR", "Kokku"},
                     "pr11": {"PR", "Kokku"},
+                    "pr12": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku", "NotFun"}, 
                     "random": {"Yldine", "Kokku", "Fun"}, 
                     "stat": {"Yldine", "Kokku", "NotFun"}, 
@@ -774,14 +776,14 @@ def stat_full(*args, **kwargs):
     return sts
 
 
-
-# def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
-print('Python')
-sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
-print('Java')
-sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
-print('Kaug')
-sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+if __name__=='__main__':
+    # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
+    print('Python')
+    sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
+    print('Java')
+    sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
+    print('Kaug')
+    sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
