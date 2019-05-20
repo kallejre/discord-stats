@@ -69,6 +69,7 @@ import xlsxwriter
 from Animate import Animate
 import os
 import zipfile
+import urllib.parse
 LINUX= os.name=='posix'
 if LINUX:  # Mõeldud töötamiseks spetsiaalsel linuxi VMil.
     import estnltk3
@@ -148,6 +149,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "ex12": {"EX", "Kokku"}, 
                     "ex13": {"EX", "Kokku"}, 
                     "ex14": {"EX", "Kokku"}, 
+                    "ex15": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku", "Fun"}, 
                     "games": {"Yldine", "Kokku", "Fun"}, 
                     "vegan-blog": {"Yldine", "Kokku", "Fun"}, 
@@ -179,6 +181,7 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "pr12": {"PR", "Kokku"},
                     "pr13": {"PR", "Kokku"},
                     "pr14": {"PR", "Kokku"},
+                    "pr15": {"PR", "Kokku"},
                     "projekt": {"Yldine", "Kokku", "NotFun"}, 
                     "random": {"Yldine", "Kokku", "Fun"}, 
                     "stat": {"Yldine", "Kokku", "NotFun"}, 
@@ -283,7 +286,7 @@ class Stats:
                     self.lyhi[message['u']] += 1
                     self.lyhi[-1] += 1
                     # continue                                      # Lühikese sõnumi saab vahele jätta
-                print(server_id,c,self.archive['meta']['userindex'][message['u']],message['t'] // 1000,message['m'].lower(), file=f,sep='\t')  # Kopeeri sõnum faili
+                print(server_id,c,self.archive['meta']['userindex'][message['u']],message['t'] // 1000,urllib.parse.quote(message['m'].lower()), file=f,sep='\t')  # Kopeeri sõnum faili
                 time = datetime.datetime.fromtimestamp(message['t'] // 1000)  # 1 sekundi täpsusega
                 wk = time.weekday()
                 hr = time.hour

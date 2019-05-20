@@ -7,6 +7,7 @@ kõigi kasutajate sõnastatistikast.
 """
 # https://estnltk.github.io/estnltk/1.4.1/tutorials/installation.html
 import estnltk
+import urllib.parse
 from estnltk import Text
 """
     A - adjective
@@ -38,7 +39,7 @@ def main(sts):
             if len(line)>50 and line.split()[0].isdigit() and len(line.split()[2])==18:
                 # See on kasutaja sõnumi algus
                 uid=line.split()[2]
-                line='\t'.join(line.split('\t')[4:])
+                line=urllib.parse.unquote('\t'.join(line.split('\t')[4:]))
             lause=Text(line)
             if uid not in users:
                 users[uid]=dict()
