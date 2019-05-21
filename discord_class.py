@@ -373,6 +373,25 @@ class Stats:
         self.times = list(sorted(self.times))
         f.close()
 
+    def sort_msgs(self):
+        data=[]
+        with open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', encoding='utf-8') as f:
+            head=f.readline()
+            for i in f:
+                t=i.split('\t')
+                for i in range(4):
+                    t[i]=int(t[i])
+                data.append(t)
+        data.sort(key=lambda x:x[3])
+        f1=open(self.OUTPUT_FOLDER+'disc_sorted1.txt', 'w',encoding='utf-8')
+        f2=open(self.OUTPUT_FOLDER+'disc_sorted2.txt', 'w',encoding='utf-8')
+        f1.write(head)
+        f2.write(head)
+        for i in data:
+            print(*i, sep='\t', file=f1)
+            i[4]=urllib.parse.quote(' '.join(urllib.parse.unquote(i[4].strip()).split()))
+            print(*i, sep='\t', file=f2)
+    
     def arhiiv(self):
         """
         Tagastab palju asju.
@@ -759,7 +778,8 @@ def stat_full(*args, **kwargs):
     sts.stat_msg2()
     sts.stat_tag()
     sts.stat_tag2()
-    print('5 Jääb vahele')  # See on kõigest teksti genereerimine.
+    print('5 Sorteeri sõnumid')  # See on kõigest teksti genereerimine.
+    sts.sort_msgs()
     """
     sts.graafid_edetabel(-1,n=5,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
