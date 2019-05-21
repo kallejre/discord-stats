@@ -15,6 +15,7 @@ with open(OUTPUT_FOLDER+'disc_sõnapilveks.txt', encoding='utf-8') as f:
         t=i.split('\t')
         for i in range(4):
             t[i]=int(t[i])
+        
         t[4]=' '.join(urllib.parse.unquote(t[4].strip()).split())
         data.append(t)
 data.sort(key=lambda x:x[3])

@@ -378,7 +378,8 @@ class Stats:
         with open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', encoding='utf-8') as f:
             head=f.readline()
             for i in f:
-                t=i.split('\t')
+                t=i.strip().split('\t')
+                if len(t)==4:t.append('')
                 for i in range(4):
                     t[i]=int(t[i])
                 data.append(t)
@@ -389,8 +390,12 @@ class Stats:
         f2.write(head)
         for i in data:
             print(*i, sep='\t', file=f1)
-            i[4]=urllib.parse.quote(' '.join(urllib.parse.unquote(i[4].strip()).split()))
+            #i[4]=urllib.parse.quote(' '.join(urllib.parse.unquote(i[4]).split()))
+            i[4]=' '.join(urllib.parse.unquote(i[4]).split())
+            
             print(*i, sep='\t', file=f2)
+        f1.close()
+        f2.close()
     
     def arhiiv(self):
         """
@@ -808,9 +813,9 @@ if __name__=='__main__':
     print('Python')
     sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
     print('Java')
-    sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
+    #sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
     print('Kaug')
-    sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+    #sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
