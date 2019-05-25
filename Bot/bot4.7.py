@@ -1,5 +1,5 @@
 # coding: utf-8
-# Bot versioon 4.7. Üritasin viia boti taaskäivituvaks -> kiirem rakendamine.
+# Bot versioon 4.7.1. Lisatud pingimine
 import asyncio
 import os
 import pickle, json
@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.0.1'
+VERSION = '4.7.1.0'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -140,9 +140,12 @@ async def help(ctx, *args):
     embed.add_field(name="?g  [new|end|list|<ID>]",
                     value="Hetkel ainult hangman. Lisainfo käsuga `?g help`",
                     inline=False)
+    embed.add_field(name="?ping", value="Viisakas viis ühenduse kontrollimiseks.", inline=False)
     embed.add_field(name="?cleanup [sõnumite hulk 1..999]", value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
+    embed.add_field(name="?cleanup2 [sõnumite hulk 2..999]", value="Kustutab kõik boti sõnumid.", inline=False)
     embed.add_field(name="?reset", value="Taaskäivitus. ?shutdown enam ei tööta.", inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
+ 
 
     return await ctx.send(embed=embed)
 
@@ -296,6 +299,26 @@ async def hi(ctx):
     await ctx.send('I heard you! {1}, {0}'.format(t.mention, t.name))
 
 
+@bot.command()
+async def ping(ctx, wait='5'):
+    # Pingimine. Vastab sõnumile ja kustutab 10 sekundi pärast.
+    # Koosolekute ID: 499629361713119264
+    t = ctx.author
+    rdr1,rdr2='Ping ping, {0}! Kustub '.format(t.mention),' sekundi pärast.'
+    print(wait, [wait], wait.isdigit())
+    if wait.isdigit():
+        wait=int(wait)
+    else:
+        wait=5
+    msg=await ctx.send(rdr1+str(wait)+rdr2)
+    for i in range(wait-1,-1,-1):
+        await asyncio.sleep(1)
+        await msg.edit(content=rdr1+str(i)+rdr2)
+    await msg.delete()
+    await ctx.message.delete()
+    #bot.delete_message(ctx)
+    #deleted = await ctx.channel.purge(limit=20, check=lambda x: x.content.startswith('?ping') or x.content.startswith('Ping'))
+
 def find_user(text, server):
     nimi = text
     if nimi[:2] == '<@':
@@ -395,7 +418,8 @@ def is_me(m):
             ('hangman' in m.content.lower()) or \
             ('> oli viimane.' in m.content.lower()) or \
             (m.content.startswith('Mängu ID'))
-
+def is_me2(m):
+    return m.author == bot.user or m.content.startswith('?')
 
 @bot.command()
 @commands.check(alll)
@@ -406,11 +430,16 @@ async def cleanup(ctx, n=15):
     his = ctx.history(limit=5)
     deleted = await ctx.channel.purge(limit=n, check=is_me)
     await ctx.send('deleted '+str(len(deleted)))
-    return
-    async for msg in his:
-        out += ''.join([msg.author.name, ': ', msg.content]) + '\n'
-    out = out.replace('@', '(ät)')
-    await ctx.send(out)
+    
+@bot.command()
+@commands.check(alll)
+async def cleanup2(ctx, n=15):
+    if n<2:n=2
+    t = ctx.author
+    his = ctx.history(limit=5)
+    deleted = await ctx.channel.purge(limit=n, check=is_me2)
+    await ctx.send('deleted '+str(len(deleted)))
+
 def define2(msg):
     try:
         asd = 1
