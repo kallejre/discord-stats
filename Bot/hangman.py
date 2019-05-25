@@ -22,19 +22,19 @@ class hangman():
             diff=3
         if diff==1:
             fname = 'hang_estonian-words.txt'
-            self.wordList=list(filter(lambda x:4<len(x)<=8, map(lambda x:x.strip(),open(fname).readlines())))
+            self.wordList=list(filter(lambda x:4<len(x)<=8, map(lambda x:x.strip(),open(fname, encoding='utf8').readlines())))
         if diff==2:
             fname = 'hang_estonian-words.txt'
-            self.wordList=list(filter(lambda x:8<len(x)<=12, map(lambda x:x.strip(),open(fname).readlines())))
+            self.wordList=list(filter(lambda x:8<len(x)<=12, map(lambda x:x.strip(),open(fname, encoding='utf8').readlines())))
         if diff==3:
             fname = 'hang_estonian-words2.txt'
-            self.wordList=list(filter(lambda x:len(x)<=16, map(lambda x:x.strip(),open(fname).readlines())))
+            self.wordList=list(filter(lambda x:len(x)<=16, map(lambda x:x.strip(),open(fname, encoding='utf8').readlines())))
         if diff==4:
             fname = 'hang_estonian-words2.txt'
-            self.wordList=list(filter(lambda x:16<len(x)<=20, map(lambda x:x.strip(),open(fname).readlines())))
+            self.wordList=list(filter(lambda x:16<len(x)<=20, map(lambda x:x.strip(),open(fname, encoding='utf8').readlines())))
         if diff==5:
             fname = 'hang_estonian-words2.txt'
-            self.wordList=list(filter(lambda x:20<len(x), map(lambda x:x.strip(),open(fname).readlines())))
+            self.wordList=list(filter(lambda x:20<len(x), map(lambda x:x.strip(),open(fname, encoding='utf8').readlines())))
         self.secretWord = random.choice(self.wordList)  # lets randomize single word from the list
         self.wlen = len(self.secretWord)
         self.guess_word = ['_'] * self.wlen

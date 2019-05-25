@@ -241,7 +241,6 @@ async def g(ctx, *args):
             await ctx.send('ID ei ole kehtiv.')
             return
         games[t]=0
-        # cleanup(ctx, 30)
         
         #input()
         await ctx.send('Mängu ID '+args[1]+' on lõpetatud.')
@@ -273,9 +272,6 @@ async def g(ctx, *args):
         except Exception as err:
             print('Exception', err)
             res, go=str(err), False
-        #if go:
-            # cleanup(ctx, 50)
-            #await ctx.send('?cleanup 50')
         await ctx.send('**ID: '+args[0]+'**  '+res)
         if go:
             games[t]=0
@@ -408,11 +404,11 @@ async def define(ctx, *args):
     await ctx.send(embed=embed)
 
 def is_me(m):
-    #print(m.author == bot.user)
-    #print(m.content)
+    #print([m.content])
     if m.content.startswith('? g'): return True
-    if not (m.author == bot.user or m.content.startswith('?cleanup') or m.content.startswith('?g ')):
-        return False
+    if m.content.startswith('?g '): return True
+    if m.content.startswith('?cleanup'): return True
+    # if m.author == bot.user: return True
     return (m.content.startswith('**ID'))  or \
             (m.content.startswith('ID')) or m.content.startswith('?wait') or \
             ('hangman' in m.content.lower()) or \
@@ -424,10 +420,10 @@ def is_me2(m):
 @bot.command()
 @commands.check(alll)
 async def cleanup(ctx, n=15):
-    if n>1000:n=200
+    if n>1000:n=500
     if n<2:n=2
     t = ctx.author
-    his = ctx.history(limit=5)
+    # his = ctx.history(limit=5)
     deleted = await ctx.channel.purge(limit=n, check=is_me)
     await ctx.send('deleted '+str(len(deleted)))
     
@@ -436,7 +432,6 @@ async def cleanup(ctx, n=15):
 async def cleanup2(ctx, n=15):
     if n<2:n=2
     t = ctx.author
-    his = ctx.history(limit=5)
     deleted = await ctx.channel.purge(limit=n, check=is_me2)
     await ctx.send('deleted '+str(len(deleted)))
 
