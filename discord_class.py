@@ -813,9 +813,9 @@ if __name__=='__main__':
     print('Python')
     sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
     print('Java')
-    #sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
+    sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
     print('Kaug')
-    #sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+    sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
 
 
 
