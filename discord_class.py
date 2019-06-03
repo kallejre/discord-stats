@@ -237,7 +237,7 @@ class Stats:
         for x1 in range(len(self.archive['meta']['userindex'])):
             self.users[x1] = {'n': self.archive['meta']['users'][self.archive['meta']['userindex'][x1]]['name'],
                               'count': dict(), 'lens': dict(), 'times': dict(), 'next': dict(),
-                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
+                              'prev': dict(), 'tag_by': dict(), 'tag_to': dict(), 'uid':self.archive['meta']['userindex'][x1]}
         self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
                           'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
         channels = list(self.kategooriad)
@@ -267,6 +267,9 @@ class Stats:
         Init-funktsioon on jagatud kaheks, sest teoreetiliselt võiks andmete lugemine ja enetav töötlemine olla eraldi.
         """
         f = open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', 'w', encoding='utf8')
+        with open(self.OUTPUT_FOLDER+'metadata.json', 'w', encoding='utf8') as meta:
+            meta.write(str(self.archive['meta']))
+        
         # print(self.archive['meta']['channels'])
         print('Server','Channel','User','Timestamp','Message', file=f,sep='\t')
         for c in sorted(self.archive['data'], key=lambda x:(self.archive['meta']['channels'][x]['server'],x)):  # c = kanali id
