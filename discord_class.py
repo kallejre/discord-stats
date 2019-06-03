@@ -97,7 +97,7 @@ class xlsx:
         for line in lines:
             self.col=0
             for cell in line.split('\t'):
-                try: self.current_sheet.write(self.row, self.col,float(cell))
+                try: self.current_sheet .write(self.row, self.col,float(cell))
                 except ValueError: self.current_sheet.write(self.row, self.col,cell)
                 self.col+=1
             self.row+=1
@@ -228,6 +228,7 @@ class Stats:
         try:os.makedirs(OUTPUT_FOLDER)
         except FileExistsError: pass
         self.excel=xlsx(OUTPUT_FOLDER+sname)
+        self.sname=sname
         # self.ajaformaat = '%a %d %b %Y %H:00'  # 'Thu 15 Nov 2018 14:00'
         self.ajaformaat = '%a %d %b %Y'          # Kasutusel koos times2-ga
                     # Koodinäide: max(sts.times2,key=lambda x:datetime.datetime.strptime(x,sts.ajaformaat))
@@ -794,12 +795,12 @@ def stat_full(*args, **kwargs):
     sts.graafid_edetabel(-1,n=10,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
     """
-    print('6 Excel+PKL')
-    sts.excel.close()
-    sts.save_pkl()
-    print('7 Linux (estnltk)')
+    print('6 Linux (estnltk)')
     if LINUX:
         estnltk3.main(sts)
+    print('7 Save Excel+PKL')
+    sts.excel.close()
+    sts.save_pkl()
     #"""
     print('8 Animate')
     ani = Animate(sts)

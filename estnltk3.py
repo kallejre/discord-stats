@@ -9,6 +9,7 @@ kõigi kasutajate sõnastatistikast.
 import estnltk
 import urllib.parse
 from estnltk import Text
+from discord_class import xlsx
 """
     A - adjective
     C - comparative adjective
@@ -36,10 +37,8 @@ def main(sts):
             c+=1
             if c==1: continue
             if c%10000==0:print(c)
-            if len(line)>50 and line.split()[0].isdigit() and len(line.split()[2])==18:
-                # See on kasutaja sõnumi algus
-                uid=line.split()[2]
-                line=urllib.parse.unquote('\t'.join(line.split('\t')[4:]))
+            uid=line.split()[2]
+            line=urllib.parse.unquote('\t'.join(line.split('\t')[4:]))
             lause=Text(line)
             if uid not in users:
                 users[uid]=dict()
@@ -52,7 +51,7 @@ def main(sts):
                     lemmad=sona[0]['root_tokens']  # Tugi liitsõnadele
                     for lemma in lemmad:
                         if lemma not in users[uid]:
-                            users[uid][lemma]=0		
+                            users[uid][lemma]=0
                         if lemma not in users['-1']:
                             users['-1'][lemma]=0
                         users[uid][lemma]+=1
@@ -62,10 +61,12 @@ def main(sts):
     with open(sts.OUTPUT_FOLDER+'sõnastats.txt', 'w', encoding='utf-8') as f:
         f.write(use)
     c=1
-
-    f=open(sts.OUTPUT_FOLDER+'sõnastats2.txt', 'w', encoding='utf-8')
+    # Kuna eafunktsiooni exceli töövihik on veel lahti, siis saab sinna asju lisada.
+    sts.excel.ws('Sõnade top 1500')
+    sts.excel.write('Sõna\tKogus')
+    #f=open(sts.OUTPUT_FOLDER+'sõnastats2.txt', 'w', encoding='utf-8')
     for i in list(sorted(users['-1'], key=lambda x:users['-1'][x], reverse=True))[:1500]:
-        try:print(c,i, users['-1'][i], sep='\t', file=f)
+        try:sts.excel.write(i+'\t'+str(users['-1'][i]))
         except:pass
         c+=1
-    f.close()
+    #f.close()
