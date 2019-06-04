@@ -97,8 +97,11 @@ class xlsx:
         for line in lines:
             self.col=0
             for cell in line.split('\t'):
-                try: self.current_sheet .write(self.row, self.col,float(cell))
-                except ValueError: self.current_sheet.write(self.row, self.col,cell)
+                if len(cell)>0 and cell[0]=='\'': # Numbri tekstina salvestamine
+                    self.current_sheet.write(self.row, self.col,cell[1:])
+                else:
+                    try: self.current_sheet.write(self.row, self.col,float(cell))
+                    except ValueError: self.current_sheet.write(self.row, self.col,cell)
                 self.col+=1
             self.row+=1
     def close(self):

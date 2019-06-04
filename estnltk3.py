@@ -61,12 +61,19 @@ def main(sts):
     with open(sts.OUTPUT_FOLDER+'sõnastats.txt', 'w', encoding='utf-8') as f:
         f.write(use)
     c=1
-    # Kuna eafunktsiooni exceli töövihik on veel lahti, siis saab sinna asju lisada.
+    # Kuna peafunktsiooni exceli töövihik on veel lahti, siis saab sinna asju lisada.
     sts.excel.ws('Sõnade top 1500')
     sts.excel.write('Sõna\tKogus')
     #f=open(sts.OUTPUT_FOLDER+'sõnastats2.txt', 'w', encoding='utf-8')
-    for i in list(sorted(users['-1'], key=lambda x:users['-1'][x], reverse=True))[:1500]:
-        try:sts.excel.write(i+'\t'+str(users['-1'][i]))
+    sonastik=list(sorted(users['-1'], key=lambda x:users['-1'][x], reverse=True))
+    # print(len(sonastik))  # -> 33110.
+    for i in sonastik[:1500]:
+        i2=i
+        try:
+            int(i)
+            i2='\''+i
         except:pass
+        try:sts.excel.write(i2+'\t'+str(users['-1'][i]))
+        except:print(i)
         c+=1
     #f.close()
