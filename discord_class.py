@@ -199,6 +199,7 @@ kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2
                     "kasulik-info": {"Yldine", "Kokku"}, 
                     "operatsioonisüsteemid-ja-nende-haldamine": {"2semester", "Kokku"}, 
                     "üld-vestlus": {"Yldine", "Kokku"}, 
+                    "random": {"Yldine", "Kokku"}, 
                     "arvutivõrgud": {"2semester", "Kokku"}, 
                     "arvutid": {"2semester", "Kokku"}, 
                     "hw02": {"Veebitehnoloogia", "Kokku"}, 
