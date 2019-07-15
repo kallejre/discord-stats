@@ -1,0 +1,897 @@
+{
+  "LexicalResource": {
+    "@xmlns:dc": "http://purl.org/dc/elements/1.1/",
+    "Lexicon": {
+      "@confidenceScore": "1.0",
+      "@email": "heili.orav@ut.ee",
+      "@id": "estwn",
+      "@label": "Estonian Wordnet",
+      "@language": "et",
+      "@license": "https://creativecommons.org/licenses/by-sa/",
+      "@note": "Work in progress. Previous name for this dataset was 'koondbaas 74'.",
+      "@status": "unchecked",
+      "@version": "2.1.0.wip",
+      "LexicalEntry": [
+        {
+          "@id": "w526582",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": ""
+          },
+          "Sense": {
+            "@id": "s--n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-5275-n"
+          }
+        },
+        {
+          "@id": "w526583",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "õäöü"
+          },
+          "Sense": {
+            "@id": "s-õäöü-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-5275-n"
+          }
+        },
+        {
+          "@id": "w526584",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "0-tüüpi grammatika"
+          },
+          "Sense": {
+            "@id": "s-0-tüüpi_grammatika-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-44468-n"
+          }
+        },
+        {
+          "@id": "w797879",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "β-kiirgus"
+          },
+          "Sense": {
+            "@id": "s-β-kiirgus-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-83938-n"
+          }
+        },
+        {
+          "@id": "w797884",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "β-lagunemine"
+          },
+          "Sense": {
+            "@id": "s-β-lagunemine-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-83940-n"
+          }
+        },
+        {
+          "@id": "w797881",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "β-osake"
+          },
+          "Sense": {
+            "@id": "s-β-osake-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-83939-n"
+          }
+        },
+        {
+          "@id": "w797887",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "β-raud"
+          },
+          "Sense": {
+            "@id": "s-β-raud-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-83942-n"
+          }
+        },
+        {
+          "@id": "w798130",
+          "Lemma": {
+            "@partOfSpeech": "n",
+            "@writtenForm": "δ-elektron"
+          },
+          "Sense": {
+            "@id": "s-δ-elektron-n1",
+            "@status": "unchecked",
+            "@synset": "estwn-et-84028-n"
+          }
+        }
+      ],
+      "Synset": [
+        {
+          "@confidenceScore": "0.5",
+          "@dc:type": "C",
+          "@id": "estwn-et-10000-n",
+          "@ili": "",
+          "@status": "checked",
+          "Definition": {
+            "#text": "tööriista, eseme vm. lai ja lame osa",
+            "@language": "et",
+            "@sourceSense": "s-laba-n1"
+          },
+          "SynsetRelation": {
+            "@confidenceScore": "1.0",
+            "@relType": "hypernym",
+            "@status": "unchecked",
+            "@target": "estwn-et-22447-n"
+          }
+        },
+        {
+          "@confidenceScore": "0.5",
+          "@dc:type": "C",
+          "@id": "estwn-et-10001-n",
+          "@ili": "",
+          "@status": "checked",
+          "Definition": {
+            "#text": "jala- v. käelaba; neid kattev suka, jalatsi v. kinda osa",
+            "@language": "et",
+            "@sourceSense": "s-laba-n2"
+          },
+          "SynsetRelation": [
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hypernym",
+              "@status": "unchecked",
+              "@target": "estwn-et-1793-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "similar",
+              "@status": "unchecked",
+              "@target": "estwn-et-53576-n"
+            }
+          ]
+        },
+        {
+          "@confidenceScore": "0.5",
+          "@dc:type": "C",
+          "@id": "estwn-et-18629-n",
+          "@ili": "",
+          "@status": "checked",
+          "Definition": {
+            "#text": "pulmas lapuliste ja langude vaheline mäng. Lapud püüavad justkui pulmi nurja ajada peiu lippu ära varastades, lapuliste ülesandeks on lippu kaitsta",
+            "@language": "et",
+            "@sourceSense": "s-lipuvargus-n1"
+          },
+          "SynsetRelation": {
+            "@confidenceScore": "1.0",
+            "@relType": "hypernym",
+            "@status": "unchecked",
+            "@target": "estwn-et-21930-n"
+          }
+        },
+        {
+          "@confidenceScore": "1.0",
+          "@dc:type": "C",
+          "@id": "estwn-et-1862-n",
+          "@ili": "i112219",
+          "@status": "checked",
+          "Definition": {
+            "#text": "füüsilise vigastuse v. haiguse sümptom",
+            "@language": "et",
+            "@sourceSense": "s-valu-n1"
+          },
+          "ILIDefinition": "füüsilise vigastuse v. haiguse sümptom",
+          "SynsetRelation": [
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "be_in_state",
+              "@status": "unchecked",
+              "@target": "estwn-et-58255-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "be_in_state",
+              "@status": "unchecked",
+              "@target": "estwn-et-58019-a"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hypernym",
+              "@status": "unchecked",
+              "@target": "estwn-et-2334-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62427-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-66610-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-70167-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-74081-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62399-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-83854-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-42046-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62388-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-4502-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-4503-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-5827-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-6520-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-6879-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-8839-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-13429-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-15528-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-25936-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-40111-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-42013-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-42014-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-45905-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-45906-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-45990-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46045-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46049-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46175-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46365-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46388-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46399-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46400-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-46402-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-49968-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-50734-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-51409-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-51567-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-51588-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-51591-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-58561-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-61490-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62370-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62371-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62372-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62373-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62374-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62375-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62376-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62377-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62378-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62380-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62381-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62382-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62384-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62385-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62387-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62389-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62390-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62391-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62392-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62393-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62395-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62396-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62397-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62398-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62400-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62402-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62403-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62404-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62405-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62406-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62408-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62409-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62411-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62412-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62415-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62417-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62418-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62419-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62420-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62421-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62422-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62423-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62424-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62425-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62426-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62428-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62429-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62430-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62431-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62432-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62433-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62434-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62435-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62436-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62437-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62438-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62439-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62440-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62441-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-62442-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hyponym",
+              "@status": "unchecked",
+              "@target": "estwn-et-63493-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "is_caused_by",
+              "@status": "unchecked",
+              "@target": "estwn-et-70500-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "is_caused_by",
+              "@status": "unchecked",
+              "@target": "estwn-et-46451-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "is_caused_by",
+              "@status": "unchecked",
+              "@target": "estwn-et-46057-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "role",
+              "@status": "unchecked",
+              "@target": "estwn-et-11280-v"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "role",
+              "@status": "unchecked",
+              "@target": "estwn-et-29130-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "similar",
+              "@status": "unchecked",
+              "@target": "estwn-et-37850-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "similar",
+              "@status": "unchecked",
+              "@target": "estwn-et-45120-n"
+            }
+          ]
+        },
+        {
+          "@confidenceScore": "0.5",
+          "@dc:type": "C",
+          "@id": "estwn-et-18630-n",
+          "@ili": "",
+          "@status": "checked",
+          "Definition": {
+            "#text": "rahvalikku pulmakombestikku kuuluv pruudi röövimine (EKSS)",
+            "@language": "et",
+            "@sourceSense": "s-pruudivargus-n1"
+          },
+          "SynsetRelation": [
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "hypernym",
+              "@status": "unchecked",
+              "@target": "estwn-et-21930-n"
+            },
+            {
+              "@confidenceScore": "1.0",
+              "@relType": "meronym",
+              "@status": "unchecked",
+              "@target": "estwn-et-22015-n"
+            }
+          ]
+        },
+        {
+          "@confidenceScore": "0.5",
+          "@dc:type": "C",
+          "@id": "estwn-et-18631-n",
+          "@ili": "",
+          "@status": "checked",
+          "Definition": {
+            "#text": "peeti üks nädal pärast pulmi või pulmadele järgneval pühapäeval mõrsja kodus ja sellest nädal hiljem peiu kodus",
+            "@language": "et",
+            "@sourceSense": "s-järelpulm-n1"
+          },
+          "SynsetRelation": {
+            "@confidenceScore": "1.0",
+            "@relType": "hypernym",
+            "@status": "unchecked",
+            "@target": "estwn-et-10746-n"
+          }
+        }
+      ]
+    }
+  }
+}

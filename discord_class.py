@@ -798,7 +798,7 @@ def stat_full(*args, **kwargs):
     sts.graafid_edetabel(-1,n=10,uid=True)
     sts.graafid_edetabel('ago',n=5,uid=False)
     """
-    print('6 Linux (estnltk)')
+    print('6 Estnltk (Linux)')
     if LINUX:
         estnltk3.main(sts)
     print('7 Save Excel+PKL')
