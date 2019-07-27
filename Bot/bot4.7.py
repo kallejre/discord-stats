@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.1.0'
+VERSION = '4.7.1.2'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -300,7 +300,7 @@ async def ping(ctx, wait='5'):
     # Pingimine. Vastab sõnumile ja kustutab 10 sekundi pärast.
     # Koosolekute ID: 499629361713119264
     t = ctx.author
-    rdr1,rdr2='Ping ping, {0}! Kustub '.format(t.mention),' sekundi pärast.'
+    rdr1,rdr2='Ping ping, {0}; {1}ms! Kustub '.format(t.mention, str(round(bot.latency, 3))),' sekundi pärast.'
     print(wait, [wait], wait.isdigit())
     if wait.isdigit():
         wait=int(wait)
@@ -676,6 +676,9 @@ async def wait(channel, sisu, user, uid):
             idd = int(sisu.split()[2][2:-1])
             kanal2 = bot.get_channel(idd)
             x = ' '.join(sisu.split()[3:])
+        elif sisu.split()[2]=='<@'+str(uid)+'>':  # DM/PM
+            kanal2=bot.get_user(uid)
+            x = ' '.join(sisu.split()[3:])
         if a > 120:
             await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
         await asyncio.sleep(a)
@@ -766,7 +769,7 @@ async def on_message(message):
     elif sisu.startswith('?wait'):
         if user in blacklist:
             return await channel.send('blacklisted')
-        await wait(channel, sisu, user, uid)
+        return await wait(channel, sisu, user, uid)
     elif sisu.startswith('?stats'):
         x = stats(message)
         if type(x) == discord.Embed:
