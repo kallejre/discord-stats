@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.1.2'
+VERSION = '4.7.1.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -312,8 +312,7 @@ async def ping(ctx, wait='5'):
         await msg.edit(content=rdr1+str(i)+rdr2)
     await msg.delete()
     await ctx.message.delete()
-    #bot.delete_message(ctx)
-    #deleted = await ctx.channel.purge(limit=20, check=lambda x: x.content.startswith('?ping') or x.content.startswith('Ping'))
+
 
 def find_user(text, server):
     nimi = text
@@ -337,11 +336,6 @@ def find_channel(kanal, server):
         return xid['name']
     else:
         return kanal
-
-
-#    elif sisu.startswith('?define'):
-#        return await channel.send(define(sisu))
-
 @bot.command()
 async def define_old(ctx, *args):
     print(args)
@@ -379,7 +373,6 @@ def define_wrap(splt):
         return defin
     except Exception as err:
         return err
-    
 @bot.command()
 async def define(ctx, *args):
     results=define2(' '.join(args))  # Tagastab listi tulemustest.
@@ -402,7 +395,6 @@ async def define(ctx, *args):
     if not results:
         embed.add_field(name='. . .', value='Tulemusi ei leitud', inline=False)
     await ctx.send(embed=embed)
-
 def is_me(m):
     #print([m.content])
     if m.content.startswith('? g'): return True
@@ -416,7 +408,6 @@ def is_me(m):
             (m.content.startswith('Mängu ID'))
 def is_me2(m):
     return m.author == bot.user or m.content.startswith('?')
-
 @bot.command()
 @commands.check(alll)
 async def cleanup(ctx, n=15):
@@ -426,7 +417,7 @@ async def cleanup(ctx, n=15):
     # his = ctx.history(limit=5)
     deleted = await ctx.channel.purge(limit=n, check=is_me)
     await ctx.send('deleted '+str(len(deleted)))
-    
+
 @bot.command()
 @commands.check(alll)
 async def cleanup2(ctx, n=15):
@@ -466,7 +457,6 @@ def define2(msg):
     except Exception as err:
         return [err]
 
-    
 def stats(message):
     global data
     stat_col = 0xf27e54
@@ -566,7 +556,6 @@ def stats(message):
     else:
         return ('Viga, katkine asi.\n' + help_msg)
 
-
 def ilma_output(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
     embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
@@ -591,7 +580,6 @@ def ilma_output(data, location):
     embed.add_field(name='Hoiatused:', value=achtung, inline=False)
     return embed
 
-
 def ilma_output2(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
     embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
@@ -602,7 +590,52 @@ def ilma_output2(data, location):
                     inline=False)
     return embed
 
-
+def ilm_output_table(data, location):
+    ilm=dict(data)
+    sep=';'
+    fn=['ilm_daily.csv', 'ilm_hourly.csv']
+    daily=True
+    hourly=True
+    encoding='cp1252'
+    if daily:
+        header=['dayPartName', 'phrase', 'cloudPct', 'humidityPct', 'precipType', 'precipAmt',
+                 'precipPct', 'qualifier', 'snowRange', 'temperature','thunderEnumPhrase',
+                 'thunderEnum', 'uvIndex', 'uvDescription','windDirCompass', 'windDirDegrees',
+                 'windSpeed', 'icon', 'iconExtended','narrative']
+        output=[header]
+        for x in range(15):
+            output.append([])
+            for i in header:
+                output[-1].append(ilm['vt1dailyForecast']['day'][i][x])
+            output.append([])
+            for i in header:
+                output[-1].append(ilm['vt1dailyForecast']['night'][i][x])
+        f=open(fn[0],'w', encoding=encoding)
+        for i in output:
+            if set(i)=={None}:continue
+            txt=sep.join(list(map(str,i[:-1]))).replace('.',',')+sep+i[-1]
+            print(txt)
+            f.write(txt+'\n')
+        f.close()
+    if hourly:
+        header=['processTime','dayInd', 'phrase', 'rh', 'precipPct', 'precipType',
+                'severity', 'temperature','feelsLike', 'uvIndex', 'windDirCompass',
+                'windDirDegrees', 'windSpeed','icon', 'iconExtended']
+        output=[header]
+        for x in range(48):
+            output.append([])
+            for i in header:
+                output[-1].append(ilm['vt1hourlyForecast'][i][x])
+            output.append([])
+            for i in header:
+                output[-1].append(ilm['vt1hourlyForecast'][i][x])
+        f=open(fn[1],'w', encoding=encoding)
+        for i in output:
+            txt=sep.join(list(map(str,i))).replace('.',',')
+            print(txt)
+            f.write(txt+'\n')
+        f.close()
+    return fn
 def ilm_getData(a):
     if a == '':
         x = {'lat': 59.43696079999999, 'lng': 24.7535747}
@@ -755,6 +788,12 @@ async def on_message(message):
         fn = 'ilm.json'
         json.dump(asd, open(fn, 'w', encoding='utf8'), ensure_ascii=False, indent=2)
         await channel.send('ilmast', file=discord.File(fn))
+        return
+    elif sisu.startswith('?ilm_tabel'):
+        asd, loc = ilm_getData(' '.join(sisu.split()[1:]))
+        fn1, fn2 = ilm_output_table(asd, loc)
+        await channel.send('ilm 2 nädalat', file=discord.File(fn1))
+        await channel.send('ilm 2 päeva', file=discord.File(fn2))
         return
     elif sisu.startswith('?miniilm'):
         asd, loc = ilm_getData(' '.join(sisu.split()[1:]))
