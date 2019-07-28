@@ -624,7 +624,6 @@ def ilm_output_table(data, location):
         for i in output:
             if set(i)=={None}:continue
             txt=sep.join(list(map(str,i[:-1]))).replace('.',',')+sep+i[-1]
-            print(txt)
             f.write(txt+'\n')
         f.close()
     if hourly:
@@ -632,17 +631,13 @@ def ilm_output_table(data, location):
                 'severity', 'temperature','feelsLike', 'uvIndex', 'windDirCompass',
                 'windDirDegrees', 'windSpeed','icon', 'iconExtended']
         output=[header]
-        for x in range(48):
-            output.append([])
-            for i in header:
-                output[-1].append(ilm['vt1hourlyForecast'][i][x])
+        for x in range(len(ilm['vt1hourlyForecast']['processTime'])):
             output.append([])
             for i in header:
                 output[-1].append(ilm['vt1hourlyForecast'][i][x])
         f=open(fn[1],'w', encoding=encoding)
         for i in output:
             txt=sep.join(list(map(str,i))).replace('.',',')
-            print(txt)
             f.write(txt+'\n')
         f.close()
     return fn
