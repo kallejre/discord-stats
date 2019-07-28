@@ -747,13 +747,13 @@ async def spam(ctx, *args):
     chance=random.random()
     if ctx.author.name=='elvar':
         chance+=0.5
-    if chance<0.7:
+    if chance<0.75:
         a = time.localtime()
         await ctx.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
     else:
         reso = gg_img('asd spam canned pork')
+        e = discord.Embed(title='Juhuslik otsingutulemus',color=0x0c9c6c)
         e.set_image(url=reso[random.randint(0,len(reso)-1)])
-        e.set_image(url=i)
         await ctx.send(embed=e)
 
 
