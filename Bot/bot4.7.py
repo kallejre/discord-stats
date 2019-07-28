@@ -696,6 +696,7 @@ async def reactor(message):
 async def wait(channel, sisu, user, uid):
     try:
         x = ' '.join(sisu.split()[2:])
+        # Ajatempli lugemine
         a = sisu.split()[1]
         if a.isdecimal():
             a = int(a)
@@ -703,17 +704,23 @@ async def wait(channel, sisu, user, uid):
         else:
             stamp = str(a)
             a = time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y_%H:%M').timetuple()) - int(time.time())
-        # Siit edasi parandada.
+        # Kanali olemasolu kontroll.
         kanal2 = channel
+        SAMA_INIMENE=lambda sisu, uid: sisu.split()[2]=='<@'+str(uid)+'>'
+        TEINE_INIMENE=lambda sisu, uid: len(sisu.split()[2])==len('<@'+str(uid)+'>') and sisu.split()[2][:2]=='<@'
         if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
             idd = int(sisu.split()[2][2:-1])
             kanal2 = bot.get_channel(idd)
             x = ' '.join(sisu.split()[3:])
-        elif sisu.split()[2]=='<@'+str(uid)+'>':  # DM/PM
+        # Juhul, kui teade algab selle isiku tagiga, kes on autor, 
+        # siis me ei hakka kanalit reostama, vaid kirjutame talle otse.
+        # Teoreetiliselt võime saata teate ka teisele inimesele.
+        elif SAMA_INIMENE(sisu, uid):  # DM/PM
             kanal2=bot.get_user(uid)
             x = ' '.join(sisu.split()[3:])
         if a > 120:
             await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
+        # Ma tahaks kuskile siia panna süsteemi, mis salvestab edastatavad teated vahepeal tekstifaili.
         await asyncio.sleep(a)
         iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]
         await kanal2.send(iad + str(x))
