@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.2'
+VERSION = '4.7.2.2'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -892,8 +892,31 @@ async def list_servers():
         await asyncio.sleep(600)  # 600
         # Lisada kontroll, kas kood on muutunud?
         #Pole vajalik, sest niikuinii saaks teha käsitsi taaskäivituse.
-
-
+async def import_wait_tasks():
+    await asyncio.sleep(15)
+    f=open('wait_queue.txt')
+    tmp=f.readlines()
+    f.close()
+    #print(tmp)
+    # kasutame koha peal ootamise genereerimist?
+    f=open('wait_queue.txt', 'w')
+    loop = asyncio.get_event_loop()
+    for i in tmp:
+        x=i.strip().split(';\'')
+        a = time.mktime(datetime.datetime.strptime(x[0], '%d.%m.%y_%H:%M').timetuple()) - int(time.time())
+        if a>-20:
+            a=max([a, 0])
+            print(*x, sep=';\'', file=f)
+            async def bg_wait_task():
+                if x[1]=='True':  # DM/PM
+                    kanal2=bot.get_user(int(x[2]))
+                else:
+                    kanal2 = bot.get_channel(int(x[2]))
+                await asyncio.sleep(a)
+                await kanal2.send(x[3])
+            loop.create_task(bg_wait_task())
+    f.close()
+bot.loop.create_task(import_wait_tasks())
 bot.loop.create_task(list_servers())
 bot.loop.create_task(troll_task())
 bot.run(võti + rõngas)
