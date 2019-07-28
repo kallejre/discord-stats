@@ -18,10 +18,10 @@ from hangman import hangman
 import titato, titato2
 """
 Asjad, mida muuta:
-    Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
+    TEHTUD - Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.2.2'
+VERSION = '4.7.2.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -744,8 +744,17 @@ async def wait(channel, sisu, user, uid):
 
 @bot.command(pass_context=True)
 async def spam(ctx, *args):
-    a = time.localtime()
-    await ctx.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
+    chance=random.random()
+    if ctx.author.name=='elvar':
+        chance+=0.5
+    if chance<0.7:
+        a = time.localtime()
+        await ctx.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
+    else:
+        reso = gg_img('asd spam canned pork')
+        e.set_image(url=reso[random.randint(0,len(reso)-1)])
+        e.set_image(url=i)
+        await ctx.send(embed=e)
 
 
 @bot.command(pass_context=True)
@@ -907,7 +916,7 @@ async def import_wait_tasks():
         if a>-20:
             a=max([a, 0])
             print(*x, sep=';\'', file=f)
-            async def bg_wait_task():
+            async def bg_wait_task(a=a, x=x):
                 if x[1]=='True':  # DM/PM
                     kanal2=bot.get_user(int(x[2]))
                 else:
