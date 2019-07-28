@@ -1,5 +1,5 @@
 # coding: utf-8
-# Bot versioon 4.7.1. Lisatud pingimine
+# Bot versioon 4.7.2 tegeleme aja parandusega. 
 import asyncio
 import os
 import pickle, json
@@ -21,7 +21,7 @@ Asjad, mida muuta:
     Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.1.3'
+VERSION = '4.7.2'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -49,6 +49,7 @@ def stats_load2(srv='py2018'):  # Serveri nimi
     return (True, x)
 
 
+    
 # data = stats_load()[1]
 data = dict()
 last_reac = dict()
@@ -153,14 +154,16 @@ async def help(ctx, *args):
 async def troll_task():
     await bot.wait_until_ready()
     while not bot.is_closed():
-        tt = 10
-        gg = discord.Spotify(title='Music', start=datetime.datetime.now(),
-                             end=datetime.datetime.now() + datetime.timedelta(minutes=1),
-                             duration=datetime.timedelta(minutes=1))
-        gg2 = discord.Game('Games', start=datetime.datetime.now(),
-                           end=datetime.datetime.now() + datetime.timedelta(minutes=1))
-        await bot.change_presence(activity=gg)
-        await asyncio.sleep(60)
+        tt = 45
+        # Botile ei ole mõtet lisada algus- ja lõpuaega, sest API ei toeta neid bottidel.
+        #"""
+        timestmp=time.strftime('%d %b %H:%M', time.localtime(time.time()))
+        #gg = discord.Activity(name='Music', url='aa.eu', application_id=377160)
+        gg2 = discord.Game(timestmp)
+        #us=bot.get_user(482189197671923713)
+        await bot.change_presence(activity=gg2)
+        await asyncio.sleep(tt)
+        """
         try:
             await bot.change_presence(activity=discord.Game(name="with humanoids"))
             await asyncio.sleep(tt)
@@ -168,6 +171,7 @@ async def troll_task():
             await asyncio.sleep(tt)
         except websockets.exceptions.ConnectionClosed:
             return
+        #"""
 def alll(ctx):return True
 
 @bot.command(pass_context=True)
@@ -706,6 +710,8 @@ async def wait(channel, sisu, user, uid):
             a = time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y_%H:%M').timetuple()) - int(time.time())
         # Kanali olemasolu kontroll.
         kanal2 = channel
+        idd=channel.id
+        isuser=False
         SAMA_INIMENE=lambda sisu, uid: sisu.split()[2]=='<@'+str(uid)+'>'
         TEINE_INIMENE=lambda sisu, uid: len(sisu.split()[2])==len('<@'+str(uid)+'>') and sisu.split()[2][:2]=='<@'
         if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
@@ -715,15 +721,23 @@ async def wait(channel, sisu, user, uid):
         # Juhul, kui teade algab selle isiku tagiga, kes on autor, 
         # siis me ei hakka kanalit reostama, vaid kirjutame talle otse.
         # Teoreetiliselt võime saata teate ka teisele inimesele.
-        elif SAMA_INIMENE(sisu, uid):  # DM/PM
-            kanal2=bot.get_user(uid)
+        elif TEINE_INIMENE(sisu, uid):  # DM/PM
+            idd=int(sisu.split()[2][2:-1])  # UID juhul, kui märgitakse keegi kolmas.
+            kanal2=bot.get_user(idd)
             x = ' '.join(sisu.split()[3:])
+            isuser=True
         if a > 120:
             await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
         # Ma tahaks kuskile siia panna süsteemi, mis salvestab edastatavad teated vahepeal tekstifaili.
+        # Salvestada: usch - kasutaja või kanal; idd - kanali ID, kuhu sõnum saata.; stamp - ajatempel, millest tuletada ooteaeg.
+        iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]  # Võimalik spämmiennetus.
+        msg=iad + str(x)
+        to_save=[stamp, isuser,idd, msg]
+        f=open('wait_queue.txt', 'a')
+        print(*to_save, sep=';\'', file=f)
+        f.close()
         await asyncio.sleep(a)
-        iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]
-        await kanal2.send(iad + str(x))
+        await kanal2.send(msg)
     except Exception as err:
         await channel.send(str(err))
 
@@ -878,9 +892,8 @@ async def list_servers():
         await asyncio.sleep(600)  # 600
         # Lisada kontroll, kas kood on muutunud?
         #Pole vajalik, sest niikuinii saaks teha käsitsi taaskäivituse.
-    await ctx.send(embed=embed)
 
 
 bot.loop.create_task(list_servers())
-# bot.loop.create_task(troll_task())
+bot.loop.create_task(troll_task())
 bot.run(võti + rõngas)
