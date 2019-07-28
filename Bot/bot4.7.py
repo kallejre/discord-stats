@@ -125,11 +125,17 @@ async def help(ctx, *args):
     embed.add_field(name="?define <märksõnad>", value="Ei guugelda, vaid ÕS-ib.", inline=False)
     embed.add_field(name="?help", value="Käskude nimekirja kuvamine.", inline=False)
     embed.add_field(name="?ilm [asukoht]",
-                    value="Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.\nLisavõimalustena saab valida\n**?miniilm** (lühike ilmateade) või\n**?ilm_raw** (põhjalik info JSONina).",
+                    value="""Tagastab eestikeelse ilmateate. Vaikeasukoht Tallinn.
+                    Lisavõimalustena saab valida:
+                    **?miniilm** (lühike ilmateade)
+                    **?ilm_raw** (põhjalik info JSONina)
+                    **?ilm_tabel** (vahepealne ilmateade järgneva 48h või 14 päeva kohta)
+                    """,
                     inline=False)
     embed.add_field(name="?invite", value="Link boti lisamiseks.", inline=False)
     embed.add_field(name="?math <tehe>", value="Kalkulaator", inline=False)
     embed.add_field(name="?pelmeen", value="Toitvad soovitused.", inline=False)
+    embed.add_field(name="?hi", value="Eksperimentaal. Kuvab viimased 5 sõnumit.", inline=False)
     embed.add_field(name="?search <märksõnad>", value="~~Guugeldab~~ StartPage'ib.", inline=False)
     embed.add_field(name="?search_img <märksõnad>", value="Pildiotsing. Tagastab juhusliku pildi esimese kümne tulemuse hulgast.", inline=False)
     embed.add_field(name="?spam", value="Saadab rämpsu.", inline=False)
