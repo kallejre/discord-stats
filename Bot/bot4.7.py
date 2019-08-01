@@ -746,7 +746,7 @@ async def wait(channel, sisu, user, uid):
 @bot.command(pass_context=True)
 async def spam(ctx, *args):
     chance=random.random()
-    if ctx.author.name=='elvar':
+    if ctx.author.name.lower() in ['elvar']:
         chance+=0.5
     if chance<0.75:
         a = time.localtime()
