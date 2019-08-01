@@ -16,6 +16,7 @@ from bot_funk import *  # Hunnik konstante
 from Disco_Stats import Stats  # Spetsiaalne moodul statistika kuvamiseks. Natuke erinev originaalist.
 from hangman import hangman
 import titato, titato2
+
 """
 Asjad, mida muuta:
     TEHTUD - Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
@@ -26,7 +27,7 @@ bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
 kellad = dict()
-games=[]
+games = []
 print('Run')
 
 
@@ -49,7 +50,6 @@ def stats_load2(srv='py2018'):  # Serveri nimi
     return (True, x)
 
 
-    
 # data = stats_load()[1]
 data = dict()
 last_reac = dict()
@@ -108,11 +108,11 @@ def gg_img(sisu):
         return [
             'You did it! [Tulemusi ei leitud.]\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
     the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>', '').split('</li>')
-    for m in range(min([10,len(the_page)])):
-        img_tag=list(enumerate(re.finditer(r"<img[\s\S]*?>", the_page[m], re.MULTILINE)))[0][1].group()
-        the_page[m]=re.findall(r"url=[\s\S]*?\&",img_tag, re.MULTILINE)[0][4:-1]
-        the_page[m]=urllib.request.unquote(the_page[m])
-    the_page=the_page[:m+1]
+    for m in range(min([10, len(the_page)])):
+        img_tag = list(enumerate(re.finditer(r"<img[\s\S]*?>", the_page[m], re.MULTILINE)))[0][1].group()
+        the_page[m] = re.findall(r"url=[\s\S]*?\&", img_tag, re.MULTILINE)[0][4:-1]
+        the_page[m] = urllib.request.unquote(the_page[m])
+    the_page = the_page[:m + 1]
     return the_page
 
 
@@ -137,7 +137,8 @@ async def help(ctx, *args):
     embed.add_field(name="?pelmeen", value="Toitvad soovitused.", inline=False)
     embed.add_field(name="?hi", value="Eksperimentaal. Kuvab viimased 5 sõnumit.", inline=False)
     embed.add_field(name="?search <märksõnad>", value="~~Guugeldab~~ StartPage'ib.", inline=False)
-    embed.add_field(name="?search_img <märksõnad>", value="Pildiotsing. Tagastab juhusliku pildi esimese kümne tulemuse hulgast.", inline=False)
+    embed.add_field(name="?search_img <märksõnad>",
+                    value="Pildiotsing. Tagastab juhusliku pildi esimese kümne tulemuse hulgast.", inline=False)
     embed.add_field(name="?spam", value="Saadab rämpsu.", inline=False)
     embed.add_field(name="?stats [help]", value="Statistika. Lisakäsud on help, edetabel, ajatabel ja top.",
                     inline=False)
@@ -148,12 +149,11 @@ async def help(ctx, *args):
                     value="Hetkel ainult hangman. Lisainfo käsuga `?g help`",
                     inline=False)
     embed.add_field(name="?ping", value="Viisakas viis ühenduse kontrollimiseks.", inline=False)
-    embed.add_field(name="?cleanup [sõnumite hulk 1..999]", value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
+    embed.add_field(name="?cleanup [sõnumite hulk 1..999]",
+                    value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
     embed.add_field(name="?cleanup2 [sõnumite hulk 2..999]", value="Kustutab kõik boti sõnumid.", inline=False)
     embed.add_field(name="?reset", value="Taaskäivitus. ?shutdown enam ei tööta.", inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
- 
-
     return await ctx.send(embed=embed)
 
 
@@ -162,11 +162,11 @@ async def troll_task():
     while not bot.is_closed():
         tt = 45
         # Botile ei ole mõtet lisada algus- ja lõpuaega, sest API ei toeta neid bottidel.
-        #"""
-        timestmp=time.strftime('%d %b %H:%M', time.localtime(time.time()))
-        #gg = discord.Activity(name='Music', url='aa.eu', application_id=377160)
+        # """
+        timestmp = time.strftime('%d %b %H:%M', time.localtime(time.time()))
+        # gg = discord.Activity(name='Music', url='aa.eu', application_id=377160)
         gg2 = discord.Game(timestmp)
-        #us=bot.get_user(482189197671923713)
+        # us=bot.get_user(482189197671923713)  # Teise kasutaja staatust ei saa muuta.
         await bot.change_presence(activity=gg2)
         await asyncio.sleep(tt)
         """
@@ -178,119 +178,127 @@ async def troll_task():
         except websockets.exceptions.ConnectionClosed:
             return
         #"""
-def alll(ctx):return True
+
+
+def alll(ctx): return True
+
 
 @bot.command(pass_context=True)
 async def g(ctx, *args):
-    #await ctx.message.delete()
-    if args[0]=='new':
+    # await ctx.message.delete()
+    if args[0] == 'new':
         if 0 in games:
-            idd=games.index(0)
+            idd = games.index(0)
         else:
-            idd=len(games)
+            idd = len(games)
             games.append(0)
-        ty=args[1]
-        if ty=='hangman':
-            dif=None
-            if len(args)>2:
+        ty = args[1]
+        if ty == 'hangman':
+            dif = None
+            if len(args) > 2:
                 if args[2].isnumeric():
-                    if 1<=int(args[2])<=5:
-                        dif=int(args[2])
-            game=hangman(dif)
-            games[idd]=game
-            await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
-        elif ty=='ttt':
+                    if 1 <= int(args[2]) <= 5:
+                        dif = int(args[2])
+            game = hangman(dif)
+            games[idd] = game
+            await ctx.send('Mängu ID on ' + str(idd + 1) + '\n' + game.startup)
+        elif ty == 'ttt':
             # `?game ttt [väljaku suurus] <võidurea pikkus> oselejad...` (tühikutega eraldatud)'
             # print(args)
             try:
-                game=titato.game_warp(args)
+                game = titato.game_warp(args)
             except SyntaxError as err:
-                game =str(err)
-            if type(game)==str:
+                game = str(err)
+            if type(game) == str:
                 # Tagastati veateade
-                await ctx.send('Viga, '+game)
+                await ctx.send('Viga, ' + game)
                 return
-            games[idd]=game
-            await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
-        elif ty=='tt2':
+            games[idd] = game
+            await ctx.send('Mängu ID on ' + str(idd + 1) + '\n' + game.startup)
+        elif ty == 'tt2':
             # `?game tt2 [väljaku suurus] <võidurea pikkus>`
             # print(args)
             try:
-                game=titato2.game_warp(args)
+                game = titato2.game_warp(args)
             except SyntaxError as err:
-                game =str(err)
-            if type(game)==str:
+                game = str(err)
+            if type(game) == str:
                 # Tagastati veateade
-                await ctx.send('Viga, '+game)
+                await ctx.send('Viga, ' + game)
                 return
-            games[idd]=game
-            await ctx.send('Mängu ID on '+str(idd+1)+'\n'+game.startup)
+            games[idd] = game
+            await ctx.send('Mängu ID on ' + str(idd + 1) + '\n' + game.startup)
         else:
             await ctx.send('Hetkel on toetatud ainult hangman ja trips-traps-trull (ttt või tt2).')
         return
-    elif args[0]=='help':
-        embed=discord.Embed(title='Funktsiooni ?g abi.'.join(args), color=0x443eef, type='rich')
-        embed.add_field(name="?g new [Mängu nimi] [Seaded]", value="Alustab uue mänguga ja tagastab mängu ID. Hetkel on olemas vaid hangman (sõnade arvamine) ja ttt (tripstrapstrull)."\
-                        "Formaadid:\nHangman: `?g new hangman <raskusaste 1-5>` (viimane on vabatahtlik)\n"\
-                        "TTT: `?g new ttt [väljaku suurus] <võidurea pikkus> [Mängijate nimekiri...]` Mängijad eraldatud tühikutega, **kasutada @-märgendeid**!\n"\
-                        "Teistmoodi TTT: `?g new tt2 [väljaku suurus] <võidurea pikkus>` Fikseerimata mängijateta. Käikude järjekord ja mängijate arv võib muutuda.", inline=False)
+    elif args[0] == 'help':
+        embed = discord.Embed(title='Funktsiooni ?g abi.'.join(args), color=0x443eef, type='rich')
+        embed.add_field(name="?g new [Mängu nimi] [Seaded]",
+                        value="Alustab uue mänguga ja tagastab mängu ID. Hetkel on olemas vaid hangman (sõnade arvamine) ja ttt (tripstrapstrull)." \
+                              "Formaadid:\nHangman: `?g new hangman <raskusaste 1-5>` (viimane on vabatahtlik)\n" \
+                              "TTT: `?g new ttt [väljaku suurus] <võidurea pikkus> [Mängijate nimekiri...]` Mängijad eraldatud tühikutega, **kasutada @-märgendeid**!\n" \
+                              "Teistmoodi TTT: `?g new tt2 [väljaku suurus] <võidurea pikkus>` Fikseerimata mängijateta. Käikude järjekord ja mängijate arv võib muutuda.",
+                        inline=False)
         embed.add_field(name="?g end [Mängu ID]", value="Lõpetab ID põhjal käimasoleva mängu.", inline=False)
         embed.add_field(name="?g list", value="Käimasolevate mängude ja seisude info.", inline=False)
-        embed.add_field(name="?g [Mängu ID] <Käik/käsud>", value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke. "\
-                        "Formaadid:\nHangman: `?g [ID] [täht]`\nTTT: `?g [ID] [X (1..n)] [Y (1..n)]`", inline=False)
-        embed.add_field(name="?cleanup [sõnumite hulk 1..999]", value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
+        embed.add_field(name="?g [Mängu ID] <Käik/käsud>",
+                        value="Edastab vastava IDga mängule käigu.\nSelleks, et edastada tühikuga käsku, kasuta jutumärke. " \
+                              "Formaadid:\nHangman: `?g [ID] [täht]`\nTTT: `?g [ID] [X (1..n)] [Y (1..n)]`",
+                        inline=False)
+        embed.add_field(name="?cleanup [sõnumite hulk 1..999]",
+                        value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
         await ctx.send(embed=embed)
         return
-    elif args[0]=='end':
-        t=args[1]
+    elif args[0] == 'end':
+        t = args[1]
         if not t.isnumeric():
             await ctx.send('ID ei ole nuber.')
             return
-        t=int(t)-1
-        if t not in range(len(games)) or games[t]==0:
+        t = int(t) - 1
+        if t not in range(len(games)) or games[t] == 0:
             await ctx.send('ID ei ole kehtiv.')
             return
-        games[t]=0
-        
-        #input()
-        await ctx.send('Mängu ID '+args[1]+' on lõpetatud.')
+        games[t] = 0
+
+        # input()
+        await ctx.send('Mängu ID ' + args[1] + ' on lõpetatud.')
         return await ctx.channel.send('?cleanup')
-    elif args[0]=='list':
-        c=0
+    elif args[0] == 'list':
+        c = 0
         for i in range(len(games)):
-            if games[i]==0:continue
-            await ctx.send(str(i+1)+'    '+games[i].type)
-            c+=1
-        if c==0: await ctx.send('Käimasolevaid mänge ei ole.')
+            if games[i] == 0: continue
+            await ctx.send(str(i + 1) + '    ' + games[i].type)
+            c += 1
+        if c == 0: await ctx.send('Käimasolevaid mänge ei ole.')
         return
     elif args[0].isnumeric():
-        t=int(args[0])-1
-        if t not in range(len(games)) or games[t]==0:
+        t = int(args[0]) - 1
+        if t not in range(len(games)) or games[t] == 0:
             await ctx.send('ID ei ole kehtiv.')
             return
-        game=games[t]
+        game = games[t]
         try:
-            if type(game)==hangman:
-                res, go=game.guess(args[1])
-            elif type(game)==titato.game_warp:
-                res,go=game.move(ctx.author.mention, int(args[2]), int(args[1]))
-            elif type(game)==titato2.game_warp:
-                res,go=game.move(ctx.author.mention, int(args[2]), int(args[1]))
+            if type(game) == hangman:
+                res, go = game.guess(args[1])
+            elif type(game) == titato.game_warp:
+                res, go = game.move(ctx.author.mention, int(args[2]), int(args[1]))
+            elif type(game) == titato2.game_warp:
+                res, go = game.move(ctx.author.mention, int(args[2]), int(args[1]))
         except SyntaxError as err:
             print('SyntaxErr', err)
-            res, go=str(err), False
+            res, go = str(err), False
         except Exception as err:
             print('Exception', err)
-            res, go=str(err), False
-        await ctx.send('**ID: '+args[0]+'**  '+res)
+            res, go = str(err), False
+        await ctx.send('**ID: ' + args[0] + '**  ' + res)
         if go:
-            games[t]=0
-            await ctx.send(ctx.author.mention+' oli viimane.')
+            games[t] = 0
+            await ctx.send(ctx.author.mention + ' oli viimane.')
         return
     await ctx.send('Proovi `?g help`')
     return
-        
-    
+
+
 @bot.command()
 async def hi(ctx):
     # Väike demo ajaloo vaatamisest.
@@ -310,16 +318,16 @@ async def ping(ctx, wait='5'):
     # Pingimine. Vastab sõnumile ja kustutab 10 sekundi pärast.
     # Koosolekute ID: 499629361713119264
     t = ctx.author
-    rdr1,rdr2='Ping ping, {0}; {1}ms! Kustub '.format(t.mention, str(round(bot.latency, 3))),' sekundi pärast.'
+    rdr1, rdr2 = 'Ping ping, {0}; {1}ms! Kustub '.format(t.mention, str(round(bot.latency, 3))), ' sekundi pärast.'
     print(wait, [wait], wait.isdigit())
     if wait.isdigit():
-        wait=int(wait)
+        wait = int(wait)
     else:
-        wait=5
-    msg=await ctx.send(rdr1+str(wait)+rdr2)
-    for i in range(wait-1,-1,-1):
+        wait = 5
+    msg = await ctx.send(rdr1 + str(wait) + rdr2)
+    for i in range(wait - 1, -1, -1):
         await asyncio.sleep(1)
-        await msg.edit(content=rdr1+str(i)+rdr2)
+        await msg.edit(content=rdr1 + str(i) + rdr2)
     await msg.delete()
     await ctx.message.delete()
 
@@ -346,11 +354,15 @@ def find_channel(kanal, server):
         return xid['name']
     else:
         return kanal
+
+
 @bot.command()
 async def define_old(ctx, *args):
     print(args)
     splt = list(args)
     await ctx.send(define_wrap(splt))
+
+
 def define_wrap(splt):
     try:
         asd = 0
@@ -383,21 +395,23 @@ def define_wrap(splt):
         return defin
     except Exception as err:
         return err
+
+
 @bot.command()
 async def define(ctx, *args):
-    results=define2(' '.join(args))  # Tagastab listi tulemustest.
+    results = define2(' '.join(args))  # Tagastab listi tulemustest.
     embed = discord.Embed(title=' '.join(args), color=0xc904e2, type='rich')
-    c=0
+    c = 0
     for res in results:
-        c+=len(res)
-        temp=res.strip().split('\n')
-        if len(temp)==1:
-            field=res.strip().split(' ')[0].strip()
-            defi=res.strip()
+        c += len(res)
+        temp = res.strip().split('\n')
+        if len(temp) == 1:
+            field = res.strip().split(' ')[0].strip()
+            defi = res.strip()
         else:
-            field=temp[0].strip()
-            defi='\n'.join(temp[1:]).strip()
-        if c<5900:
+            field = temp[0].strip()
+            defi = '\n'.join(temp[1:]).strip()
+        if c < 5900:
             embed.add_field(name=field, value=defi, inline=False)
         else:
             embed.add_field(name='Liiga palju tulemusi', value='Rohkem vastuseid ei saa kuvada', inline=False)
@@ -405,50 +419,58 @@ async def define(ctx, *args):
     if not results:
         embed.add_field(name='. . .', value='Tulemusi ei leitud', inline=False)
     await ctx.send(embed=embed)
+
+
 def is_me(m):
-    #print([m.content])
+    # print([m.content])
     if m.content.startswith('? g'): return True
     if m.content.startswith('?g '): return True
     if m.content.startswith('?cleanup'): return True
     # if m.author == bot.user: return True
-    return (m.content.startswith('**ID'))  or \
-            (m.content.startswith('ID')) or m.content.startswith('?wait') or \
-            ('hangman' in m.content.lower()) or \
-            ('> oli viimane.' in m.content.lower()) or \
-            (m.content.startswith('Mängu ID'))
+    return (m.content.startswith('**ID')) or \
+           (m.content.startswith('ID')) or m.content.startswith('?wait') or \
+           ('hangman' in m.content.lower()) or \
+           ('> oli viimane.' in m.content.lower()) or \
+           (m.content.startswith('Mängu ID'))
+
+
 def is_me2(m):
     return m.author == bot.user or m.content.startswith('?')
+
+
 @bot.command()
 @commands.check(alll)
 async def cleanup(ctx, n=15):
-    if n>1000:n=500
-    if n<2:n=2
+    if n > 1000: n = 500
+    if n < 2: n = 2
     t = ctx.author
     # his = ctx.history(limit=5)
     deleted = await ctx.channel.purge(limit=n, check=is_me)
-    await ctx.send('deleted '+str(len(deleted)))
+    await ctx.send('deleted ' + str(len(deleted)))
+
 
 @bot.command()
 @commands.check(alll)
 async def cleanup2(ctx, n=15):
-    if n<2:n=2
+    if n < 2: n = 2
     t = ctx.author
     deleted = await ctx.channel.purge(limit=n, check=is_me2)
-    await ctx.send('deleted '+str(len(deleted)))
+    await ctx.send('deleted ' + str(len(deleted)))
+
 
 def define2(msg):
     try:
         asd = 1
         ms = msg
         regex = r"<div class=\"tervikart\">[.\s\S\d\D]*?<\/div>"
-        regex2= r"<span class=\"leitud_ss\">([.\s\S\d\D]*?)<\/span>"
+        regex2 = r"<span class=\"leitud_ss\">([.\s\S\d\D]*?)<\/span>"
         adr = urllib.request.quote(ms)
         adr = 'https://www.eki.ee/dict/ekss/index.cgi?Q=' + adr
         req = urllib.request.Request(adr)
         response = urllib.request.urlopen(req)
         the_page = response.read().decode('utf8')
         matches = re.finditer(regex, the_page, re.MULTILINE)
-        results=[]
+        results = []
         for matchNum, match in enumerate(matches, start=1):
             text = match.group()
             try:
@@ -456,16 +478,18 @@ def define2(msg):
             except Exception as err:
                 return [err]
             for matchNum, match in enumerate(re.finditer(regex2, text, re.MULTILINE)):
-                title=match.group(1)
+                title = match.group(1)
                 break
             text2 = re.sub('<[\s\S]*?>', '', text)
             if len(text2) < 1020:
                 results.append(text2)
             else:
-                results.append(text2.split('\n')[0]+'\n**Liiga pikk vastus**\n' + '\n'.join(text2.split('\n')[1:])[:1000])
+                results.append(
+                    text2.split('\n')[0] + '\n**Liiga pikk vastus**\n' + '\n'.join(text2.split('\n')[1:])[:1000])
         return results
     except Exception as err:
         return [err]
+
 
 def stats(message):
     global data
@@ -566,6 +590,7 @@ def stats(message):
     else:
         return ('Viga, katkine asi.\n' + help_msg)
 
+
 def ilma_output(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
     embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
@@ -590,6 +615,7 @@ def ilma_output(data, location):
     embed.add_field(name='Hoiatused:', value=achtung, inline=False)
     return embed
 
+
 def ilma_output2(data, location):
     embed = discord.Embed(title=data['vt1observation']['phrase'], description=location, color=0x2a85ed, type='rich')
     embed.set_thumbnail(url='http://l.yimg.com/a/i/us/we/52/' + str(data['vt1observation']['icon']) + '.gif')
@@ -600,19 +626,20 @@ def ilma_output2(data, location):
                     inline=False)
     return embed
 
+
 def ilm_output_table(data, location):
-    ilm=dict(data)
-    sep=';'
-    fn=['ilm_daily.csv', 'ilm_hourly.csv']
-    daily=True
-    hourly=True
-    encoding='cp1252'
+    ilm = dict(data)
+    sep = ';'
+    fn = ['ilm_daily.csv', 'ilm_hourly.csv']
+    daily = True
+    hourly = True
+    encoding = 'cp1252'
     if daily:
-        header=['dayPartName', 'phrase', 'cloudPct', 'humidityPct', 'precipType', 'precipAmt',
-                 'precipPct', 'qualifier', 'snowRange', 'temperature','thunderEnumPhrase',
-                 'thunderEnum', 'uvIndex', 'uvDescription','windDirCompass', 'windDirDegrees',
-                 'windSpeed', 'icon', 'iconExtended','narrative']
-        output=[header]
+        header = ['dayPartName', 'phrase', 'cloudPct', 'humidityPct', 'precipType', 'precipAmt',
+                  'precipPct', 'qualifier', 'snowRange', 'temperature', 'thunderEnumPhrase',
+                  'thunderEnum', 'uvIndex', 'uvDescription', 'windDirCompass', 'windDirDegrees',
+                  'windSpeed', 'icon', 'iconExtended', 'narrative']
+        output = [header]
         for x in range(15):
             output.append([])
             for i in header:
@@ -620,27 +647,29 @@ def ilm_output_table(data, location):
             output.append([])
             for i in header:
                 output[-1].append(ilm['vt1dailyForecast']['night'][i][x])
-        f=open(fn[0],'w', encoding=encoding)
+        f = open(fn[0], 'w', encoding=encoding)
         for i in output:
-            if set(i)=={None}:continue
-            txt=sep.join(list(map(str,i[:-1]))).replace('.',',')+sep+i[-1]
-            f.write(txt+'\n')
+            if set(i) == {None}: continue
+            txt = sep.join(list(map(str, i[:-1]))).replace('.', ',') + sep + i[-1]
+            f.write(txt + '\n')
         f.close()
     if hourly:
-        header=['processTime','dayInd', 'phrase', 'rh', 'precipPct', 'precipType',
-                'severity', 'temperature','feelsLike', 'uvIndex', 'windDirCompass',
-                'windDirDegrees', 'windSpeed','icon', 'iconExtended']
-        output=[header]
+        header = ['processTime', 'dayInd', 'phrase', 'rh', 'precipPct', 'precipType',
+                  'severity', 'temperature', 'feelsLike', 'uvIndex', 'windDirCompass',
+                  'windDirDegrees', 'windSpeed', 'icon', 'iconExtended']
+        output = [header]
         for x in range(len(ilm['vt1hourlyForecast']['processTime'])):
             output.append([])
             for i in header:
                 output[-1].append(ilm['vt1hourlyForecast'][i][x])
-        f=open(fn[1],'w', encoding=encoding)
+        f = open(fn[1], 'w', encoding=encoding)
         for i in output:
-            txt=sep.join(list(map(str,i))).replace('.',',')
-            f.write(txt+'\n')
+            txt = sep.join(list(map(str, i))).replace('.', ',')
+            f.write(txt + '\n')
         f.close()
     return fn
+
+
 def ilm_getData(a):
     if a == '':
         x = {'lat': 59.43696079999999, 'lng': 24.7535747}
@@ -711,10 +740,11 @@ async def wait(channel, sisu, user, uid):
             a = time.mktime(datetime.datetime.strptime(stamp, '%d.%m.%y_%H:%M').timetuple()) - int(time.time())
         # Kanali olemasolu kontroll.
         kanal2 = channel
-        idd=channel.id
-        isuser=False
-        SAMA_INIMENE=lambda sisu, uid: sisu.split()[2]=='<@'+str(uid)+'>'
-        TEINE_INIMENE=lambda sisu, uid: len(sisu.split()[2])==len('<@'+str(uid)+'>') and sisu.split()[2][:2]=='<@'
+        idd = channel.id
+        isuser = False
+        SAMA_INIMENE = lambda sisu, uid: sisu.split()[2] == '<@' + str(uid) + '>'
+        TEINE_INIMENE = lambda sisu, uid: len(sisu.split()[2]) == len('<@' + str(uid) + '>') and sisu.split()[2][
+                                                                                                 :2] == '<@'
         if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
             idd = int(sisu.split()[2][2:-1])
             kanal2 = bot.get_channel(idd)
@@ -723,18 +753,18 @@ async def wait(channel, sisu, user, uid):
         # siis me ei hakka kanalit reostama, vaid kirjutame talle otse.
         # Teoreetiliselt võime saata teate ka teisele inimesele.
         elif TEINE_INIMENE(sisu, uid):  # DM/PM
-            idd=int(sisu.split()[2][2:-1])  # UID juhul, kui märgitakse keegi kolmas.
-            kanal2=bot.get_user(idd)
+            idd = int(sisu.split()[2][2:-1])  # UID juhul, kui märgitakse keegi kolmas.
+            kanal2 = bot.get_user(idd)
             x = ' '.join(sisu.split()[3:])
-            isuser=True
+            isuser = True
         if a > 120:
             await channel.send('Vastu võetud ' + str(x) + ', esitamisel ' + stamp)
         # Ma tahaks kuskile siia panna süsteemi, mis salvestab edastatavad teated vahepeal tekstifaili.
         # Salvestada: usch - kasutaja või kanal; idd - kanali ID, kuhu sõnum saata.; stamp - ajatempel, millest tuletada ooteaeg.
         iad = ['<@' + str(abs(uid)) + '> ', '', '- '][1]  # Võimalik spämmiennetus.
-        msg=iad + str(x)
-        to_save=[stamp, isuser,idd, msg]
-        f=open('wait_queue.txt', 'a')
+        msg = iad + str(x)
+        to_save = [stamp, isuser, idd, msg]
+        f = open('wait_queue.txt', 'a')
         print(*to_save, sep=';\'', file=f)
         f.close()
         await asyncio.sleep(a)
@@ -745,16 +775,16 @@ async def wait(channel, sisu, user, uid):
 
 @bot.command(pass_context=True)
 async def spam(ctx, *args):
-    chance=random.random()
-    if ctx.author.name.lower() in ['elvar']:
-        chance+=0.5
-    if chance<0.75:
+    chance = random.random()
+    if ctx.author.name.lower().startswith('elvar'):
+        chance += 0.5
+    if chance < 0.75:
         a = time.localtime()
         await ctx.send('Kell on ' + time.strftime('%H:%M', a) + ', ' + random.choice(textid[a.tm_hour]))
     else:
         reso = gg_img('asd spam canned pork')
-        e = discord.Embed(title='Juhuslik otsingutulemus',color=0x0c9c6c)
-        e.set_image(url=reso[random.randint(0,len(reso)-1)])
+        e = discord.Embed(title='Juhuslik otsingutulemus', color=0x0c9c6c)
+        e.set_image(url=reso[random.randint(0, len(reso) - 1)])
         await ctx.send(embed=e)
 
 
@@ -777,6 +807,7 @@ async def week(ctx, *args):
 async def hallo(ctx, *args):
     # Args tuple sõnedega, mis tulid argumentidena.
     await ctx.send(str(args))
+
 
 """
 channel = message.channel 
@@ -850,8 +881,8 @@ async def on_message(message):
         reso = gg_img(sisu)
         if len(reso) == 1 and reso[0].startswith('You did it!'):
             return await channel.send('Tulemusi ei leitud.')
-        e = discord.Embed(title='Juhuslik otsingutulemus',color=0xd81c0f)
-        e.set_image(url=reso[random.randint(0,9)])
+        e = discord.Embed(title='Juhuslik otsingutulemus', color=0xd81c0f)
+        e.set_image(url=reso[random.randint(0, 9)])
         await channel.send(embed=e)
         return
     elif sisu.startswith('?search'):
@@ -864,7 +895,7 @@ async def on_message(message):
         return await channel.send(embed=embed)
     elif sisu.strip() == '?reset':
         print('RESET')
-        print(tag, '\n',test)
+        print(tag, '\n', test)
         print('-----------------')
         if tag == test:
             await channel.send('Restarting...')
@@ -872,19 +903,20 @@ async def on_message(message):
             return
         else:
             await channel.send('no')
-    elif list(re.finditer(r"\bhmm\b", sisu, re.IGNORECASE)) and not sisu.startswith('?') and tag!=bvb and user!='anubis':
+    elif list(re.finditer(r"\bhmm\b", sisu, re.IGNORECASE)) and not sisu.startswith(
+            '?') and tag != bvb and user != 'anubis':
         await channel.send('Mitte hmm, vaid hm või hmh!')
     elif sisu.lower().startswith('tere'):
-        if tag==bvb: return
+        if tag == bvb: return
         if '<@' in sisu and bvb not in sisu: return
         for n in ['kadri', 'piret', 'sebastian', 'elvar', 'anubis', 'test', 'ago']:
-            if n in sisu.lower() and 'bot' not in sisu.lower():return
+            if n in sisu.lower() and 'bot' not in sisu.lower(): return
         print(str(message.created_at)[:-10] + '    ' + sisu, user, sep='\t')  # Logimine tere jaoks.
         if user.lower().startswith('kadri'):
             return await channel.send('<@' + str(abs(uid)) + '>' + ', **pelmeen!**')
         await channel.send('<@' + str(abs(uid)) + '>' + ', **tere!**')
     elif bvb in sisu.lower():
-        if tag!=bvb:
+        if tag != bvb:
             await channel.send('I heard you! {1}, {0}'.format(tag, user))
     await bot.process_commands(message)
 
@@ -901,31 +933,37 @@ async def list_servers():
             if tmp[0]: data[srv] = tmp[1]
         await asyncio.sleep(600)  # 600
         # Lisada kontroll, kas kood on muutunud?
-        #Pole vajalik, sest niikuinii saaks teha käsitsi taaskäivituse.
+        # Pole vajalik, sest niikuinii saaks teha käsitsi taaskäivituse.
+
+
 async def import_wait_tasks():
     await asyncio.sleep(15)
-    f=open('wait_queue.txt')
-    tmp=f.readlines()
+    f = open('wait_queue.txt')
+    tmp = f.readlines()
     f.close()
-    #print(tmp)
+    # print(tmp)
     # kasutame koha peal ootamise genereerimist?
-    f=open('wait_queue.txt', 'w')
+    f = open('wait_queue.txt', 'w')
     loop = asyncio.get_event_loop()
     for i in tmp:
-        x=i.strip().split(';\'')
+        x = i.strip().split(';\'')
         a = time.mktime(datetime.datetime.strptime(x[0], '%d.%m.%y_%H:%M').timetuple()) - int(time.time())
-        if a>-20:
-            a=max([a, 0])
+        if a > -20:
+            a = max([a, 0])
             print(*x, sep=';\'', file=f)
+
             async def bg_wait_task(a=a, x=x):
-                if x[1]=='True':  # DM/PM
-                    kanal2=bot.get_user(int(x[2]))
+                if x[1] == 'True':  # DM/PM
+                    kanal2 = bot.get_user(int(x[2]))
                 else:
                     kanal2 = bot.get_channel(int(x[2]))
                 await asyncio.sleep(a)
                 await kanal2.send(x[3])
+
             loop.create_task(bg_wait_task())
     f.close()
+
+
 bot.loop.create_task(import_wait_tasks())
 bot.loop.create_task(list_servers())
 bot.loop.create_task(troll_task())
