@@ -1,5 +1,5 @@
-# coding: utf-8
-# Bot versioon 4.7.2 tegeleme aja parandusega. 
+# -*- coding: utf-8 -*-
+# Bot versioon 4.7.3 otsingutulemused läksid vahepeal katki. 
 import asyncio
 import os
 import pickle, json
@@ -22,7 +22,7 @@ Asjad, mida muuta:
     TEHTUD - Wait võiks salvestada asjad vahemällu, et uuel käivitamisel asjad töötaksid.
 """
 
-VERSION = '4.7.2.3'
+VERSION = '4.7.3'
 bot = commands.Bot(command_prefix=BOT_PREFIX, description='Bot for tests')
 # Docs: https://discordpy.readthedocs.io/en/rewrite/
 kell = ''
@@ -71,22 +71,29 @@ def gg(sisu):
     response = urllib.request.urlopen(req)
     htm = response.read().decode('utf8')
     try:
-        the_page = htm.split('<ol class="list-flat">')[1].split('</ol>')[0]
+        the_page = htm.split('<section class="w-gl w-gl--default">')[1].split('</section>')[0]
     except IndexError:
         return [
             'You did it! [Tulemusi ei leitud.]\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
-    the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>', '').split('</li>')
-    for m in range(len(the_page)): the_page[m] = re.sub('<[\s\S]*?>', ' ', the_page[m].replace('<br>', '\n'))
+    the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<a>Anonymous View</a>', '').replace('Web Results', '').split('</div>')
+    for m in range(len(the_page)):
+        the_page[m] = re.sub('<[\s\S]*?>', ' ', the_page[m].replace('<br>', '\n')).replace('  ', ' ')
+
     tulem = []
     for m in the_page[:3]:
-        m = html.unescape(m)
-        hd, li = m.strip().split('  \n \n ')
-        t = li.split(' \n \n\n \n \n ')
-        if len(t) == 1:
+        m = html.unescape(m).strip()
+        m=re.sub('((^\s+)|(\s\n))\s+', '\n',m)
+        #tulem.append(m)
+        #continue # ((^\s+)|(\s\n))\s+
+        out=m.split('\n')
+        print(out)
+        if len(out)==2:
+            hd,link= out
             desc = '[Kirjeldus puudub]'
-            link = t[0]
         else:
-            link, desc = t
+            hd,link,desc= out
+        #hd, link = m.split(' \n                 \n                 ')
+        #t = li.split(' \n                \n                \n\n                  ')
         if link[:4] != 'http': link = 'http://' + link
         tulem.append([hd, desc, '<' + link + '>'])
     return tulem
@@ -103,15 +110,21 @@ def gg_img(sisu):
     response = urllib.request.urlopen(req)
     htm = response.read().decode('utf8')
     try:
-        the_page = htm.split('<ul class=\'image-results\' id=\'image-results\'>')[1].split('</ul>')[0]
+        the_page = htm.split('<section class="ig-gl__main">')[1].split('</section>')[0]
     except IndexError:
         return [
             'You did it! [Tulemusi ei leitud.]\nhttps://i.pinimg.com/originals/a0/95/8a/a0958af58be0330979c242038b62e2f1.jpg']
-    the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>', '').split('</li>')
-    for m in range(min([10, len(the_page)])):
-        img_tag = list(enumerate(re.finditer(r"<img[\s\S]*?>", the_page[m], re.MULTILINE)))[0][1].group()
-        the_page[m] = re.findall(r"url=[\s\S]*?\&", img_tag, re.MULTILINE)[0][4:-1]
-        the_page[m] = urllib.request.unquote(the_page[m])
+    the_page = re.sub('<a[\s\S]*?>', '<a>', the_page).replace('<li><a>Anonymous View</a></li>', '')
+    #return the_page
+    # '\"clickUrl\": \"[\s\S]*?\"'
+    matches = re.finditer(r"\"clickUrl\": \"[\s\S]*?\"", the_page, re.MULTILINE)
+    the_page=[]
+    for match in matches:
+        match2 = match.group()[13:-1]
+        mat4=bytes(match2, 'ascii').decode('unicode-escape')
+        mat3=urllib.request.unquote(mat4)
+        the_page.append(mat3)
+    m=min([10, len(the_page)])-1
     the_page = the_page[:m + 1]
     return the_page
 
