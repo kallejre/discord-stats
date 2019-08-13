@@ -829,7 +829,15 @@ async def invite(ctx, *args):
 
 @bot.command(pass_context=True)
 async def week(ctx, *args):
-    await ctx.send(str(datetime.datetime.utcnow().isocalendar()[1] - 4) + '. nädal.')
+    if datetime.datetime.utcnow().isocalendar()[1] - 35>-1:
+        wk=datetime.datetime.utcnow().isocalendar()[1] - 35
+    elif datetime.datetime.utcnow().isocalendar()[1] - 4>-1:
+        wk=datetime.datetime.utcnow().isocalendar()[1] - 4
+    else:
+        wk=datetime.datetime.utcnow().isocalendar()[1] - 35+52
+    if wk<20:
+        await ctx.send(str(wk) + '. nädal.')
+    else:await ctx.send('Vaheaeg ('+str(wk)'. nädal?)')
 
 
 @bot.command(pass_context=True)
