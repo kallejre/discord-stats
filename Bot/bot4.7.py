@@ -5,7 +5,7 @@ import os
 import pickle, json
 import random
 import re
-import time, datetime
+import time, datetime, pytz
 import urllib.request
 from sys import exit
 import funk
@@ -799,6 +799,22 @@ async def spam(ctx, *args):
         e = discord.Embed(title='Juhuslik otsingutulemus', color=0x0c9c6c)
         e.set_image(url=reso[random.randint(0, len(reso) - 1)])
         await ctx.send(embed=e)
+
+
+@bot.command(pass_context=True)
+async def miami(ctx, tz='America/New_York', *args):
+    # https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568
+    if tz in pytz.all_timezones:
+        miami = pytz.timezone(tz)
+    elif tz.title in pytz.all_timezones:
+        miami = pytz.timezone(tz.title())
+    elif tz.upper in pytz.all_timezones:
+        miami = pytz.timezone(tz.upper())
+    else:
+        await ctx.send('Tundmatu ajavöönd. Vaata "https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568"')
+        return
+    a = pytz.timezone('UTC').localize(datetime.datetime.utcnow()).astimezone(miami)
+    await ctx.send('Seal on kell ' + datetime.datetime.strftime(a,'%H:%M'))
 
 
 @bot.command(pass_context=True)
