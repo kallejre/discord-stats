@@ -804,17 +804,26 @@ async def spam(ctx, *args):
 @bot.command(pass_context=True)
 async def miami(ctx, tz='America/New_York', *args):
     # https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568
-    if tz in pytz.all_timezones:
-        miami = pytz.timezone(tz)
-    elif tz.title in pytz.all_timezones:
-        miami = pytz.timezone(tz.title())
-    elif tz.upper in pytz.all_timezones:
-        miami = pytz.timezone(tz.upper())
+    chance = random.random()+0.0
+    if ctx.author.name.lower().startswith('elvar'):
+        chance += 0.5
+    if chance < 0.75:
+        if tz in pytz.all_timezones:
+            miami = pytz.timezone(tz)
+        elif tz.title in pytz.all_timezones:
+            miami = pytz.timezone(tz.title())
+        elif tz.upper in pytz.all_timezones:
+            miami = pytz.timezone(tz.upper())
+        else:
+            await ctx.send('Tundmatu ajavöönd. Vaata "https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568"')
+            return
+        a = pytz.timezone('UTC').localize(datetime.datetime.utcnow()).astimezone(miami)
+        await ctx.send('Seal on kell ' + datetime.datetime.strftime(a,'%H:%M'))
     else:
-        await ctx.send('Tundmatu ajavöönd. Vaata "https://gist.github.com/heyalexej/8bf688fd67d7199be4a1682b3eec7568"')
-        return
-    a = pytz.timezone('UTC').localize(datetime.datetime.utcnow()).astimezone(miami)
-    await ctx.send('Seal on kell ' + datetime.datetime.strftime(a,'%H:%M'))
+        reso = gg_img(('asd '+tz.replace('/',' ').replace('_',' ')+' '+' '.join(args)).strip())
+        e = discord.Embed(title='Juhuslik otsingutulemus', color=0xb2bf1d)
+        e.set_image(url=reso[random.randint(0, len(reso) - 1)])
+        await ctx.send(embed=e)
 
 
 @bot.command(pass_context=True)
@@ -837,7 +846,8 @@ async def week(ctx, *args):
         wk=datetime.datetime.utcnow().isocalendar()[1] - 35+52
     if wk<20:
         await ctx.send(str(wk) + '. nädal.')
-    else:await ctx.send('Vaheaeg ('+str(wk)'. nädal?)')
+    else:
+        await ctx.send('Vaheaeg ('+str(wk)+'. nädal?)')
 
 
 @bot.command(pass_context=True)

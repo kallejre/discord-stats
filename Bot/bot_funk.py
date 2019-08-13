@@ -40,6 +40,7 @@ blacklist = []
 helin = '<@392707534764376074>'
 test = '<@482189197671923713>'
 ago = '<@366546170149076993>'
+seb = '<@487456588383256586>'
 BOT_PREFIX = ("?", "!")
 võti = 'NDg2NDQ1MTA5NjQ3MjQ1MzMy.DnEL'
 rõngas = 'rQ.WDT1RXBmKt61KbX9MgtoDYGgt8A'
