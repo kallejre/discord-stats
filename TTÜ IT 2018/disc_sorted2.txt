@@ -4641,10 +4641,16 @@ Server	Channel	User	Timestamp	Message
 0	541655405428736024	463080018948390923	1554911298	hea tunne kui saad aru 😄
 0	484465842449285124	485134579884359690	1554922415	muidu tunduski, et nädalavahetusel pole midagi teha 😄
 0	484465842449285124	487456588383256586	1554953971	😄
+0	563970566093013002	194118810960265216	1554999780	huvitav kas hw5's peab kindlalt kasutama sqlite'i
 0	541655405428736024	414440233577349153	1554999823	kas arvutivõrkudes peab isegi paaris tehes panema täpselt samad tööd eraldi sinna esitusse?
 0	541655405428736024	414440233577349153	1554999830	ma ei saa korraldusest endiselt kellagi aru
 0	541655405428736024	481778359043358720	1554999857	individuaalülesanne lõpus on erinev.
 0	541655405428736024	481778359043358720	1554999875	seega tuleb ikka jah eraldi esitada.
+0	563970566093013002	487456588383256586	1555000783	kas on väljas?
+0	563970566093013002	487456588383256586	1555000786	teen kanali?
+0	563970566093013002	487456588383256586	1555000812	nvm
+0	563970566093013002	487456588383256586	1555000815	nägin
+0	563970566093013002	487456588383256586	1555000847	mida sa sqllite asemel kasutaksid?
 0	563970566093013002	487456588383256586	1555000851	mysqli?
 0	563970566093013002	487456588383256586	1555001020	kuna mysql > sqllite siis seda pahaks vist ei pandaks. tekstifail oleks alla lati
 0	563970566093013002	194118810960265216	1555003121	pdo tundub nagu parem variant
@@ -4810,10 +4816,15 @@ Server	Channel	User	Timestamp	Message
 0	541541492628652034	444825395347456010	1555858473	aga siin oli igatahes history.log õige vastus
 0	541655405428736024	268817928835694593	1555869983	ma mõtlesin 3 bitti, mis on loogilise väärtusega 1 😄
 0	541655405428736024	268817928835694593	1555869996	aga aitäh
+0	565939206225133569	488217043708018688	1555905687	kas kellegil on nippe, näiteid, suunamise osas, kasutades header funktsiooni. minul jätkuvalt probleeme selle rakendamisega.
 0	541540176783212544	463080018948390923	1555957403	kas keegi on lab4 ära ka teinud juba?
 0	541540176783212544	481778359043358720	1555957457	see tundub nii keeruline (üldse aru saada, mida vaja teha on), et ma pole veel ette võtnud.
 0	541540176783212544	463080018948390923	1555957509	eks ta ole jah
+0	565939206225133569	488217043708018688	1556078693	kas keegi teab indrek otsa emaili?
+0	565939206225133569	487456588383256586	1556078906	indrek.ots@taltech.ee ? või küsi märdi käest. miks sa ei taha ära oodata üldse, kui ametlikult seda ülli hakatakse seletama? äkki saad siis oma küsimustele vastuse?
+0	565939206225133569	487456588383256586	1556078927	hetkel ju on üll väljas, kuid loengut selle kohta ei ole või praksi, kus saab esitada oma küsimusi
 0	484465842449285124	487456588383256586	1556083953	arvutite laborite kaitsmine. selleks laupäevaks planeeritakse ca 15.00 paiku uut võimalust kellel veel kaitsmata. info pannakse lähiajal üles diskmat.ee/kaug lehele.
+0	565939206225133569	488217043708018688	1556128689	tegemist ei ole tegelikult küsimusega, mis otseselt seostub hw5-ga.
 0	541540176783212544	481778359043358720	1556129495	kas nüüd on keegi suutnud end sellest läbi närida?
 0	541540176783212544	481778359043358720	1556129517	ma tahaks vaikselt tegema hakata, aga ma ei saa sellest väga eriti midagi aru ikkagi.
 0	541540176783212544	481778359043358720	1556129518	
@@ -4889,6 +4900,9 @@ Server	Channel	User	Timestamp	Message
 0	541655405428736024	481778359043358720	1556185941	viimane tundub loogilisem, aga sõnaliselt kattub esimene paremini.
 0	541655405428736024	463080018948390923	1556190681	w on see mis sa sinna mõõdetud spektri laiuse lahtisse panid
 0	541655405428736024	481778359043358720	1556191105	aitäh! tundus jah natuke loogilisem variant
+0	565939206225133569	194118810960265216	1556193265	php dokkist ei leidnud vastust?
+0	565939206225133569	487456588383256586	1556199280	<@488217043708018688> see redirect. hakkasin vaatama mingit indreku loengut
+0	565939206225133569	487456588383256586	1556199289	apr 02 on tal loeng kus räägib ka sellest redirectist
 0	484461017997246480	392707534764376074	1556212674	annan ära pileti homsele konfluence'ile
 0	484461017997246480	392707534764376074	1556212675	https://fienta.com/et/konfluence-2019
 0	541541492628652034	488217043708018688	1556247244	usun, et seda ei tea isegi õppejõud.
@@ -4901,10 +4915,21 @@ Server	Channel	User	Timestamp	Message
 0	541541492628652034	483610248632860683	1556388973	kuidas üleüldiselt oli? ma suht kahtlustan, et liiga "silmaringi" test jälle...
 0	563970566093013002	486905181468885002	1556390975	kas keegi oskaks aidata kuidas ma tekitatud firstname, lastname ja phone arrayst loopiga tabelisse list.htmli saaks. juba pool päeva jaman.
 0	563970566093013002	487456588383256586	1556418913	kui häda siis võite mulle kirjutada, aitan 😃
+0	565939206225133569	488217043708018688	1556425059	kas enamus kasutab siin ka mingit raamistikku? drupal etc.?
 0	563970566093013002	488217043708018688	1556425229	ma ei ole kindel kas ma saan aru. et kuidas array lõhkuda ja siis php-s valmistada html kujul tabel?
 0	563970566093013002	488217043708018688	1556425426	ma ütleks, et explode lõhuks array ja siis echo-ga saab anda php-d. samas indrekul on parem lähenemine.
 0	563970566093013002	488217043708018688	1556425443	https://bitbucket.org/indrekots2/todo-rakendus/src/26fa43c58f4809b485112d69e4e362460192df4d/tpl/?at=master
+0	565939206225133569	487456588383256586	1556425446	raamistik oleks selge overkill selle ülli suhtes
+0	565939206225133569	488217043708018688	1556425470	jah. aga minu jaoks kogu see header on täielik headache 😄
 0	563970566093013002	487456588383256586	1556425481	tegelikult ta vajab seda php foreach loopi templiiti
+0	565939206225133569	488217043708018688	1556425505	kuna ma kirjutan echo-ga kontakte, siis alati output tuleb enne kui miski muu.
+0	565939206225133569	487456588383256586	1556425518	ma ei saa aru kuidas saab selline asi olla peavalu
+0	565939206225133569	488217043708018688	1556425524	ma ise ka ei saa
+0	565939206225133569	488217043708018688	1556425532	see mulle raskusi valmistab
+0	565939206225133569	488217043708018688	1556425538	😃
+0	565939206225133569	487456588383256586	1556425552	sisuliselt lisa üks rida juurde header("location: list.html") ja valmis
+0	565939206225133569	488217043708018688	1556425646	jah. aga selle rea asukoht on oluline
+0	565939206225133569	488217043708018688	1556425658	minu kood annab enne output-i
 0	565939206225133569	488217043708018688	1556425661	ja header ei tööta
 0	565939206225133569	487456588383256586	1556425701	see header peab olema täpselt seal kus sa lõpetad andmete kirjutamise
 0	565939206225133569	487456588383256586	1556425711	peale seda
@@ -6953,3 +6978,10 @@ Server	Channel	User	Timestamp	Message
 0	484465842449285124	157909146275020800	1561730998	kes kohal
 0	484465842449285124	487456588383256586	1561795919	njaa
 0	484465842449285124	487456588383256586	1561795925	see oleks küll üritus kus oleks tahtnud olla
+0	484465842449285124	483610248632860683	1566326926	et, noh, mina kirjutasin dagmarile igastahes kirja ära, et kas tüüpõpingukava muutub, nii et selle järgi saaks 30 eap-d kokku ka. filosoofia ei loe, see moodul sai suuremal osal eelmisel aastal majandusõpetusega kaetud.
+0	484465842449285124	483610248632860683	1566326965	5. semestri tunniplaaniga on piisavalt kattumist, et läheb parajaks leiutamiseks.
+0	484465842449285124	483610248632860683	1566331636	kellelgi on ideid kuidas platvormipõhised mobiikirakendused organiseeritud on? xcode jookseb ainult õunal. ja seega läheb nagu keeruliseks, kui maci pole
+0	484465842449285124	392707534764376074	1566336378	meil füüsika ka
+0	484465842449285124	392707534764376074	1566336392	seda veel pole pandud, aga küll pannakse
+0	484465842449285124	392707534764376074	1566336402	inimesed pole ju täna veel töölgi
+0	484465842449285124	483610248632860683	1566366283	nad kogu augusti on vähemalt juba olnud...
