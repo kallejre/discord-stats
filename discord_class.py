@@ -210,7 +210,15 @@ kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2
                     "hw06": {"Veebitehnoloogia", "Kokku"}, 
                     "kõrgem-matemaatika": {"2semester", "Kokku"}}
 
-
+kategooriad_py19 = {'teated':{"Yldine", "Kokku"},
+                    'vaikne':{"Yldine", "Kokku"},
+                    'general':{"Yldine", "Kokku"},
+                    'pr01':{"PR", "Kokku"},
+                    "food": {"Kokku", "Fun"}, 
+                    "random": {"Kokku", "Fun"}, 
+                    "games": {"Fun", "Kokku"}, 
+                    'meme':{"Fun", "Kokku"},
+                    'music':{"Fun", "Kokku"},}
 
 # OUTPUT_FOLDER-i Lõppu käib kaldkriips
 class Stats:
@@ -825,6 +833,8 @@ if __name__=='__main__':
     sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
     print('Kaug')
     sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+    print('Py19')
+    sts = stat_full('dht_py19.txt', 'py2019/', kategooria=kategooriad_py19)  # Kaug
 
 
 
