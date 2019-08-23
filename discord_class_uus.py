@@ -139,19 +139,7 @@ kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ
 kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"}, 
                     "ülesanded": {"Kalmo", "Kokku"}, 
                     "codera": {"Yldine", "Kokku", "NotFun"}, 
-                    "ex01": {"EX", "Kokku"}, 
-                    "ex02": {"EX", "Kokku"}, 
-                    "ex03": {"EX", "Kokku"}, 
-                    "ex04": {"EX", "Kokku"}, 
-                    "ex05": {"EX", "Kokku"}, 
-                    "ex06": {"EX", "Kokku"}, 
-                    "ex07": {"EX", "Kokku"}, 
-                    "ex08": {"EX", "Kokku"}, 
-                    "ex09": {"EX", "Kokku"}, 
-                    "ex11": {"EX", "Kokku"}, 
-                    "ex12": {"EX", "Kokku"}, 
-                    "ex13": {"EX", "Kokku"}, 
-                    "ex14": {"EX", "Kokku"}, 
+                    "ex01": {"EX", "Kokku"},
                     "ex15": {"EX", "Kokku"}, 
                     "food": {"Yldine", "Kokku", "Fun"}, 
                     "games": {"Yldine", "Kokku", "Fun"}, 
@@ -159,12 +147,6 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "general": {"Yldine", "Kokku", "NotFun"}, 
                     "gomoku": {"Yldine", "Kokku", "NotFun"}, 
                     "hw03": {"Kalmo", "Kokku"},
-                    "hw04": {"Kalmo", "Kokku"},
-                    "hw05": {"Kalmo", "Kokku"},
-                    "hw06": {"Kalmo", "Kokku"}, 
-                    "hw07": {"Kalmo", "Kokku"},
-                    "hw08": {"Kalmo", "Kokku"}, 
-                    "hw09": {"Kalmo", "Kokku"}, 
                     "hw10": {"Kalmo", "Kokku"}, 
                     "java": {"Kalmo", "Kokku"}, 
                     "korraldus": {"Kalmo", "Kokku"}, 
@@ -172,6 +154,23 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "music": {"Yldine", "Kokku", "Fun"}, 
                     "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
                     "pr00": {"PR", "Kokku"}, 
+                    "pr15": {"PR", "Kokku"},
+                    "projekt": {"Yldine", "Kokku", "NotFun"}, 
+                    "random": {"Yldine", "Kokku", "Fun"}, 
+                    "suhtenurk": {"Yldine", "Kokku", "Fun"}, 
+                    "stat": {"Yldine", "Kokku", "NotFun"}, 
+                    "teadaanded": {"Yldine", "Kokku", "NotFun"}, 
+                    "teated": {"Yldine", "Kokku", "NotFun"}, 
+                    "videod": {"Yldine", "Kokku", "NotFun"},
+                    "wat": {"Kalmo", "Kokku"}}
+
+"""
+                    "hw04": {"Kalmo", "Kokku"},
+                    "hw05": {"Kalmo", "Kokku"},
+                    "hw06": {"Kalmo", "Kokku"}, 
+                    "hw07": {"Kalmo", "Kokku"},
+                    "hw08": {"Kalmo", "Kokku"}, 
+                    "hw09": {"Kalmo", "Kokku"}, 
                     "pr01": {"PR", "Kokku"}, 
                     "pr02": {"PR", "Kokku"},
                     "pr03": {"PR", "Kokku"},
@@ -184,15 +183,19 @@ kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"},
                     "pr12": {"PR", "Kokku"},
                     "pr13": {"PR", "Kokku"},
                     "pr14": {"PR", "Kokku"},
-                    "pr15": {"PR", "Kokku"},
-                    "projekt": {"Yldine", "Kokku", "NotFun"}, 
-                    "random": {"Yldine", "Kokku", "Fun"}, 
-                    "suhtenurk": {"Yldine", "Kokku", "Fun"}, 
-                    "stat": {"Yldine", "Kokku", "NotFun"}, 
-                    "teadaanded": {"Yldine", "Kokku", "NotFun"}, 
-                    "teated": {"Yldine", "Kokku", "NotFun"}, 
-                    "videod": {"Yldine", "Kokku", "NotFun"},
-                    "wat": {"Kalmo", "Kokku"}}
+                    "ex02": {"EX", "Kokku"}, 
+                    "ex03": {"EX", "Kokku"}, 
+                    "ex04": {"EX", "Kokku"}, 
+                    "ex05": {"EX", "Kokku"}, 
+                    "ex06": {"EX", "Kokku"}, 
+                    "ex07": {"EX", "Kokku"}, 
+                    "ex08": {"EX", "Kokku"}, 
+                    "ex09": {"EX", "Kokku"}, 
+                    "ex11": {"EX", "Kokku"}, 
+                    "ex12": {"EX", "Kokku"}, 
+                    "ex13": {"EX", "Kokku"}, 
+                    "ex14": {"EX", "Kokku"},
+"""
 
 kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2semester", "Kokku"}, 
                     "statsionaar": {"Yldine", "Kokku"}, 
@@ -210,6 +213,13 @@ kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2
                     "hw06": {"Veebitehnoloogia", "Kokku"}, 
                     "kõrgem-matemaatika": {"2semester", "Kokku"}}
 
+# Uus kategoriseerimise süsteem:
+# PR, EX, XP, DJ, HW liigituvad automaatselt.
+# Fun: random, meme, food, music, games
+# Yldine: kõik muud
+
+# Animatsioonis ei tohiks olla suure algustähega kanaleid (kategooriaid)
+# Sisemised viited kanalitele peavad olema UID järgi.
 
 
 # OUTPUT_FOLDER-i Lõppu käib kaldkriips
@@ -334,12 +344,32 @@ class Stats:
                     self.times2[time_str][cur_name][uid] = 0
                 self.times2[time_str][cur_name][uid] += 1
                 # self.times2 töötlemine läbi
+
+                # PR, EX, XP, DJ, HW liigituvad automaatselt.
+                # Fun: random, meme, food, music, games
+                # Yldine: kõik muud
+                                
                 if (cur_name.startswith('ex0') or cur_name.startswith('ex1')) and cur_name not in self.kategooriad:
                     self.kategooriad[cur_name]={"EX", "Kokku"}
                 elif (cur_name.startswith('hw0') or cur_name.startswith('hw1')) and cur_name not in self.kategooriad:
                     self.kategooriad[cur_name]={"Kalmo", "Kokku"}
                 elif (cur_name.startswith('pr0') or cur_name.startswith('pr1')) and cur_name not in self.kategooriad:
                     self.kategooriad[cur_name]={"PR", "Kokku"}
+                elif (cur_name.startswith('dj0') or cur_name.startswith('dj1')) and cur_name not in self.kategooriad:
+                    self.kategooriad[cur_name]= {"Kokku", "DJ"}  # {"Syva", "Kokku", "DJ"}
+                elif (cur_name.startswith('xp0') or cur_name.startswith('xp1')) and cur_name not in self.kategooriad:
+                    self.kategooriad[cur_name]= {"Kokku", "XP"}  # {"Syva", "Kokku", "XP"}
+                elif cur_name in ['random', 'meme', 'food', 'music', 'games']:
+                    self.kategooriad[cur_name]={"Fun", "Kokku"}
+                else:
+                    self.kategooriad[cur_name]={"Yldine", "Kokku"}
+
+                    
+                if cur_name not in self.kategooriad:
+                    print('------')
+                    print(cur_name)
+                    print(list(filter(lambda x:x[:2] not in ['ex', 'hw', 'pr', 'dj', 'xp'],self.kategooriad)))
+                    input()
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
                     if sub not in self.users[uid]['count']:  # Kui see sõnum on kasutaja
                         self.users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
@@ -806,7 +836,7 @@ def stat_full(*args, **kwargs):
     print('7 Save Excel+PKL')
     sts.excel.close()
     sts.save_pkl()
-    #"""
+    """
     print('8 Animate')
     ani = Animate(sts)
     ani.draw_main()
