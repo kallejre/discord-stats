@@ -86,7 +86,7 @@ def gg(sisu):
         #tulem.append(m)
         #continue # ((^\s+)|(\s\n))\s+
         out=m.split('\n')
-        print(out)
+        # print(out)
         if len(out)==2:
             hd,link= out
             desc = '[Kirjeldus puudub]'
@@ -152,6 +152,7 @@ async def help(ctx, *args):
     embed.add_field(name="?search <märksõnad>", value="~~Guugeldab~~ StartPage'ib.", inline=False)
     embed.add_field(name="?search_img <märksõnad>",
                     value="Pildiotsing. Tagastab juhusliku pildi esimese kümne tulemuse hulgast.", inline=False)
+    embed.add_field(name="?search2 <märksõnad>", value="Sama mis ?search, aga lisab ka esimese pilditulemuse. **Aeglane**.", inline=False)
     embed.add_field(name="?spam", value="Saadab rämpsu.", inline=False)
     embed.add_field(name="?stats [help]", value="Statistika. Lisakäsud on help, edetabel, ajatabel ja top.",
                     inline=False)
@@ -162,9 +163,9 @@ async def help(ctx, *args):
                     value="Hetkel ainult hangman. Lisainfo käsuga `?g help`",
                     inline=False)
     embed.add_field(name="?ping", value="Viisakas viis ühenduse kontrollimiseks.", inline=False)
-    embed.add_field(name="?cleanup [sõnumite hulk 1..999]",
+    embed.add_field(name="?cleanup [sõnumite hulk 1..999]", value="Kustutab kõik boti sõnumid.", inline=False)
+    embed.add_field(name="?cleanup2 [sõnumite hulk 2..999]",
                     value="Vaatab läbi viimased sõnumid ja kustutab mänguga seotu.", inline=False)
-    embed.add_field(name="?cleanup2 [sõnumite hulk 2..999]", value="Kustutab kõik boti sõnumid.", inline=False)
     embed.add_field(name="?reset", value="Taaskäivitus. ?shutdown enam ei tööta.", inline=False)
     embed.add_field(name="tere", value="Viisakas robot teeb tuju heaks :smiley:", inline=False)
     return await ctx.send(embed=embed)
@@ -453,7 +454,7 @@ def is_me2(m):
 
 @bot.command()
 @commands.check(alll)
-async def cleanup(ctx, n=15):
+async def cleanup2(ctx, n=15):
     if n > 1000: n = 500
     if n < 2: n = 2
     t = ctx.author
@@ -464,7 +465,7 @@ async def cleanup(ctx, n=15):
 
 @bot.command()
 @commands.check(alll)
-async def cleanup2(ctx, n=15):
+async def cleanup(ctx, n=15):
     if n < 2: n = 2
     t = ctx.author
     deleted = await ctx.channel.purge(limit=n, check=is_me2)
@@ -932,6 +933,19 @@ async def on_message(message):
         e.set_image(url=reso[random.randint(0, 9)])
         await channel.send(embed=e)
         return
+    elif sisu.startswith('?search2'):
+        reso = gg(sisu)
+        if len(reso) == 1 and reso[0].startswith('You did it!'):
+            return await channel.send(reso[0])  # Tulemusi ei leitud.
+        embed = discord.Embed(title='Otsingutulemused', description=sisu[8:], color=0xd81c0f, type='rich')
+        for res in reso:  # Kuvab 3 tulemust.
+            embed.add_field(name=res[0], value=res[1] + '\n' + res[2], inline=False)
+        
+        reso = gg_img(sisu)
+        if not (len(reso) == 1 and reso[0].startswith('You did it!')):
+            embed.set_thumbnail(url=reso[0])
+        
+        return await channel.send(embed=embed)
     elif sisu.startswith('?search'):
         reso = gg(sisu)
         if len(reso) == 1 and reso[0].startswith('You did it!'):
