@@ -203,42 +203,22 @@ kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2
                     "random": {"Yldine", "Kokku"}, 
                     "arvutivõrgud": {"2semester", "Kokku"}, 
                     "arvutid": {"2semester", "Kokku"}, 
-                    "üld-vestlus": {"3semester", "Kokku"},
-                    "andmebaasisüsteemide-alused": {"3semester", "Kokku"},
-                    "programmeerimine-c-keeles": {"3semester", "Kokku"},
-                    "veebirakendused-java-baasil": {"3semester", "Kokku"},
-                    "platvormipõhised-mobiilirakendused": {"3semester", "Kokku"},
-                    "tõenäosusteooria-ja-matemaatiline-statistika": {"3semester", "Kokku"},
-                    "füüsika-mittefüüsikutele": {"3semester", "Kokku"},
-                    "algoritmid-ja-andmestruktuurid": {"3semester", "Kokku"},
-                    "veebitehnoloogiad": {"3semester", "Kokku"},
-                    "andmeturve-ja-krüptoloogia": {"3semester", "Kokku"},
                     "hw02": {"Veebitehnoloogia", "Kokku"}, 
                     "hw03": {"Veebitehnoloogia", "Kokku"}, 
                     "hw04": {"Veebitehnoloogia", "Kokku"}, 
                     "hw05": {"Veebitehnoloogia", "Kokku"}, 
                     "hw06": {"Veebitehnoloogia", "Kokku"}, 
                     "kõrgem-matemaatika": {"2semester", "Kokku"}}
-                    
 
 kategooriad_py19 = {'teated':{"Yldine", "Kokku"},
                     'vaikne':{"Yldine", "Kokku"},
                     'general':{"Yldine", "Kokku"},
-                    'ülesanded':{"Yldine", "Kokku"},
-                    'stat':{"Yldine", "Kokku"},
-                    'hääletused':{"Yldine", "Kokku"},
-                    'pydoc':{"Yldine", "Kokku"},
                     'pr01':{"PR", "Kokku"},
                     "food": {"Kokku", "Fun"}, 
                     "random": {"Kokku", "Fun"}, 
-                    "gaming": {"Fun", "Kokku"}, 
+                    "games": {"Fun", "Kokku"}, 
                     'meme':{"Fun", "Kokku"},
-                    'music':{"Fun", "Kokku"},
-                    "kaugõpe": {"Yldine", "Kokku"},
-                    "iaib": {"Õppegrupid", "Kokku"},
-                    "iaab": {"Õppegrupid", "Kokku"},
-                    "iadb": {"Õppegrupid", "Kokku"},
-                    }
+                    'music':{"Fun", "Kokku"},}
 
 # OUTPUT_FOLDER-i Lõppu käib kaldkriips
 class Stats:
@@ -376,10 +356,6 @@ class Stats:
                     self.kategooriad[cur_name]={"Kalmo", "Kokku"}
                 elif (cur_name.startswith('pr0') or cur_name.startswith('pr1')) and cur_name not in self.kategooriad:
                     self.kategooriad[cur_name]={"PR", "Kokku"}
-                elif (cur_name.startswith('t0') or cur_name.startswith('t1')) and cur_name not in self.kategooriad:
-                    self.kategooriad[cur_name]={"Täiend", "Kokku"}
-                elif (cur_name.startswith('xp0') or cur_name.startswith('xp1')) and cur_name not in self.kategooriad:
-                    self.kategooriad[cur_name]={"Syva", "Kokku", 'XP'}
                 for sub in [cur_name] + list(self.kategooriad[cur_name]):
                     if sub not in self.users[uid]['count']:  # Kui see sõnum on kasutaja
                         self.users[uid]['count'][sub] = 0  # esimene sõnum antud kanalis
@@ -860,11 +836,11 @@ def stat_full(*args, **kwargs):
 if __name__=='__main__':
     # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
     print('Python')
-    #sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
+    sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
     print('Java')
-    #sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
+    sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
     print('Kaug')
-    #sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+    sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
     print('Py19')
     sts = stat_full('dht_py19.txt', 'py2019/', kategooria=kategooriad_py19)  # Kaug
 
