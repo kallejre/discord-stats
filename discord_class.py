@@ -297,6 +297,14 @@ class Stats:
             print(cur_name[:1] + cur_name[-2:], end=' ')
             for m in sorted(self.archive['data'][c]):  # m = sõnumi ID
                 message = self.archive['data'][c][m]
+                if 'e' in message and 'm' not in message:
+                    message['m'] = ''  # See olukord, kui bot saatis ilma sisusa sõnumi.
+                if 'a' in message and 'm' not in message:
+                    message['m'] = message['a'][0]['url']  # Lingi või pildi ilma sisuta saatmine
+                #if set(message)!={'m', 't', 'u'} and 'e' not in message:
+                #    print(message)
+                if len(list(message))==2 and set(message)=={'u','t'}:
+                    continue  # Ilma sisuta sõnum tekkib pinnimisel. Jätab vahele.
                 if len(message['m'].strip().split()) < 2:  # Ühesõnaliste sõnumitega opereerimine
                     if message['u'] not in self.lyhi:
                         self.lyhi[message['u']] = 0  # Loendab lühikesi sõnumeid
