@@ -108,137 +108,100 @@ class xlsx:
         self.excel.close()
 
 # Kategooria peaks algama suure tähega
-kategooriad_py = {"dj01": {"Syva", "Kokku", "DJ"}, "dj02": {"Syva", "Kokku", "DJ"},
-                    "ettepanekud": {"Yldine", "Kokku"}, "ex01": {"EX", "Kokku"}, "ex02": {"EX", "Kokku"},
-                    "ex03": {"EX", "Kokku"}, "ex04": {"EX", "Kokku"}, "ex05": {"EX", "Kokku"},
-                    "ex06": {"EX", "Kokku"},
-                    "ex07": {"EX", "Kokku"}, "ex08": {"EX", "Kokku"}, "ex09": {"EX", "Kokku"},
-                    "ex11": {"EX", "Kokku"},
-                    "ex12": {"EX", "Kokku"}, "ex13": {"EX", "Kokku"}, "ex14": {"EX", "Kokku"},
-                    "ex15": {"EX", "Kokku"},
-                    "food": {"Yldine", "Kokku"}, "general": {"Yldine", "Kokku"}, "git": {"Yldine", "Kokku"},
-                    "kaugõpe": {"Yldine", "Kokku"}, "konsult": {"Yldine", "Kokku"}, "meme": {"Yldine", "Kokku"},
-                    "mitteniiolulisedagasiiskiolulised-teadaanded": {"Yldine", "Kokku"},
-                    "pr03": {"PR", "Kokku"}, "java": {"Yldine", "Kokku"},
-                    "olulised-teadaanded": {"Yldine", "Kokku"}, "pr01": {"PR", "Kokku"},
-                    "pr02": {"PR", "Kokku"},
-                    "pr04": {"PR", "Kokku"}, "pr06": {"PR", "Kokku"}, "pr07": {"PR", "Kokku"},
-                    "pr08": {"PR", "Kokku"},
-                    "pr09": {"PR", "Kokku"}, "pr11": {"PR", "Kokku"}, "pr12": {"PR", "Kokku"},
-                    "pr13": {"PR", "Kokku"},
-                    "pr14": {"PR", "Kokku"}, "pr15": {"PR", "Kokku"}, "random": {"Yldine", "Kokku"},
-                    "wat": {"PR", "Kokku"},
-                    "stat": {"Yldine", "Kokku"}, "syvapy-general": {"Yldine", "Kokku"},
-                    "videod": {"Yldine", "Kokku"}, "eksam": {"Yldine", "Kokku"},
-                    "xp01": {"Syva", "Kokku", "XP"}, "xp02": {"Syva", "Kokku", "XP"},
-                    "xp03": {"Syva", "Kokku", "XP"},
-                    "xp04": {"Syva", "Kokku", "XP"}, "xp05": {"Syva", "Kokku", "XP"},
-                    "xp06": {"Syva", "Kokku", "XP"},
-                    "xp07": {"Syva", "Kokku", "XP"}}
+kategooriad_py = {'dj01': {'Syva', 'DJ', 'Kokku'},
+                 'dj02': {'Syva', 'DJ', 'Kokku'},
+                 'eksam': {'Yldine', 'Kokku'},
+                 'ettepanekud': {'Yldine', 'Kokku'},
+                 'ex01': {'EX', 'Kokku'},
+                 'ex02': {'EX', 'Kokku'},
+                 'ex03': {'EX', 'Kokku'},
+                 'ex04': {'EX', 'Kokku'},
+                 'ex05': {'EX', 'Kokku'},
+                 'food': {'Yldine', 'Kokku'},
+                 'general': {'Yldine', 'Kokku'},
+                 'git': {'Yldine', 'Kokku'},
+                 'java': {'Yldine', 'Kokku'},
+                 'kaugõpe': {'Yldine', 'Kokku'},
+                 'konsult': {'Yldine', 'Kokku'},
+                 'meme': {'Yldine', 'Kokku'},
+                 'mitteniiolulisedagasiiskiolulised-teadaanded': {'Yldine', 'Kokku'},
+                 'olulised-teadaanded': {'Yldine', 'Kokku'},
+                 'pr01': {'PR', 'Kokku'},
+                 'pr03': {'PR', 'Kokku'},
+                 'random': {'Yldine', 'Kokku'},
+                 'stat': {'Yldine', 'Kokku'},
+                 'syvapy-general': {'Yldine', 'Kokku'},
+                 'videod': {'Yldine', 'Kokku'},
+                 'wat': {'PR', 'Kokku'},
+                 'xp01': {'XP', 'Syva', 'Kokku'}}
 
-kategooriad_java = {"setup": {"Yldine", "Kokku", "NotFun"}, 
-                    "ülesanded": {"Kalmo", "Kokku"}, 
-                    "codera": {"Yldine", "Kokku", "NotFun"}, 
-                    "ex01": {"EX", "Kokku"}, 
-                    "ex02": {"EX", "Kokku"}, 
-                    "ex03": {"EX", "Kokku"}, 
-                    "ex04": {"EX", "Kokku"}, 
-                    "ex05": {"EX", "Kokku"}, 
-                    "ex06": {"EX", "Kokku"}, 
-                    "ex07": {"EX", "Kokku"}, 
-                    "ex08": {"EX", "Kokku"}, 
-                    "ex09": {"EX", "Kokku"}, 
-                    "ex11": {"EX", "Kokku"}, 
-                    "ex12": {"EX", "Kokku"}, 
-                    "ex13": {"EX", "Kokku"}, 
-                    "ex14": {"EX", "Kokku"}, 
-                    "ex15": {"EX", "Kokku"}, 
-                    "food": {"Yldine", "Kokku", "Fun"}, 
-                    "games": {"Yldine", "Kokku", "Fun"}, 
-                    "vegan-blog": {"Yldine", "Kokku", "Fun"}, 
-                    "general": {"Yldine", "Kokku", "NotFun"}, 
-                    "gomoku": {"Yldine", "Kokku", "NotFun"}, 
-                    "hw03": {"Kalmo", "Kokku"},
-                    "hw04": {"Kalmo", "Kokku"},
-                    "hw05": {"Kalmo", "Kokku"},
-                    "hw06": {"Kalmo", "Kokku"}, 
-                    "hw07": {"Kalmo", "Kokku"},
-                    "hw08": {"Kalmo", "Kokku"}, 
-                    "hw09": {"Kalmo", "Kokku"}, 
-                    "hw10": {"Kalmo", "Kokku"}, 
-                    "java": {"Kalmo", "Kokku"}, 
-                    "korraldus": {"Kalmo", "Kokku"}, 
-                    "meme": {"Yldine", "Kokku", "Fun"}, 
-                    "music": {"Yldine", "Kokku", "Fun"}, 
-                    "pelmeeni-kuningriik": {"MuudAined", "Kokku"},
-                    "pr00": {"PR", "Kokku"}, 
-                    "pr01": {"PR", "Kokku"}, 
-                    "pr02": {"PR", "Kokku"},
-                    "pr03": {"PR", "Kokku"},
-                    "pr04": {"PR", "Kokku"},
-                    "pr06": {"PR", "Kokku"},
-                    "pr07": {"PR", "Kokku"},
-                    "pr08": {"PR", "Kokku"},
-                    "pr09": {"PR", "Kokku"},
-                    "pr11": {"PR", "Kokku"},
-                    "pr12": {"PR", "Kokku"},
-                    "pr13": {"PR", "Kokku"},
-                    "pr14": {"PR", "Kokku"},
-                    "pr15": {"PR", "Kokku"},
-                    "projekt": {"Yldine", "Kokku", "NotFun"}, 
-                    "random": {"Yldine", "Kokku", "Fun"}, 
-                    "suhtenurk": {"Yldine", "Kokku", "Fun"}, 
-                    "stat": {"Yldine", "Kokku", "NotFun"}, 
-                    "teadaanded": {"Yldine", "Kokku", "NotFun"}, 
-                    "teated": {"Yldine", "Kokku", "NotFun"}, 
-                    "videod": {"Yldine", "Kokku", "NotFun"},
-                    "wat": {"Kalmo", "Kokku"}}
+kategooriad_java = {'codera': {'Yldine', 'Kokku', 'NotFun'},
+                     'ex01': {'EX', 'Kokku'},
+                     'ex02': {'EX', 'Kokku'},
+                     'ex03': {'EX', 'Kokku'},
+                     'food': {'Yldine', 'Kokku', 'Fun'},
+                     'games': {'Yldine', 'Kokku', 'Fun'},
+                     'general': {'Yldine', 'Kokku', 'NotFun'},
+                     'gomoku': {'Yldine', 'Kokku', 'NotFun'},
+                     'hw03': {'Kalmo', 'Kokku'},
+                     'java': {'Kalmo', 'Kokku'},
+                     'korraldus': {'Kalmo', 'Kokku'},
+                     'meme': {'Yldine', 'Kokku', 'Fun'},
+                     'music': {'Yldine', 'Kokku', 'Fun'},
+                     'pelmeeni-kuningriik': {'Kokku', 'MuudAined'},
+                     'pr00': {'PR', 'Kokku'},
+                     'pr01': {'PR', 'Kokku'},
+                     'projekt': {'Yldine', 'Kokku', 'NotFun'},
+                     'random': {'Yldine', 'Kokku', 'Fun'},
+                     'setup': {'Yldine', 'Kokku', 'NotFun'},
+                     'stat': {'Yldine', 'Kokku', 'NotFun'},
+                     'suhtenurk': {'Yldine', 'Kokku', 'Fun'},
+                     'teadaanded': {'Yldine', 'Kokku', 'NotFun'},
+                     'teated': {'Yldine', 'Kokku', 'NotFun'},
+                     'vegan-blog': {'Yldine', 'Kokku', 'Fun'},
+                     'videod': {'Yldine', 'Kokku', 'NotFun'},
+                     'wat': {'Kalmo', 'Kokku'},
+                     'ülesanded': {'Kalmo', 'Kokku'}}
 
-kategooriad_kaug = {"it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid": {"2semester", "Kokku"}, 
-                    "statsionaar": {"Yldine", "Kokku"}, 
-                    "kaugõpe": {"Yldine", "Kokku"}, 
-                    "kasulik-info": {"Yldine", "Kokku"}, 
-                    "operatsioonisüsteemid-ja-nende-haldamine": {"2semester", "Kokku"}, 
-                    "üld-vestlus": {"Yldine", "Kokku"}, 
-                    "random": {"Yldine", "Kokku"}, 
-                    "arvutivõrgud": {"2semester", "Kokku"}, 
-                    "arvutid": {"2semester", "Kokku"}, 
-                    "üld-vestlus": {"3semester", "Kokku"},
-                    "andmebaasisüsteemide-alused": {"3semester", "Kokku"},
-                    "programmeerimine-c-keeles": {"3semester", "Kokku"},
-                    "veebirakendused-java-baasil": {"3semester", "Kokku"},
-                    "platvormipõhised-mobiilirakendused": {"3semester", "Kokku"},
-                    "tõenäosusteooria-ja-matemaatiline-statistika": {"3semester", "Kokku"},
-                    "füüsika-mittefüüsikutele": {"3semester", "Kokku"},
-                    "algoritmid-ja-andmestruktuurid": {"3semester", "Kokku"},
-                    "veebitehnoloogiad": {"3semester", "Kokku"},
-                    "andmeturve-ja-krüptoloogia": {"3semester", "Kokku"},
-                    "hw02": {"Veebitehnoloogia", "Kokku"}, 
-                    "hw03": {"Veebitehnoloogia", "Kokku"}, 
-                    "hw04": {"Veebitehnoloogia", "Kokku"}, 
-                    "hw05": {"Veebitehnoloogia", "Kokku"}, 
-                    "hw06": {"Veebitehnoloogia", "Kokku"}, 
-                    "kõrgem-matemaatika": {"2semester", "Kokku"}}
+kategooriad_kaug =  {'algoritmid-ja-andmestruktuurid': {'3semester', 'Kokku'},
+                     'andmebaasisüsteemide-alused': {'3semester', 'Kokku'},
+                     'andmeturve-ja-krüptoloogia': {'3semester', 'Kokku'},
+                     'arvutid': {'2semester', 'Kokku'},
+                     'arvutivõrgud': {'2semester', 'Kokku'},
+                     'füüsika-mittefüüsikutele': {'3semester', 'Kokku'},
+                     'hw02': {'Veebitehnoloogia', 'Kokku'},
+                     'it-eetilised-sotsiaalsed-ja-professionaalsed-aspektid': {'2semester', 'Kokku'},
+                     'kasulik-info': {'Yldine', 'Kokku'},
+                     'kaugõpe': {'Yldine', 'Kokku'},
+                     'kõrgem-matemaatika': {'2semester', 'Kokku'},
+                     'operatsioonisüsteemid-ja-nende-haldamine': {'2semester', 'Kokku'},
+                     'platvormipõhised-mobiilirakendused': {'3semester', 'Kokku'},
+                     'programmeerimine-c-keeles': {'3semester', 'Kokku'},
+                     'random': {'Yldine', 'Kokku'},
+                     'statsionaar': {'Yldine', 'Kokku'},
+                     'tõenäosusteooria-ja-matemaatiline-statistika': {'3semester', 'Kokku'},
+                     'veebirakendused-java-baasil': {'3semester', 'Kokku'},
+                     'veebitehnoloogiad': {'3semester', 'Kokku'},
+                     'üld-vestlus': {'3semester', 'Kokku'}}
                     
 
-kategooriad_py19 = {'teated':{"Yldine", "Kokku"},
-                    'vaikne':{"Yldine", "Kokku"},
-                    'general':{"Yldine", "Kokku"},
-                    'ülesanded':{"Yldine", "Kokku"},
-                    'stat':{"Yldine", "Kokku"},
-                    'hääletused':{"Yldine", "Kokku"},
-                    'pydoc':{"Yldine", "Kokku"},
-                    'pr01':{"PR", "Kokku"},
-                    "food": {"Kokku", "Fun"}, 
-                    "random": {"Kokku", "Fun"}, 
-                    "gaming": {"Fun", "Kokku"}, 
-                    'meme':{"Fun", "Kokku"},
-                    'music':{"Fun", "Kokku"},
-                    "kaugõpe": {"Yldine", "Kokku"},
-                    "iaib": {"Õppegrupid", "Kokku"},
-                    "iaab": {"Õppegrupid", "Kokku"},
-                    "iadb": {"Õppegrupid", "Kokku"},
-                    }
+kategooriad_py19 = {'food': {'Kokku', 'Fun'},
+                     'gaming': {'Kokku', 'Fun'},
+                     'general': {'Yldine', 'Kokku'},
+                     'hääletused': {'Yldine', 'Kokku'},
+                     'iaab': {'Õppegrupid', 'Kokku'},
+                     'iadb': {'Õppegrupid', 'Kokku'},
+                     'iaib': {'Õppegrupid', 'Kokku'},
+                     'kaugõpe': {'Yldine', 'Kokku'},
+                     'meme': {'Kokku', 'Fun'},
+                     'music': {'Kokku', 'Fun'},
+                     'pr01': {'PR', 'Kokku'},
+                     'pydoc': {'Yldine', 'Kokku'},
+                     'random': {'Kokku', 'Fun'},
+                     'stat': {'Yldine', 'Kokku'},
+                     'teated': {'Yldine', 'Kokku'},
+                     'vaikne': {'Yldine', 'Kokku'},
+                     'ülesanded': {'Yldine', 'Kokku'}}
 
 # OUTPUT_FOLDER-i Lõppu käib kaldkriips
 class Stats:
@@ -274,16 +237,7 @@ class Stats:
                               'prev': dict(), 'tag_by': dict(), 'tag_to': dict(), 'uid':self.archive['meta']['userindex'][x1]}
         self.users[-1] = {'n': 'Kõik', 'count': dict(), 'lens': dict(),
                           'times': dict(), 'next': dict(), 'prev': dict(), 'tag_by': dict(), 'tag_to': dict()}
-        channels = list(self.kategooriad)
-        for a in list(channels):
-            channels += list(self.kategooriad[a])
-        self.channels = list(sorted(set(channels)))
-        self.header = '\t'.join(['Nimi'] + self.channels)
-        head = []
-        for wk in 'ETKNRLP':
-            for hr in range(24):
-                head.append(wk + ' ' + str(hr))
-        self.header2 = '\t'.join(['Nimi', 'Kanal'] + head)
+        self.gen_chanel_header()
         self.nimed2 = list(map(lambda uid: self.users[uid]['n'], self.users))
         self.nimed3 = list(map(lambda x: x.lower(), self.nimed2))
         # self.week=["Esmaspäev", "Teisipäev", "Kolmapäev", "Neljapäev", "Reede", "Laupäev", "Pühapäev"]
@@ -417,11 +371,22 @@ class Stats:
                     self.users[uid]['next'][prev_msg] += 1
                     self.users[uid]['prev'][uid2] += 1
                 prev_msg = uid2
+        self.gen_chanel_header()
         print()
         # del self.archive
         self.times = list(sorted(self.times))
         f.close()
-
+    def gen_chanel_header(self):
+        channels = list(self.kategooriad)
+        for a in list(channels):
+            channels += list(self.kategooriad[a])
+        self.channels = list(sorted(set(channels)))
+        self.header = '\t'.join(['Nimi'] + self.channels)
+        head = []
+        for wk in 'ETKNRLP':
+            for hr in range(24):
+                head.append(wk + ' ' + str(hr))
+        self.header2 = '\t'.join(['Nimi', 'Kanal'] + head)
     def sort_msgs(self):
         data=[]
         with open(self.OUTPUT_FOLDER+'disc_sõnapilveks.txt', encoding='utf-8') as f:
@@ -860,11 +825,11 @@ def stat_full(*args, **kwargs):
 if __name__=='__main__':
     # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
     print('Python')
-    #sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
+    sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
     print('Java')
-    #sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
+    sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
     print('Kaug')
-    #sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
+    sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
     print('Py19')
     sts = stat_full('dht_py19.txt', 'py2019/', kategooria=kategooriad_py19)  # Kaug
 
