@@ -40442,6 +40442,146 @@ Server	Channel	User	Timestamp	Message
 0	624877643384356865	236460404446855168	1570290699	https://cdn.discordapp.com/attachments/624877643384356865/630069600976896010/unknown.png
 0	624877643384356865	236460404446855168	1570290707	saad ise ka vaadata ju.
 0	624877643384356865	236460404446855168	1570290721	https://cdn.discordapp.com/attachments/624877643384356865/630069696087195698/unknown.png
+0	624877643384356865	236460404446855168	1570290731	<@483890165056536598>'st ei ole keegi veel jagu saanud.
+0	624877643384356865	482189197671923713	1570290814	ma ei ole siin kuigi aktiivne, kadri on ju õppejõud.
+0	624877643384356865	482189197671923713	1570290832	vana statistika oli 3392 sõnumit 8 kanalis.
+0	624877643384356865	482189197671923713	1570290872	praegu on 18739, aga alles <#613300043474010113>i juures.
+0	624877643384356865	482189197671923713	1570290913	29.08 oli vähemalt 3000 uut teadet
 0	628095629742178344	246714173944233988	1570290969	kas seda ülesannet saaks pmst klassidega lahendada?
 0	628095629742178344	246714173944233988	1570291010	<@&613298677339127811> sest mul muidu tuleksid mingid global muutujat sisse
 0	628095629742178344	236460404446855168	1570291104	hoida globaalsetest muutujatest eemale.
+0	624877643384356865	482189197671923713	1570291150	<@!246714173944233988> nüüd on 40464 tk 35 kanalis
+0	628095629742178344	236460404446855168	1570291155	global tag'ist siis.
+0	628095629742178344	236460404446855168	1570291173	konstandid on ok, kui faili algusesse panna.
+0	628095629742178344	246714173944233988	1570291183	eksole, sellepärast ma klasside kohta küsingi
+0	628095629742178344	236460404446855168	1570291206	teoorias saaks teha sinna klassi, aga ma ei näe vajadust.
+0	628095629742178344	246714173944233988	1570291213	>:(
+0	628095629742178344	246714173944233988	1570291241	muidu see lihtsalt teeb seda faili mitu korda lahti
+0	628095629742178344	246714173944233988	1570291254	tahaks teha nii, et korra loeb ja rohkem pole vaja
+0	628095629742178344	236460404446855168	1570291275	aga teegi nii?
+0	628095629742178344	236460404446855168	1570291295	aga tester kontrollib igat funktsiooni eraldi.
+0	628095629742178344	246714173944233988	1570291328	nagu, täiesti eraldi?
+0	628095629742178344	236460404446855168	1570291335	jah.
+0	628095629742178344	236460404446855168	1570291340	ja ka koos.
+0	628095629742178344	236460404446855168	1570291343	igat pidi.
+0	628095629742178344	246714173944233988	1570291372	ehket.. ma peangi siis igas funktsioonis selle faili avama?
+0	628095629742178344	236460404446855168	1570291405	jah?
+0	628095629742178344	246714173944233988	1570291423	dude, kuidas see normaalne on
+0	628095629742178344	236460404446855168	1570291431	nii kõige kiirem.
+0	628095629742178344	246714173944233988	1570291439	irl ma ei teeks ju iga väikse funktsiooni jaoks faili uuesti lahti?
+0	628095629742178344	236460404446855168	1570291450	🤔
+0	628095629742178344	246714173944233988	1570291451	lihtsalt loeks millalgi alguses ära ja siis jätan rahule
+0	628095629742178344	236460404446855168	1570291470	päris elus ei loe sa midagi tekstifailist, kui aus olla.
+0	628095629742178344	246714173944233988	1570291479	mingit faili ikka loen
+0	628095629742178344	246714173944233988	1570291488	aga ega seda mingit faili ka iga funktsiooni sees ei ava
+0	628095629742178344	236460404446855168	1570291545	kui sul on 6 erinevat faili, kus pead tegema 6 erinevat tegevust.
+0	628095629742178344	236460404446855168	1570291555	siis kuidas saad sa need tehtud ilma neid faile avamata?
+0	628095629742178344	246714173944233988	1570291577	aga.. mul on 1 fail
+0	628095629742178344	236460404446855168	1570291585	mitte testeris.
+0	628095629742178344	246714173944233988	1570291619	mängud ju ka nt ei ava ühte save'i iga kord kui sa midagi teed
+0	628095629742178344	236460404446855168	1570291664	...
+0	628095629742178344	246714173944233988	1570291734	nagu, mul on üks programm, mis teeb midagi. irl ma ei teeks iga funktsiooni jaoks faili uuesti lahti, vaid jagaks sisse loetud andmeid iga funktsiooni vahel (vist?).
+0	628095629742178344	236460404446855168	1570291735	kujuta ette, et .txt fail on nagu linked list, mille pead läbi käima, et info kätte saada.
+0	628095629742178344	236460404446855168	1570291760	ja path on viide registrile.
+0	628095629742178344	236460404446855168	1570291763	täpselt sama.
+0	624877643384356865	483890165056536598	1570291764	aitäh!
+0	613300043474010113	483890165056536598	1570291886	<@192226147558227968>
+0	613300043474010113	483890165056536598	1570291891	palun vasta.
+0	613300043474010113	487456588383256586	1570291926	ma ei või vastata? või sa ei taha et mina vastan?
+0	628095629742178344	246714173944233988	1570291961	ütleme, et meil on mingi funktsioon, mida oleks kuskil tsükli sees vaja kasutada. see funktsioon vajab andmeid mingist failist. kas ma peaksingi siis seda faili tsükli sees avama?
+0	628095629742178344	246714173944233988	1570291979	faili avamine võtab ju ka aega.
+0	628095629742178344	236460404446855168	1570291981	miks sa ei või faili tsükli ees avada?
+0	628095629742178344	236460404446855168	1570291984	ei?
+0	628095629742178344	236460404446855168	1570292022	https://cdn.discordapp.com/attachments/628095629742178344/630075151152578610/unknown.png
+0	628095629742178344	246714173944233988	1570292120	"miks sa ei või faili tsükli ees avada?" kui ma nii teen, siis ei ole selles funktsioonis, mida autotester kontrollib, faili avamist.
+0	628095629742178344	236460404446855168	1570292134	sest seal on sul vaja avada teine fail.
+0	628095629742178344	236460404446855168	1570292151	ja faili nime saad alles funktsioonis teada.
+0	628095629742178344	246714173944233988	1570292218	mul on vaja avada sama fail, mille nimi on programmi algusest saati teada, ning mis ei muutu programmi jooksul.
+0	628095629742178344	236460404446855168	1570292259	tee faili algusesse dicorionary, kus key'ks on faili path ja valueks faili sisu?
+0	628095629742178344	236460404446855168	1570292270	kui tõesti arvad, et see vajalik on.
+0	628095629742178344	246714173944233988	1570292307	nii, nüüd me jõudsime enamvähem globaliteni ja klassideni tagasi
+0	628095629742178344	236460404446855168	1570292319	global tag püütonis on täiesti teine asi.
+0	628095629742178344	236460404446855168	1570292336	ja see pole eriti klassidega seotud, sest need funktsioonid on staatilised.
+0	628095629742178344	236460404446855168	1570292344	täielik vastand oop'ile.
+0	628095629742178344	246714173944233988	1570292364	kui ma teen faili alguses dictionary, siis kui tester testib igat funktsiooni täiesti eraldi, siis kuidas see funktsioon selle dictionary kätte saab?
+0	628095629742178344	236460404446855168	1570292385	ei saagi.
+0	628095629742178344	236460404446855168	1570292394	ega peagi saama.
+0	628095629742178344	236460404446855168	1570292406	see ongi unit testi põhimõte.
+0	628095629742178344	236460404446855168	1570292413	et sa kontrollid igat asja eraldi.
+0	628095629742178344	236460404446855168	1570292420	et teada saada, mis töötab, mis mitte.
+0	628095629742178344	246714173944233988	1570292475	irl töötavad funktsioonid koos (onju?).. teevad koostööd. kas see, mis irl oleks praktiline, ei läheks testerist alati läbi?
+0	628095629742178344	236460404446855168	1570292545	kas sa oled rumal? kui sul on 10 tuhande realine projekt ja sul seal 1 funktsioon ei tööta aga sul on ainult integration testid, siis see ütleb sulle ainult seda, et sul kogu kood ei anna lõpptulemuseks soovitud tulemust.
+0	628095629742178344	236460404446855168	1570292557	kui sul on unit testid, siis saad kohe teada, et mis funktsioon ei tööta.
+0	628095629742178344	246714173944233988	1570292588	"kas sa oled rumal?" no ma loodan, et mitte
+0	628095629742178344	246714173944233988	1570292626	ma küsin esmasp agolt üle, kuidas loogilisem on
+0	628095629742178344	236460404446855168	1570292655	kas sa arvad, et tal pole paremaga tegeleda?
+0	628095629742178344	151099445944123392	1570292666	pedagoogiliste võtete varamu on lai .d
+0	628095629742178344	246714173944233988	1570292699	mitte et ma ei usuks enricot, aga see tundub rängalt ebaloogiline
+0	628095629742178344	246714173944233988	1570292814	*kui* sa viitsiksid, mis ma arutaks dmides edasi
+0	628095629742178344	246714173944233988	1570292965	*"pedagoogiliste võtete varamu on lai .d"* kõva pedagoogiline võte see õppejõult abi palumine
+0	628095629742178344	487456588383256586	1570293117	huvitav vaidlus 🤔
+0	613300043474010113	192226147558227968	1570293793	tere
+0	628095629742178344	621027301299060737	1570293838	jändan selle viimase testiga: test_write_results_csv_correct_file: failed (3.397 ms) weight: 20.0 kas keegi saaks mu koodile pilgu visata? uniid tarams
+0	628095629742178344	621027301299060737	1570293860	muud testid passed
+0	628095629742178344	621027301299060737	1570293890	faili sisu tundub õige
+0	628095629742178344	299208317119758347	1570294948	kas sul place,name,result on failis?
+0	628095629742178344	299208317119758347	1570294981	ma jätsin esialgu need välja, siis feilisin ka
+0	628095629742178344	621027301299060737	1570295024	https://cdn.discordapp.com/attachments/628095629742178344/630087744470777875/unknown.png
+0	628095629742178344	621027301299060737	1570295066	mulle valmistab kahtlustusi hoopis see rida :
+0	628095629742178344	621027301299060737	1570295067	https://cdn.discordapp.com/attachments/628095629742178344/630087922934087690/unknown.png
+0	628095629742178344	621027301299060737	1570295076	file_to_write parameetrit ei ole kasutanud
+0	628095629742178344	621027301299060737	1570295099	kui mul fail on ok ja kõik nagu õige, kus ja mille jaoks ma seda kasutama peaks? 😄
+0	628095629742178344	613691519601475595	1570295147	sa pead kirjutajasse muutujana panema selle parameetri, mitte otse kirjutama faili nime
+0	628095629742178344	621027301299060737	1570295207	ümst with open(file_to... ?
+0	628095629742178344	613691519601475595	1570295226	jep
+0	628095629742178344	621027301299060737	1570295285	man.. how easy was that
+0	628095629742178344	621027301299060737	1570295368	ok, nüüd 100%, aga lihtsalt, et mõistaks paremini, hetkel justkui pidime panema selle nime sinna selleks, et tester töötaks, eksole? et muidu kui ma teeksin midagi enda jaoks, siis kasutaks with open('minuomafailinimi.csv'...?
+0	628095629742178344	613691519601475595	1570295415	pm küll aga funktsiooni eesmärk on valmis olla misiganes sisendiks, otse faili nime kirjutades töötab ainult selle nimega failiga
+0	628095629742178344	621027301299060737	1570295429	yes, arusaadav, tänud!
+0	628095629742178344	613691519601475595	1570295528	ma avastasin enda kirjutatud faili lõpust huvitava anomaalia! testerist läks läbi ja andis 100% aga kohalikus masinas testides faili kirjutades oli faili lõpus mingi kordus tekkinud. ei saagi aru täpselt miks, kas minu enda mingi näpukas koodis või ... 🤔
+0	625006508480004107	621027301299060737	1570295569	kas ainult minul see probleem praegu t6 submittides?
+0	625006508480004107	621027301299060737	1570295570	https://cdn.discordapp.com/attachments/625006508480004107/630090032920657951/unknown.png
+0	628095629742178344	621027301299060737	1570295775	kui debugides käia kood läbi kuskilt maalt, saad ehk järge ajada, kus kohast ja miks ta hakkab viimasest tulemusest veel edasi kirjutama?
+0	628095629742178344	621027301299060737	1570295857	targemad võiks kommenteerida, kas on ehk mingi efektiivsem variant vea leidmiseks, ma algajana näen seda hetkel hea võimalusena 🙂
+0	628095629742178344	613691519601475595	1570296135	no kaeme aga perra 😉
+0	628095629742178344	443852590854438923	1570296175	ma proovisin su koodi enda arvutis jooksutada ja mul koostas t
+0	628095629742178344	443852590854438923	1570296181	täitsa õige faili
+0	628095629742178344	443852590854438923	1570296194	ilma mingite anomaaliateta
+0	628095629742178344	613691519601475595	1570296266	huvitav jah, ma kustutasin nüüd faili sisu maha ja proovisin uuesti jooksutada, päris mitu korda ja nüüd on vastus korrektne
+0	613300043474010113	483890165056536598	1570296306	tere!
+0	628095629742178344	443852590854438923	1570296311	võibolla oled ise mingi hetk mingil moel midagi lisanud sinna 😄
+0	613300043474010113	483890165056536598	1570296315	kas täna peaks sööma ka?
+0	628095629742178344	613691519601475595	1570296316	äkki siis üle kirjutamisel jäi kursor kuhugi ripakile mingil hetkel ja kirjutas mingi testi allapoole
+0	613300043474010113	483890165056536598	1570296332	või oli sellest ühest küpsisest hommikul küll?
+0	613300043474010113	481778359043358720	1570296365	kui sa pead seda siin küsima, ju siis oli küll.
+0	628095629742178344	443852590854438923	1570296378	sest testris on kolm erinevat faili ja ma ei usu, et see laseks läbi mingi anomaaliaga lahenduse 😄
+0	628095629742178344	443852590854438923	1570296401	ses mõttes, et see sisu peaks olema täpselt sama, mis nn õige lahenduse korral
+0	628095629742178344	613691519601475595	1570296416	siis paneme enda ärevate näppude sündroomi arvele ja kõige tähtsam, et nüüd korras ja funkab 😄
+0	613300043474010113	483890165056536598	1570296443	olgu.
+0	613300043474010113	482189197671923713	1570296719	anna teada kui sa nälga sured
+0	613300043474010113	487456588383256586	1570296790	mina olen teisel arvamusel
+0	613300043474010113	487456588383256586	1570296797	mina arvan, et <@483890165056536598> peaks sööma
+0	613300043474010113	483890165056536598	1570297129	aitäh!
+0	624239798499934211	510757632559284226	1570297146	regexi kohta küsimus. mul on tehtud regex pattern maakeeli selline: leia +- number x2 ees|rea alguses number x2 ees|võrdusmärk kasutan findall'i sisuliselt paistab toimivat, kuid vastuseks on ennikute list, kus igas ennikus on kõik need 3 varianti sees, ka tühjad sõned: näidisvalem selline: '- 3x2 + 7x - 44 + 22 + 43x = + 23x2 + 5x2' regex ruutliikmete kordajate leidmise tulemus: [('- 3', '', ''), ('', '', '='), ('+ 23', '', ''), ('+ 5', '', '')] kas saab regex patterni kuidagi nii ka teha, et neid tühje sõnesid ei lisataks ennikusse, vaid ainult väärtused, mis reaalselt leiti. vastus võiks olla selline: ['- 3', '=', '+ 23', '+ 5']
+0	628095629742178344	443852590854438923	1570297255	<@!246714173944233988> kui sa ülesannet õigesti lahendad, siis programmi täitumisel peaks sul ainult 3 korda toimuma faili avamine (välja arvatud csv fail, sellega oleks 4 korda).
+0	628095629742178344	246714173944233988	1570297282	ei ma küsisin pigem põhimõtet selle taga
+0	628095629742178344	246714173944233988	1570297296	aga <@236460404446855168> seletas dmides ära
+0	628095629742178344	443852590854438923	1570297329	selge, loodetavasti saite kultuurselt suhelda 😄
+0	628095629742178344	246714173944233988	1570297376	ma reaalselt tundun nagu ma vaidleks koguaeg kõigiga?
+0	628095629742178344	246714173944233988	1570297442	ma luban, et ma proovisin mitte vaielda
+0	628095629742178344	443852590854438923	1570297475	ma ei tea, ma ei pane tähele, kes vaidleb, kes mitte. aga ma tean, et enrico oskab vajadusel väga ootamatutel viisidel asju selgeks teha 😄
+0	613300043474010113	483890165056536598	1570297521	aga keegi on küpsised ära söönud...
+0	613300043474010113	483890165056536598	1570297537	mõtlesin just, et tulen ja söön neid.
+0	613300043474010113	483890165056536598	1570297549	ja nüüd näen, et pakend on prügikastis.
+0	613300043474010113	487456588383256586	1570297553	😮
+0	613300043474010113	483890165056536598	1570297558	kui siis ei saa seekord. 😄
+0	613300043474010113	487456588383256586	1570297581	ohh seda "keegit"!
+0	613300043474010113	483890165056536598	1570297669	pole hullu, mul hea meel, et talle meeldivad. 😛
+0	613300043474010113	487456588383256586	1570297703	mulle ka!
+0	613300043474010113	483890165056536598	1570297728	sa ei teagi, mis küpsised.
+0	613300043474010113	487456588383256586	1570297743	doomino?
+0	613300043474010113	487456588383256586	1570297754	kreekerid?
+0	613300043474010113	482189197671923713	1570297924	head küpsised?
+0	613300043474010113	482189197671923713	1570298168	kuidas ma ikka veel siin serveris viie kõige aktiivsema hulgas olen?
+0	613300043474010113	483890165056536598	1570298740	mkm.
+0	628095629742178344	622315533668319232	1570298793	kas keegi saab mu koodi veidi vaadata, olen veidi jännis yhe koha peal?
