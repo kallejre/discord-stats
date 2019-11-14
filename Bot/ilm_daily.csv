@@ -1,30 +1,31 @@
 dayPartName;phrase;cloudPct;humidityPct;precipType;precipAmt;precipPct;qualifier;snowRange;temperature;thunderEnumPhrase;thunderEnum;uvIndex;uvDescription;windDirCompass;windDirDegrees;windSpeed;icon;iconExtended;narrative
-Täna öösel;Valdavalt selge;28;76;rain;0,0;10;None;;13;None;0;0;Madal;SSW;208;12;33;3300;Valdavalt selge. Madalaim temperatuur 13ºC. Tuul SSW kiirusel 10 kuni 15 km/h.
-Homme;Osaliselt pilvine;60;76;rain;0,0;10;None;;23;None;0;3;Mõõdukas;WSW;253;22;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 23ºC. Tuul WSW kiirusel 15 kuni 30 km/h.
-Homme öösel;Valdavalt pilvine;64;92;rain;0,0;10;None;;14;None;0;0;Madal;W;278;19;27;2700;Valdavalt pilvine. Madalaim temperatuur 14ºC. Tuul W kiirusel 15 kuni 25 km/h.
-Teisipäev;Osaliselt pilvine;48;76;rain;0,0;10;None;;23;None;0;4;Mõõdukas;NW;310;10;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 23ºC. Tuul NW kiirusel 10 kuni 15 km/h.
-Teisipäeva öö;Selge;16;82;rain;0,0;10;None;;14;None;0;0;Madal;SE;126;8;31;3100;Valdavalt selge. Madalaim temperatuur 14ºC. Tuul SE ja muutlik.
-Kolmapäev;Osaliselt pilvine;38;67;rain;0,0;10;None;;24;None;0;4;Mõõdukas;SE;146;12;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 24ºC. Tuul SE kiirusel 10 kuni 15 km/h.
-Kolmapäeva öö;Osaliselt pilvine;36;77;rain;0,0;10;None;;14;None;0;0;Madal;SE;144;13;29;2900;Osaliselt pilvine. Madalaim temperatuur 14ºC. Tuul SE kiirusel 10 kuni 15 km/h.
-Neljapäev;Osaliselt pilvine;41;64;rain;0,0;0;None;;24;None;0;3;Mõõdukas;SSE;158;18;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 24ºC. Tuul SSE kiirusel 15 kuni 25 km/h.
-Neljapäeva öö;Valdavalt selge;26;73;rain;0,0;10;None;;14;None;0;0;Madal;SSE;154;15;33;3300;Valdavalt selge. Madalaim temperatuur 14ºC. Tuul SSE kiirusel 10 kuni 15 km/h.
-Reede;Osaliselt pilvine;43;68;rain;0,0;20;None;;23;None;0;3;Mõõdukas;S;179;20;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 23ºC. Tuul S kiirusel 15 kuni 25 km/h.
-Reede öö;Varahommikul hoovihm;46;84;rain;0,77;40;None;;14;None;0;0;Madal;SSW;209;17;45;6100;Varahommikul hoovihm. Madalaim temperatuur 14ºC. Tuul SSW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 40%.
-Laupäev;Osaliselt pilvine;47;75;rain;0,0;20;None;;22;None;0;3;Mõõdukas;WSW;248;19;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 22ºC. Tuul WSW kiirusel 15 kuni 25 km/h.
-Laupäeva öö;Osaliselt pilvine;41;87;rain;0,0;10;None;;14;None;0;0;Madal;SW;236;15;29;2900;Osaliselt pilvine. Madalaim temperatuur 14ºC. Tuul SW kiirusel 10 kuni 15 km/h.
-Pühapäev;Osaliselt pilvine;32;73;rain;0,0;10;None;;23;None;0;4;Mõõdukas;SW;235;18;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 23ºC. Tuul SW kiirusel 15 kuni 25 km/h.
-Pühapäeva öö;Valdavalt selge;23;82;rain;0,0;20;None;;14;None;0;0;Madal;SSW;210;15;33;3300;Valdavalt selge. Madalaim temperatuur 14ºC. Tuul SSW kiirusel 10 kuni 15 km/h.
-Esmaspäev;Valdavalt päikeseline;26;69;rain;0,0;20;None;;24;None;0;3;Mõõdukas;SSW;211;18;34;3400;Valdavalt selge. Kõrgeim temperatuur 24ºC. Tuul SSW kiirusel 15 kuni 25 km/h.
-Esmaspäeva öö;Valdavalt selge;31;77;rain;0,0;20;None;;15;None;0;0;Madal;SSW;203;17;33;3300;Valdavalt selge. Madalaim temperatuur 15ºC. Tuul SSW kiirusel 15 kuni 25 km/h.
-Teisipäev;Osaliselt pilvine;46;67;rain;0,0;20;None;;21;None;0;3;Mõõdukas;SW;230;22;30;3000;Osaliselt pilvine. Kõrgeim temperatuur 21ºC. Tuul SW kiirusel 15 kuni 30 km/h.
-Teisipäeva öö;Hilisõhtul hoovihm;39;77;rain;0,4;30;None;;12;None;0;0;Madal;SW;231;18;45;7100;Hoovihm õhtul hiljem. Madalaim temperatuur 12ºC. Tuul SW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 30%.
-Kolmapäev;Vähene hoovihm;44;68;rain;0,9;30;None;;19;None;0;3;Mõõdukas;WSW;256;21;11;4600;Vähene hoovihm. Kõrgeim temperatuur 19ºC. Tuul WSW kiirusel 15 kuni 30 km/h. Vihma tõenäosus 30%.
-Kolmapäeva öö;Hoovihm;44;77;rain;1,4;50;None;;11;None;0;0;Madal;SW;235;19;11;1100;Hoovihm. Madalaim temperatuur 11ºC. Tuul SW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 50%.
-Neljapäev;Hoovihm;48;69;rain;1,19;40;None;;19;None;0;3;Mõõdukas;SW;231;18;11;1100;Hoovihm. Kõrgeim temperatuur 19ºC. Tuul SW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 40%.
-Neljapäeva öö;Hoovihm;45;79;rain;0,5;30;None;;12;None;0;0;Madal;SSW;206;15;11;1100;Hoovihm. Madalaim temperatuur 12ºC. Tuul SSW kiirusel 10 kuni 15 km/h. Vihma tõenäosus 30%.
-Reede;Pärastlõunal hoovihm;43;70;rain;0,63;30;None;;19;None;0;3;Mõõdukas;SSW;203;19;39;7103;Pärastlõunal hoovihm. Kõrgeim temperatuur 19ºC. Tuul SSW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 30%.
-Reede öö;Hoovihm;48;79;rain;1,1;40;None;;12;None;0;0;Madal;S;187;16;11;1100;Hoovihm. Madalaim temperatuur 12ºC. Tuul S kiirusel 10 kuni 15 km/h. Vihma tõenäosus 40%.
-Laupäev;Hoovihm;54;72;rain;1,1;40;None;;19;None;0;3;Mõõdukas;SW;225;21;11;1100;Hoovihm. Kõrgeim temperatuur 19ºC. Tuul SW kiirusel 15 kuni 30 km/h. Vihma tõenäosus 40%.
-Laupäeva öö;Hilisõhtul hoovihm;47;81;rain;0,2;30;None;;12;None;0;0;Madal;SW;220;18;45;7100;Hoovihm õhtul hiljem. Madalaim temperatuur 12ºC. Tuul SW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 30%.
-Pühapäev;Hoovihm;52;74;rain;1,6;40;None;;18;None;0;3;Mõõdukas;SW;223;18;11;1100;Hoovihm. Kõrgeim temperatuur 18ºC. Tuul SW kiirusel 15 kuni 25 km/h. Vihma tõenäosus 40%.
-Pühapäeva öö;Hoovihm;47;83;rain;1,0;40;None;;11;None;0;0;Madal;SSW;201;15;11;1100;Hoovihm. Madalaim temperatuur 11ºC. Tuul SSW kiirusel 10 kuni 15 km/h. Vihma tõenäosus 40%.
+Täna;Nõrk vihm;94;93;rain;1,45;80;None;;7;None;0;0;Madal;NNE;25;11;11;1201;Nõrk vihm. Kõrgeim temperatuur 7ºC. Tuul NNE kiirusel 10 kuni 15 km/h. Vihma tõenäosus 80%.
+Täna öösel;Nõrk vihm;97;90;rain;3,37;80;None;;3;None;0;0;Madal;ENE;59;22;11;1201;Nõrk vihm. Madalaim temperatuur 3ºC. Tuul ENE kiirusel 15 kuni 30 km/h. Vihma tõenäosus 80%.
+Homme;Pilvine;94;79;precip;0,0;20;None;;4;None;0;0;Madal;ENE;66;30;26;2600;Pilvine. Kõrgeim temperatuur 4ºC. Tuul ENE kiirusel 25 kuni 40 km/h.
+Homme öösel;Vihm/hooglumi/tuul;97;82;precip;4,69;60;Tuulepuhangud võivad kohati saavutada kiiruse üle 65 km/h,;;2;None;0;0;Madal;ENE;63;34;5;4910;Tuuline, vihm ja hooglumi. Madalaim temperatuur 2ºC. Tuul ENE kiirusel 30 kuni 50 km/h. Sademete tõenäosus 60%. Tuulepuhangud võivad kohati saavutada kiiruse üle 65 km/h.
+Teisipäev;Vihm/lumi/tuul;96;83;precip;6,75;70;None;;3;None;0;0;Madal;NE;52;35;5;510;Tuuline vihma ja lumega. Kõrgeim temperatuur 3ºC. Tuul NE kiirusel 30 kuni 50 km/h. Sademete tõenäosus 70%.
+Teisipäeva öö;Valdavalt pilvine;81;73;precip;0,0;20;None;;0;None;0;0;Madal;NE;51;29;27;2700;Valdavalt pilvine. Madalaim temperatuur 0ºC. Tuul NE kiirusel 25 kuni 40 km/h.
+Kolmapäev;Valdavalt pilvine;65;75;precip;0,0;20;None;;2;None;0;0;Madal;ENE;63;22;28;2800;Valdavalt pilvine. Kõrgeim temperatuur 2ºC. Tuul ENE kiirusel 15 kuni 30 km/h.
+Kolmapäeva öö;Valdavalt pilvine;74;84;precip;0,0;20;None;;-2;None;0;0;Madal;ENE;72;18;27;2700;Valdavalt pilvine. Madalaim temperatuur -2ºC. Tuul ENE kiirusel 15 kuni 25 km/h.
+Neljapäev;Valdavalt pilvine;73;82;precip;0,0;20;None;;1;None;0;0;Madal;E;94;13;28;2800;Valdavalt pilvine. Kõrgeim temperatuur 1ºC. Tuul E kiirusel 10 kuni 15 km/h.
+Neljapäeva öö;Valdavalt pilvine;73;85;precip;0,0;20;None;;-2;None;0;0;Madal;ESE;120;10;27;2700;Valdavalt pilvine. Madalaim temperatuur -2ºC. Tuul ESE kiirusel 10 kuni 15 km/h.
+Reede;Valdavalt pilvine;75;83;precip;0,0;20;None;;2;None;0;0;Madal;SE;128;11;28;2800;Valdavalt pilvine. Kõrgeim temperatuur 2ºC. Tuul SE kiirusel 10 kuni 15 km/h.
+Reede öö;Hilisõhtul hooglumi;78;89;snow;0,2;30;None;;0;None;0;0;Madal;SE;126;13;46;7800;Öösel hooglumi. Madalaim temperatuur 0ºC. Tuul SE kiirusel 10 kuni 15 km/h. Lume tõenäosus 30%.
+Laupäev;Vihm/lumi;87;87;precip;1,4;50;None;;3;None;0;0;Madal;ESE;105;18;5;500;Vihm ja lumi. Kõrgeim temperatuur 3ºC. Tuul ESE kiirusel 15 kuni 25 km/h. Sademete tõenäosus 50%.
+Laupäeva öö;Vihm/hooglumi;86;89;precip;2,4;50;None;;0;None;0;0;Madal;E;96;18;5;4900;Vihm ja hooglumi. Madalaim temperatuur 0ºC. Tuul E kiirusel 15 kuni 25 km/h. Sademete tõenäosus 50%.
+Pühapäev;Vihm/hooglumi;88;83;precip;2,0;50;None;;2;None;0;0;Madal;E;100;19;5;4900;Vihm ja hooglumi. Kõrgeim temperatuur 2ºC. Tuul E kiirusel 15 kuni 25 km/h. Sademete tõenäosus 50%.
+Pühapäeva öö;Vihm/hooglumi;84;87;precip;1,5;40;None;;0;None;0;0;Madal;E;83;19;5;4900;Vihm ja hooglumi. Madalaim temperatuur 0ºC. Tuul E kiirusel 15 kuni 25 km/h. Sademete tõenäosus 40%.
+Esmaspäev;Vihm/lumi;85;85;precip;1,2;40;None;;2;None;0;0;Madal;ENE;76;20;5;500;Vihm ja lumi. Kõrgeim temperatuur 2ºC. Tuul ENE kiirusel 15 kuni 25 km/h. Sademete tõenäosus 40%.
+Esmaspäeva öö;Hooglumi;81;88;snow;1,2;40;None;< 2;-1;None;0;0;Madal;ENE;73;17;14;1400;Hooglumi. Madalaim temperatuur -1ºC. Tuul ENE kiirusel 15 kuni 25 km/h. Lume tõenäosus 40%. Lund koguneb vähem kui 2 cm.
+Teisipäev;Vähene hooglumi;76;86;snow;1,2;40;None;< 2;2;None;0;0;Madal;E;86;15;14;4700;Vähene hooglumi. Kõrgeim temperatuur 2ºC. Tuul E kiirusel 10 kuni 15 km/h. Lume tõenäosus 40%. Lund koguneb vähem kui 2 cm.
+Teisipäeva öö;Hilisõhtul hooglumi;75;89;snow;0,6;40;None;;-1;None;0;0;Madal;E;99;14;46;7800;Öösel hooglumi. Madalaim temperatuur -1ºC. Tuul E kiirusel 10 kuni 15 km/h. Lume tõenäosus 40%.
+Kolmapäev;Vihm/lumi;74;85;precip;1,8;40;None;< 2;2;None;0;0;Madal;ESE;113;18;5;500;Vihm ja lumi. Kõrgeim temperatuur 2ºC. Tuul ESE kiirusel 15 kuni 25 km/h. Sademete tõenäosus 40%. Lund koguneb vähem kui 2 cm.
+Kolmapäeva öö;Hooglumi;73;87;snow;2,0;50;None;< 2;0;None;0;0;Madal;SE;132;17;14;1400;Hooglumi. Madalaim temperatuur 0ºC. Tuul SE kiirusel 15 kuni 25 km/h. Lume tõenäosus 50%. Lund koguneb vähem kui 2 cm.
+Neljapäev;Vihm/lumi;72;84;precip;2,0;50;None;;2;None;0;0;Madal;SSE;149;19;5;500;Vihm ja lumi. Kõrgeim temperatuur 2ºC. Tuul SSE kiirusel 15 kuni 25 km/h. Sademete tõenäosus 50%.
+Neljapäeva öö;Hooglumi;66;87;snow;1,0;40;None;< 2;-1;None;0;0;Madal;SSE;158;18;14;1400;Hooglumi. Madalaim temperatuur -1ºC. Tuul SSE kiirusel 15 kuni 25 km/h. Lume tõenäosus 40%. Lund koguneb vähem kui 2 cm.
+Reede;Vihm/lumi;68;85;precip;1,2;40;None;;2;None;0;0;Madal;SSE;149;16;5;500;Vihm ja lumi. Kõrgeim temperatuur 2ºC. Tuul SSE kiirusel 10 kuni 15 km/h. Sademete tõenäosus 40%.
+Reede öö;Hooglumi;67;89;snow;1,2;40;None;< 2;-1;None;0;0;Madal;SSE;157;15;14;1400;Hooglumi. Madalaim temperatuur -1ºC. Tuul SSE kiirusel 10 kuni 15 km/h. Lume tõenäosus 40%. Lund koguneb vähem kui 2 cm.
+Laupäev;Valdavalt pilvine;66;86;precip;0,0;20;None;;2;None;0;0;Madal;S;171;17;28;2800;Valdavalt pilvine. Kõrgeim temperatuur 2ºC. Tuul S kiirusel 15 kuni 25 km/h.
+Laupäeva öö;Hooglumi;64;88;snow;1,1;40;None;< 2;-1;None;0;0;Madal;SSE;164;15;14;1400;Hooglumi. Madalaim temperatuur -1ºC. Tuul SSE kiirusel 10 kuni 15 km/h. Lume tõenäosus 40%. Lund koguneb vähem kui 2 cm.
+Pühapäev;Vihm/lumi;67;87;precip;1,2;40;None;;2;None;0;0;Madal;S;172;16;5;500;Vihm ja lumi. Kõrgeim temperatuur 2ºC. Tuul S kiirusel 10 kuni 15 km/h. Sademete tõenäosus 40%.
+Pühapäeva öö;Varahommikul vihm/lumesadu;65;91;precip;0,7;40;None;;0;None;0;0;Madal;S;176;14;5;6400;Varahommikul vihm ja lumi. Madalaim temperatuur 0ºC. Tuul S kiirusel 10 kuni 15 km/h. Sademete tõenäosus 40%.

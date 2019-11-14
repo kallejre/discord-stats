@@ -833,6 +833,92 @@ async def pelmeen(ctx, *args):
 
 
 @bot.command(pass_context=True)
+async def unread2(ctx, *args):
+    msg=ctx.author.mention+' '+' '.join(args)+' readme!'
+    kanalid=ctx.guild.channels
+
+    
+    for ch in sorted(list(filter(lambda x:type(x)==discord.channel.TextChannel,ctx.guild.channels)), key=lambda x:(x.category_id,x.id)):
+        if type(ch)==discord.channel.TextChannel:
+            #await ch.edit(name='asdasd_'+ch.name)
+            print(ch.name)
+            try:
+                await ch.send(msg)
+                await asyncio.sleep(0.1)
+                await ch.purge(limit=1, check=lambda x:is_me2)
+                await asyncio.sleep(0.4)
+            except discord.errors.Forbidden:
+                pass
+    return 0#await ctx.send(':)')
+
+@bot.command(pass_context=True)
+async def unread(ctx, *args):
+    msg=ctx.author.mention+' '+' '.join(args)+' readme!'
+    kanalid=ctx.guild.channels
+    kanalid=[ctx.channel]
+    
+    for ch in sorted(list(filter(lambda x:type(x)==discord.channel.TextChannel,ctx.guild.channels)), key=lambda x:(x.category_id,x.id)):
+        if type(ch)==discord.channel.TextChannel:
+            #await ch.edit(name='asdasd_'+ch.name)
+            print(ch.name)
+            try:
+                await ch.send(msg)
+                await asyncio.sleep(0.1)
+                await ch.purge(limit=1, check=lambda x:is_me2)
+                await asyncio.sleep(0.4)
+            except discord.errors.Forbidden:
+                pass
+    return 0#await ctx.send(':)')
+
+"""
+
+def is_me2(m):
+    return m.author == bot.user or m.content.startswith('?')
+
+
+@bot.command()
+@commands.check(alll)
+async def cleanup2(ctx, n=15):
+    if n > 1000: n = 500
+    if n < 2: n = 2
+    t = ctx.author
+    # his = ctx.history(limit=5)
+    deleted = await ctx.channel.purge(limit=n, check=is_me)
+    await ctx.send('deleted ' + str(len(deleted)))
+
+
+@bot.command()
+@commands.check(alll)
+async def cleanup(ctx, n=15):
+    if n < 2: n = 2
+    t = ctx.author
+    deleted = await ctx.channel.purge(limit=n, check=is_me2)
+    await ctx.send('deleted ' + str(len(deleted)))
+"""
+def is_me3(m):
+    x=m.reactions
+    print(len(x))
+    global reaktsioon
+    if len(x)!=0:
+        y=x[0]
+        reaktsioon=y
+        counts = {react.emoji: react.count for react in m.reactions}
+        print(type(x[0]))
+        print(dir(y))
+        print(counts)
+    return False
+
+
+@bot.command(pass_context=True)
+async def c(ctx, *args):
+    n=2
+    t = ctx.author
+    deleted = await ctx.channel.purge(limit=n, check=is_me3)
+    print('deleted ' + str(len(deleted)))
+
+
+
+@bot.command(pass_context=True)
 async def invite(ctx, *args):
     return await ctx.send('Call me maybe:\n' + Link)
 
