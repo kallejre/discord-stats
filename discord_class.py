@@ -184,6 +184,7 @@ kategooriad_kaug =  {'algoritmid-ja-andmestruktuurid': {'3semester', 'Kokku'},
 kategooriad_py19 = {'food': {'Kokku', 'Fun'},
                      'gaming': {'Kokku', 'Fun'},
                      'general': {'Yldine', 'Kokku'},
+                 'eksam': {'Yldine', 'Kokku'},
                      'hääletused': {'Yldine', 'Kokku'},
                      'iaab': {'Õppegrupid', 'Kokku'},
                      'iadb': {'Õppegrupid', 'Kokku'},
@@ -812,7 +813,7 @@ def stat_full(*args, **kwargs):
     print('7 Save Excel+PKL')
     sts.excel.close()
     sts.save_pkl()
-    #"""
+    """
     print('8 Animate')
     ani = Animate(sts)
     ani.draw_main()
@@ -824,7 +825,6 @@ def stat_full(*args, **kwargs):
 
 
 if __name__=='__main__':
-    # def __init__(self, fname='dht.txt',OUTPUT_FOLDER='Python/',  sname='stats.xlsx', kategooria=kategooriad_py):
     print('Python')
     sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
     print('Java')
