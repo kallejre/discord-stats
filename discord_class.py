@@ -70,7 +70,7 @@ from Animate import Animate
 import os
 import zipfile
 import urllib.parse
-LINUX= os.name=='posix'
+LINUX= os.name=='posix' and False
 if LINUX:  # Mõeldud töötamiseks spetsiaalsel linuxi VMil.
     import estnltk3
     
@@ -136,6 +136,9 @@ kategooriad_java = {'codera': {'Yldine', 'Kokku', 'NotFun'},
                      'ex02': {'EX', 'Kokku'},
                      'ex03': {'EX', 'Kokku'},
                      'food': {'Yldine', 'Kokku', 'Fun'},
+                     'arvaära': {'Yldine', 'Kokku', 'Fun'},
+                     'koroona': {'Yldine', 'Kokku', 'Fun'},
+                     'monoloogid': {'Yldine', 'Kokku', 'Fun'},
                      'games': {'Yldine', 'Kokku', 'Fun'},
                      'general': {'Yldine', 'Kokku', 'NotFun'},
                      'gomoku': {'Yldine', 'Kokku', 'NotFun'},
@@ -149,6 +152,7 @@ kategooriad_java = {'codera': {'Yldine', 'Kokku', 'NotFun'},
                      'pr01': {'PR', 'Kokku'},
                      'projekt': {'Yldine', 'Kokku', 'NotFun'},
                      'random': {'Yldine', 'Kokku', 'Fun'},
+                     'poliitika': {'Yldine', 'Kokku', 'Fun'},
                      'setup': {'Yldine', 'Kokku', 'NotFun'},
                      'stat': {'Yldine', 'Kokku', 'NotFun'},
                      'suhtenurk': {'Yldine', 'Kokku', 'Fun'},
@@ -178,6 +182,12 @@ kategooriad_kaug =  {'algoritmid-ja-andmestruktuurid': {'3semester', 'Kokku'},
                      'tõenäosusteooria-ja-matemaatiline-statistika': {'3semester', 'Kokku'},
                      'veebirakendused-java-baasil': {'3semester', 'Kokku'},
                      'veebitehnoloogiad': {'3semester', 'Kokku'},
+                     'javascript': {'4semester', 'Kokku'},
+                     'hajussüsteemide-ehitamine': {'4semester', 'Kokku'},
+                     'ettevõtluse-alused': {'4semester', 'Kokku'},
+                     'tarkvaratehnika': {'4semester', 'Kokku'},
+                     'algoritmid-ja-andmestruktuurid': {'4semester', 'Kokku'},
+                     'python-edasijõudnutele': {'4semester', 'Kokku'},
                      'üld-vestlus': {'3semester', 'Kokku'}}
                     
 
@@ -217,7 +227,7 @@ class Stats:
         """
         with open(fname, encoding='utf8') as f:
             file = f.read()
-        self.archive = eval(file)
+        self.archive = json.loads(file)
         self.users = dict()
         self.lyhi = {-1: 0}
         self.times = list()
@@ -659,7 +669,6 @@ class Stats:
 
     def stat_weeks(self):  # Kutsuda välja enne cleanup-i
         weeks=dict()
-        self.ajaformaat
         """
         # Idee: stat nädalanumbritega, aktiivsed nädalad.
         >>> import datetime
@@ -693,6 +702,73 @@ class Stats:
                 else:out.append('')
             self.excel.write('\t'.join(out))
             # print(week, weeks[week])
+    def stat_days_user(self):  # Kutsuda välja enne cleanup-i
+        # Väljund: Vertikaalselt kuupäevad \|/ ja horisontaalselt kanalid ->
+        weeks=dict()
+        # Times2 on halb, sest seal on ainulttop25 ja kõik ülejäänud.
+        # Siin funktsioonis pole see oluline
+        
+        for aeg in self.times2:
+            week=aeg # datetime.datetime.strptime(aeg,self.ajaformaat).isocalendar()[:2]
+            if week not in weeks:
+                weeks[week]=dict()
+            for kanal in self.times2[aeg]:
+                #print(kanal)
+                for uid in self.times2[aeg][kanal]:
+                    #print(uid)
+                    if uid not in weeks[week]:
+                        weeks[week][uid]=0
+                    weeks[week][uid]+=self.times2[aeg][kanal][uid]
+        
+        self.days_u=weeks
+        ########  Start tabeli tegemine
+        
+        self.excel.ws('Päev kasutaja')
+        su=list(sorted(self.users))
+        head=['Kuupäev']+ list(map(lambda x:self.users[x]['n'], su))
+        self.excel.write('\t'.join(head))
+        for day in sorted(self.times2, key=lambda x: datetime.datetime.strptime(x,self.ajaformaat)):
+            out=[str(day)]
+            for uid in su:
+                if uid in weeks[week]:
+                    out.append(str(weeks[week][uid]))
+                else:out.append('')
+            self.excel.write('\t'.join(out))
+            # print(week, weeks[week])
+
+    def stat_days_channel(self):  # Kutsuda välja enne cleanup-i
+        # Väljund: Vertikaalselt kuupäevad \|/ ja horisontaalselt (TOP25?) kasutajad ->
+        weeks=dict()
+        #Kanalid
+        cha=list(filter(lambda x:x[0].upper()!=x[0],self.channels))
+        # Times2 on halb, sest seal on ainulttop25 ja kõik ülejäänud.
+        for aeg in self.times2:
+            #print(aeg)
+            week=aeg # datetime.datetime.strptime(aeg,self.ajaformaat).isocalendar()[:2]
+            if week not in weeks:
+                weeks[week]=dict()
+            for kanal in self.times2[aeg]:
+                #print(kanal)
+                for uid in self.times2[aeg][kanal]:
+                    #print(uid)
+                    if kanal not in weeks[week]:
+                        weeks[week][kanal]=0
+                    weeks[week][kanal]+=self.times2[aeg][kanal][uid]
+        self.days_c=weeks
+        ########  Start tabeli tegemine
+        
+        self.excel.ws('Päev kanal')
+        head=['Kuupäev']+ cha
+        self.excel.write('\t'.join(head))
+        for week in sorted(self.times2, key=lambda x: datetime.datetime.strptime(x,self.ajaformaat)):
+            out=[str(week)]
+            for kanal in cha:
+                if kanal in weeks[week]:
+                    out.append(str(weeks[week][kanal]))
+                else:out.append('')
+            self.excel.write('\t'.join(out))
+            # print(week, weeks[week])
+            
     def times2_cleanup(self,n=25):
         ###  ----   Times2/times3 Eri
         # Lugeda kokku enim postituste TOP_N (25) ja ülejäänute statistika liita.
@@ -713,6 +789,7 @@ class Stats:
         e=sorted(self.times2,key=lambda x:datetime.datetime.strptime(x,self.ajaformaat))[-24:]
         q=set()
         usrs=set()
+        N = 24
         for i in e:
             q=q.union(self.times2[i])
             for x in self.times2[i]:
@@ -720,7 +797,7 @@ class Stats:
         usrs=list(sorted(usrs))
         us2=list(map(lambda x: self.users[x]['n'],usrs))
         q=list(sorted(q))
-        self.excel.ws('Last '+str(24))
+        self.excel.ws('Last '+str(N))
         f=self.excel
         print('\t'.join(['Kuupäev','Kanal']+us2), file=f)
         for i in e:
@@ -781,8 +858,11 @@ def stats_load(fname='d_stats.pkl'):
 
 def stat_full(*args, **kwargs):
     print('Algus', end=' ')
+    print(args)
     sts = Stats(*args, **kwargs)
     print('1 Ajatabelid')
+    sts.stat_days_user()
+    sts.stat_days_channel()
     sts.stat_weeks()
     sts.times2_cleanup()
     sts.ajatabel_suur()
@@ -799,7 +879,7 @@ def stat_full(*args, **kwargs):
     sts.stat_msg2()
     sts.stat_tag()
     sts.stat_tag2()
-    print('5 Sorteeri sõnumid')  # See on kõigest teksti genereerimine.
+    print('5 Sorteeri sõnumid')  # See oli kõigest teksti genereerimine.
     sts.sort_msgs()
     """
     sts.graafid_edetabel(-1,n=5,uid=True)
@@ -813,26 +893,27 @@ def stat_full(*args, **kwargs):
     print('7 Save Excel+PKL')
     sts.excel.close()
     sts.save_pkl()
-    """
-    print('8 Animate')
-    ani = Animate(sts)
-    ani.draw_main()
-    #"""
+    if False and LINUX:
+        print('8 Animate')
+        ani = Animate(sts)
+        ani.draw_main()
     print('9 ZIP')
-    sts.save_zip()
+    if True and LINUX:
+        sts.save_zip()
     print('10 Done')
     return sts
 
 
 if __name__=='__main__':
-    print('Python')
-    sts = stat_full('dht.txt', 'py2018/', kategooria=kategooriad_py)  # Python
-    print('Java')
-    sts = stat_full('dht_java.txt', 'java 2019/', kategooria=kategooriad_java)  # Java
-    print('Kaug')
-    sts = stat_full('dht_kaug.txt', 'TTÜ IT 2018/', kategooria=kategooriad_kaug)  # Kaug
-    print('Py19')
-    sts = stat_full('dht_py19.txt', 'py2019/', kategooria=kategooriad_py19)  # Kaug
+    inputs={#'Python': ['dht.txt', 'py2018/', kategooriad_py],           # Python
+            'Java': ['dht_java.txt', 'java 2019/', kategooriad_java],   # Java
+            #'Kaug': ['dht_kaug.txt', 'TTÜ IT 2018/', kategooriad_kaug], # Kaug
+            #'Py19': ['dht_py19.txt', 'py2019/', kategooriad_py19]      # Kaug
+	}
+    #inputs={'PA': ['dht_pa.txt', 'pa/',{'yard':{'Kokku'}}]}
+    for i in inputs:
+        print(i)
+        sts = stat_full(inputs[i][0], inputs[i][1], kategooria=inputs[i][2])
 
 
 
@@ -850,3 +931,4 @@ for i in list(filter(lambda x: x[0] != '_', dir(sts))):
 with open('sõnastats.txt',encoding='utf-8') as f:
 	a=json.load(f)
 # """
+# for i in filter(lambda x: x[0]!='_',dir(sts)):print('sts.'+i, type(eval('sts.'+i)), sep='\t')
