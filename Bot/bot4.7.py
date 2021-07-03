@@ -174,7 +174,7 @@ async def help(ctx, *args):
 async def troll_task():
     await bot.wait_until_ready()
     while not bot.is_closed():
-        tt = 45
+        tt = 15
         # Botile ei ole mõtet lisada algus- ja lõpuaega, sest API ei toeta neid bottidel.
         # """
         timestmp = time.strftime('%d %b %H:%M', time.localtime(time.time()))
@@ -697,6 +697,22 @@ def ilm_getData(a):
     return funk.ilm.weatherAPI(x['lat'], x['lng']), loc
 
 
+@bot.event  # type: ignore
+async def on_raw_reaction_add(payload) -> None:
+    # Probably needs testing. It should maybe remove bot's own message, 
+    # if someone reacts with wastebasket emoji
+    # For safety reasons, it should also authenticate reacting user 
+    waste_basket=b'\xf0\x9f\x97\x91\xef\xb8\x8f'
+    if (payload.emoji.name.encode('utf8')!=waste_basket):
+        return
+    # Fetch message is rather slow operation, that's why it only takes place if user reacts with wastebasket
+    msg = await bot.get_channel(payload.channel_id).fetch_message(payload.message_id)
+    # Safety checks
+    if (msg.author!=bot.user and msg.author!=payload.member):
+        return
+    await msg.delete()
+
+
 async def reactor(message):
     global last_reac
     user = message.author.name.lower()
@@ -705,7 +721,7 @@ async def reactor(message):
         last_reac[user] = dict()
     if srv not in last_reac[user]:
         last_reac[user][srv] = 0
-    if time.time() - last_reac[user][srv] < 45:
+    if time.time() - last_reac[user][srv] < 600:
         return False
     last_reac[user][srv] = int(time.time())
     if user.startswith('kadri'):
@@ -723,7 +739,27 @@ async def reactor(message):
             await message.add_reaction(bot.get_emoji(506934160250765323))
         elif False:
             for i in range(18):
-                await message.add_reaction(random.choice(all_emojis))
+                await message.add_reaction('\U0001f50d')
+    print(srv,srv=='bot test', message.content,  'test' in message.content)
+    # print(dir(bot.user))
+    print(message.author.bot)
+    if  not message.author.bot:  # srv=='bot test' and
+        async with message.channel.typing():
+            reaction_string='\U0001f50e'  # :mag_right:
+            await message.add_reaction(reaction_string)
+            def check(reaction, user_obj):
+                return user_obj == message.author and str(reaction.emoji) == reaction_string
+
+            try:
+                reaction, user_obj = await bot.wait_for('reaction_add', timeout=15.0, check=check)
+            except asyncio.TimeoutError:
+                # User didn't respond
+                await message.clear_reaction(reaction_string)
+            else:
+                # User responded
+                await message.clear_reaction(reaction_string)
+                # Run queries
+        print(0)
     if user.startswith('rauno'):
         last_reac[user][srv] = int(time.time()) + 30
         for i in range(1):
@@ -735,8 +771,9 @@ async def reactor(message):
                 except:
                     pass
     if user.startswith('sebastian'):
-        await message.add_reaction(u"\U0001F34D")
-        await message.add_reaction(u"\U0001F355")
+        pass
+        #await message.add_reaction(u"\U0001F34D")
+        #await message.add_reaction(u"\U0001F355")
     if user.startswith('elvar'):
         await message.add_reaction(u"\U0001F37A")
 
@@ -756,10 +793,13 @@ async def wait(channel, sisu, user, uid):
         kanal2 = channel
         idd = channel.id
         isuser = False
-        SAMA_INIMENE = lambda sisu, uid: sisu.split()[2] == '<@' + str(uid) + '>'
-        TEINE_INIMENE = lambda sisu, uid: len(sisu.split()[2]) == len('<@' + str(uid) + '>') and sisu.split()[2][
-                                                                                                 :2] == '<@'
-        if sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>'):
+        # Kontrollib, kas mainitud inimene on sama inimene kes saatis sõnumi
+        SAMA_INIMENE = lambda sisu, uid: sisu.split()[2] == '<@!' + str(uid) + '>'
+        TEINE_INIMENE = lambda sisu, uid: len(sisu.split()[2]) == len('<@!' + str(uid) + '>') and  sisu.split()[2].startswith('<@')
+        KANAL = lambda sisu, uid: sisu.split()[2].startswith('<#') and sisu.split()[2].endswith('>')
+        print('debug',sisu,'\n', uid, sisu.split()[2])
+        print(KANAL(sisu, uid), SAMA_INIMENE(sisu, uid), TEINE_INIMENE(sisu, uid))
+        if KANAL(sisu, uid):
             idd = int(sisu.split()[2][2:-1])
             kanal2 = bot.get_channel(idd)
             x = ' '.join(sisu.split()[3:])
@@ -767,8 +807,11 @@ async def wait(channel, sisu, user, uid):
         # siis me ei hakka kanalit reostama, vaid kirjutame talle otse.
         # Teoreetiliselt võime saata teate ka teisele inimesele.
         elif TEINE_INIMENE(sisu, uid):  # DM/PM
-            idd = int(sisu.split()[2][2:-1])  # UID juhul, kui märgitakse keegi kolmas.
-            kanal2 = bot.get_user(idd)
+            print("Oli vist sama inimene")
+            print(sisu.split()[2])
+            idd = int(sisu.split()[2][3:-1])  # UID juhul, kui märgitakse keegi kolmas.
+            print(idd)
+            kanal2 = await bot.fetch_user(idd)
             x = ' '.join(sisu.split()[3:])
             isuser = True
         if a > 120:
@@ -808,7 +851,7 @@ async def miami(ctx, tz='America/New_York', *args):
     chance = random.random()+0.0
     if ctx.author.name.lower().startswith('elvar'):
         chance += 0.5
-    if chance < 0.75:
+    if chance < 0.05:  # 0.75
         if tz in pytz.all_timezones:
             miami = pytz.timezone(tz)
         elif tz.title in pytz.all_timezones:
@@ -1046,7 +1089,11 @@ async def on_message(message):
         print('-----------------')
         if tag == test:
             await channel.send('Restarting...')
-            exit()
+            #exit()
+            print(discord.Status.dnd)
+            await bot.change_presence(status=discord.Status.dnd, activity=discord.Game('None'))
+            
+            #
             return
         else:
             await channel.send('no')
@@ -1101,7 +1148,7 @@ async def import_wait_tasks():
 
             async def bg_wait_task(a=a, x=x):
                 if x[1] == 'True':  # DM/PM
-                    kanal2 = bot.get_user(int(x[2]))
+                    kanal2 = bot.fetch_user(int(x[2]))
                 else:
                     kanal2 = bot.get_channel(int(x[2]))
                 await asyncio.sleep(a)
